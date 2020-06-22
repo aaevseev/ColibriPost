@@ -4,7 +4,7 @@
     android:id="@+id/activity_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:name="com.srgpanov.telegrammsmm.ui.screen.NewPostFragment"
+    android:name="ru.teamdroid.colibripost.ui.screens.new_task.NewPostFragment"
     android:tag="NewPostFragment"
     tools:context=".ui.MainActivity">
 

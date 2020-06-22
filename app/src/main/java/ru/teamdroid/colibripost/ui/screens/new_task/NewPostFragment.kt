@@ -1,4 +1,4 @@
-package com.srgpanov.telegrammsmm.ui.screen
+package ru.teamdroid.colibripost.ui.screens.new_task
 
 import android.graphics.Color
 import android.graphics.drawable.LayerDrawable
@@ -10,7 +10,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import com.srgpanov.telegrammsmm.ui.screen.SpinnerAdapter
+import com.srgpanov.telegrammsmm.ui.screen.SpinnerItem
 import ru.teamdroid.colibripost.R
 import ru.teamdroid.colibripost.databinding.FragmentNewPostBinding
 
@@ -19,16 +20,6 @@ class NewPostFragment : Fragment() {
     private var _binding: FragmentNewPostBinding? = null
     private val binding: FragmentNewPostBinding
         get() = _binding!!
-    private lateinit var viewModel: NewPostViewModel
-
-    companion object {
-
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this)[NewPostViewModel::class.java]
-    }
 
 
     override fun onCreateView(
@@ -57,29 +48,32 @@ class NewPostFragment : Fragment() {
         setupDateSpinner(spinnerHeight)
     }
 
+    //спиннер нужно переделать
     private fun setupDateSpinner(spinnerHeight: Int) {
-        binding.spnDate.dropDownVerticalOffset = spinnerHeight
+        binding.spinnerDate.dropDownVerticalOffset = spinnerHeight
         val timeList = getSpinnerTimeList()
         val timeAdapter: ArrayAdapter<*> = SpinnerAdapter(
             requireActivity(),
             android.R.layout.simple_spinner_item,
             timeList
         )
-        binding.spnDate.adapter = timeAdapter
+        binding.spinnerDate.adapter = timeAdapter
     }
 
+    //спиннер нужно переделать
     private fun setupPublishSpinner(spinnerHeight: Int) {
-        binding.spnPublish.dropDownVerticalOffset = spinnerHeight
+        binding.spinnerPublish.dropDownVerticalOffset = spinnerHeight
         val publishList = getSpinnerPublishList()
         val publishAdapter: ArrayAdapter<*> = SpinnerAdapter(
             requireActivity(),
             android.R.layout.simple_spinner_item,
             publishList
         )
-        binding.spnPublish.adapter = publishAdapter
-        binding.spnPublish.setSelection(1)
+        binding.spinnerPublish.adapter = publishAdapter
+        binding.spinnerPublish.setSelection(1)
     }
 
+    //спиннер нужно переделать
     private fun setupCategorySpinner(spinnerHeight: Int) {
         val categoryList = getSpinnerCategoryList()
         val categoryAdapter: ArrayAdapter<*> = SpinnerAdapter(
@@ -88,11 +82,12 @@ class NewPostFragment : Fragment() {
             categoryList
         )
         categoryAdapter.setDropDownViewResource(R.layout.simple_spinner_item)
-        binding.spnCategory.dropDownVerticalOffset = spinnerHeight
-        binding.spnCategory.adapter = categoryAdapter
-        binding.spnCategory.setSelection(4)
+        binding.spinnerCategory.dropDownVerticalOffset = spinnerHeight
+        binding.spinnerCategory.adapter = categoryAdapter
+        binding.spinnerCategory.setSelection(4)
     }
 
+    //Мок данные для спиннера
     private fun getSpinnerPublishList(): MutableList<SpinnerItem> {
         val list = mutableListOf<SpinnerItem>()
         val blue = ShapeDrawable()
@@ -103,7 +98,7 @@ class NewPostFragment : Fragment() {
         return list
     }
 
-
+    //Мок данные для спиннера
     private fun getSpinnerTimeList(): MutableList<SpinnerItem> {
         val list = mutableListOf<SpinnerItem>()
         val blue = ShapeDrawable()
@@ -114,38 +109,19 @@ class NewPostFragment : Fragment() {
         return list
     }
 
+    //Мок данные для спиннера
     private fun getSpinnerCategoryList(): MutableList<SpinnerItem> {
-        val list = mutableListOf<SpinnerItem>()
-        val spinnerCircleDrawable: LayerDrawable = requireActivity().resources.getDrawable(
+        val drawable: LayerDrawable = requireActivity().resources.getDrawable(
             R.drawable.spinner_circle,
             null
         ) as LayerDrawable
-        list.add(
-            SpinnerItem(
-                spinnerCircleDrawable.findDrawableByLayerId(R.id.spinner_green), "News"
-            )
+        return mutableListOf(
+            SpinnerItem(drawable.findDrawableByLayerId(R.id.spinner_green), "News"),
+            SpinnerItem(drawable.findDrawableByLayerId(R.id.spinner_blue), "Advertising"),
+            SpinnerItem(drawable.findDrawableByLayerId(R.id.spinner_orange), "Entertainment"),
+            SpinnerItem(drawable.findDrawableByLayerId(R.id.spinner_purple), "Involvement"),
+            SpinnerItem(drawable.findDrawableByLayerId(R.id.spinner_hint), "Choose category")
         )
-        list.add(
-            SpinnerItem(
-                spinnerCircleDrawable.findDrawableByLayerId(R.id.spinner_blue), "Advertising"
-            )
-        )
-        list.add(
-            SpinnerItem(
-                spinnerCircleDrawable.findDrawableByLayerId(R.id.spinner_orange), "Entertainment"
-            )
-        )
-        list.add(
-            SpinnerItem(
-                spinnerCircleDrawable.findDrawableByLayerId(R.id.spinner_purple), "Involvement"
-            )
-        )
-        list.add(
-            SpinnerItem(
-                spinnerCircleDrawable.findDrawableByLayerId(R.id.spinner_hint), "Choose category"
-            )
-        )
-        return list
     }
 
 

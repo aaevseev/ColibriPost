@@ -39,6 +39,7 @@
         android:padding="16dp"
         android:textColor="@color/textColor"
         android:textSize="14sp"
+        android:inputType="text"
         app:layout_constraintBottom_toTopOf="@id/view_tool_panel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -108,7 +109,7 @@
         app:layout_constraintTop_toTopOf="@id/view_tool_panel" />
 
     <ru.teamdroid.colibripost.ui.screens.new_task.NewTaskSpinner
-        android:id="@+id/spn_category"
+        android:id="@+id/spinner_category"
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginStart="32dp"
@@ -122,7 +123,7 @@
 
 
     <ru.teamdroid.colibripost.ui.screens.new_task.NewTaskSpinner
-        android:id="@+id/spn_publish"
+        android:id="@+id/spinner_publish"
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginStart="32dp"
@@ -131,10 +132,10 @@
         android:background="@drawable/new_post_spinner_background"
         app:layout_constraintEnd_toEndOf="@id/view_tool_panel"
         app:layout_constraintStart_toStartOf="@id/view_tool_panel"
-        app:layout_constraintTop_toBottomOf="@id/spn_category" />
+        app:layout_constraintTop_toBottomOf="@id/spinner_category" />
 
     <androidx.appcompat.widget.AppCompatSpinner
-        android:id="@+id/spn_date"
+        android:id="@+id/spinner_date"
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginStart="32dp"
@@ -143,7 +144,7 @@
         android:background="@drawable/new_post_spinner_background"
         app:layout_constraintEnd_toStartOf="@id/tv_time"
         app:layout_constraintStart_toStartOf="@id/view_tool_panel"
-        app:layout_constraintTop_toBottomOf="@id/spn_publish" />
+        app:layout_constraintTop_toBottomOf="@id/spinner_publish" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tv_time"
@@ -153,12 +154,11 @@
         android:background="@drawable/new_post_spinner_background"
         android:gravity="center"
         android:singleLine="true"
-        android:text="11:00"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@id/spn_date"
+        app:layout_constraintBottom_toBottomOf="@id/spinner_date"
         app:layout_constraintEnd_toEndOf="@id/view_tool_panel"
-        app:layout_constraintStart_toEndOf="@id/spn_date"
-        app:layout_constraintTop_toTopOf="@id/spn_date"
+        app:layout_constraintStart_toEndOf="@id/spinner_date"
+        app:layout_constraintTop_toTopOf="@id/spinner_date"
         tools:text="11:00" />
 
     <com.google.android.material.button.MaterialButton
@@ -177,7 +177,7 @@
         android:textColor="@color/accent"
         app:layout_constraintEnd_toStartOf="@id/btn_send_post"
         app:layout_constraintStart_toStartOf="@id/view_tool_panel"
-        app:layout_constraintTop_toBottomOf="@id/spn_date"
+        app:layout_constraintTop_toBottomOf="@id/spinner_date"
         app:strokeColor="@color/accent"
         app:strokeWidth="1dp" />
 
