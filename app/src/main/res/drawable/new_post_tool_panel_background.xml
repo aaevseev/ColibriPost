@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="@color/primaryDark" />
-    <corners
-        android:topLeftRadius="@dimen/new_task_tool_panel_corner_radius"
-        android:topRightRadius="@dimen/new_task_tool_panel_corner_radius" />
-
-</shape>
