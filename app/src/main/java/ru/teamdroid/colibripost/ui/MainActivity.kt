@@ -1,7 +1,8 @@
-package ru.teamdroid.colibripost
+package ru.teamdroid.colibripost.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import ru.teamdroid.colibripost.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
