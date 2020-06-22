@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
+    <color name="primary">#FFFFFF</color>
+    <color name="primaryDark">#E1E5E9</color>
+    <color name="accent">#0081C3</color>
+    <color name="textBackground">#F0F2F4</color>
+    <color name="white">#FFFFFF</color>
+    <color name="textColor">#1B1B1B</color>
+    <color name="hint">#B2BCC8</color>
+    <color name="spinner_green">#2BBD56</color>
+    <color name="spinner_blue">#3E89F4</color>
+    <color name="spinner_orange">#FF6A00</color>
+    <color name="spinner_purple">#9B51E0</color>
 </resources>
