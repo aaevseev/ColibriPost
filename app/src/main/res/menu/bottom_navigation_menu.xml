@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_main"
+        android:title="@string/navigation_main_title"
+        android:icon="@drawable/bottom_navigator_main_item_selector" />
+
+    <item
+        android:id="@+id/navigation_newPost"
+        android:title="@string/navigation_new_post_title"
+        android:icon="@drawable/bottom_navigator_newpost_item_selector"/>
+
+    <item
+        android:id="@+id/navigation_settings"
+        android:title="@string/navigation_settings_title"
+        android:icon="@drawable/bottom_navigator_settings_item_selector"/>
+</menu>

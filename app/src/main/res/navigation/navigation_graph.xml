@@ -3,41 +3,40 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_graph"
-    app:startDestination="@id/mainFragment">
+    app:startDestination="@id/bottomNavigationFragment">
 
     <fragment
-        android:id="@+id/mainFragment"
-        android:name="ru.teamdroid.colibripost.presentation.ui.MainFragment"
-        tools:layout="@layout/fragment_main"
-        android:label="MainFragment" >
+        android:id="@+id/bottomNavigationFragment"
+        android:name="ru.teamdroid.colibripost.presentation.ui.bottomnavigation.BottomNavigationFragment"
+        android:label="BottomNavigationFragment" >
         <action
-            android:id="@+id/action_mainFragment_to_newPostFragment"
-            app:destination="@id/newPostFragment" />
+            android:id="@+id/action_bottomNavigationFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
         <action
-            android:id="@+id/action_mainFragment_to_settingsFragment"
+            android:id="@+id/action_bottomNavigationFragment_to_newPostFragment"
+            app:destination="@id/newPostFragment"
+            app:popUpTo="@id/bottomNavigationFragment"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_bottomNavigationFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
     </fragment>
 
     <fragment
+        android:id="@+id/mainFragment"
+        android:name="ru.teamdroid.colibripost.presentation.ui.main.MainFragment"
+        tools:layout="@layout/fragment_main"
+        android:label="MainFragment" />
+
+    <fragment
         android:id="@+id/newPostFragment"
-        android:name="ru.teamdroid.colibripost.presentation.ui.NewPostFragment"
+        android:name="ru.teamdroid.colibripost.presentation.ui.newpost.NewPostFragment"
         android:label="fragment_new_post"
-        tools:layout="@layout/fragment_new_post" >
-        <action
-            android:id="@+id/action_newPostFragment_to_galleryFragment"
-            app:destination="@id/galleryFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_new_post" />
 
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="ru.teamdroid.colibripost.presentation.ui.SettingsFragment"
+        android:name="ru.teamdroid.colibripost.presentation.ui.settings.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
-
-    <fragment
-        android:id="@+id/galleryFragment"
-        android:name="ru.teamdroid.colibripost.presentation.ui.GalleryFragment"
-        android:label="fragment_gallery"
-        tools:layout="@layout/fragment_gallery" />
-
 </navigation>

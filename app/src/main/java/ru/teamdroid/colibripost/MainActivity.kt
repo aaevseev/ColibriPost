@@ -3,17 +3,17 @@ package ru.teamdroid.colibripost
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import ru.teamdroid.colibripost.presentation.ui.MainFragment
+import ru.teamdroid.colibripost.presentation.ui.bottomnavigation.BottomNavigationFragment
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        changeFragment(MainFragment(), MainFragment.TAG)
+        setNavigationFragment(BottomNavigationFragment(), BottomNavigationFragment.TAG)
     }
 
-    private fun changeFragment(fragment: Fragment, tag: String) {
+    private fun setNavigationFragment(fragment: Fragment, tag: String) {
         supportFragmentManager.beginTransaction().apply {
             replace(R.id.container, fragment).addToBackStack(tag)
         }.commit()

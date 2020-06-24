@@ -1,4 +1,4 @@
-package ru.teamdroid.colibripost.presentation.ui
+package ru.teamdroid.colibripost.presentation.ui.main
 
 import android.os.Bundle
 import android.view.LayoutInflater
