@@ -6,6 +6,5 @@
     <color name="accent">#0081C3</color>
 
     <color name="bottom_navigation_background_color">#FFFFFFFF</color>
-    <color name="bottom_navigation_item_color_inactive">#800081C3</color>
-    <color name="bottom_navigation_item_color_active">#FF0081C3</color>
+    <color name="bottom_navigation_item_color">#FF0081C3</color>
 </resources>

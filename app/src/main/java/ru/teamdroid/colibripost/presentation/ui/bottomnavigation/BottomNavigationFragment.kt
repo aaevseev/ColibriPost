@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import kotlinx.android.synthetic.main.fragment_bottom_navigation.*
 import ru.teamdroid.colibripost.R
 import ru.teamdroid.colibripost.databinding.FragmentBottomNavigationBinding
 import ru.teamdroid.colibripost.presentation.ui.main.MainFragment
@@ -34,13 +33,14 @@ class BottomNavigationFragment : Fragment() {
 
     private fun setupBottomNavigator() {
 
-        bottomNavigation.setOnNavigationItemSelectedListener {
-            when(it.itemId) {
+        binding.bottomNavigation.setOnNavigationItemSelectedListener {
+            when (it.itemId) {
                 R.id.navigation_main -> {
                     displayFragment(MainFragment.TAG)
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.navigation_newPost -> {
+                    binding.bottomNavigation.visibility = View.GONE
                     displayFragment(NewPostFragment.TAG)
                     return@setOnNavigationItemSelectedListener true
                 }

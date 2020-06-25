@@ -10,12 +10,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        setNavigationFragment(BottomNavigationFragment(), BottomNavigationFragment.TAG)
+        setNavigationFragment(BottomNavigationFragment())
     }
 
-    private fun setNavigationFragment(fragment: Fragment, tag: String) {
+    private fun setNavigationFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction().apply {
-            replace(R.id.container, fragment).addToBackStack(tag)
+            replace(R.id.container, fragment).addToBackStack(BottomNavigationFragment.TAG)
         }.commit()
     }
 
