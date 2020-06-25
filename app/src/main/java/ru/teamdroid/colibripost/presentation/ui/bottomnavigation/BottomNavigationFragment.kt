@@ -5,13 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import ru.teamdroid.colibripost.OnBackPressedListener
 import ru.teamdroid.colibripost.R
 import ru.teamdroid.colibripost.databinding.FragmentBottomNavigationBinding
 import ru.teamdroid.colibripost.presentation.ui.main.MainFragment
 import ru.teamdroid.colibripost.presentation.ui.newpost.NewPostFragment
 import ru.teamdroid.colibripost.presentation.ui.settings.SettingsFragment
 
-class BottomNavigationFragment : Fragment() {
+class BottomNavigationFragment : Fragment(), OnBackPressedListener {
 
     private var selectedFragment = MainFragment.TAG
 
@@ -20,7 +21,11 @@ class BottomNavigationFragment : Fragment() {
         get() = _binding!!
 
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         _binding = FragmentBottomNavigationBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -84,5 +89,11 @@ class BottomNavigationFragment : Fragment() {
 
     companion object {
         const val TAG = "BottomNavigationFragment"
+    }
+
+    override fun backPressed() {
+        displayFragment(MainFragment.TAG)
+        binding.bottomNavigation.selectedItemId = R.id.navigation_main
+        binding.bottomNavigation.visibility = View.VISIBLE
     }
 }
