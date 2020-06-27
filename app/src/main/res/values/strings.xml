@@ -1,8 +1,17 @@
 <resources>
     <string name="app_name">Colibri Post</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="navigation_main_title">Main</string>
     <string name="navigation_new_post_title">New post</string>
     <string name="navigation_settings_title">Settings</string>
+    <string name="settings_fragment_title">Настройки</string>
+    <string name="user_image_description">User photo</string>
+
+    <string-array name="settings_menu">
+        <item>Каналы</item>
+        <item>Менеджеры</item>
+        <item>Оплата</item>
+        <item>Уведомления</item>
+        <item>Помощь</item>
+        <item>Выйти</item>
+    </string-array>
 </resources>

@@ -7,4 +7,18 @@
 
     <color name="bottom_navigation_background_color">#FFFFFFFF</color>
     <color name="bottom_navigation_item_color">#FF0081C3</color>
+    <color name="fragment_title_color">#FF0081C3</color>
+
+    <color name="user_info_background_color">#FFF0F2F4</color>
+    <color name="user_name_text_color">#1B1B1B</color>
+    <color name="user_subscription_text_color">#FFFFFF</color>
+    <color name="user_image_placeholder_color">#1A0081C3</color>
+
+    <color name="user_subscription_ok_color">#2ECC71</color>
+    <color name="user_subscription_attention_color">#E67E22</color>
+    <color name="user_subscription_none_color">#E74C3C</color>
+
+    <color name="settings_menu_background_color">#0081C3</color>
+    <color name="item_setting_menu_text_color">#FFFFFF</color>
+
 </resources>

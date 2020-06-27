@@ -5,6 +5,35 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="bottomNavigationViewHeight">@dimen/bottom_navigation_height</item>
     </style>
 
+    <style name="fragmentTitleStyle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">?attr/actionBarSize</item>
+        <item name="android:background">@null</item>
+        <item name="android:textColor">@color/fragment_title_color</item>
+        <item name="android:textSize">@dimen/fragment_title_text_size</item>
+        <item name="android:letterSpacing">0.02</item>
+    </style>
+
+    <style name="userNameTextStyle">
+        <item name="android:textSize">@dimen/user_name_text_size</item>
+        <item name="android:letterSpacing">0.03</item>
+        <item name="android:textColor">@color/user_name_text_color</item>
+    </style>
+
+    <style name="user_subscription_text_style">
+        <item name="android:textSize">@dimen/user_subscription_text_size</item>
+        <item name="android:textColor">@color/user_subscription_text_color</item>
+        <item name="android:letterSpacing">0.04</item>
+    </style>
+
+    <style name="item_setting_menu_text_style">
+        <item name="android:textSize">@dimen/item_setting_menu_text_size</item>
+        <item name="android:textColor">@color/item_setting_menu_text_color</item>
+        <item name="android:letterSpacing">0.03</item>
+    </style>
+
+    <attr name="bottomNavigationViewHeight" format="dimension" />
 </resources>
