@@ -75,6 +75,11 @@ class SettingsFragment : Fragment() {
             else -> resources.getDrawable(R.drawable.user_subscription_none_background, null)
         }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     companion object {
 
         const val TAG = "SettingsFragment"
