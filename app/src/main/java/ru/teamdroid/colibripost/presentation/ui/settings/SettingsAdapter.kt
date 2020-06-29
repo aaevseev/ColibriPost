@@ -1,26 +1,30 @@
 package ru.teamdroid.colibripost.presentation.ui.settings
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.item_setting_menu.view.*
-import ru.teamdroid.colibripost.R
+import ru.teamdroid.colibripost.databinding.ItemSettingMenuBinding
 
-class SettingsAdapter : RecyclerView.Adapter<SettingsAdapter.SettingsMenuViewHolder>() {
+class SettingsAdapter(var onItemClickListener: (position: Int) -> Unit) :
+    RecyclerView.Adapter<SettingsAdapter.SettingsMenuViewHolder>() {
+
+    private var _binding: ItemSettingMenuBinding? = null
+    private val binding: ItemSettingMenuBinding
+        get() = _binding!!
 
     private val items = arrayListOf<String>()
 
     override fun getItemCount() = items.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SettingsMenuViewHolder {
-        val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.item_setting_menu, parent, false)
-        return SettingsMenuViewHolder(view)
+        _binding =
+            ItemSettingMenuBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return SettingsMenuViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: SettingsMenuViewHolder, position: Int) {
-        holder.itemView.tv_item_settings_menu_name.text = items[position]
+        binding.root.setOnClickListener { onItemClickListener.invoke(position) }
+        binding.tvItemSettingsMenuName.text = items[position]
     }
 
     fun addItem(menu: Array<String>) {
@@ -28,6 +32,12 @@ class SettingsAdapter : RecyclerView.Adapter<SettingsAdapter.SettingsMenuViewHol
         items.addAll(menu)
     }
 
-    class SettingsMenuViewHolder(view: View) : RecyclerView.ViewHolder(view)
+    override fun onDetachedFromRecyclerView(recyclerView: RecyclerView) {
+        super.onDetachedFromRecyclerView(recyclerView)
+        _binding = null
+    }
+
+    inner class SettingsMenuViewHolder(binding: ItemSettingMenuBinding) :
+        RecyclerView.ViewHolder(binding.root)
 }
 

@@ -10,18 +10,18 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import ru.teamdroid.colibripost.R
-import ru.teamdroid.colibripost.common.OnItemClickListener
-import ru.teamdroid.colibripost.common.addOnItemClickListener
 import ru.teamdroid.colibripost.databinding.FragmentSettingsBinding
 
 class SettingsFragment : Fragment() {
 
+    private val userName = "User Name"
+    private val userSubscription = 31
+    private val userImage =
+        "https://i.pinimg.com/474x/93/42/ac/9342acf190a62b5f03e6d78e2e79c43b.jpg"
+
     private var _binding: FragmentSettingsBinding? = null
     private val binding: FragmentSettingsBinding
         get() = _binding!!
-
-    private val userName = "Chuck Norris"
-    private val userSubscription = 31
 
     private lateinit var settingsAdapter: SettingsAdapter
 
@@ -32,16 +32,14 @@ class SettingsFragment : Fragment() {
     ): View? {
         _binding = FragmentSettingsBinding.inflate(inflater, container, false)
 
-        settingsAdapter = SettingsAdapter()
+        settingsAdapter = SettingsAdapter(onItemClickListener = {
+            Toast.makeText(activity, "Pressed menu $it", Toast.LENGTH_SHORT).show()
+        })
+
         settingsAdapter.addItem(requireActivity().resources.getStringArray(R.array.settings_menu))
         with(binding.rvSettingsMenu) {
             layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
             adapter = settingsAdapter
-            addOnItemClickListener(object : OnItemClickListener {
-                override fun onItemClicked(position: Int) {
-                    Toast.makeText(activity, "Pressed menu $position", Toast.LENGTH_SHORT).show()
-                }
-            })
         }
 
         return binding.root
@@ -51,7 +49,7 @@ class SettingsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         Glide.with(this)
-            .load(R.drawable.chuck_norris)
+            .load(userImage)
             .placeholder(R.drawable.user_image_placeholder)
             .fitCenter()
             .circleCrop()
