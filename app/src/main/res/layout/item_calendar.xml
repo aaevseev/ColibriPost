@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layoutDescription="@xml/item_calendar_scene">
+
+    <TextView
+        android:id="@+id/tv_first_day_week"
+        style="@style/tv_calendar_weekday"
+        android:layout_marginStart="16dp"
+        app:layout_constraintEnd_toStartOf="@id/tv_second_day_week"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="mon" />
+
+    <TextView
+        android:id="@+id/tv_second_day_week"
+        style="@style/tv_calendar_weekday"
+        app:layout_constraintBaseline_toBaselineOf="@id/tv_first_day_week"
+        app:layout_constraintEnd_toStartOf="@id/tv_third_day_week"
+        app:layout_constraintStart_toEndOf="@id/tv_first_day_week"
+        tools:text="tue" />
+
+    <TextView
+        android:id="@+id/tv_third_day_week"
+        style="@style/tv_calendar_weekday"
+        app:layout_constraintBaseline_toBaselineOf="@id/tv_first_day_week"
+        app:layout_constraintEnd_toStartOf="@id/tv_forth_day_week"
+        app:layout_constraintStart_toEndOf="@id/tv_second_day_week"
+        tools:text="wed" />
+
+    <TextView
+        android:id="@+id/tv_forth_day_week"
+        style="@style/tv_calendar_weekday"
+        app:layout_constraintBaseline_toBaselineOf="@id/tv_first_day_week"
+        app:layout_constraintEnd_toStartOf="@id/tv_fifth_day_week"
+        app:layout_constraintStart_toEndOf="@id/tv_third_day_week"
+        tools:text="thu" />
+
+    <TextView
+        android:id="@+id/tv_fifth_day_week"
+        style="@style/tv_calendar_weekday"
+        app:layout_constraintBaseline_toBaselineOf="@id/tv_first_day_week"
+        app:layout_constraintEnd_toStartOf="@id/tv_sixth_day_week"
+        app:layout_constraintStart_toEndOf="@id/tv_forth_day_week"
+        tools:text="fri" />
+
+    <TextView
+        android:id="@+id/tv_sixth_day_week"
+        style="@style/tv_calendar_weekday"
+        app:layout_constraintBaseline_toBaselineOf="@id/tv_first_day_week"
+        app:layout_constraintEnd_toStartOf="@id/tv_seventh_day_week"
+        app:layout_constraintStart_toEndOf="@id/tv_fifth_day_week"
+        tools:text="sat" />
+
+    <TextView
+        android:id="@+id/tv_seventh_day_week"
+        style="@style/tv_calendar_weekday"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBaseline_toBaselineOf="@id/tv_first_day_week"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tv_sixth_day_week"
+        tools:text="sun" />
+
+    <View
+        android:id="@+id/view_selected_day"
+        android:layout_width="@dimen/calendar_number_day"
+        android:layout_height="@dimen/calendar_number_day"
+        android:background="@drawable/main_calendar_under_day_background"
+        android:backgroundTint="@color/accent"
+        app:layout_constraintBottom_toBottomOf="@id/tv_number_seventh"
+        app:layout_constraintEnd_toEndOf="@id/tv_number_seventh"
+        app:layout_constraintStart_toStartOf="@id/tv_number_seventh"
+        app:layout_constraintTop_toTopOf="@id/tv_number_seventh" />
+
+    <TextView
+        android:id="@+id/tv_number_first"
+        style="@style/tv_calendar_number_of_month"
+        app:layout_constraintEnd_toEndOf="@id/tv_first_day_week"
+        app:layout_constraintStart_toStartOf="@id/tv_first_day_week"
+        app:layout_constraintTop_toBottomOf="@id/tv_first_day_week"
+        tools:text="15" />
+
+    <TextView
+        android:id="@+id/tv_number_second"
+        style="@style/tv_calendar_number_of_month"
+        app:layout_constraintEnd_toEndOf="@id/tv_second_day_week"
+        app:layout_constraintStart_toStartOf="@id/tv_second_day_week"
+        app:layout_constraintTop_toBottomOf="@id/tv_second_day_week"
+        tools:text="15" />
+
+    <TextView
+        android:id="@+id/tv_number_third"
+        style="@style/tv_calendar_number_of_month"
+        app:layout_constraintEnd_toEndOf="@id/tv_third_day_week"
+        app:layout_constraintStart_toStartOf="@id/tv_third_day_week"
+        app:layout_constraintTop_toBottomOf="@id/tv_third_day_week"
+        tools:text="15" />
+
+    <TextView
+        android:id="@+id/tv_number_fourth"
+        style="@style/tv_calendar_number_of_month"
+        app:layout_constraintEnd_toEndOf="@id/tv_forth_day_week"
+        app:layout_constraintStart_toStartOf="@id/tv_forth_day_week"
+        app:layout_constraintTop_toBottomOf="@id/tv_forth_day_week"
+        tools:text="15" />
+
+    <TextView
+        android:id="@+id/tv_number_fifth"
+        style="@style/tv_calendar_number_of_month"
+        app:layout_constraintEnd_toEndOf="@id/tv_fifth_day_week"
+        app:layout_constraintStart_toStartOf="@id/tv_fifth_day_week"
+        app:layout_constraintTop_toBottomOf="@id/tv_fifth_day_week"
+        tools:text="15" />
+
+    <TextView
+        android:id="@+id/tv_number_sixth"
+        style="@style/tv_calendar_number_of_month"
+        app:layout_constraintEnd_toEndOf="@id/tv_sixth_day_week"
+        app:layout_constraintStart_toStartOf="@id/tv_sixth_day_week"
+        app:layout_constraintTop_toBottomOf="@id/tv_sixth_day_week"
+        tools:text="15" />
+
+    <TextView
+        android:id="@+id/tv_number_seventh"
+        style="@style/tv_calendar_number_of_month"
+        app:layout_constraintEnd_toEndOf="@id/tv_seventh_day_week"
+        app:layout_constraintStart_toStartOf="@id/tv_seventh_day_week"
+        app:layout_constraintTop_toBottomOf="@id/tv_seventh_day_week"
+        tools:text="15" />
+
+    <View
+        android:id="@+id/view_under_day1"
+        android:layout_width="6dp"
+        android:layout_height="6dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/main_calendar_under_day_background"
+        android:backgroundTint="@color/accent"
+        app:layout_constraintEnd_toEndOf="@id/tv_number_first"
+        app:layout_constraintStart_toStartOf="@id/tv_number_first"
+        app:layout_constraintTop_toBottomOf="@id/tv_number_first" />
+
+    <View
+        android:id="@+id/view_under_day2"
+        android:layout_width="6dp"
+        android:layout_height="6dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/main_calendar_under_day_background"
+        android:backgroundTint="@color/accent"
+        app:layout_constraintEnd_toEndOf="@id/tv_number_second"
+        app:layout_constraintStart_toStartOf="@id/tv_number_second"
+        app:layout_constraintTop_toBottomOf="@id/tv_number_second" />
+
+    <View
+        android:id="@+id/view_under_day3"
+        android:layout_width="6dp"
+        android:layout_height="6dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/main_calendar_under_day_background"
+        android:backgroundTint="@color/accent"
+        app:layout_constraintEnd_toEndOf="@id/tv_number_third"
+        app:layout_constraintStart_toStartOf="@id/tv_number_third"
+        app:layout_constraintTop_toBottomOf="@id/tv_number_third" />
+
+    <View
+        android:id="@+id/view_under_day4"
+        android:layout_width="6dp"
+        android:layout_height="6dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/main_calendar_under_day_background"
+        android:backgroundTint="@color/accent"
+        app:layout_constraintEnd_toEndOf="@id/tv_number_fourth"
+        app:layout_constraintStart_toStartOf="@id/tv_number_fourth"
+        app:layout_constraintTop_toBottomOf="@id/tv_number_fourth" />
+
+    <View
+        android:id="@+id/view_under_day5"
+        android:layout_width="6dp"
+        android:layout_height="6dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/main_calendar_under_day_background"
+        android:backgroundTint="@color/accent"
+        app:layout_constraintEnd_toEndOf="@id/tv_number_fifth"
+        app:layout_constraintStart_toStartOf="@id/tv_number_fifth"
+        app:layout_constraintTop_toBottomOf="@id/tv_number_fifth" />
+
+    <View
+        android:id="@+id/view_under_day6"
+        android:layout_width="6dp"
+        android:layout_height="6dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/main_calendar_under_day_background"
+        android:backgroundTint="@color/accent"
+        app:layout_constraintEnd_toEndOf="@id/tv_number_sixth"
+        app:layout_constraintStart_toStartOf="@id/tv_number_sixth"
+        app:layout_constraintTop_toBottomOf="@id/tv_number_sixth" />
+
+
+    <View
+        android:id="@+id/view_under_day7"
+        android:layout_width="6dp"
+        android:layout_height="6dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/main_calendar_under_day_background"
+        android:backgroundTint="@color/accent"
+        app:layout_constraintEnd_toEndOf="@id/tv_number_seventh"
+        app:layout_constraintStart_toStartOf="@id/tv_number_seventh"
+        app:layout_constraintTop_toBottomOf="@id/tv_number_seventh" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
