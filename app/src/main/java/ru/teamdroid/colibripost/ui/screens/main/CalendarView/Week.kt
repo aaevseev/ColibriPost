@@ -1,4 +1,4 @@
-package ru.teamdroid.colibripost.ui.screens.main
+package ru.teamdroid.colibripost.ui.screens.main.CalendarView
 
 import java.util.*
 
@@ -20,7 +20,11 @@ class Week(dayTime: Long) {
             val listOfWeeks = mutableListOf<Week>()
             val weeksNeed = (weekAround * 2) + 1
             for (i in 0 until weeksNeed) {
-                listOfWeeks.add(Week(t))
+                listOfWeeks.add(
+                    Week(
+                        t
+                    )
+                )
                 t += WEEK
             }
             return listOfWeeks
@@ -31,7 +35,11 @@ class Week(dayTime: Long) {
         val calendar = Calendar.getInstance()
         calendar.timeInMillis = getFirstDayOfWeek(dayTime)
         for (i in 0..6) {
-            weekDays.add(Day(calendar.timeInMillis))
+            weekDays.add(
+                Day(
+                    calendar.timeInMillis
+                )
+            )
             calendar.add(Calendar.DAY_OF_WEEK, 1)
         }
     }
@@ -65,11 +73,15 @@ class Week(dayTime: Long) {
 
 
     fun nextWeek(): Week {
-        return Week(weekDays[0].time + WEEK)
+        return Week(
+            weekDays[0].time + WEEK
+        )
     }
 
     fun previousWeek(): Week {
-        return Week(weekDays[0].time - WEEK)
+        return Week(
+            weekDays[0].time - WEEK
+        )
     }
 
     fun getMonthOfDay(dayWeek: Int): Int {

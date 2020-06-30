@@ -1,4 +1,4 @@
-package ru.teamdroid.colibripost.ui.screens.main
+package ru.teamdroid.colibripost.ui.screens.main.CalendarView
 
 import android.content.res.ColorStateList
 import android.graphics.Color
@@ -20,7 +20,8 @@ class CalendarAdapter : RecyclerView.Adapter<CalendarAdapter.WeekHolder>() {
     private val weeks =
         Week.getWeekAround(5) //нужно ли делать бесконечный скролл или мы будем отображать посты в определённом периоде?
 
-    var selectedDay = Day(System.currentTimeMillis())
+    var selectedDay =
+        Day(System.currentTimeMillis())
         private set(value) {
             previousSelectedDay = field
             field = value
@@ -70,7 +71,8 @@ class CalendarAdapter : RecyclerView.Adapter<CalendarAdapter.WeekHolder>() {
     suspend fun setData(posts: List<Post>) = withContext(Dispatchers.Default) {
         val list = mutableListOf<Day>()
         posts.forEach { post ->
-            val day = Day(post.time)
+            val day =
+                Day(post.time)
             day.delayedPost = if (post.success) {
                 Day.DelayedPosts.DELAYED
             } else {
@@ -200,7 +202,11 @@ class CalendarAdapter : RecyclerView.Adapter<CalendarAdapter.WeekHolder>() {
             setupStateUnderView(viewUnderDay7, week.dayOfWeek(7))
 
             setupSelection(week)
-            animatorHelper = AnimatorHelper(this, week)
+            animatorHelper =
+                AnimatorHelper(
+                    this,
+                    week
+                )
         }
 
         private fun setupStateUnderView(view: View, day: Day) {

@@ -1,4 +1,4 @@
-package ru.teamdroid.colibripost.ui.screens.main
+package ru.teamdroid.colibripost.ui.screens.main.CalendarView
 
 import java.util.Calendar.*
 
@@ -8,7 +8,8 @@ class Day(var time: Long) {
     var month = 1
     var year: Int = 2020
 
-    var delayedPost = DelayedPosts.NONE
+    var delayedPost =
+        DelayedPosts.NONE
 
 
     init {

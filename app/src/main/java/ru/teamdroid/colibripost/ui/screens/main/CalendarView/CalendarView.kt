@@ -1,4 +1,4 @@
-package ru.teamdroid.colibripost.ui.screens.main
+package ru.teamdroid.colibripost.ui.screens.main.CalendarView
 
 import android.content.Context
 import android.util.AttributeSet
@@ -17,7 +17,8 @@ class CalendarView @JvmOverloads constructor(
             field = value
             adapter.calendarClickListener = value
         }
-    var selectedDay = Day(System.currentTimeMillis())
+    var selectedDay =
+        Day(System.currentTimeMillis())
         get() = adapter.selectedDay
         set(value) {
             field = value
@@ -25,7 +26,8 @@ class CalendarView @JvmOverloads constructor(
             binding.vpCalendar.setCurrentItem(adapter.getPageOfDay(value), false)
         }
     private val binding: CalendarViewBinding
-    private val adapter = CalendarAdapter()
+    private val adapter =
+        CalendarAdapter()
 
 
     init {
@@ -38,8 +40,13 @@ class CalendarView @JvmOverloads constructor(
     override fun onFinishInflate() {
         super.onFinishInflate()
         binding.vpCalendar.adapter = adapter
-        selectedDay = Day(System.currentTimeMillis())
-        setupNumbersOfWeek(Week(selectedDay.time))
+        selectedDay =
+            Day(System.currentTimeMillis())
+        setupNumbersOfWeek(
+            Week(
+                selectedDay.time
+            )
+        )
         setupListeners()
     }
 

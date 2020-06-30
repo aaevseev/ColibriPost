@@ -1,4 +1,4 @@
-package ru.teamdroid.colibripost.ui.screens.main
+package ru.teamdroid.colibripost.ui.screens.main.CalendarView
 
 import android.content.Context
 import android.graphics.Color
