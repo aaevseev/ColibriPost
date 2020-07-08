@@ -5,4 +5,8 @@
     <string name="navigation_main_title">Main</string>
     <string name="navigation_new_post_title">New post</string>
     <string name="navigation_settings_title">Settings</string>
+    <string name="telegram_api_hash">68b8be724f9f786fdd51e22047d6a2c2</string>
+    <string name="splash_colibri_post"><b>Colibri</b> Post</string>
+    <string name="sign_in_text">Войдите, чтобы начать создавать отложенные посты для Telegram.</string>
+    <string name="sign_in_btn_text">Войти через Telegram</string>
 </resources>

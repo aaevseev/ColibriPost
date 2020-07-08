@@ -7,4 +7,19 @@
 
     <color name="bottom_navigation_background_color">#FFFFFFFF</color>
     <color name="bottom_navigation_item_color">#FF0081C3</color>
+    <color name="white">#FFFFFF</color>
+
+
+    <color name="blue_1">#0081C3</color>
+    <color name="blue_2">#005F90</color>
+    <color name="gray_1">#F0F2F4</color>
+    <color name="gray_2">#E1E5E9</color>
+    <color name="gray_3">#B4B7BA</color>
+    <color name="text">#1B1B1B</color>
+    <color name="smile">#FFC10E</color>
+    <color name="red">#E74C3C</color>
+    <color name="orange">#E67E22</color>
+    <color name="green">#2ECC71</color>
+
+
 </resources>

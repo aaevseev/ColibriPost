@@ -1,7 +1,8 @@
 package ru.teamdroid.colibripost
 
-import androidx.appcompat.app.AppCompatActivity
+
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import ru.teamdroid.colibripost.presentation.ui.bottomnavigation.BottomNavigationFragment
 import ru.teamdroid.colibripost.presentation.ui.newpost.NewPostFragment
@@ -10,9 +11,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        setNavigationFragment(BottomNavigationFragment())
+//        setNavigationFragment(WaitNumberFragment())
     }
+
 
     private fun setNavigationFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction().apply {
@@ -34,7 +35,9 @@ class MainActivity : AppCompatActivity() {
                 finish()
         }
     }
+
 }
+
 
 interface OnBackPressedListener {
     fun backPressed()
