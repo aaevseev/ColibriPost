@@ -25,7 +25,11 @@ class AuthHolder @Inject constructor(
     override val coroutineContext: CoroutineContext
         get() = Job() + Dispatchers.IO
 
+    companion object{
+        const val LOG_LEVEL_ERROR = 1
+    }
     init {
+        client.client.send(TdApi.SetLogVerbosityLevel(LOG_LEVEL_ERROR),client)
         client.authListener = this
         client.client.send(TdApi.GetAuthorizationState(), client)
     }

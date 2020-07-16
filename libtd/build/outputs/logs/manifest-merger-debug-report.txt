@@ -1,40 +1,40 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Android projects\ColibriPost\libtd\src\main\AndroidManifest.xml:21:1-32:12
-INJECTED from C:\Android projects\ColibriPost\libtd\src\main\AndroidManifest.xml:21:1-32:12
-INJECTED from C:\Android projects\ColibriPost\libtd\src\main\AndroidManifest.xml:21:1-32:12
-INJECTED from C:\Android projects\ColibriPost\libtd\src\main\AndroidManifest.xml:21:1-32:12
-INJECTED from C:\Android projects\ColibriPost\libtd\src\main\AndroidManifest.xml:21:1-32:12
-INJECTED from C:\Android projects\ColibriPost\libtd\src\main\AndroidManifest.xml:21:1-32:12
-INJECTED from C:\Android projects\ColibriPost\libtd\src\main\AndroidManifest.xml:21:1-32:12
+ADDED from C:\Android projects\ColibriPost\libtd\src\main\AndroidManifest.xml:21:1-33:12
+INJECTED from C:\Android projects\ColibriPost\libtd\src\main\AndroidManifest.xml:21:1-33:12
+INJECTED from C:\Android projects\ColibriPost\libtd\src\main\AndroidManifest.xml:21:1-33:12
+INJECTED from C:\Android projects\ColibriPost\libtd\src\main\AndroidManifest.xml:21:1-33:12
+INJECTED from C:\Android projects\ColibriPost\libtd\src\main\AndroidManifest.xml:21:1-33:12
+INJECTED from C:\Android projects\ColibriPost\libtd\src\main\AndroidManifest.xml:21:1-33:12
+INJECTED from C:\Android projects\ColibriPost\libtd\src\main\AndroidManifest.xml:21:1-33:12
 	package
 		ADDED from C:\Android projects\ColibriPost\libtd\src\main\AndroidManifest.xml:22:5-39
 		INJECTED from C:\Android projects\ColibriPost\libtd\src\main\AndroidManifest.xml
 		INJECTED from C:\Android projects\ColibriPost\libtd\src\main\AndroidManifest.xml
 	android:versionName
 		INJECTED from C:\Android projects\ColibriPost\libtd\src\main\AndroidManifest.xml
-		ADDED from C:\Android projects\ColibriPost\libtd\src\main\AndroidManifest.xml:21:1-32:12
+		ADDED from C:\Android projects\ColibriPost\libtd\src\main\AndroidManifest.xml:21:1-33:12
 		INJECTED from C:\Android projects\ColibriPost\libtd\src\main\AndroidManifest.xml
 	android:versionCode
 		INJECTED from C:\Android projects\ColibriPost\libtd\src\main\AndroidManifest.xml
-		ADDED from C:\Android projects\ColibriPost\libtd\src\main\AndroidManifest.xml:21:1-32:12
+		ADDED from C:\Android projects\ColibriPost\libtd\src\main\AndroidManifest.xml:21:1-33:12
 		INJECTED from C:\Android projects\ColibriPost\libtd\src\main\AndroidManifest.xml
 	xmlns:android
 		ADDED from C:\Android projects\ColibriPost\libtd\src\main\AndroidManifest.xml:21:11-69
 uses-permission#android.permission.INTERNET
-ADDED from C:\Android projects\ColibriPost\libtd\src\main\AndroidManifest.xml:24:5-66
+ADDED from C:\Android projects\ColibriPost\libtd\src\main\AndroidManifest.xml:24:5-67
 	android:name
 		ADDED from C:\Android projects\ColibriPost\libtd\src\main\AndroidManifest.xml:24:22-64
 uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
-ADDED from C:\Android projects\ColibriPost\libtd\src\main\AndroidManifest.xml:25:5-80
+ADDED from C:\Android projects\ColibriPost\libtd\src\main\AndroidManifest.xml:25:5-81
 	android:name
 		ADDED from C:\Android projects\ColibriPost\libtd\src\main\AndroidManifest.xml:25:22-78
 application
-ADDED from C:\Android projects\ColibriPost\libtd\src\main\AndroidManifest.xml:26:5-30:19
+ADDED from C:\Android projects\ColibriPost\libtd\src\main\AndroidManifest.xml:27:5-31:19
 	android:label
-		ADDED from C:\Android projects\ColibriPost\libtd\src\main\AndroidManifest.xml:27:9-41
+		ADDED from C:\Android projects\ColibriPost\libtd\src\main\AndroidManifest.xml:29:9-41
 	android:allowBackup
-		ADDED from C:\Android projects\ColibriPost\libtd\src\main\AndroidManifest.xml:26:18-44
+		ADDED from C:\Android projects\ColibriPost\libtd\src\main\AndroidManifest.xml:28:9-35
 uses-sdk
 INJECTED from C:\Android projects\ColibriPost\libtd\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Android projects\ColibriPost\libtd\src\main\AndroidManifest.xml

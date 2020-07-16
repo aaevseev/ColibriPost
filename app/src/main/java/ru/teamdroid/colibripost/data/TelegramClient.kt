@@ -110,13 +110,12 @@ class TelegramClient @Inject constructor() : Client.ResultHandler {
                     is ExpectedResult -> continuation.resume(result).also {
                         Log.d("TelegramClient", "send: $result")
                     }
-
                     is TdApi.Error -> continuation.resumeWithException(
                         TelegramException.Error(result.message)
                     ).also { Log.e("TelegramClient", "send: error ${result.message}") }
                     else -> continuation.resumeWithException(
                         TelegramException.UnexpectedResult(result)
-                    ).also { Log.e("TelegramClient", "send: unexpected error ${result}") }
+                    ).also { Log.e("TelegramClient", "send: unexpected error $result") }
 
                 }
             }

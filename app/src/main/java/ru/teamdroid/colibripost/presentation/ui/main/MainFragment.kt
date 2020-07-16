@@ -67,7 +67,12 @@ class MainFragment : Fragment() {
         send_message.setOnClickListener {
             val msg = messages.createExtendedMessage()
             lifecycleScope.launch {
-                messages.sendDelayedMessage(-1001154531989, msg, 1594201528)
+                -1001264815755
+                val messages = messages.getMessages(-1001264815755, fromMessageId = 0, limit = 10)
+
+                messages.forEachIndexed { index, message ->
+                    Log.d("NewPostViewModel", "getMessages: ${message.replyMarkup}")
+                }
             }
         }
     }

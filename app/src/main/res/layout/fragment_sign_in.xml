@@ -65,7 +65,7 @@
         android:textColor="@color/accent"
         android:textSize="16sp"
         app:cornerRadius="10dp"
-        app:icon="@drawable/ic_telegram"
+        app:icon="@drawable/ic_telegram_blue"
         app:iconGravity="textStart"
         app:iconTint="@color/accent"
         app:layout_constraintBottom_toBottomOf="parent"

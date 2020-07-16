@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
+    <color name="primary">#6200EE</color>
+    <color name="primaryDark">#3700B3</color>
     <color name="accent">#0081C3</color>
 
     <color name="bottom_navigation_background_color">#FFFFFFFF</color>
     <color name="bottom_navigation_item_color">#FF0081C3</color>
     <color name="white">#FFFFFF</color>
+    <color name="hint">#B2BCC8</color>
 
 
     <color name="blue_1">#0081C3</color>
@@ -20,6 +20,8 @@
     <color name="red">#E74C3C</color>
     <color name="orange">#E67E22</color>
     <color name="green">#2ECC71</color>
+    <color name="purple">#9B51E0</color>
+
 
 
 </resources>

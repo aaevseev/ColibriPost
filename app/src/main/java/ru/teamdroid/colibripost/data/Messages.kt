@@ -8,11 +8,39 @@ import javax.inject.Singleton
 
 @Singleton
 class Messages @Inject constructor(private val client: TelegramClient) {
-    suspend fun getMessages(chatId: Long): List<TdApi.Message> {
-        val getChatHistory = TdApi.GetChatHistory(chatId, 0, 0, 100, false)
-        val messages = client.send<TdApi.Messages>(getChatHistory)
-        return messages.messages.toList()
+    //сообщений за 1 запрос; максимум 100
+    var defaultRequest = 50
 
+    suspend fun getMessages(
+        chatId: Long,
+        fromMessageId: Long = 0,
+        limit: Int = defaultRequest
+    ): List<TdApi.Message> {
+        val messageList = mutableListOf<Message>()
+        val lastChatMessage: Message = getLastChatMessage(chatId) ?: return emptyList()
+        var startId = if (fromMessageId == 0L) {
+            messageList.add(lastChatMessage)
+            lastChatMessage.id
+        } else {
+            fromMessageId
+        }
+        var messagesRequested = limit
+        val oneRequest = if (limit < defaultRequest) limit else defaultRequest
+        while (messagesRequested > 0) {
+            val getChatHistory = GetChatHistory(chatId, startId, 0, oneRequest, false)
+            val request = client.send<TdApi.Messages>(getChatHistory).messages.toList()
+            startId = request.last().id
+            messageList.addAll(request)
+            if (request.size < oneRequest) return messageList
+            messagesRequested -= oneRequest
+        }
+
+        return messageList
+    }
+
+    private suspend fun getLastChatMessage(chatId: Long): Message? {
+        val chat = client.send<TdApi.Chat>(TdApi.GetChat(chatId))
+        return chat.lastMessage
     }
 
 
@@ -21,17 +49,41 @@ class Messages @Inject constructor(private val client: TelegramClient) {
     }
 
 
-    suspend fun sendDelayedMessage(
+    suspend fun sendMessage(
         chatId: Long,
         content: TdApi.InputMessageContent,
-        unixTime: Int
-    ): Unit {
-        val options = TdApi.SendMessageOptions().apply {
-            schedulingState = TdApi.MessageSchedulingStateSendAtDate(unixTime)
-            fromBackground = true
-        }
-        val message = TdApi.SendMessage(chatId, 0, options, null, content)
-        client.send<Message>(message)
+        delayedUnixTime: Int = 0,
+        replyMarkup: ReplyMarkup? = null
+    ): Message {
+        val options = getMessageOptions(delayedUnixTime)
+        val message = TdApi.SendMessage(chatId, 0, options, replyMarkup, content)
+        return client.send<Message>(message)
+    }
+
+    suspend fun sendAlbum(
+        chatId: Long,
+        content: Array<InputMessageContent>,
+        delayedUnixTime: Int = 0
+    ): TdApi.Messages {
+        val options = getMessageOptions(delayedUnixTime)
+        val album: SendMessageAlbum = SendMessageAlbum(chatId, 0, options, content)
+        return client.send(album)
+    }
+
+    suspend fun sendMessageAlbum(
+        chatId: Long,
+        content: Array<TdApi.InputMessageContent>,
+        delayedUnixTime: Int = 0
+    ): Message {
+        val options = getMessageOptions(delayedUnixTime)
+        val message = SendMessageAlbum(chatId, 0, options, content)
+        return client.send<Message>(message)
+    }
+
+    private fun getMessageOptions(delayedUnixTime: Int) = SendMessageOptions().apply {
+        if (delayedUnixTime == 0) return@apply
+        schedulingState = MessageSchedulingStateSendAtDate(delayedUnixTime)
+        fromBackground = true
     }
 
 
