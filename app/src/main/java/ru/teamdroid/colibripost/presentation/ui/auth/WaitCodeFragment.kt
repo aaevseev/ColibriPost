@@ -15,9 +15,13 @@ import ru.teamdroid.colibripost.R
 import ru.teamdroid.colibripost.data.AuthHolder
 import ru.teamdroid.colibripost.data.AuthStates
 import ru.teamdroid.colibripost.databinding.FragmentWaitCodeBinding
+import ru.teamdroid.colibripost.presentation.ui.bottomnavigation.BottomNavigationFragment
+import ru.teamdroid.colibripost.presentation.ui.core.BaseFragment
 import javax.inject.Inject
 
-class WaitCodeFragment : Fragment() {
+class WaitCodeFragment : BaseFragment() {
+
+    override val layoutId = R.layout.fragment_wait_code
     private var _binding: FragmentWaitCodeBinding? = null
     private val binding: FragmentWaitCodeBinding
         get() = _binding!!
@@ -34,6 +38,8 @@ class WaitCodeFragment : Fragment() {
         super.onCreate(savedInstanceState)
         App.instance.appComponent.injectWaitCodeFragment(this)
     }
+
+
 
 
     override fun onCreateView(
@@ -80,7 +86,7 @@ class WaitCodeFragment : Fragment() {
     }
 
     private fun startMainFragment() {
-        findNavController().navigate(R.id.action_waitCodeFragment_to_bottomNavigationFragment)
+        base { setNavigationFragment(BottomNavigationFragment()) }
     }
 
     override fun onDestroyView() {

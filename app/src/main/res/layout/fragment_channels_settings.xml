@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/channels_settings_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="ru.teamdroid.colibripost.presentation.ui.settings.ChannelsSettingsFragment">
+
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/gray_1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/size_medium"
+                android:layout_marginTop="@dimen/size_smedium"
+                android:layout_marginEnd="@dimen/size_medium"
+                android:layout_marginBottom="@dimen/size_smedium"
+                android:background="@color/gray_1"
+                android:fontFamily="@font/montserrat_bold"
+                android:letterSpacing="0.1"
+                android:text="2 КАНАЛА"
+                android:textColor="@color/accent"
+                android:textSize="19sp" />
+
+
+        </LinearLayout>
+
+        <View style="@style/Divider" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvChannels"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/lAddChannels"
+                android:layout_alignParentTop="true"
+
+                android:background="@color/gray_1" />
+
+            <LinearLayout
+                android:id="@+id/lAddChannels"
+                android:layout_width="match_parent"
+                android:layout_height="128dp"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/new_channel_add_background"
+                android:orientation="vertical">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_add_btn"
+                    style="?attr/borderlessButtonStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="32dp"
+                    android:backgroundTint="@color/white"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:text="@string/add_channel"
+                    android:textAllCaps="false"
+                    android:textColor="@color/accent"
+                    android:textSize="16sp"
+                    app:cornerRadius="10dp"
+                    app:icon="@drawable/ic_plus"
+                    app:iconGravity="textStart"
+                    app:iconTint="@color/accent" />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

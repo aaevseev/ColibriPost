@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.replace
 import androidx.lifecycle.lifecycleScope
 import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.coroutines.launch
@@ -14,9 +15,11 @@ import ru.teamdroid.colibripost.App
 import ru.teamdroid.colibripost.R
 import ru.teamdroid.colibripost.data.Chats
 import ru.teamdroid.colibripost.data.Messages
+import ru.teamdroid.colibripost.presentation.ui.core.BaseFragment
+import ru.teamdroid.colibripost.presentation.ui.settings.ChannelsSettingsFragment
 import javax.inject.Inject
 
-class MainFragment : Fragment() {
+class MainFragment : BaseFragment() {
 
 
     @Inject
@@ -30,13 +33,7 @@ class MainFragment : Fragment() {
         App.instance.appComponent.injectMainFragment(this)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_main, container, false)
-    }
+    override val layoutId = R.layout.fragment_main
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -47,6 +44,15 @@ class MainFragment : Fragment() {
                 val chats1: List<TdApi.Chat> = chats.getChats()
                 chats1.forEach {
                     Log.d("MainFragment", "onViewCreated: chat: ${it.title} id ${it.id}")
+                }
+
+            }
+        }
+        get_Channels.setOnClickListener {
+            lifecycleScope.launch {
+                val channels: List<TdApi.Channel> = chats.getChannels()
+                channels.forEach {
+                    Log.d("MainFragment", "onViewCreated: chat: ${it.id} id ${it.date}")
                 }
 
             }
@@ -75,6 +81,8 @@ class MainFragment : Fragment() {
                 }
             }
         }
+
+
     }
 
     companion object {

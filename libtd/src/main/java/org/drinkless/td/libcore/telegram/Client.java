@@ -153,7 +153,7 @@ public final class Client implements Runnable {
             public void run() {
                 if (isExternalError(errorMessage)) {
                     processExternalError();
-                    return;
+                       return;
                 }
 
                 throw new ClientException("TDLib fatal error (" + clientCount.get() + "): " + errorMessage);

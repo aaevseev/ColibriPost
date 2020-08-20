@@ -8,19 +8,22 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import ru.teamdroid.colibripost.R
 import ru.teamdroid.colibripost.databinding.FragmentSignInBinding
+import ru.teamdroid.colibripost.presentation.ui.core.BaseFragment
 
-class SignInFragment : Fragment() {
+class SignInFragment : BaseFragment() {
     private var _binding: FragmentSignInBinding? = null
     private val binding: FragmentSignInBinding
         get() = _binding!!
 
     companion object {
-
+        const val TAG = "SignInFragment"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
+
+    override val layoutId = R.layout.fragment_sign_in
 
 
     override fun onCreateView(
@@ -34,7 +37,7 @@ class SignInFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.btnSignIn.setOnClickListener {
-            findNavController().navigate(R.id.action_signInFragment_to_waitNumberFragment)
+            base{setNavigationFragment(WaitNumberFragment())}
         }
 
     }

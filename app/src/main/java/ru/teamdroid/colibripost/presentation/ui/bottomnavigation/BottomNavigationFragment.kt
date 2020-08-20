@@ -5,20 +5,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import kotlinx.android.synthetic.main.activity_main.*
 import ru.teamdroid.colibripost.OnBackPressedListener
 import ru.teamdroid.colibripost.R
 import ru.teamdroid.colibripost.databinding.FragmentBottomNavigationBinding
+import ru.teamdroid.colibripost.presentation.ui.core.BaseFragment
 import ru.teamdroid.colibripost.presentation.ui.main.MainFragment
 import ru.teamdroid.colibripost.presentation.ui.newpost.NewPostFragment
+import ru.teamdroid.colibripost.presentation.ui.settings.ChannelsSettingsFragment
 import ru.teamdroid.colibripost.presentation.ui.settings.SettingsFragment
 
-class BottomNavigationFragment : Fragment(), OnBackPressedListener {
+class BottomNavigationFragment : BaseFragment(), OnBackPressedListener {
 
     private var selectedFragment = MainFragment.TAG
 
     private var _binding: FragmentBottomNavigationBinding? = null
     private val binding: FragmentBottomNavigationBinding
         get() = _binding!!
+    override val layoutId: Int = R.layout.fragment_bottom_navigation
 
 
     override fun onCreateView(
@@ -32,6 +36,7 @@ class BottomNavigationFragment : Fragment(), OnBackPressedListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        base { toolbar.visibility = View.VISIBLE }
 
         setupBottomNavigator()
     }

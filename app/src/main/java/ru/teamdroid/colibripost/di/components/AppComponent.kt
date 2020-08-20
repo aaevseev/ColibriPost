@@ -1,6 +1,7 @@
 package ru.teamdroid.colibripost.di.components
 
 import dagger.Component
+import ru.teamdroid.colibripost.MainActivity
 import ru.teamdroid.colibripost.di.modules.AppModule
 import ru.teamdroid.colibripost.di.modules.ViewModelsModule
 import ru.teamdroid.colibripost.presentation.ui.auth.WaitCodeFragment
@@ -25,4 +26,6 @@ interface AppComponent {
     fun injectSplashFragment(fragment: SplashFragment)
     fun injectMainFragment(fragment: MainFragment)
     fun injectNewPostFragment(fragment: NewPostFragment)
+
+    fun injectMainActivity(mainActivity: MainActivity)
 }

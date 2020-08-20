@@ -67,7 +67,7 @@ class SplashFragment : Fragment() {
         }
     }
 
-    override fun onResume() {
+    /*override fun onResume() {
         super.onResume()
         lifecycleScope.launch {
             delay(2000)
@@ -77,7 +77,7 @@ class SplashFragment : Fragment() {
                 findNavController().navigate(R.id.action_splashFragment_to_signInFragment)
             }
         }
-    }
+    }*/
 
     override fun onDestroyView() {
         super.onDestroyView()

@@ -15,9 +15,12 @@ import ru.teamdroid.colibripost.R
 import ru.teamdroid.colibripost.data.AuthHolder
 import ru.teamdroid.colibripost.data.AuthStates.*
 import ru.teamdroid.colibripost.databinding.FragmentWaitNumberBinding
+import ru.teamdroid.colibripost.presentation.ui.core.BaseFragment
 import javax.inject.Inject
 
-class WaitNumberFragment : Fragment() {
+class WaitNumberFragment : BaseFragment() {
+
+    override val layoutId = R.layout.fragment_wait_number
     private var _binding: FragmentWaitNumberBinding? = null
     private val binding: FragmentWaitNumberBinding
         get() = _binding!!
@@ -26,13 +29,14 @@ class WaitNumberFragment : Fragment() {
     lateinit var authHolder: AuthHolder
 
     companion object {
-
+        const val TAG = "WaitNumberFragment"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         App.instance.appComponent.injectWaitPhoneFragment(this)
     }
+
 
 
     override fun onCreateView(
@@ -87,7 +91,7 @@ class WaitNumberFragment : Fragment() {
     }
 
     private fun startWaitCodeFragment() {
-        findNavController().navigate(R.id.action_waitNumberFragment_to_waitCodeFragment)
+        base { setNavigationFragment(WaitCodeFragment()) }
     }
 
     override fun onDestroyView() {
