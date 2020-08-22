@@ -50,11 +50,14 @@ class MainFragment : BaseFragment() {
         }
         get_Channels.setOnClickListener {
             lifecycleScope.launch {
-                val channels: List<TdApi.SupergroupFullInfo> = chats.getChannels()
-                channels.forEach {
+                val channelsMemberCount: List<TdApi.SupergroupFullInfo> = chats.getChannelsMembersCount()
+                val channelsInfo: List<TdApi.Chat> = chats.getChannelInfoBySuperGroup()
+                channelsMemberCount.forEach {
                     Log.d("MainFragment", "onViewCreated: chat: ${it.description} count ${it.memberCount}")
                 }
-
+                channelsInfo.forEach{
+                    Log.d("MainFragment", "onViewCreated: chat: ${it.title} photo")
+                }
             }
         }
         get_messages.setOnClickListener {

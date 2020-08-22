@@ -26,12 +26,24 @@ class Chats @Inject constructor(private val client: TelegramClient) {
     suspend fun getChat(chatId: Long): TdApi.Chat {
         return client.send<TdApi.Chat>(TdApi.GetChat(chatId))
     }
+    
+    suspend fun getAdminChannelSupergroups(): List<TdApi.Supergroup>{
+        return getChats().filterByChannel()
+            .map {chat -> getSupergroup((chat.type as TdApi.ChatTypeSupergroup).supergroupId)}
+            .filter {supergroup ->  supergroup.status is  TdApi.ChatMemberStatusCreator || supergroup.status is TdApi.ChatMemberStatusAdministrator}
+    }
 
-    suspend fun getChannels(): List<TdApi.SupergroupFullInfo> {
-        return getChats().filter {chat ->  chat.type is TdApi.ChatTypeSupergroup && (chat.type as TdApi.ChatTypeSupergroup).isChannel }
-            .map { chat -> getSupergroup((chat.type as TdApi.ChatTypeSupergroup).supergroupId) }
-            .filter { supergroup ->  supergroup.status is TdApi.ChatMemberStatusAdministrator}
-            .map { supergroup -> getSupergroupFullInfo(supergroup.id) }
+    suspend fun getChannelsMembersCount(): List<TdApi.SupergroupFullInfo> {
+        return getAdminChannelSupergroups().map { supergroup -> getSupergroupFullInfo(supergroup.id) }
+    }
+
+    suspend fun getChannelInfoBySuperGroup(): List<TdApi.Chat>{
+        val channelSupergroup = getAdminChannelSupergroups()
+        val chats = getChats().filterByChannel()
+        return chats.filter {
+            val chatFilterId = (it.type as TdApi.ChatTypeSupergroup).supergroupId
+            chatFilterId == channelSupergroup.firstOrNull{it.id == chatFilterId}?.id
+        }
     }
 
 
@@ -44,4 +56,8 @@ class Chats @Inject constructor(private val client: TelegramClient) {
     }
 
 
+}
+
+fun List<TdApi.Chat>.filterByChannel(): List<TdApi.Chat>{
+    return this.filter { it.type is TdApi.ChatTypeSupergroup && (it.type as TdApi.ChatTypeSupergroup).isChannel }
 }
