@@ -2,11 +2,7 @@ package ru.teamdroid.colibripost.presentation.ui.main
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.replace
 import androidx.lifecycle.lifecycleScope
 import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.coroutines.launch
@@ -16,7 +12,7 @@ import ru.teamdroid.colibripost.R
 import ru.teamdroid.colibripost.data.Chats
 import ru.teamdroid.colibripost.data.Messages
 import ru.teamdroid.colibripost.presentation.ui.core.BaseFragment
-import ru.teamdroid.colibripost.presentation.ui.settings.ChannelsSettingsFragment
+import java.util.*
 import javax.inject.Inject
 
 class MainFragment : BaseFragment() {
@@ -50,13 +46,14 @@ class MainFragment : BaseFragment() {
         }
         get_Channels.setOnClickListener {
             lifecycleScope.launch {
-                val channelsMemberCount: List<TdApi.SupergroupFullInfo> = chats.getChannelsMembersCount()
+                val channelsMemberCount: List<TdApi.SupergroupFullInfo> =
+                    chats.getChannelsMembersCount()
                 val channelsInfo: List<TdApi.Chat> = chats.getChannelInfoBySuperGroup()
                 channelsMemberCount.forEach {
-                    Log.d("MainFragment", "onViewCreated: chat: ${it.description} count ${it.memberCount}")
+                    Log.d("!!!", "description: ${it.description} count ${it.memberCount}")
                 }
-                channelsInfo.forEach{
-                    Log.d("MainFragment", "onViewCreated: chat: ${it.title} photo")
+                channelsInfo.forEach {
+                    Log.d("!!", "title: ${it.title} id: ${it.id} ")
                 }
             }
         }
@@ -76,16 +73,11 @@ class MainFragment : BaseFragment() {
         send_message.setOnClickListener {
             val msg = messages.createExtendedMessage()
             lifecycleScope.launch {
-                -1001264815755
-                val messages = messages.getMessages(-1001264815755, fromMessageId = 0, limit = 10)
-
-                messages.forEachIndexed { index, message ->
-                    Log.d("NewPostViewModel", "getMessages: ${message.replyMarkup}")
-                }
+                val now = Calendar.getInstance()
+                now.add(Calendar.SECOND, 15)
+                messages.sendDelayedMessage(-1001488669203, msg, (now.time.time / 1000L).toInt())
             }
         }
-
-
     }
 
     companion object {
