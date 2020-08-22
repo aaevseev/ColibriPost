@@ -6620,6 +6620,44 @@ public class TdApi {
         }
     }
 
+
+    /**
+     * Represents a list of channels.
+     */
+    public static class Channels extends Object {
+        /**
+         * Identifier uniquely determining type of the object.
+         */
+        public static final int CONSTRUCTOR = -1687756020;
+        /**
+         * List of chat identifiers.
+         */
+        public int[] channelIds;
+
+        /**
+         * Represents a list of chats.
+         */
+        public Channels() {
+        }
+
+        /**
+         * Represents a list of chats.
+         *
+         * @param channelIds List of channel identifiers.
+         */
+        public Channels(int[] channelIds) {
+            this.channelIds = channelIds;
+        }
+
+        /**
+         * @return this.CONSTRUCTOR
+         */
+        @Override
+        public int getConstructor() {
+            return CONSTRUCTOR;
+        }
+    }
+
     /**
      * Represents a list of chats located nearby.
      */
