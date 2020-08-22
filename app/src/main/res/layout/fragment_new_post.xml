@@ -5,43 +5,9 @@
     android:id="@+id/new_post_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context="ru.teamdroid.colibripost.presentation.ui.newpost.NewPostFragment">
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="0dp"
-        android:layout_height="?attr/actionBarSize"
 
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:title="@string/new_post"
-        app:titleTextColor="@color/accent"
-        app:titleTextAppearance="@style/Toolbar.TitleText"
-        app:navigationIcon="@drawable/ic_arrow_back_24"
-        />
-
-<!--    <ImageButton-->
-<!--        android:id="@+id/btn_back"-->
-<!--        android:layout_width="?attr/actionBarSize"-->
-<!--        android:layout_height="?attr/actionBarSize"-->
-<!--        android:background="@color/white"-->
-<!--        android:src="@drawable/ic_arrow_back_24"-->
-<!--        app:iconTint="@color/accent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
-
-<!--    <com.google.android.material.textview.MaterialTextView-->
-<!--        android:id="@+id/tv_title"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="?attr/actionBarSize"-->
-<!--        android:gravity="start|center_vertical"-->
-<!--        android:text="@string/new_post"-->
-<!--        android:textColor="@color/accent"-->
-<!--        android:textSize="24sp"-->
-<!--        android:textStyle="bold"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toEndOf="@id/btn_back"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
 
     <EditText
         android:id="@+id/et_post"
@@ -57,7 +23,7 @@
         app:layout_constraintBottom_toTopOf="@id/rv_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintTop_toTopOf="parent"
         tools:text="Привет! Я пишу свой первый отложенный постинг в Телеграм.С уважением,Ваш Петр." />
 
     <ImageButton
@@ -243,6 +209,5 @@
         app:layout_constraintEnd_toEndOf="@id/tv_time"
         app:layout_constraintStart_toStartOf="@id/tv_time"
         app:layout_constraintTop_toTopOf="@id/btn_preview" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

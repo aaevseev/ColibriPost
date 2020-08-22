@@ -5,10 +5,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.observe
-import androidx.navigation.fragment.findNavController
 import kotlinx.coroutines.launch
 import ru.teamdroid.colibripost.App
 import ru.teamdroid.colibripost.R
@@ -22,6 +20,7 @@ import javax.inject.Inject
 class WaitCodeFragment : BaseFragment() {
 
     override val layoutId = R.layout.fragment_wait_code
+
     private var _binding: FragmentWaitCodeBinding? = null
     private val binding: FragmentWaitCodeBinding
         get() = _binding!!
@@ -29,18 +28,10 @@ class WaitCodeFragment : BaseFragment() {
     @Inject
     lateinit var authHolder: AuthHolder
 
-
-    companion object {
-
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         App.instance.appComponent.injectWaitCodeFragment(this)
     }
-
-
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -93,6 +84,4 @@ class WaitCodeFragment : BaseFragment() {
         super.onDestroyView()
         _binding = null
     }
-
-
 }

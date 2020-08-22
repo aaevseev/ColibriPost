@@ -1,6 +1,5 @@
 package ru.teamdroid.colibripost.data
 
-import android.util.Log
 import org.drinkless.td.libcore.telegram.TdApi
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -24,7 +23,7 @@ class Chats @Inject constructor(private val client: TelegramClient) {
         .map { ids -> getChat(ids) }
 
     suspend fun getChat(chatId: Long): TdApi.Chat {
-        return client.send<TdApi.Chat>(TdApi.GetChat(chatId))
+        return client.send(TdApi.GetChat(chatId))
     }
     
     suspend fun getAdminChannelSupergroups(): List<TdApi.Supergroup>{
@@ -46,16 +45,13 @@ class Chats @Inject constructor(private val client: TelegramClient) {
         }
     }
 
-
     suspend fun getSupergroup(superGroupId: Int): TdApi.Supergroup {
-        return client.send<TdApi.Supergroup>(TdApi.GetSupergroup(superGroupId))
+        return client.send(TdApi.GetSupergroup(superGroupId))
     }
 
     suspend fun getSupergroupFullInfo(superGroupId: Int): TdApi.SupergroupFullInfo {
-        return client.send<TdApi.SupergroupFullInfo>(TdApi.GetSupergroupFullInfo(superGroupId))
+        return client.send(TdApi.GetSupergroupFullInfo(superGroupId))
     }
-
-
 }
 
 fun List<TdApi.Chat>.filterByChannel(): List<TdApi.Chat>{

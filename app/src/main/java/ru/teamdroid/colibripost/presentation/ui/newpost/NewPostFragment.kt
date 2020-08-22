@@ -16,17 +16,16 @@ import android.widget.ArrayAdapter
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.widget.doAfterTextChanged
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.srgpanov.telegrammsmm.ui.screen.SpinnerAdapter
 import com.srgpanov.telegrammsmm.ui.screen.SpinnerItem
 import ru.teamdroid.colibripost.App
 import ru.teamdroid.colibripost.R
 import ru.teamdroid.colibripost.databinding.FragmentNewPostBinding
+import ru.teamdroid.colibripost.presentation.ui.core.BaseFragment
 import ru.teamdroid.colibripost.presentation.ui.newpost.CalendarDialogFragment.Companion.KEY_DAY
 import ru.teamdroid.colibripost.presentation.ui.newpost.CalendarDialogFragment.Companion.KEY_MONTH
 import ru.teamdroid.colibripost.presentation.ui.newpost.CalendarDialogFragment.Companion.KEY_YEAR
@@ -36,15 +35,17 @@ import ru.teamdroid.colibripost.presentation.ui.newpost.TimeDialogFragment.Compa
 import ru.teamdroid.colibripost.presentation.ui.newpost.TimeDialogFragment.Companion.REQUEST_TIME
 import javax.inject.Inject
 
+class NewPostFragment : BaseFragment(), FragmentResultListener {
 
-class NewPostFragment : Fragment(), FragmentResultListener {
+    override val layoutId = R.layout.fragment_channels_settings
+
     private var _binding: FragmentNewPostBinding? = null
     private val binding: FragmentNewPostBinding
         get() = _binding!!
 
     private lateinit var takePicture: ActivityResultLauncher<Intent>
 
-    private val adapter:MessageContentAdapter by lazy { MessageContentAdapter() }
+    private val adapter: MessageContentAdapter by lazy { MessageContentAdapter() }
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -169,19 +170,19 @@ class NewPostFragment : Fragment(), FragmentResultListener {
             dialogFragment.show(childFragmentManager, TimeDialogFragment.TAG)
         }
         takePicture = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-            val selectedImage = it.data?.getData()
+            val selectedImage = it.data?.data
 
             Log.d("NewPostFragment", "setupListeners: $selectedImage")
             if (selectedImage != null) {
                 viewModel.onFileChosen(selectedImage)
-            }else {
-                Log.e(TAG, "setupListeners: selectedImage null" )
+            } else {
+                Log.e(TAG, "setupListeners: selectedImage null")
             }
 
         }
 
         binding.btnClip.setOnClickListener {
-            val takePictureIntent: Intent = Intent(Intent.ACTION_PICK)
+            val takePictureIntent = Intent(Intent.ACTION_PICK)
             takePictureIntent.type = "image/*"
             takePicture.launch(takePictureIntent)
         }

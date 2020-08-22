@@ -1,9 +1,12 @@
 package ru.teamdroid.colibripost.presentation.ui.bottomnavigation
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.activity_main.*
 import ru.teamdroid.colibripost.OnBackPressedListener
@@ -12,18 +15,16 @@ import ru.teamdroid.colibripost.databinding.FragmentBottomNavigationBinding
 import ru.teamdroid.colibripost.presentation.ui.core.BaseFragment
 import ru.teamdroid.colibripost.presentation.ui.main.MainFragment
 import ru.teamdroid.colibripost.presentation.ui.newpost.NewPostFragment
-import ru.teamdroid.colibripost.presentation.ui.settings.ChannelsSettingsFragment
 import ru.teamdroid.colibripost.presentation.ui.settings.SettingsFragment
 
 class BottomNavigationFragment : BaseFragment(), OnBackPressedListener {
 
+    override val layoutId: Int = R.layout.fragment_bottom_navigation
     private var selectedFragment = MainFragment.TAG
 
     private var _binding: FragmentBottomNavigationBinding? = null
     private val binding: FragmentBottomNavigationBinding
         get() = _binding!!
-    override val layoutId: Int = R.layout.fragment_bottom_navigation
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,25 +37,27 @@ class BottomNavigationFragment : BaseFragment(), OnBackPressedListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setHasOptionsMenu(true)
         base { toolbar.visibility = View.VISIBLE }
-
         setupBottomNavigator()
     }
 
     private fun setupBottomNavigator() {
-
         binding.bottomNavigation.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.navigation_main -> {
+                    changeActionBar(getString(R.string.main))
                     displayFragment(MainFragment.TAG)
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.navigation_newPost -> {
+                    changeActionBar(getString(R.string.new_post), true)
                     binding.bottomNavigation.visibility = View.GONE
                     displayFragment(NewPostFragment.TAG)
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.navigation_settings -> {
+                    changeActionBar(getString(R.string.settings))
                     displayFragment(SettingsFragment.TAG)
                     return@setOnNavigationItemSelectedListener true
                 }
@@ -63,17 +66,31 @@ class BottomNavigationFragment : BaseFragment(), OnBackPressedListener {
         }
 
         displayFragment(selectedFragment)
+        setToolbarTitle(getString(R.string.main))
+    }
+
+    private fun changeActionBar(title: String, isShowHomeButton: Boolean = false) {
+        setToolbarTitle(title)
+        (requireActivity() as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(
+            isShowHomeButton
+        )
     }
 
     private fun displayFragment(tag: String) {
         childFragmentManager.beginTransaction().apply {
-            childFragmentManager.findFragmentByTag(selectedFragment)?.let { if (it.isAdded) hide(it) }
+            childFragmentManager.findFragmentByTag(selectedFragment)
+                ?.let { if (it.isAdded) hide(it) }
             selectedFragment = tag
-            val fragment = childFragmentManager.findFragmentByTag(selectedFragment) ?: createFragment(selectedFragment)
+            val fragment =
+                childFragmentManager.findFragmentByTag(selectedFragment) ?: createFragment(
+                    selectedFragment
+                )
             if (fragment.isAdded) {
                 show(fragment)
             } else {
-                add(R.id.navigationContainer, fragment, selectedFragment).addToBackStack(selectedFragment)
+                add(R.id.navigationContainer, fragment, selectedFragment).addToBackStack(
+                    selectedFragment
+                )
             }
         }.commit()
     }
@@ -96,7 +113,17 @@ class BottomNavigationFragment : BaseFragment(), OnBackPressedListener {
         const val TAG = "BottomNavigationFragment"
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val id: Int = item.itemId
+        if (id == android.R.id.home) {
+            backPressed()
+            return true
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
     override fun backPressed() {
+        Log.d("!!!", "onBackPressed")
         displayFragment(MainFragment.TAG)
         binding.bottomNavigation.selectedItemId = R.id.navigation_main
         binding.bottomNavigation.visibility = View.VISIBLE

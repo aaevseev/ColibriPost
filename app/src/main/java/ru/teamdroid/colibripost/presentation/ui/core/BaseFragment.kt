@@ -6,14 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import ru.teamdroid.colibripost.MainActivity
-import ru.teamdroid.colibripost.R
 import ru.teamdroid.colibripost.base
 
 abstract class BaseFragment: Fragment() {
 
-
     abstract val layoutId:Int
-    open val titleToolbar = R.string.app_name
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -23,10 +20,9 @@ abstract class BaseFragment: Fragment() {
         return inflater.inflate(layoutId, container, false)
     }
 
-    override fun onResume() {
-        super.onResume()
+    fun setToolbarTitle(title: String) {
         base {
-            supportActionBar?.title = getString(titleToolbar)
+            supportActionBar?.title = title
         }
     }
 

@@ -1,6 +1,5 @@
 package ru.teamdroid.colibripost
 
-
 import android.app.Activity
 import android.os.Bundle
 import android.util.Log
@@ -8,8 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.observe
-import androidx.navigation.Navigation.findNavController
-import androidx.navigation.findNavController
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -29,10 +26,10 @@ class MainActivity : AppCompatActivity() {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         App.instance.appComponent.injectMainActivity(this)
         setSupportActionBar(toolbar)
-
+        supportActionBar?.setDisplayHomeAsUpEnabled(false)
+        supportActionBar?.setHomeButtonEnabled(true)
     }
 
     override fun onResume() {
@@ -43,14 +40,13 @@ class MainActivity : AppCompatActivity() {
             delay(500)
             if (authHolder.authState.value == AuthStates.AUTHENTICATED) {
                 setNavigationFragment(BottomNavigationFragment())
-            }
-            else {
+            } else {
                 setNavigationFragment(SignInFragment())
             }
         }
     }
 
-     fun setNavigationFragment(fragment: Fragment) {
+    fun setNavigationFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction().apply {
             replace(R.id.fragmentContainer, fragment).addToBackStack(BottomNavigationFragment.TAG)
         }.commit()
@@ -71,7 +67,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun authStateLog(){
+    fun authStateLog() {
         authHolder.authState.observe(this) { state ->
             when (state) {
                 AuthStates.UNAUTHENTICATED -> {
@@ -98,7 +94,7 @@ class MainActivity : AppCompatActivity() {
     }
 }
 
-inline fun Activity?.base(block: MainActivity.() -> Unit){
+inline fun Activity?.base(block: MainActivity.() -> Unit) {
     (this as? MainActivity)?.let(block)
 }
 
