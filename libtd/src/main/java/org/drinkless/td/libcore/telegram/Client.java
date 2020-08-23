@@ -136,6 +136,38 @@ public final class Client implements Runnable {
     }
 
     /**
+     * Closes Client.
+     */
+    public void close() {
+        writeLock.lock();
+        try {
+            if (isClientDestroyed) {
+                return;
+            }
+            if (!stopFlag) {
+                send(new TdApi.Close(), null);
+            }
+            isClientDestroyed = true;
+            while (!stopFlag) {
+                Thread.yield();
+            }
+            if (handlers.size() != 1) {
+                receiveQueries(0.0);
+
+                for (Long key : handlers.keySet()) {
+                    if (key != 0) {
+                        processResult(key, new TdApi.Error(500, "Client is closed"));
+                    }
+                }
+            }
+            NativeClient.destroyClient(nativeClientId);
+            clientCount.decrementAndGet();
+        } finally {
+            writeLock.unlock();
+        }
+    }
+
+    /**
      * This function is called from the JNI when a fatal error happens to provide a better error message.
      * It shouldn't return. Do not call it directly.
      *
