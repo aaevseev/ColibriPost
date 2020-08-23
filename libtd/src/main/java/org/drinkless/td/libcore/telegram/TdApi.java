@@ -33,370 +33,373 @@ public class TdApi {
     public abstract static class Function extends Object {
         @Retention(RetentionPolicy.SOURCE)
         @IntDef({
-            AcceptCall.CONSTRUCTOR,
-            AcceptTermsOfService.CONSTRUCTOR,
-            AddChatMember.CONSTRUCTOR,
-            AddChatMembers.CONSTRUCTOR,
-            AddContact.CONSTRUCTOR,
-            AddCustomServerLanguagePack.CONSTRUCTOR,
-            AddFavoriteSticker.CONSTRUCTOR,
-            AddLocalMessage.CONSTRUCTOR,
-            AddLogMessage.CONSTRUCTOR,
-            AddNetworkStatistics.CONSTRUCTOR,
-            AddProxy.CONSTRUCTOR,
-            AddRecentSticker.CONSTRUCTOR,
-            AddRecentlyFoundChat.CONSTRUCTOR,
-            AddSavedAnimation.CONSTRUCTOR,
-            AddStickerToSet.CONSTRUCTOR,
-            AnswerCallbackQuery.CONSTRUCTOR,
-            AnswerCustomQuery.CONSTRUCTOR,
-            AnswerInlineQuery.CONSTRUCTOR,
-            AnswerPreCheckoutQuery.CONSTRUCTOR,
-            AnswerShippingQuery.CONSTRUCTOR,
-            BlockUser.CONSTRUCTOR,
-            CanTransferOwnership.CONSTRUCTOR,
-            CancelDownloadFile.CONSTRUCTOR,
-            CancelUploadFile.CONSTRUCTOR,
-            ChangeImportedContacts.CONSTRUCTOR,
-            ChangePhoneNumber.CONSTRUCTOR,
-            ChangeStickerSet.CONSTRUCTOR,
-            CheckAuthenticationBotToken.CONSTRUCTOR,
-            CheckAuthenticationCode.CONSTRUCTOR,
-            CheckAuthenticationPassword.CONSTRUCTOR,
-            CheckChangePhoneNumberCode.CONSTRUCTOR,
-            CheckChatInviteLink.CONSTRUCTOR,
-            CheckChatUsername.CONSTRUCTOR,
-            CheckCreatedPublicChatsLimit.CONSTRUCTOR,
-            CheckDatabaseEncryptionKey.CONSTRUCTOR,
-            CheckEmailAddressVerificationCode.CONSTRUCTOR,
-            CheckPhoneNumberConfirmationCode.CONSTRUCTOR,
-            CheckPhoneNumberVerificationCode.CONSTRUCTOR,
-            CheckRecoveryEmailAddressCode.CONSTRUCTOR,
-            CleanFileName.CONSTRUCTOR,
-            ClearAllDraftMessages.CONSTRUCTOR,
-            ClearImportedContacts.CONSTRUCTOR,
-            ClearRecentStickers.CONSTRUCTOR,
-            ClearRecentlyFoundChats.CONSTRUCTOR,
-            Close.CONSTRUCTOR,
-            CloseChat.CONSTRUCTOR,
-            CloseSecretChat.CONSTRUCTOR,
-            ConfirmQrCodeAuthentication.CONSTRUCTOR,
-            CreateBasicGroupChat.CONSTRUCTOR,
-            CreateCall.CONSTRUCTOR,
-            CreateNewBasicGroupChat.CONSTRUCTOR,
-            CreateNewSecretChat.CONSTRUCTOR,
-            CreateNewStickerSet.CONSTRUCTOR,
-            CreateNewSupergroupChat.CONSTRUCTOR,
-            CreatePrivateChat.CONSTRUCTOR,
-            CreateSecretChat.CONSTRUCTOR,
-            CreateSupergroupChat.CONSTRUCTOR,
-            CreateTemporaryPassword.CONSTRUCTOR,
-            DeleteAccount.CONSTRUCTOR,
-            DeleteChatHistory.CONSTRUCTOR,
-            DeleteChatMessagesFromUser.CONSTRUCTOR,
-            DeleteChatReplyMarkup.CONSTRUCTOR,
-            DeleteFile.CONSTRUCTOR,
-            DeleteLanguagePack.CONSTRUCTOR,
-            DeleteMessages.CONSTRUCTOR,
-            DeletePassportElement.CONSTRUCTOR,
-            DeleteProfilePhoto.CONSTRUCTOR,
-            DeleteSavedCredentials.CONSTRUCTOR,
-            DeleteSavedOrderInfo.CONSTRUCTOR,
-            DeleteSupergroup.CONSTRUCTOR,
-            Destroy.CONSTRUCTOR,
-            DisableProxy.CONSTRUCTOR,
-            DiscardCall.CONSTRUCTOR,
-            DisconnectAllWebsites.CONSTRUCTOR,
-            DisconnectWebsite.CONSTRUCTOR,
-            DownloadFile.CONSTRUCTOR,
-            EditCustomLanguagePackInfo.CONSTRUCTOR,
-            EditInlineMessageCaption.CONSTRUCTOR,
-            EditInlineMessageLiveLocation.CONSTRUCTOR,
-            EditInlineMessageMedia.CONSTRUCTOR,
-            EditInlineMessageReplyMarkup.CONSTRUCTOR,
-            EditInlineMessageText.CONSTRUCTOR,
-            EditMessageCaption.CONSTRUCTOR,
-            EditMessageLiveLocation.CONSTRUCTOR,
-            EditMessageMedia.CONSTRUCTOR,
-            EditMessageReplyMarkup.CONSTRUCTOR,
-            EditMessageSchedulingState.CONSTRUCTOR,
-            EditMessageText.CONSTRUCTOR,
-            EditProxy.CONSTRUCTOR,
-            EnableProxy.CONSTRUCTOR,
-            FinishFileGeneration.CONSTRUCTOR,
-            ForwardMessages.CONSTRUCTOR,
-            GenerateChatInviteLink.CONSTRUCTOR,
-            GetAccountTtl.CONSTRUCTOR,
-            GetActiveLiveLocationMessages.CONSTRUCTOR,
-            GetActiveSessions.CONSTRUCTOR,
-            GetAllPassportElements.CONSTRUCTOR,
-            GetApplicationConfig.CONSTRUCTOR,
-            GetArchivedStickerSets.CONSTRUCTOR,
-            GetAttachedStickerSets.CONSTRUCTOR,
-            GetAuthorizationState.CONSTRUCTOR,
-            GetAutoDownloadSettingsPresets.CONSTRUCTOR,
-            GetBackgroundUrl.CONSTRUCTOR,
-            GetBackgrounds.CONSTRUCTOR,
-            GetBasicGroup.CONSTRUCTOR,
-            GetBasicGroupFullInfo.CONSTRUCTOR,
-            GetBlockedUsers.CONSTRUCTOR,
-            GetCallbackQueryAnswer.CONSTRUCTOR,
-            GetChat.CONSTRUCTOR,
-            GetChatAdministrators.CONSTRUCTOR,
-            GetChatEventLog.CONSTRUCTOR,
-            GetChatHistory.CONSTRUCTOR,
-            GetChatMember.CONSTRUCTOR,
-            GetChatMessageByDate.CONSTRUCTOR,
-            GetChatMessageCount.CONSTRUCTOR,
-            GetChatNotificationSettingsExceptions.CONSTRUCTOR,
-            GetChatPinnedMessage.CONSTRUCTOR,
-            GetChatScheduledMessages.CONSTRUCTOR,
-            GetChatStatisticsUrl.CONSTRUCTOR,
-            GetChats.CONSTRUCTOR,
-            GetConnectedWebsites.CONSTRUCTOR,
-            GetContacts.CONSTRUCTOR,
-            GetCountryCode.CONSTRUCTOR,
-            GetCreatedPublicChats.CONSTRUCTOR,
-            GetCurrentState.CONSTRUCTOR,
-            GetDatabaseStatistics.CONSTRUCTOR,
-            GetDeepLinkInfo.CONSTRUCTOR,
-            GetEmojiSuggestionsUrl.CONSTRUCTOR,
-            GetFavoriteStickers.CONSTRUCTOR,
-            GetFile.CONSTRUCTOR,
-            GetFileDownloadedPrefixSize.CONSTRUCTOR,
-            GetFileExtension.CONSTRUCTOR,
-            GetFileMimeType.CONSTRUCTOR,
-            GetGameHighScores.CONSTRUCTOR,
-            GetGroupsInCommon.CONSTRUCTOR,
-            GetImportedContactCount.CONSTRUCTOR,
-            GetInactiveSupergroupChats.CONSTRUCTOR,
-            GetInlineGameHighScores.CONSTRUCTOR,
-            GetInlineQueryResults.CONSTRUCTOR,
-            GetInstalledStickerSets.CONSTRUCTOR,
-            GetInviteText.CONSTRUCTOR,
-            GetJsonString.CONSTRUCTOR,
-            GetJsonValue.CONSTRUCTOR,
-            GetLanguagePackInfo.CONSTRUCTOR,
-            GetLanguagePackString.CONSTRUCTOR,
-            GetLanguagePackStrings.CONSTRUCTOR,
-            GetLocalizationTargetInfo.CONSTRUCTOR,
-            GetLogStream.CONSTRUCTOR,
-            GetLogTagVerbosityLevel.CONSTRUCTOR,
-            GetLogTags.CONSTRUCTOR,
-            GetLogVerbosityLevel.CONSTRUCTOR,
-            GetLoginUrl.CONSTRUCTOR,
-            GetLoginUrlInfo.CONSTRUCTOR,
-            GetMapThumbnailFile.CONSTRUCTOR,
-            GetMe.CONSTRUCTOR,
-            GetMessage.CONSTRUCTOR,
-            GetMessageLink.CONSTRUCTOR,
-            GetMessageLinkInfo.CONSTRUCTOR,
-            GetMessageLocally.CONSTRUCTOR,
-            GetMessages.CONSTRUCTOR,
-            GetNetworkStatistics.CONSTRUCTOR,
-            GetOption.CONSTRUCTOR,
-            GetPassportAuthorizationForm.CONSTRUCTOR,
-            GetPassportAuthorizationFormAvailableElements.CONSTRUCTOR,
-            GetPassportElement.CONSTRUCTOR,
-            GetPasswordState.CONSTRUCTOR,
-            GetPaymentForm.CONSTRUCTOR,
-            GetPaymentReceipt.CONSTRUCTOR,
-            GetPollVoters.CONSTRUCTOR,
-            GetPreferredCountryLanguage.CONSTRUCTOR,
-            GetProxies.CONSTRUCTOR,
-            GetProxyLink.CONSTRUCTOR,
-            GetPublicMessageLink.CONSTRUCTOR,
-            GetPushReceiverId.CONSTRUCTOR,
-            GetRecentInlineBots.CONSTRUCTOR,
-            GetRecentStickers.CONSTRUCTOR,
-            GetRecentlyVisitedTMeUrls.CONSTRUCTOR,
-            GetRecoveryEmailAddress.CONSTRUCTOR,
-            GetRemoteFile.CONSTRUCTOR,
-            GetRepliedMessage.CONSTRUCTOR,
-            GetSavedAnimations.CONSTRUCTOR,
-            GetSavedOrderInfo.CONSTRUCTOR,
-            GetScopeNotificationSettings.CONSTRUCTOR,
-            GetSecretChat.CONSTRUCTOR,
-            GetStickerEmojis.CONSTRUCTOR,
-            GetStickerSet.CONSTRUCTOR,
-            GetStickers.CONSTRUCTOR,
-            GetStorageStatistics.CONSTRUCTOR,
-            GetStorageStatisticsFast.CONSTRUCTOR,
-            GetSuitableDiscussionChats.CONSTRUCTOR,
-            GetSupergroup.CONSTRUCTOR,
-            GetSupergroupFullInfo.CONSTRUCTOR,
-            GetSupergroupMembers.CONSTRUCTOR,
-            GetSupportUser.CONSTRUCTOR,
-            GetTemporaryPasswordState.CONSTRUCTOR,
-            GetTextEntities.CONSTRUCTOR,
-            GetTopChats.CONSTRUCTOR,
-            GetTrendingStickerSets.CONSTRUCTOR,
-            GetUser.CONSTRUCTOR,
-            GetUserFullInfo.CONSTRUCTOR,
-            GetUserPrivacySettingRules.CONSTRUCTOR,
-            GetUserProfilePhotos.CONSTRUCTOR,
-            GetWebPageInstantView.CONSTRUCTOR,
-            GetWebPagePreview.CONSTRUCTOR,
-            ImportContacts.CONSTRUCTOR,
-            JoinChat.CONSTRUCTOR,
-            JoinChatByInviteLink.CONSTRUCTOR,
-            LeaveChat.CONSTRUCTOR,
-            LogOut.CONSTRUCTOR,
-            OpenChat.CONSTRUCTOR,
-            OpenMessageContent.CONSTRUCTOR,
-            OptimizeStorage.CONSTRUCTOR,
-            ParseTextEntities.CONSTRUCTOR,
-            PinChatMessage.CONSTRUCTOR,
-            PingProxy.CONSTRUCTOR,
-            ProcessPushNotification.CONSTRUCTOR,
-            ReadAllChatMentions.CONSTRUCTOR,
-            ReadFilePart.CONSTRUCTOR,
-            RecoverAuthenticationPassword.CONSTRUCTOR,
-            RecoverPassword.CONSTRUCTOR,
-            RegisterDevice.CONSTRUCTOR,
-            RegisterUser.CONSTRUCTOR,
-            RemoveBackground.CONSTRUCTOR,
-            RemoveChatActionBar.CONSTRUCTOR,
-            RemoveContacts.CONSTRUCTOR,
-            RemoveFavoriteSticker.CONSTRUCTOR,
-            RemoveNotification.CONSTRUCTOR,
-            RemoveNotificationGroup.CONSTRUCTOR,
-            RemoveProxy.CONSTRUCTOR,
-            RemoveRecentHashtag.CONSTRUCTOR,
-            RemoveRecentSticker.CONSTRUCTOR,
-            RemoveRecentlyFoundChat.CONSTRUCTOR,
-            RemoveSavedAnimation.CONSTRUCTOR,
-            RemoveStickerFromSet.CONSTRUCTOR,
-            RemoveTopChat.CONSTRUCTOR,
-            ReorderInstalledStickerSets.CONSTRUCTOR,
-            ReportChat.CONSTRUCTOR,
-            ReportSupergroupSpam.CONSTRUCTOR,
-            RequestAuthenticationPasswordRecovery.CONSTRUCTOR,
-            RequestPasswordRecovery.CONSTRUCTOR,
-            RequestQrCodeAuthentication.CONSTRUCTOR,
-            ResendAuthenticationCode.CONSTRUCTOR,
-            ResendChangePhoneNumberCode.CONSTRUCTOR,
-            ResendEmailAddressVerificationCode.CONSTRUCTOR,
-            ResendMessages.CONSTRUCTOR,
-            ResendPhoneNumberConfirmationCode.CONSTRUCTOR,
-            ResendPhoneNumberVerificationCode.CONSTRUCTOR,
-            ResendRecoveryEmailAddressCode.CONSTRUCTOR,
-            ResetAllNotificationSettings.CONSTRUCTOR,
-            ResetBackgrounds.CONSTRUCTOR,
-            ResetNetworkStatistics.CONSTRUCTOR,
-            SaveApplicationLogEvent.CONSTRUCTOR,
-            SearchBackground.CONSTRUCTOR,
-            SearchCallMessages.CONSTRUCTOR,
-            SearchChatMembers.CONSTRUCTOR,
-            SearchChatMessages.CONSTRUCTOR,
-            SearchChatRecentLocationMessages.CONSTRUCTOR,
-            SearchChats.CONSTRUCTOR,
-            SearchChatsNearby.CONSTRUCTOR,
-            SearchChatsOnServer.CONSTRUCTOR,
-            SearchContacts.CONSTRUCTOR,
-            SearchEmojis.CONSTRUCTOR,
-            SearchHashtags.CONSTRUCTOR,
-            SearchInstalledStickerSets.CONSTRUCTOR,
-            SearchMessages.CONSTRUCTOR,
-            SearchPublicChat.CONSTRUCTOR,
-            SearchPublicChats.CONSTRUCTOR,
-            SearchSecretMessages.CONSTRUCTOR,
-            SearchStickerSet.CONSTRUCTOR,
-            SearchStickerSets.CONSTRUCTOR,
-            SearchStickers.CONSTRUCTOR,
-            SendBotStartMessage.CONSTRUCTOR,
-            SendCallDebugInformation.CONSTRUCTOR,
-            SendCallRating.CONSTRUCTOR,
-            SendChatAction.CONSTRUCTOR,
-            SendChatScreenshotTakenNotification.CONSTRUCTOR,
-            SendChatSetTtlMessage.CONSTRUCTOR,
-            SendCustomRequest.CONSTRUCTOR,
-            SendEmailAddressVerificationCode.CONSTRUCTOR,
-            SendInlineQueryResultMessage.CONSTRUCTOR,
-            SendMessage.CONSTRUCTOR,
-            SendMessageAlbum.CONSTRUCTOR,
-            SendPassportAuthorizationForm.CONSTRUCTOR,
-            SendPaymentForm.CONSTRUCTOR,
-            SendPhoneNumberConfirmationCode.CONSTRUCTOR,
-            SendPhoneNumberVerificationCode.CONSTRUCTOR,
-            SetAccountTtl.CONSTRUCTOR,
-            SetAlarm.CONSTRUCTOR,
-            SetAuthenticationPhoneNumber.CONSTRUCTOR,
-            SetAutoDownloadSettings.CONSTRUCTOR,
-            SetBackground.CONSTRUCTOR,
-            SetBio.CONSTRUCTOR,
-            SetBotUpdatesStatus.CONSTRUCTOR,
-            SetChatChatList.CONSTRUCTOR,
-            SetChatClientData.CONSTRUCTOR,
-            SetChatDescription.CONSTRUCTOR,
-            SetChatDiscussionGroup.CONSTRUCTOR,
-            SetChatDraftMessage.CONSTRUCTOR,
-            SetChatLocation.CONSTRUCTOR,
-            SetChatMemberStatus.CONSTRUCTOR,
-            SetChatNotificationSettings.CONSTRUCTOR,
-            SetChatPermissions.CONSTRUCTOR,
-            SetChatPhoto.CONSTRUCTOR,
-            SetChatSlowModeDelay.CONSTRUCTOR,
-            SetChatTitle.CONSTRUCTOR,
-            SetCustomLanguagePack.CONSTRUCTOR,
-            SetCustomLanguagePackString.CONSTRUCTOR,
-            SetDatabaseEncryptionKey.CONSTRUCTOR,
-            SetFileGenerationProgress.CONSTRUCTOR,
-            SetGameScore.CONSTRUCTOR,
-            SetInlineGameScore.CONSTRUCTOR,
-            SetLogStream.CONSTRUCTOR,
-            SetLogTagVerbosityLevel.CONSTRUCTOR,
-            SetLogVerbosityLevel.CONSTRUCTOR,
-            SetName.CONSTRUCTOR,
-            SetNetworkType.CONSTRUCTOR,
-            SetOption.CONSTRUCTOR,
-            SetPassportElement.CONSTRUCTOR,
-            SetPassportElementErrors.CONSTRUCTOR,
-            SetPassword.CONSTRUCTOR,
-            SetPinnedChats.CONSTRUCTOR,
-            SetPollAnswer.CONSTRUCTOR,
-            SetProfilePhoto.CONSTRUCTOR,
-            SetRecoveryEmailAddress.CONSTRUCTOR,
-            SetScopeNotificationSettings.CONSTRUCTOR,
-            SetStickerPositionInSet.CONSTRUCTOR,
-            SetSupergroupStickerSet.CONSTRUCTOR,
-            SetSupergroupUsername.CONSTRUCTOR,
-            SetTdlibParameters.CONSTRUCTOR,
-            SetUserPrivacySettingRules.CONSTRUCTOR,
-            SetUsername.CONSTRUCTOR,
-            SharePhoneNumber.CONSTRUCTOR,
-            StopPoll.CONSTRUCTOR,
-            SynchronizeLanguagePack.CONSTRUCTOR,
-            TerminateAllOtherSessions.CONSTRUCTOR,
-            TerminateSession.CONSTRUCTOR,
-            TestCallBytes.CONSTRUCTOR,
-            TestCallEmpty.CONSTRUCTOR,
-            TestCallString.CONSTRUCTOR,
-            TestCallVectorInt.CONSTRUCTOR,
-            TestCallVectorIntObject.CONSTRUCTOR,
-            TestCallVectorString.CONSTRUCTOR,
-            TestCallVectorStringObject.CONSTRUCTOR,
-            TestGetDifference.CONSTRUCTOR,
-            TestNetwork.CONSTRUCTOR,
-            TestProxy.CONSTRUCTOR,
-            TestReturnError.CONSTRUCTOR,
-            TestSquareInt.CONSTRUCTOR,
-            TestUseUpdate.CONSTRUCTOR,
-            ToggleChatDefaultDisableNotification.CONSTRUCTOR,
-            ToggleChatIsMarkedAsUnread.CONSTRUCTOR,
-            ToggleChatIsPinned.CONSTRUCTOR,
-            ToggleSupergroupIsAllHistoryAvailable.CONSTRUCTOR,
-            ToggleSupergroupSignMessages.CONSTRUCTOR,
-            TransferChatOwnership.CONSTRUCTOR,
-            UnblockUser.CONSTRUCTOR,
-            UnpinChatMessage.CONSTRUCTOR,
-            UpgradeBasicGroupChatToSupergroupChat.CONSTRUCTOR,
-            UploadFile.CONSTRUCTOR,
-            UploadStickerFile.CONSTRUCTOR,
-            ValidateOrderInfo.CONSTRUCTOR,
-            ViewMessages.CONSTRUCTOR,
-            ViewTrendingStickerSets.CONSTRUCTOR,
-            WriteGeneratedFilePart.CONSTRUCTOR
+                AcceptCall.CONSTRUCTOR,
+                AcceptTermsOfService.CONSTRUCTOR,
+                AddChatMember.CONSTRUCTOR,
+                AddChatMembers.CONSTRUCTOR,
+                AddContact.CONSTRUCTOR,
+                AddCustomServerLanguagePack.CONSTRUCTOR,
+                AddFavoriteSticker.CONSTRUCTOR,
+                AddLocalMessage.CONSTRUCTOR,
+                AddLogMessage.CONSTRUCTOR,
+                AddNetworkStatistics.CONSTRUCTOR,
+                AddProxy.CONSTRUCTOR,
+                AddRecentSticker.CONSTRUCTOR,
+                AddRecentlyFoundChat.CONSTRUCTOR,
+                AddSavedAnimation.CONSTRUCTOR,
+                AddStickerToSet.CONSTRUCTOR,
+                AnswerCallbackQuery.CONSTRUCTOR,
+                AnswerCustomQuery.CONSTRUCTOR,
+                AnswerInlineQuery.CONSTRUCTOR,
+                AnswerPreCheckoutQuery.CONSTRUCTOR,
+                AnswerShippingQuery.CONSTRUCTOR,
+                BlockUser.CONSTRUCTOR,
+                CanTransferOwnership.CONSTRUCTOR,
+                CancelDownloadFile.CONSTRUCTOR,
+                CancelUploadFile.CONSTRUCTOR,
+                ChangeImportedContacts.CONSTRUCTOR,
+                ChangePhoneNumber.CONSTRUCTOR,
+                ChangeStickerSet.CONSTRUCTOR,
+                CheckAuthenticationBotToken.CONSTRUCTOR,
+                CheckAuthenticationCode.CONSTRUCTOR,
+                CheckAuthenticationPassword.CONSTRUCTOR,
+                CheckChangePhoneNumberCode.CONSTRUCTOR,
+                CheckChatInviteLink.CONSTRUCTOR,
+                CheckChatUsername.CONSTRUCTOR,
+                CheckCreatedPublicChatsLimit.CONSTRUCTOR,
+                CheckDatabaseEncryptionKey.CONSTRUCTOR,
+                CheckEmailAddressVerificationCode.CONSTRUCTOR,
+                CheckPhoneNumberConfirmationCode.CONSTRUCTOR,
+                CheckPhoneNumberVerificationCode.CONSTRUCTOR,
+                CheckRecoveryEmailAddressCode.CONSTRUCTOR,
+                CleanFileName.CONSTRUCTOR,
+                ClearAllDraftMessages.CONSTRUCTOR,
+                ClearImportedContacts.CONSTRUCTOR,
+                ClearRecentStickers.CONSTRUCTOR,
+                ClearRecentlyFoundChats.CONSTRUCTOR,
+                Close.CONSTRUCTOR,
+                CloseChat.CONSTRUCTOR,
+                CloseSecretChat.CONSTRUCTOR,
+                ConfirmQrCodeAuthentication.CONSTRUCTOR,
+                CreateBasicGroupChat.CONSTRUCTOR,
+                CreateCall.CONSTRUCTOR,
+                CreateNewBasicGroupChat.CONSTRUCTOR,
+                CreateNewSecretChat.CONSTRUCTOR,
+                CreateNewStickerSet.CONSTRUCTOR,
+                CreateNewSupergroupChat.CONSTRUCTOR,
+                CreatePrivateChat.CONSTRUCTOR,
+                CreateSecretChat.CONSTRUCTOR,
+                CreateSupergroupChat.CONSTRUCTOR,
+                CreateTemporaryPassword.CONSTRUCTOR,
+                DeleteAccount.CONSTRUCTOR,
+                DeleteChatHistory.CONSTRUCTOR,
+                DeleteChatMessagesFromUser.CONSTRUCTOR,
+                DeleteChatReplyMarkup.CONSTRUCTOR,
+                DeleteFile.CONSTRUCTOR,
+                DeleteLanguagePack.CONSTRUCTOR,
+                DeleteMessages.CONSTRUCTOR,
+                DeletePassportElement.CONSTRUCTOR,
+                DeleteProfilePhoto.CONSTRUCTOR,
+                DeleteSavedCredentials.CONSTRUCTOR,
+                DeleteSavedOrderInfo.CONSTRUCTOR,
+                DeleteSupergroup.CONSTRUCTOR,
+                Destroy.CONSTRUCTOR,
+                DisableProxy.CONSTRUCTOR,
+                DiscardCall.CONSTRUCTOR,
+                DisconnectAllWebsites.CONSTRUCTOR,
+                DisconnectWebsite.CONSTRUCTOR,
+                DownloadFile.CONSTRUCTOR,
+                EditCustomLanguagePackInfo.CONSTRUCTOR,
+                EditInlineMessageCaption.CONSTRUCTOR,
+                EditInlineMessageLiveLocation.CONSTRUCTOR,
+                EditInlineMessageMedia.CONSTRUCTOR,
+                EditInlineMessageReplyMarkup.CONSTRUCTOR,
+                EditInlineMessageText.CONSTRUCTOR,
+                EditMessageCaption.CONSTRUCTOR,
+                EditMessageLiveLocation.CONSTRUCTOR,
+                EditMessageMedia.CONSTRUCTOR,
+                EditMessageReplyMarkup.CONSTRUCTOR,
+                EditMessageSchedulingState.CONSTRUCTOR,
+                EditMessageText.CONSTRUCTOR,
+                EditProxy.CONSTRUCTOR,
+                EnableProxy.CONSTRUCTOR,
+                FinishFileGeneration.CONSTRUCTOR,
+                ForwardMessages.CONSTRUCTOR,
+                GenerateChatInviteLink.CONSTRUCTOR,
+                GetAccountTtl.CONSTRUCTOR,
+                GetActiveLiveLocationMessages.CONSTRUCTOR,
+                GetActiveSessions.CONSTRUCTOR,
+                GetAllPassportElements.CONSTRUCTOR,
+                GetApplicationConfig.CONSTRUCTOR,
+                GetArchivedStickerSets.CONSTRUCTOR,
+                GetAttachedStickerSets.CONSTRUCTOR,
+                GetAuthorizationState.CONSTRUCTOR,
+                GetAutoDownloadSettingsPresets.CONSTRUCTOR,
+                GetBackgroundUrl.CONSTRUCTOR,
+                GetBackgrounds.CONSTRUCTOR,
+                GetBasicGroup.CONSTRUCTOR,
+                GetBasicGroupFullInfo.CONSTRUCTOR,
+                GetBlockedUsers.CONSTRUCTOR,
+                GetCallbackQueryAnswer.CONSTRUCTOR,
+                GetChat.CONSTRUCTOR,
+                GetChatAdministrators.CONSTRUCTOR,
+                GetChatEventLog.CONSTRUCTOR,
+                GetChatHistory.CONSTRUCTOR,
+                GetChatMember.CONSTRUCTOR,
+                GetChatMessageByDate.CONSTRUCTOR,
+                GetChatMessageCount.CONSTRUCTOR,
+                GetChatNotificationSettingsExceptions.CONSTRUCTOR,
+                GetChatPinnedMessage.CONSTRUCTOR,
+                GetChatScheduledMessages.CONSTRUCTOR,
+                GetChatStatisticsUrl.CONSTRUCTOR,
+                GetChats.CONSTRUCTOR,
+                GetChannel.CONSTRUCTOR,
+                GetChannelFull.CONSTRUCTOR,
+                GetChannels.CONSTRUCTOR,
+                GetConnectedWebsites.CONSTRUCTOR,
+                GetContacts.CONSTRUCTOR,
+                GetCountryCode.CONSTRUCTOR,
+                GetCreatedPublicChats.CONSTRUCTOR,
+                GetCurrentState.CONSTRUCTOR,
+                GetDatabaseStatistics.CONSTRUCTOR,
+                GetDeepLinkInfo.CONSTRUCTOR,
+                GetEmojiSuggestionsUrl.CONSTRUCTOR,
+                GetFavoriteStickers.CONSTRUCTOR,
+                GetFile.CONSTRUCTOR,
+                GetFileDownloadedPrefixSize.CONSTRUCTOR,
+                GetFileExtension.CONSTRUCTOR,
+                GetFileMimeType.CONSTRUCTOR,
+                GetGameHighScores.CONSTRUCTOR,
+                GetGroupsInCommon.CONSTRUCTOR,
+                GetImportedContactCount.CONSTRUCTOR,
+                GetInactiveSupergroupChats.CONSTRUCTOR,
+                GetInlineGameHighScores.CONSTRUCTOR,
+                GetInlineQueryResults.CONSTRUCTOR,
+                GetInstalledStickerSets.CONSTRUCTOR,
+                GetInviteText.CONSTRUCTOR,
+                GetJsonString.CONSTRUCTOR,
+                GetJsonValue.CONSTRUCTOR,
+                GetLanguagePackInfo.CONSTRUCTOR,
+                GetLanguagePackString.CONSTRUCTOR,
+                GetLanguagePackStrings.CONSTRUCTOR,
+                GetLocalizationTargetInfo.CONSTRUCTOR,
+                GetLogStream.CONSTRUCTOR,
+                GetLogTagVerbosityLevel.CONSTRUCTOR,
+                GetLogTags.CONSTRUCTOR,
+                GetLogVerbosityLevel.CONSTRUCTOR,
+                GetLoginUrl.CONSTRUCTOR,
+                GetLoginUrlInfo.CONSTRUCTOR,
+                GetMapThumbnailFile.CONSTRUCTOR,
+                GetMe.CONSTRUCTOR,
+                GetMessage.CONSTRUCTOR,
+                GetMessageLink.CONSTRUCTOR,
+                GetMessageLinkInfo.CONSTRUCTOR,
+                GetMessageLocally.CONSTRUCTOR,
+                GetMessages.CONSTRUCTOR,
+                GetNetworkStatistics.CONSTRUCTOR,
+                GetOption.CONSTRUCTOR,
+                GetPassportAuthorizationForm.CONSTRUCTOR,
+                GetPassportAuthorizationFormAvailableElements.CONSTRUCTOR,
+                GetPassportElement.CONSTRUCTOR,
+                GetPasswordState.CONSTRUCTOR,
+                GetPaymentForm.CONSTRUCTOR,
+                GetPaymentReceipt.CONSTRUCTOR,
+                GetPollVoters.CONSTRUCTOR,
+                GetPreferredCountryLanguage.CONSTRUCTOR,
+                GetProxies.CONSTRUCTOR,
+                GetProxyLink.CONSTRUCTOR,
+                GetPublicMessageLink.CONSTRUCTOR,
+                GetPushReceiverId.CONSTRUCTOR,
+                GetRecentInlineBots.CONSTRUCTOR,
+                GetRecentStickers.CONSTRUCTOR,
+                GetRecentlyVisitedTMeUrls.CONSTRUCTOR,
+                GetRecoveryEmailAddress.CONSTRUCTOR,
+                GetRemoteFile.CONSTRUCTOR,
+                GetRepliedMessage.CONSTRUCTOR,
+                GetSavedAnimations.CONSTRUCTOR,
+                GetSavedOrderInfo.CONSTRUCTOR,
+                GetScopeNotificationSettings.CONSTRUCTOR,
+                GetSecretChat.CONSTRUCTOR,
+                GetStickerEmojis.CONSTRUCTOR,
+                GetStickerSet.CONSTRUCTOR,
+                GetStickers.CONSTRUCTOR,
+                GetStorageStatistics.CONSTRUCTOR,
+                GetStorageStatisticsFast.CONSTRUCTOR,
+                GetSuitableDiscussionChats.CONSTRUCTOR,
+                GetSupergroup.CONSTRUCTOR,
+                GetSupergroupFullInfo.CONSTRUCTOR,
+                GetSupergroupMembers.CONSTRUCTOR,
+                GetSupportUser.CONSTRUCTOR,
+                GetTemporaryPasswordState.CONSTRUCTOR,
+                GetTextEntities.CONSTRUCTOR,
+                GetTopChats.CONSTRUCTOR,
+                GetTrendingStickerSets.CONSTRUCTOR,
+                GetUser.CONSTRUCTOR,
+                GetUserFullInfo.CONSTRUCTOR,
+                GetUserPrivacySettingRules.CONSTRUCTOR,
+                GetUserProfilePhotos.CONSTRUCTOR,
+                GetWebPageInstantView.CONSTRUCTOR,
+                GetWebPagePreview.CONSTRUCTOR,
+                ImportContacts.CONSTRUCTOR,
+                JoinChat.CONSTRUCTOR,
+                JoinChatByInviteLink.CONSTRUCTOR,
+                LeaveChat.CONSTRUCTOR,
+                LogOut.CONSTRUCTOR,
+                OpenChat.CONSTRUCTOR,
+                OpenMessageContent.CONSTRUCTOR,
+                OptimizeStorage.CONSTRUCTOR,
+                ParseTextEntities.CONSTRUCTOR,
+                PinChatMessage.CONSTRUCTOR,
+                PingProxy.CONSTRUCTOR,
+                ProcessPushNotification.CONSTRUCTOR,
+                ReadAllChatMentions.CONSTRUCTOR,
+                ReadFilePart.CONSTRUCTOR,
+                RecoverAuthenticationPassword.CONSTRUCTOR,
+                RecoverPassword.CONSTRUCTOR,
+                RegisterDevice.CONSTRUCTOR,
+                RegisterUser.CONSTRUCTOR,
+                RemoveBackground.CONSTRUCTOR,
+                RemoveChatActionBar.CONSTRUCTOR,
+                RemoveContacts.CONSTRUCTOR,
+                RemoveFavoriteSticker.CONSTRUCTOR,
+                RemoveNotification.CONSTRUCTOR,
+                RemoveNotificationGroup.CONSTRUCTOR,
+                RemoveProxy.CONSTRUCTOR,
+                RemoveRecentHashtag.CONSTRUCTOR,
+                RemoveRecentSticker.CONSTRUCTOR,
+                RemoveRecentlyFoundChat.CONSTRUCTOR,
+                RemoveSavedAnimation.CONSTRUCTOR,
+                RemoveStickerFromSet.CONSTRUCTOR,
+                RemoveTopChat.CONSTRUCTOR,
+                ReorderInstalledStickerSets.CONSTRUCTOR,
+                ReportChat.CONSTRUCTOR,
+                ReportSupergroupSpam.CONSTRUCTOR,
+                RequestAuthenticationPasswordRecovery.CONSTRUCTOR,
+                RequestPasswordRecovery.CONSTRUCTOR,
+                RequestQrCodeAuthentication.CONSTRUCTOR,
+                ResendAuthenticationCode.CONSTRUCTOR,
+                ResendChangePhoneNumberCode.CONSTRUCTOR,
+                ResendEmailAddressVerificationCode.CONSTRUCTOR,
+                ResendMessages.CONSTRUCTOR,
+                ResendPhoneNumberConfirmationCode.CONSTRUCTOR,
+                ResendPhoneNumberVerificationCode.CONSTRUCTOR,
+                ResendRecoveryEmailAddressCode.CONSTRUCTOR,
+                ResetAllNotificationSettings.CONSTRUCTOR,
+                ResetBackgrounds.CONSTRUCTOR,
+                ResetNetworkStatistics.CONSTRUCTOR,
+                SaveApplicationLogEvent.CONSTRUCTOR,
+                SearchBackground.CONSTRUCTOR,
+                SearchCallMessages.CONSTRUCTOR,
+                SearchChatMembers.CONSTRUCTOR,
+                SearchChatMessages.CONSTRUCTOR,
+                SearchChatRecentLocationMessages.CONSTRUCTOR,
+                SearchChats.CONSTRUCTOR,
+                SearchChatsNearby.CONSTRUCTOR,
+                SearchChatsOnServer.CONSTRUCTOR,
+                SearchContacts.CONSTRUCTOR,
+                SearchEmojis.CONSTRUCTOR,
+                SearchHashtags.CONSTRUCTOR,
+                SearchInstalledStickerSets.CONSTRUCTOR,
+                SearchMessages.CONSTRUCTOR,
+                SearchPublicChat.CONSTRUCTOR,
+                SearchPublicChats.CONSTRUCTOR,
+                SearchSecretMessages.CONSTRUCTOR,
+                SearchStickerSet.CONSTRUCTOR,
+                SearchStickerSets.CONSTRUCTOR,
+                SearchStickers.CONSTRUCTOR,
+                SendBotStartMessage.CONSTRUCTOR,
+                SendCallDebugInformation.CONSTRUCTOR,
+                SendCallRating.CONSTRUCTOR,
+                SendChatAction.CONSTRUCTOR,
+                SendChatScreenshotTakenNotification.CONSTRUCTOR,
+                SendChatSetTtlMessage.CONSTRUCTOR,
+                SendCustomRequest.CONSTRUCTOR,
+                SendEmailAddressVerificationCode.CONSTRUCTOR,
+                SendInlineQueryResultMessage.CONSTRUCTOR,
+                SendMessage.CONSTRUCTOR,
+                SendMessageAlbum.CONSTRUCTOR,
+                SendPassportAuthorizationForm.CONSTRUCTOR,
+                SendPaymentForm.CONSTRUCTOR,
+                SendPhoneNumberConfirmationCode.CONSTRUCTOR,
+                SendPhoneNumberVerificationCode.CONSTRUCTOR,
+                SetAccountTtl.CONSTRUCTOR,
+                SetAlarm.CONSTRUCTOR,
+                SetAuthenticationPhoneNumber.CONSTRUCTOR,
+                SetAutoDownloadSettings.CONSTRUCTOR,
+                SetBackground.CONSTRUCTOR,
+                SetBio.CONSTRUCTOR,
+                SetBotUpdatesStatus.CONSTRUCTOR,
+                SetChatChatList.CONSTRUCTOR,
+                SetChatClientData.CONSTRUCTOR,
+                SetChatDescription.CONSTRUCTOR,
+                SetChatDiscussionGroup.CONSTRUCTOR,
+                SetChatDraftMessage.CONSTRUCTOR,
+                SetChatLocation.CONSTRUCTOR,
+                SetChatMemberStatus.CONSTRUCTOR,
+                SetChatNotificationSettings.CONSTRUCTOR,
+                SetChatPermissions.CONSTRUCTOR,
+                SetChatPhoto.CONSTRUCTOR,
+                SetChatSlowModeDelay.CONSTRUCTOR,
+                SetChatTitle.CONSTRUCTOR,
+                SetCustomLanguagePack.CONSTRUCTOR,
+                SetCustomLanguagePackString.CONSTRUCTOR,
+                SetDatabaseEncryptionKey.CONSTRUCTOR,
+                SetFileGenerationProgress.CONSTRUCTOR,
+                SetGameScore.CONSTRUCTOR,
+                SetInlineGameScore.CONSTRUCTOR,
+                SetLogStream.CONSTRUCTOR,
+                SetLogTagVerbosityLevel.CONSTRUCTOR,
+                SetLogVerbosityLevel.CONSTRUCTOR,
+                SetName.CONSTRUCTOR,
+                SetNetworkType.CONSTRUCTOR,
+                SetOption.CONSTRUCTOR,
+                SetPassportElement.CONSTRUCTOR,
+                SetPassportElementErrors.CONSTRUCTOR,
+                SetPassword.CONSTRUCTOR,
+                SetPinnedChats.CONSTRUCTOR,
+                SetPollAnswer.CONSTRUCTOR,
+                SetProfilePhoto.CONSTRUCTOR,
+                SetRecoveryEmailAddress.CONSTRUCTOR,
+                SetScopeNotificationSettings.CONSTRUCTOR,
+                SetStickerPositionInSet.CONSTRUCTOR,
+                SetSupergroupStickerSet.CONSTRUCTOR,
+                SetSupergroupUsername.CONSTRUCTOR,
+                SetTdlibParameters.CONSTRUCTOR,
+                SetUserPrivacySettingRules.CONSTRUCTOR,
+                SetUsername.CONSTRUCTOR,
+                SharePhoneNumber.CONSTRUCTOR,
+                StopPoll.CONSTRUCTOR,
+                SynchronizeLanguagePack.CONSTRUCTOR,
+                TerminateAllOtherSessions.CONSTRUCTOR,
+                TerminateSession.CONSTRUCTOR,
+                TestCallBytes.CONSTRUCTOR,
+                TestCallEmpty.CONSTRUCTOR,
+                TestCallString.CONSTRUCTOR,
+                TestCallVectorInt.CONSTRUCTOR,
+                TestCallVectorIntObject.CONSTRUCTOR,
+                TestCallVectorString.CONSTRUCTOR,
+                TestCallVectorStringObject.CONSTRUCTOR,
+                TestGetDifference.CONSTRUCTOR,
+                TestNetwork.CONSTRUCTOR,
+                TestProxy.CONSTRUCTOR,
+                TestReturnError.CONSTRUCTOR,
+                TestSquareInt.CONSTRUCTOR,
+                TestUseUpdate.CONSTRUCTOR,
+                ToggleChatDefaultDisableNotification.CONSTRUCTOR,
+                ToggleChatIsMarkedAsUnread.CONSTRUCTOR,
+                ToggleChatIsPinned.CONSTRUCTOR,
+                ToggleSupergroupIsAllHistoryAvailable.CONSTRUCTOR,
+                ToggleSupergroupSignMessages.CONSTRUCTOR,
+                TransferChatOwnership.CONSTRUCTOR,
+                UnblockUser.CONSTRUCTOR,
+                UnpinChatMessage.CONSTRUCTOR,
+                UpgradeBasicGroupChatToSupergroupChat.CONSTRUCTOR,
+                UploadFile.CONSTRUCTOR,
+                UploadStickerFile.CONSTRUCTOR,
+                ValidateOrderInfo.CONSTRUCTOR,
+                ViewMessages.CONSTRUCTOR,
+                ViewTrendingStickerSets.CONSTRUCTOR,
+                WriteGeneratedFilePart.CONSTRUCTOR
         })
         public @interface Constructors {}
 
@@ -779,10 +782,10 @@ public class TdApi {
     public abstract static class AuthenticationCodeType extends Object {
         @Retention(RetentionPolicy.SOURCE)
         @IntDef({
-            AuthenticationCodeTypeTelegramMessage.CONSTRUCTOR,
-            AuthenticationCodeTypeSms.CONSTRUCTOR,
-            AuthenticationCodeTypeCall.CONSTRUCTOR,
-            AuthenticationCodeTypeFlashCall.CONSTRUCTOR
+                AuthenticationCodeTypeTelegramMessage.CONSTRUCTOR,
+                AuthenticationCodeTypeSms.CONSTRUCTOR,
+                AuthenticationCodeTypeCall.CONSTRUCTOR,
+                AuthenticationCodeTypeFlashCall.CONSTRUCTOR
         })
         public @interface Constructors {}
 
@@ -953,17 +956,17 @@ public class TdApi {
     public abstract static class AuthorizationState extends Object {
         @Retention(RetentionPolicy.SOURCE)
         @IntDef({
-            AuthorizationStateWaitTdlibParameters.CONSTRUCTOR,
-            AuthorizationStateWaitEncryptionKey.CONSTRUCTOR,
-            AuthorizationStateWaitPhoneNumber.CONSTRUCTOR,
-            AuthorizationStateWaitCode.CONSTRUCTOR,
-            AuthorizationStateWaitOtherDeviceConfirmation.CONSTRUCTOR,
-            AuthorizationStateWaitRegistration.CONSTRUCTOR,
-            AuthorizationStateWaitPassword.CONSTRUCTOR,
-            AuthorizationStateReady.CONSTRUCTOR,
-            AuthorizationStateLoggingOut.CONSTRUCTOR,
-            AuthorizationStateClosing.CONSTRUCTOR,
-            AuthorizationStateClosed.CONSTRUCTOR
+                AuthorizationStateWaitTdlibParameters.CONSTRUCTOR,
+                AuthorizationStateWaitEncryptionKey.CONSTRUCTOR,
+                AuthorizationStateWaitPhoneNumber.CONSTRUCTOR,
+                AuthorizationStateWaitCode.CONSTRUCTOR,
+                AuthorizationStateWaitOtherDeviceConfirmation.CONSTRUCTOR,
+                AuthorizationStateWaitRegistration.CONSTRUCTOR,
+                AuthorizationStateWaitPassword.CONSTRUCTOR,
+                AuthorizationStateReady.CONSTRUCTOR,
+                AuthorizationStateLoggingOut.CONSTRUCTOR,
+                AuthorizationStateClosing.CONSTRUCTOR,
+                AuthorizationStateClosed.CONSTRUCTOR
         })
         public @interface Constructors {}
 
@@ -1532,8 +1535,8 @@ public class TdApi {
     public abstract static class BackgroundFill extends Object {
         @Retention(RetentionPolicy.SOURCE)
         @IntDef({
-            BackgroundFillSolid.CONSTRUCTOR,
-            BackgroundFillGradient.CONSTRUCTOR
+                BackgroundFillSolid.CONSTRUCTOR,
+                BackgroundFillGradient.CONSTRUCTOR
         })
         public @interface Constructors {}
 
@@ -1640,9 +1643,9 @@ public class TdApi {
     public abstract static class BackgroundType extends Object {
         @Retention(RetentionPolicy.SOURCE)
         @IntDef({
-            BackgroundTypeWallpaper.CONSTRUCTOR,
-            BackgroundTypePattern.CONSTRUCTOR,
-            BackgroundTypeFill.CONSTRUCTOR
+                BackgroundTypeWallpaper.CONSTRUCTOR,
+                BackgroundTypePattern.CONSTRUCTOR,
+                BackgroundTypeFill.CONSTRUCTOR
         })
         public @interface Constructors {}
 
@@ -2155,11 +2158,11 @@ public class TdApi {
     public abstract static class CallDiscardReason extends Object {
         @Retention(RetentionPolicy.SOURCE)
         @IntDef({
-            CallDiscardReasonEmpty.CONSTRUCTOR,
-            CallDiscardReasonMissed.CONSTRUCTOR,
-            CallDiscardReasonDeclined.CONSTRUCTOR,
-            CallDiscardReasonDisconnected.CONSTRUCTOR,
-            CallDiscardReasonHungUp.CONSTRUCTOR
+                CallDiscardReasonEmpty.CONSTRUCTOR,
+                CallDiscardReasonMissed.CONSTRUCTOR,
+                CallDiscardReasonDeclined.CONSTRUCTOR,
+                CallDiscardReasonDisconnected.CONSTRUCTOR,
+                CallDiscardReasonHungUp.CONSTRUCTOR
         })
         public @interface Constructors {}
 
@@ -2341,13 +2344,13 @@ public class TdApi {
     public abstract static class CallProblem extends Object {
         @Retention(RetentionPolicy.SOURCE)
         @IntDef({
-            CallProblemEcho.CONSTRUCTOR,
-            CallProblemNoise.CONSTRUCTOR,
-            CallProblemInterruptions.CONSTRUCTOR,
-            CallProblemDistortedSpeech.CONSTRUCTOR,
-            CallProblemSilentLocal.CONSTRUCTOR,
-            CallProblemSilentRemote.CONSTRUCTOR,
-            CallProblemDropped.CONSTRUCTOR
+                CallProblemEcho.CONSTRUCTOR,
+                CallProblemNoise.CONSTRUCTOR,
+                CallProblemInterruptions.CONSTRUCTOR,
+                CallProblemDistortedSpeech.CONSTRUCTOR,
+                CallProblemSilentLocal.CONSTRUCTOR,
+                CallProblemSilentRemote.CONSTRUCTOR,
+                CallProblemDropped.CONSTRUCTOR
         })
         public @interface Constructors {}
 
@@ -2597,12 +2600,12 @@ public class TdApi {
     public abstract static class CallState extends Object {
         @Retention(RetentionPolicy.SOURCE)
         @IntDef({
-            CallStatePending.CONSTRUCTOR,
-            CallStateExchangingKeys.CONSTRUCTOR,
-            CallStateReady.CONSTRUCTOR,
-            CallStateHangingUp.CONSTRUCTOR,
-            CallStateDiscarded.CONSTRUCTOR,
-            CallStateError.CONSTRUCTOR
+                CallStatePending.CONSTRUCTOR,
+                CallStateExchangingKeys.CONSTRUCTOR,
+                CallStateReady.CONSTRUCTOR,
+                CallStateHangingUp.CONSTRUCTOR,
+                CallStateDiscarded.CONSTRUCTOR,
+                CallStateError.CONSTRUCTOR
         })
         public @interface Constructors {}
 
@@ -2921,8 +2924,8 @@ public class TdApi {
     public abstract static class CallbackQueryPayload extends Object {
         @Retention(RetentionPolicy.SOURCE)
         @IntDef({
-            CallbackQueryPayloadData.CONSTRUCTOR,
-            CallbackQueryPayloadGame.CONSTRUCTOR
+                CallbackQueryPayloadData.CONSTRUCTOR,
+                CallbackQueryPayloadGame.CONSTRUCTOR
         })
         public @interface Constructors {}
 
@@ -3017,10 +3020,10 @@ public class TdApi {
     public abstract static class CanTransferOwnershipResult extends Object {
         @Retention(RetentionPolicy.SOURCE)
         @IntDef({
-            CanTransferOwnershipResultOk.CONSTRUCTOR,
-            CanTransferOwnershipResultPasswordNeeded.CONSTRUCTOR,
-            CanTransferOwnershipResultPasswordTooFresh.CONSTRUCTOR,
-            CanTransferOwnershipResultSessionTooFresh.CONSTRUCTOR
+                CanTransferOwnershipResultOk.CONSTRUCTOR,
+                CanTransferOwnershipResultPasswordNeeded.CONSTRUCTOR,
+                CanTransferOwnershipResultPasswordTooFresh.CONSTRUCTOR,
+                CanTransferOwnershipResultSessionTooFresh.CONSTRUCTOR
         })
         public @interface Constructors {}
 
@@ -3353,19 +3356,19 @@ public class TdApi {
     public abstract static class ChatAction extends Object {
         @Retention(RetentionPolicy.SOURCE)
         @IntDef({
-            ChatActionTyping.CONSTRUCTOR,
-            ChatActionRecordingVideo.CONSTRUCTOR,
-            ChatActionUploadingVideo.CONSTRUCTOR,
-            ChatActionRecordingVoiceNote.CONSTRUCTOR,
-            ChatActionUploadingVoiceNote.CONSTRUCTOR,
-            ChatActionUploadingPhoto.CONSTRUCTOR,
-            ChatActionUploadingDocument.CONSTRUCTOR,
-            ChatActionChoosingLocation.CONSTRUCTOR,
-            ChatActionChoosingContact.CONSTRUCTOR,
-            ChatActionStartPlayingGame.CONSTRUCTOR,
-            ChatActionRecordingVideoNote.CONSTRUCTOR,
-            ChatActionUploadingVideoNote.CONSTRUCTOR,
-            ChatActionCancel.CONSTRUCTOR
+                ChatActionTyping.CONSTRUCTOR,
+                ChatActionRecordingVideo.CONSTRUCTOR,
+                ChatActionUploadingVideo.CONSTRUCTOR,
+                ChatActionRecordingVoiceNote.CONSTRUCTOR,
+                ChatActionUploadingVoiceNote.CONSTRUCTOR,
+                ChatActionUploadingPhoto.CONSTRUCTOR,
+                ChatActionUploadingDocument.CONSTRUCTOR,
+                ChatActionChoosingLocation.CONSTRUCTOR,
+                ChatActionChoosingContact.CONSTRUCTOR,
+                ChatActionStartPlayingGame.CONSTRUCTOR,
+                ChatActionRecordingVideoNote.CONSTRUCTOR,
+                ChatActionUploadingVideoNote.CONSTRUCTOR,
+                ChatActionCancel.CONSTRUCTOR
         })
         public @interface Constructors {}
 
@@ -3774,11 +3777,11 @@ public class TdApi {
     public abstract static class ChatActionBar extends Object {
         @Retention(RetentionPolicy.SOURCE)
         @IntDef({
-            ChatActionBarReportSpam.CONSTRUCTOR,
-            ChatActionBarReportUnrelatedLocation.CONSTRUCTOR,
-            ChatActionBarReportAddBlock.CONSTRUCTOR,
-            ChatActionBarAddContact.CONSTRUCTOR,
-            ChatActionBarSharePhoneNumber.CONSTRUCTOR
+                ChatActionBarReportSpam.CONSTRUCTOR,
+                ChatActionBarReportUnrelatedLocation.CONSTRUCTOR,
+                ChatActionBarReportAddBlock.CONSTRUCTOR,
+                ChatActionBarAddContact.CONSTRUCTOR,
+                ChatActionBarSharePhoneNumber.CONSTRUCTOR
         })
         public @interface Constructors {}
 
@@ -4066,28 +4069,28 @@ public class TdApi {
     public abstract static class ChatEventAction extends Object {
         @Retention(RetentionPolicy.SOURCE)
         @IntDef({
-            ChatEventMessageEdited.CONSTRUCTOR,
-            ChatEventMessageDeleted.CONSTRUCTOR,
-            ChatEventPollStopped.CONSTRUCTOR,
-            ChatEventMessagePinned.CONSTRUCTOR,
-            ChatEventMessageUnpinned.CONSTRUCTOR,
-            ChatEventMemberJoined.CONSTRUCTOR,
-            ChatEventMemberLeft.CONSTRUCTOR,
-            ChatEventMemberInvited.CONSTRUCTOR,
-            ChatEventMemberPromoted.CONSTRUCTOR,
-            ChatEventMemberRestricted.CONSTRUCTOR,
-            ChatEventTitleChanged.CONSTRUCTOR,
-            ChatEventPermissionsChanged.CONSTRUCTOR,
-            ChatEventDescriptionChanged.CONSTRUCTOR,
-            ChatEventUsernameChanged.CONSTRUCTOR,
-            ChatEventPhotoChanged.CONSTRUCTOR,
-            ChatEventInvitesToggled.CONSTRUCTOR,
-            ChatEventLinkedChatChanged.CONSTRUCTOR,
-            ChatEventSlowModeDelayChanged.CONSTRUCTOR,
-            ChatEventSignMessagesToggled.CONSTRUCTOR,
-            ChatEventStickerSetChanged.CONSTRUCTOR,
-            ChatEventLocationChanged.CONSTRUCTOR,
-            ChatEventIsAllHistoryAvailableToggled.CONSTRUCTOR
+                ChatEventMessageEdited.CONSTRUCTOR,
+                ChatEventMessageDeleted.CONSTRUCTOR,
+                ChatEventPollStopped.CONSTRUCTOR,
+                ChatEventMessagePinned.CONSTRUCTOR,
+                ChatEventMessageUnpinned.CONSTRUCTOR,
+                ChatEventMemberJoined.CONSTRUCTOR,
+                ChatEventMemberLeft.CONSTRUCTOR,
+                ChatEventMemberInvited.CONSTRUCTOR,
+                ChatEventMemberPromoted.CONSTRUCTOR,
+                ChatEventMemberRestricted.CONSTRUCTOR,
+                ChatEventTitleChanged.CONSTRUCTOR,
+                ChatEventPermissionsChanged.CONSTRUCTOR,
+                ChatEventDescriptionChanged.CONSTRUCTOR,
+                ChatEventUsernameChanged.CONSTRUCTOR,
+                ChatEventPhotoChanged.CONSTRUCTOR,
+                ChatEventInvitesToggled.CONSTRUCTOR,
+                ChatEventLinkedChatChanged.CONSTRUCTOR,
+                ChatEventSlowModeDelayChanged.CONSTRUCTOR,
+                ChatEventSignMessagesToggled.CONSTRUCTOR,
+                ChatEventStickerSetChanged.CONSTRUCTOR,
+                ChatEventLocationChanged.CONSTRUCTOR,
+                ChatEventIsAllHistoryAvailableToggled.CONSTRUCTOR
         })
         public @interface Constructors {}
 
@@ -5235,8 +5238,8 @@ public class TdApi {
     public abstract static class ChatList extends Object {
         @Retention(RetentionPolicy.SOURCE)
         @IntDef({
-            ChatListMain.CONSTRUCTOR,
-            ChatListArchive.CONSTRUCTOR
+                ChatListMain.CONSTRUCTOR,
+                ChatListArchive.CONSTRUCTOR
         })
         public @interface Constructors {}
 
@@ -5411,12 +5414,12 @@ public class TdApi {
     public abstract static class ChatMemberStatus extends Object {
         @Retention(RetentionPolicy.SOURCE)
         @IntDef({
-            ChatMemberStatusCreator.CONSTRUCTOR,
-            ChatMemberStatusAdministrator.CONSTRUCTOR,
-            ChatMemberStatusMember.CONSTRUCTOR,
-            ChatMemberStatusRestricted.CONSTRUCTOR,
-            ChatMemberStatusLeft.CONSTRUCTOR,
-            ChatMemberStatusBanned.CONSTRUCTOR
+                ChatMemberStatusCreator.CONSTRUCTOR,
+                ChatMemberStatusAdministrator.CONSTRUCTOR,
+                ChatMemberStatusMember.CONSTRUCTOR,
+                ChatMemberStatusRestricted.CONSTRUCTOR,
+                ChatMemberStatusLeft.CONSTRUCTOR,
+                ChatMemberStatusBanned.CONSTRUCTOR
         })
         public @interface Constructors {}
 
@@ -5753,12 +5756,12 @@ public class TdApi {
     public abstract static class ChatMembersFilter extends Object {
         @Retention(RetentionPolicy.SOURCE)
         @IntDef({
-            ChatMembersFilterContacts.CONSTRUCTOR,
-            ChatMembersFilterAdministrators.CONSTRUCTOR,
-            ChatMembersFilterMembers.CONSTRUCTOR,
-            ChatMembersFilterRestricted.CONSTRUCTOR,
-            ChatMembersFilterBanned.CONSTRUCTOR,
-            ChatMembersFilterBots.CONSTRUCTOR
+                ChatMembersFilterContacts.CONSTRUCTOR,
+                ChatMembersFilterAdministrators.CONSTRUCTOR,
+                ChatMembersFilterMembers.CONSTRUCTOR,
+                ChatMembersFilterRestricted.CONSTRUCTOR,
+                ChatMembersFilterBanned.CONSTRUCTOR,
+                ChatMembersFilterBots.CONSTRUCTOR
         })
         public @interface Constructors {}
 
@@ -6187,13 +6190,13 @@ public class TdApi {
     public abstract static class ChatReportReason extends Object {
         @Retention(RetentionPolicy.SOURCE)
         @IntDef({
-            ChatReportReasonSpam.CONSTRUCTOR,
-            ChatReportReasonViolence.CONSTRUCTOR,
-            ChatReportReasonPornography.CONSTRUCTOR,
-            ChatReportReasonChildAbuse.CONSTRUCTOR,
-            ChatReportReasonCopyright.CONSTRUCTOR,
-            ChatReportReasonUnrelatedLocation.CONSTRUCTOR,
-            ChatReportReasonCustom.CONSTRUCTOR
+                ChatReportReasonSpam.CONSTRUCTOR,
+                ChatReportReasonViolence.CONSTRUCTOR,
+                ChatReportReasonPornography.CONSTRUCTOR,
+                ChatReportReasonChildAbuse.CONSTRUCTOR,
+                ChatReportReasonCopyright.CONSTRUCTOR,
+                ChatReportReasonUnrelatedLocation.CONSTRUCTOR,
+                ChatReportReasonCustom.CONSTRUCTOR
         })
         public @interface Constructors {}
 
@@ -6400,10 +6403,10 @@ public class TdApi {
     public abstract static class ChatType extends Object {
         @Retention(RetentionPolicy.SOURCE)
         @IntDef({
-            ChatTypePrivate.CONSTRUCTOR,
-            ChatTypeBasicGroup.CONSTRUCTOR,
-            ChatTypeSupergroup.CONSTRUCTOR,
-            ChatTypeSecret.CONSTRUCTOR
+                ChatTypePrivate.CONSTRUCTOR,
+                ChatTypeBasicGroup.CONSTRUCTOR,
+                ChatTypeSupergroup.CONSTRUCTOR,
+                ChatTypeSecret.CONSTRUCTOR
         })
         public @interface Constructors {}
 
@@ -6617,6 +6620,44 @@ public class TdApi {
         }
     }
 
+
+    /**
+     * Represents a list of channels.
+     */
+    public static class Channels extends Object {
+        /**
+         * Identifier uniquely determining type of the object.
+         */
+        public static final int CONSTRUCTOR = -1687756020;
+        /**
+         * List of chat identifiers.
+         */
+        public int[] channelIds;
+
+        /**
+         * Represents a list of chats.
+         */
+        public Channels() {
+        }
+
+        /**
+         * Represents a list of chats.
+         *
+         * @param channelIds List of channel identifiers.
+         */
+        public Channels(int[] channelIds) {
+            this.channelIds = channelIds;
+        }
+
+        /**
+         * @return this.CONSTRUCTOR
+         */
+        @Override
+        public int getConstructor() {
+            return CONSTRUCTOR;
+        }
+    }
+
     /**
      * Represents a list of chats located nearby.
      */
@@ -6661,6 +6702,269 @@ public class TdApi {
         }
     }
 
+
+    public static class ChatParticipantRoleAdmin extends ChatParticipantRole {
+
+        /**
+         * The username can be set.
+         */
+        public ChatParticipantRoleAdmin() {
+        }
+
+        /**
+         * Identifier uniquely determining type of the object.
+         */
+        public static final int CONSTRUCTOR = -1493424244;
+
+        /**
+         * @return this.CONSTRUCTOR
+         */
+        @Override
+        public int getConstructor() {
+            return CONSTRUCTOR;
+        }
+    }
+
+    public static class ChatParticipantRoleEditor extends ChatParticipantRole {
+
+        /**
+         * The username can be set.
+         */
+        public ChatParticipantRoleEditor() {
+        }
+
+        /**
+         * Identifier uniquely determining type of the object.
+         */
+        public static final int CONSTRUCTOR = -1493424245;
+
+        /**
+         * @return this.CONSTRUCTOR
+         */
+        @Override
+        public int getConstructor() {
+            return CONSTRUCTOR;
+        }
+    }
+
+    public static class ChatParticipantRoleGeneral extends ChatParticipantRole {
+
+        /**
+         * The username can be set.
+         */
+        public ChatParticipantRoleGeneral() {
+        }
+
+        /**
+         * Identifier uniquely determining type of the object.
+         */
+        public static final int CONSTRUCTOR = -1493424246;
+
+        /**
+         * @return this.CONSTRUCTOR
+         */
+        @Override
+        public int getConstructor() {
+            return CONSTRUCTOR;
+        }
+    }
+
+    public static class ChatParticipantRoleKicked extends ChatParticipantRole {
+
+        /**
+         * The username can be set.
+         */
+        public ChatParticipantRoleKicked() {
+        }
+
+        /**
+         * Identifier uniquely determining type of the object.
+         */
+        public static final int CONSTRUCTOR = -1493424247;
+
+        /**
+         * @return this.CONSTRUCTOR
+         */
+        @Override
+        public int getConstructor() {
+            return CONSTRUCTOR;
+        }
+    }
+
+    public static class ChatParticipantRoleLeft extends ChatParticipantRole {
+
+        /**
+         * The username can be set.
+         */
+        public ChatParticipantRoleLeft() {
+        }
+
+        /**
+         * Identifier uniquely determining type of the object.
+         */
+        public static final int CONSTRUCTOR = -1493424248;
+
+        /**
+         * @return this.CONSTRUCTOR
+         */
+        @Override
+        public int getConstructor() {
+            return CONSTRUCTOR;
+        }
+    }
+
+    public static class ChatParticipantRoleModerator extends ChatParticipantRole {
+
+        /**
+         * The username can be set.
+         */
+        public ChatParticipantRoleModerator() {
+        }
+
+        /**
+         * Identifier uniquely determining type of the object.
+         */
+        public static final int CONSTRUCTOR = -1493424249;
+
+        /**
+         * @return this.CONSTRUCTOR
+         */
+        @Override
+        public int getConstructor() {
+            return CONSTRUCTOR;
+        }
+    }
+
+    /**
+     * This class is an abstract base class.
+     * Represents result of checking whether a username can be set for a chat.
+     */
+    public abstract static class ChatParticipantRole extends Object{
+        @Retention(RetentionPolicy.SOURCE)
+        @IntDef({
+                ChatParticipantRoleAdmin.CONSTRUCTOR,
+                ChatParticipantRoleEditor.CONSTRUCTOR,
+                ChatParticipantRoleGeneral.CONSTRUCTOR,
+                ChatParticipantRoleKicked.CONSTRUCTOR,
+                ChatParticipantRoleLeft.CONSTRUCTOR,
+                ChatParticipantRoleModerator.CONSTRUCTOR
+        })
+
+        public @interface Constructors{}
+
+        /**
+         * @return identifier uniquely determining type of the object.
+         */
+        @ChatParticipantRole.Constructors
+        @Override
+        public abstract int getConstructor();
+
+    }
+
+    public static class Channel extends Object{
+
+        public boolean anyoneCanInvite;
+
+        public int date;
+
+        public int id;
+
+        public boolean isBroadcast;
+
+        public boolean isSupergroup;
+
+        public boolean isVerified;
+
+        public String restrictionReason;
+
+        public ChatParticipantRole role;
+
+        public boolean signMessages;
+
+        public String username;
+
+        public Channel() {
+        }
+
+        public Channel(boolean anyoneCanInvite,
+                       int date,
+                       int id,
+                       boolean isBroadcast,
+                       boolean isSupergroup,
+                       boolean isVerified,
+                       String restrictionReason,
+                       ChatParticipantRole role, boolean signMessages, String username) {
+            this.anyoneCanInvite = anyoneCanInvite;
+            this.date = date;
+            this.id = id;
+            this.isBroadcast = isBroadcast;
+            this.isSupergroup = isSupergroup;
+            this.isVerified = isVerified;
+            this.restrictionReason = restrictionReason;
+            this.role = role;
+            this.signMessages = signMessages;
+            this.username = username;
+        }
+
+        public static final int CONSTRUCTOR = 0xd31a961e;
+
+        @Override
+        public int getConstructor() {
+            return CONSTRUCTOR;
+        }
+    }
+
+    public static class ChannelFull extends Object{
+
+        //Information about the channel.
+        public String about;
+
+        public int adminsCount;
+
+        public boolean canGetParticipants;
+
+        public Channel channel;
+
+        public String inviteLink;
+
+        public int kickedCount;
+
+        public int migratedFromGroupId;
+
+        public int migratedFromMaxMessageId;
+
+        public int participantsCount;
+
+        ChannelFull() {
+        }
+
+        public ChannelFull(String about,
+                           int adminsCount,
+                           boolean canGetParticipants,
+                           Channel channel,
+                           String inviteLink,
+                           int kickedCount,
+                           int migratedFromGroupId,
+                           int migratedFromMaxMessageId, int participantsCount) {
+            this.about = about;
+            this.adminsCount = adminsCount;
+            this.canGetParticipants = canGetParticipants;
+            this.channel = channel;
+            this.inviteLink = inviteLink;
+            this.kickedCount = kickedCount;
+            this.migratedFromGroupId = migratedFromGroupId;
+            this.migratedFromMaxMessageId = migratedFromMaxMessageId;
+            this.participantsCount = participantsCount;
+        }
+
+        public static final int CONSTRUCTOR = 0xf0e6672a;
+
+        @Override
+        public int getConstructor() {
+            return CONSTRUCTOR;
+        }
+    }
+
     /**
      * This class is an abstract base class.
      * Represents result of checking whether a username can be set for a chat.
@@ -6668,11 +6972,11 @@ public class TdApi {
     public abstract static class CheckChatUsernameResult extends Object {
         @Retention(RetentionPolicy.SOURCE)
         @IntDef({
-            CheckChatUsernameResultOk.CONSTRUCTOR,
-            CheckChatUsernameResultUsernameInvalid.CONSTRUCTOR,
-            CheckChatUsernameResultUsernameOccupied.CONSTRUCTOR,
-            CheckChatUsernameResultPublicChatsTooMuch.CONSTRUCTOR,
-            CheckChatUsernameResultPublicGroupsUnavailable.CONSTRUCTOR
+                CheckChatUsernameResultOk.CONSTRUCTOR,
+                CheckChatUsernameResultUsernameInvalid.CONSTRUCTOR,
+                CheckChatUsernameResultUsernameOccupied.CONSTRUCTOR,
+                CheckChatUsernameResultPublicChatsTooMuch.CONSTRUCTOR,
+                CheckChatUsernameResultPublicGroupsUnavailable.CONSTRUCTOR
         })
         public @interface Constructors {}
 
@@ -6940,11 +7244,11 @@ public class TdApi {
     public abstract static class ConnectionState extends Object {
         @Retention(RetentionPolicy.SOURCE)
         @IntDef({
-            ConnectionStateWaitingForNetwork.CONSTRUCTOR,
-            ConnectionStateConnectingToProxy.CONSTRUCTOR,
-            ConnectionStateConnecting.CONSTRUCTOR,
-            ConnectionStateUpdating.CONSTRUCTOR,
-            ConnectionStateReady.CONSTRUCTOR
+                ConnectionStateWaitingForNetwork.CONSTRUCTOR,
+                ConnectionStateConnectingToProxy.CONSTRUCTOR,
+                ConnectionStateConnecting.CONSTRUCTOR,
+                ConnectionStateUpdating.CONSTRUCTOR,
+                ConnectionStateReady.CONSTRUCTOR
         })
         public @interface Constructors {}
 
@@ -7402,17 +7706,17 @@ public class TdApi {
     public abstract static class DeviceToken extends Object {
         @Retention(RetentionPolicy.SOURCE)
         @IntDef({
-            DeviceTokenFirebaseCloudMessaging.CONSTRUCTOR,
-            DeviceTokenApplePush.CONSTRUCTOR,
-            DeviceTokenApplePushVoIP.CONSTRUCTOR,
-            DeviceTokenWindowsPush.CONSTRUCTOR,
-            DeviceTokenMicrosoftPush.CONSTRUCTOR,
-            DeviceTokenMicrosoftPushVoIP.CONSTRUCTOR,
-            DeviceTokenWebPush.CONSTRUCTOR,
-            DeviceTokenSimplePush.CONSTRUCTOR,
-            DeviceTokenUbuntuPush.CONSTRUCTOR,
-            DeviceTokenBlackBerryPush.CONSTRUCTOR,
-            DeviceTokenTizenPush.CONSTRUCTOR
+                DeviceTokenFirebaseCloudMessaging.CONSTRUCTOR,
+                DeviceTokenApplePush.CONSTRUCTOR,
+                DeviceTokenApplePushVoIP.CONSTRUCTOR,
+                DeviceTokenWindowsPush.CONSTRUCTOR,
+                DeviceTokenMicrosoftPush.CONSTRUCTOR,
+                DeviceTokenMicrosoftPushVoIP.CONSTRUCTOR,
+                DeviceTokenWebPush.CONSTRUCTOR,
+                DeviceTokenSimplePush.CONSTRUCTOR,
+                DeviceTokenUbuntuPush.CONSTRUCTOR,
+                DeviceTokenBlackBerryPush.CONSTRUCTOR,
+                DeviceTokenTizenPush.CONSTRUCTOR
         })
         public @interface Constructors {}
 
@@ -8353,22 +8657,22 @@ public class TdApi {
     public abstract static class FileType extends Object {
         @Retention(RetentionPolicy.SOURCE)
         @IntDef({
-            FileTypeNone.CONSTRUCTOR,
-            FileTypeAnimation.CONSTRUCTOR,
-            FileTypeAudio.CONSTRUCTOR,
-            FileTypeDocument.CONSTRUCTOR,
-            FileTypePhoto.CONSTRUCTOR,
-            FileTypeProfilePhoto.CONSTRUCTOR,
-            FileTypeSecret.CONSTRUCTOR,
-            FileTypeSecretThumbnail.CONSTRUCTOR,
-            FileTypeSecure.CONSTRUCTOR,
-            FileTypeSticker.CONSTRUCTOR,
-            FileTypeThumbnail.CONSTRUCTOR,
-            FileTypeUnknown.CONSTRUCTOR,
-            FileTypeVideo.CONSTRUCTOR,
-            FileTypeVideoNote.CONSTRUCTOR,
-            FileTypeVoiceNote.CONSTRUCTOR,
-            FileTypeWallpaper.CONSTRUCTOR
+                FileTypeNone.CONSTRUCTOR,
+                FileTypeAnimation.CONSTRUCTOR,
+                FileTypeAudio.CONSTRUCTOR,
+                FileTypeDocument.CONSTRUCTOR,
+                FileTypePhoto.CONSTRUCTOR,
+                FileTypeProfilePhoto.CONSTRUCTOR,
+                FileTypeSecret.CONSTRUCTOR,
+                FileTypeSecretThumbnail.CONSTRUCTOR,
+                FileTypeSecure.CONSTRUCTOR,
+                FileTypeSticker.CONSTRUCTOR,
+                FileTypeThumbnail.CONSTRUCTOR,
+                FileTypeUnknown.CONSTRUCTOR,
+                FileTypeVideo.CONSTRUCTOR,
+                FileTypeVideoNote.CONSTRUCTOR,
+                FileTypeVoiceNote.CONSTRUCTOR,
+                FileTypeWallpaper.CONSTRUCTOR
         })
         public @interface Constructors {}
 
@@ -9269,12 +9573,12 @@ public class TdApi {
     public abstract static class InlineKeyboardButtonType extends Object {
         @Retention(RetentionPolicy.SOURCE)
         @IntDef({
-            InlineKeyboardButtonTypeUrl.CONSTRUCTOR,
-            InlineKeyboardButtonTypeLoginUrl.CONSTRUCTOR,
-            InlineKeyboardButtonTypeCallback.CONSTRUCTOR,
-            InlineKeyboardButtonTypeCallbackGame.CONSTRUCTOR,
-            InlineKeyboardButtonTypeSwitchInline.CONSTRUCTOR,
-            InlineKeyboardButtonTypeBuy.CONSTRUCTOR
+                InlineKeyboardButtonTypeUrl.CONSTRUCTOR,
+                InlineKeyboardButtonTypeLoginUrl.CONSTRUCTOR,
+                InlineKeyboardButtonTypeCallback.CONSTRUCTOR,
+                InlineKeyboardButtonTypeCallbackGame.CONSTRUCTOR,
+                InlineKeyboardButtonTypeSwitchInline.CONSTRUCTOR,
+                InlineKeyboardButtonTypeBuy.CONSTRUCTOR
         })
         public @interface Constructors {}
 
@@ -9513,18 +9817,18 @@ public class TdApi {
     public abstract static class InlineQueryResult extends Object {
         @Retention(RetentionPolicy.SOURCE)
         @IntDef({
-            InlineQueryResultArticle.CONSTRUCTOR,
-            InlineQueryResultContact.CONSTRUCTOR,
-            InlineQueryResultLocation.CONSTRUCTOR,
-            InlineQueryResultVenue.CONSTRUCTOR,
-            InlineQueryResultGame.CONSTRUCTOR,
-            InlineQueryResultAnimation.CONSTRUCTOR,
-            InlineQueryResultAudio.CONSTRUCTOR,
-            InlineQueryResultDocument.CONSTRUCTOR,
-            InlineQueryResultPhoto.CONSTRUCTOR,
-            InlineQueryResultSticker.CONSTRUCTOR,
-            InlineQueryResultVideo.CONSTRUCTOR,
-            InlineQueryResultVoiceNote.CONSTRUCTOR
+                InlineQueryResultArticle.CONSTRUCTOR,
+                InlineQueryResultContact.CONSTRUCTOR,
+                InlineQueryResultLocation.CONSTRUCTOR,
+                InlineQueryResultVenue.CONSTRUCTOR,
+                InlineQueryResultGame.CONSTRUCTOR,
+                InlineQueryResultAnimation.CONSTRUCTOR,
+                InlineQueryResultAudio.CONSTRUCTOR,
+                InlineQueryResultDocument.CONSTRUCTOR,
+                InlineQueryResultPhoto.CONSTRUCTOR,
+                InlineQueryResultSticker.CONSTRUCTOR,
+                InlineQueryResultVideo.CONSTRUCTOR,
+                InlineQueryResultVoiceNote.CONSTRUCTOR
         })
         public @interface Constructors {}
 
@@ -10229,8 +10533,8 @@ public class TdApi {
     public abstract static class InputBackground extends Object {
         @Retention(RetentionPolicy.SOURCE)
         @IntDef({
-            InputBackgroundLocal.CONSTRUCTOR,
-            InputBackgroundRemote.CONSTRUCTOR
+                InputBackgroundLocal.CONSTRUCTOR,
+                InputBackgroundRemote.CONSTRUCTOR
         })
         public @interface Constructors {}
 
@@ -10325,10 +10629,10 @@ public class TdApi {
     public abstract static class InputCredentials extends Object {
         @Retention(RetentionPolicy.SOURCE)
         @IntDef({
-            InputCredentialsSaved.CONSTRUCTOR,
-            InputCredentialsNew.CONSTRUCTOR,
-            InputCredentialsAndroidPay.CONSTRUCTOR,
-            InputCredentialsApplePay.CONSTRUCTOR
+                InputCredentialsSaved.CONSTRUCTOR,
+                InputCredentialsNew.CONSTRUCTOR,
+                InputCredentialsAndroidPay.CONSTRUCTOR,
+                InputCredentialsApplePay.CONSTRUCTOR
         })
         public @interface Constructors {}
 
@@ -10505,10 +10809,10 @@ public class TdApi {
     public abstract static class InputFile extends Object {
         @Retention(RetentionPolicy.SOURCE)
         @IntDef({
-            InputFileId.CONSTRUCTOR,
-            InputFileRemote.CONSTRUCTOR,
-            InputFileLocal.CONSTRUCTOR,
-            InputFileGenerated.CONSTRUCTOR
+                InputFileId.CONSTRUCTOR,
+                InputFileRemote.CONSTRUCTOR,
+                InputFileLocal.CONSTRUCTOR,
+                InputFileGenerated.CONSTRUCTOR
         })
         public @interface Constructors {}
 
@@ -10759,19 +11063,19 @@ public class TdApi {
     public abstract static class InputInlineQueryResult extends Object {
         @Retention(RetentionPolicy.SOURCE)
         @IntDef({
-            InputInlineQueryResultAnimatedGif.CONSTRUCTOR,
-            InputInlineQueryResultAnimatedMpeg4.CONSTRUCTOR,
-            InputInlineQueryResultArticle.CONSTRUCTOR,
-            InputInlineQueryResultAudio.CONSTRUCTOR,
-            InputInlineQueryResultContact.CONSTRUCTOR,
-            InputInlineQueryResultDocument.CONSTRUCTOR,
-            InputInlineQueryResultGame.CONSTRUCTOR,
-            InputInlineQueryResultLocation.CONSTRUCTOR,
-            InputInlineQueryResultPhoto.CONSTRUCTOR,
-            InputInlineQueryResultSticker.CONSTRUCTOR,
-            InputInlineQueryResultVenue.CONSTRUCTOR,
-            InputInlineQueryResultVideo.CONSTRUCTOR,
-            InputInlineQueryResultVoiceNote.CONSTRUCTOR
+                InputInlineQueryResultAnimatedGif.CONSTRUCTOR,
+                InputInlineQueryResultAnimatedMpeg4.CONSTRUCTOR,
+                InputInlineQueryResultArticle.CONSTRUCTOR,
+                InputInlineQueryResultAudio.CONSTRUCTOR,
+                InputInlineQueryResultContact.CONSTRUCTOR,
+                InputInlineQueryResultDocument.CONSTRUCTOR,
+                InputInlineQueryResultGame.CONSTRUCTOR,
+                InputInlineQueryResultLocation.CONSTRUCTOR,
+                InputInlineQueryResultPhoto.CONSTRUCTOR,
+                InputInlineQueryResultSticker.CONSTRUCTOR,
+                InputInlineQueryResultVenue.CONSTRUCTOR,
+                InputInlineQueryResultVideo.CONSTRUCTOR,
+                InputInlineQueryResultVoiceNote.CONSTRUCTOR
         })
         public @interface Constructors {}
 
@@ -11830,22 +12134,22 @@ public class TdApi {
     public abstract static class InputMessageContent extends Object {
         @Retention(RetentionPolicy.SOURCE)
         @IntDef({
-            InputMessageText.CONSTRUCTOR,
-            InputMessageAnimation.CONSTRUCTOR,
-            InputMessageAudio.CONSTRUCTOR,
-            InputMessageDocument.CONSTRUCTOR,
-            InputMessagePhoto.CONSTRUCTOR,
-            InputMessageSticker.CONSTRUCTOR,
-            InputMessageVideo.CONSTRUCTOR,
-            InputMessageVideoNote.CONSTRUCTOR,
-            InputMessageVoiceNote.CONSTRUCTOR,
-            InputMessageLocation.CONSTRUCTOR,
-            InputMessageVenue.CONSTRUCTOR,
-            InputMessageContact.CONSTRUCTOR,
-            InputMessageGame.CONSTRUCTOR,
-            InputMessageInvoice.CONSTRUCTOR,
-            InputMessagePoll.CONSTRUCTOR,
-            InputMessageForwarded.CONSTRUCTOR
+                InputMessageText.CONSTRUCTOR,
+                InputMessageAnimation.CONSTRUCTOR,
+                InputMessageAudio.CONSTRUCTOR,
+                InputMessageDocument.CONSTRUCTOR,
+                InputMessagePhoto.CONSTRUCTOR,
+                InputMessageSticker.CONSTRUCTOR,
+                InputMessageVideo.CONSTRUCTOR,
+                InputMessageVideoNote.CONSTRUCTOR,
+                InputMessageVoiceNote.CONSTRUCTOR,
+                InputMessageLocation.CONSTRUCTOR,
+                InputMessageVenue.CONSTRUCTOR,
+                InputMessageContact.CONSTRUCTOR,
+                InputMessageGame.CONSTRUCTOR,
+                InputMessageInvoice.CONSTRUCTOR,
+                InputMessagePoll.CONSTRUCTOR,
+                InputMessageForwarded.CONSTRUCTOR
         })
         public @interface Constructors {}
 
@@ -12814,19 +13118,19 @@ public class TdApi {
     public abstract static class InputPassportElement extends Object {
         @Retention(RetentionPolicy.SOURCE)
         @IntDef({
-            InputPassportElementPersonalDetails.CONSTRUCTOR,
-            InputPassportElementPassport.CONSTRUCTOR,
-            InputPassportElementDriverLicense.CONSTRUCTOR,
-            InputPassportElementIdentityCard.CONSTRUCTOR,
-            InputPassportElementInternalPassport.CONSTRUCTOR,
-            InputPassportElementAddress.CONSTRUCTOR,
-            InputPassportElementUtilityBill.CONSTRUCTOR,
-            InputPassportElementBankStatement.CONSTRUCTOR,
-            InputPassportElementRentalAgreement.CONSTRUCTOR,
-            InputPassportElementPassportRegistration.CONSTRUCTOR,
-            InputPassportElementTemporaryRegistration.CONSTRUCTOR,
-            InputPassportElementPhoneNumber.CONSTRUCTOR,
-            InputPassportElementEmailAddress.CONSTRUCTOR
+                InputPassportElementPersonalDetails.CONSTRUCTOR,
+                InputPassportElementPassport.CONSTRUCTOR,
+                InputPassportElementDriverLicense.CONSTRUCTOR,
+                InputPassportElementIdentityCard.CONSTRUCTOR,
+                InputPassportElementInternalPassport.CONSTRUCTOR,
+                InputPassportElementAddress.CONSTRUCTOR,
+                InputPassportElementUtilityBill.CONSTRUCTOR,
+                InputPassportElementBankStatement.CONSTRUCTOR,
+                InputPassportElementRentalAgreement.CONSTRUCTOR,
+                InputPassportElementPassportRegistration.CONSTRUCTOR,
+                InputPassportElementTemporaryRegistration.CONSTRUCTOR,
+                InputPassportElementPhoneNumber.CONSTRUCTOR,
+                InputPassportElementEmailAddress.CONSTRUCTOR
         })
         public @interface Constructors {}
 
@@ -13389,15 +13693,15 @@ public class TdApi {
     public abstract static class InputPassportElementErrorSource extends Object {
         @Retention(RetentionPolicy.SOURCE)
         @IntDef({
-            InputPassportElementErrorSourceUnspecified.CONSTRUCTOR,
-            InputPassportElementErrorSourceDataField.CONSTRUCTOR,
-            InputPassportElementErrorSourceFrontSide.CONSTRUCTOR,
-            InputPassportElementErrorSourceReverseSide.CONSTRUCTOR,
-            InputPassportElementErrorSourceSelfie.CONSTRUCTOR,
-            InputPassportElementErrorSourceTranslationFile.CONSTRUCTOR,
-            InputPassportElementErrorSourceTranslationFiles.CONSTRUCTOR,
-            InputPassportElementErrorSourceFile.CONSTRUCTOR,
-            InputPassportElementErrorSourceFiles.CONSTRUCTOR
+                InputPassportElementErrorSourceUnspecified.CONSTRUCTOR,
+                InputPassportElementErrorSourceDataField.CONSTRUCTOR,
+                InputPassportElementErrorSourceFrontSide.CONSTRUCTOR,
+                InputPassportElementErrorSourceReverseSide.CONSTRUCTOR,
+                InputPassportElementErrorSourceSelfie.CONSTRUCTOR,
+                InputPassportElementErrorSourceTranslationFile.CONSTRUCTOR,
+                InputPassportElementErrorSourceTranslationFiles.CONSTRUCTOR,
+                InputPassportElementErrorSourceFile.CONSTRUCTOR,
+                InputPassportElementErrorSourceFiles.CONSTRUCTOR
         })
         public @interface Constructors {}
 
@@ -14044,12 +14348,12 @@ public class TdApi {
     public abstract static class JsonValue extends Object {
         @Retention(RetentionPolicy.SOURCE)
         @IntDef({
-            JsonValueNull.CONSTRUCTOR,
-            JsonValueBoolean.CONSTRUCTOR,
-            JsonValueNumber.CONSTRUCTOR,
-            JsonValueString.CONSTRUCTOR,
-            JsonValueArray.CONSTRUCTOR,
-            JsonValueObject.CONSTRUCTOR
+                JsonValueNull.CONSTRUCTOR,
+                JsonValueBoolean.CONSTRUCTOR,
+                JsonValueNumber.CONSTRUCTOR,
+                JsonValueString.CONSTRUCTOR,
+                JsonValueArray.CONSTRUCTOR,
+                JsonValueObject.CONSTRUCTOR
         })
         public @interface Constructors {}
 
@@ -14327,10 +14631,10 @@ public class TdApi {
     public abstract static class KeyboardButtonType extends Object {
         @Retention(RetentionPolicy.SOURCE)
         @IntDef({
-            KeyboardButtonTypeText.CONSTRUCTOR,
-            KeyboardButtonTypeRequestPhoneNumber.CONSTRUCTOR,
-            KeyboardButtonTypeRequestLocation.CONSTRUCTOR,
-            KeyboardButtonTypeRequestPoll.CONSTRUCTOR
+                KeyboardButtonTypeText.CONSTRUCTOR,
+                KeyboardButtonTypeRequestPhoneNumber.CONSTRUCTOR,
+                KeyboardButtonTypeRequestLocation.CONSTRUCTOR,
+                KeyboardButtonTypeRequestPoll.CONSTRUCTOR
         })
         public @interface Constructors {}
 
@@ -14666,9 +14970,9 @@ public class TdApi {
     public abstract static class LanguagePackStringValue extends Object {
         @Retention(RetentionPolicy.SOURCE)
         @IntDef({
-            LanguagePackStringValueOrdinary.CONSTRUCTOR,
-            LanguagePackStringValuePluralized.CONSTRUCTOR,
-            LanguagePackStringValueDeleted.CONSTRUCTOR
+                LanguagePackStringValueOrdinary.CONSTRUCTOR,
+                LanguagePackStringValuePluralized.CONSTRUCTOR,
+                LanguagePackStringValueDeleted.CONSTRUCTOR
         })
         public @interface Constructors {}
 
@@ -15018,9 +15322,9 @@ public class TdApi {
     public abstract static class LogStream extends Object {
         @Retention(RetentionPolicy.SOURCE)
         @IntDef({
-            LogStreamDefault.CONSTRUCTOR,
-            LogStreamFile.CONSTRUCTOR,
-            LogStreamEmpty.CONSTRUCTOR
+                LogStreamDefault.CONSTRUCTOR,
+                LogStreamFile.CONSTRUCTOR,
+                LogStreamEmpty.CONSTRUCTOR
         })
         public @interface Constructors {}
 
@@ -15209,8 +15513,8 @@ public class TdApi {
     public abstract static class LoginUrlInfo extends Object {
         @Retention(RetentionPolicy.SOURCE)
         @IntDef({
-            LoginUrlInfoOpen.CONSTRUCTOR,
-            LoginUrlInfoRequestConfirmation.CONSTRUCTOR
+                LoginUrlInfoOpen.CONSTRUCTOR,
+                LoginUrlInfoRequestConfirmation.CONSTRUCTOR
         })
         public @interface Constructors {}
 
@@ -15329,10 +15633,10 @@ public class TdApi {
     public abstract static class MaskPoint extends Object {
         @Retention(RetentionPolicy.SOURCE)
         @IntDef({
-            MaskPointForehead.CONSTRUCTOR,
-            MaskPointEyes.CONSTRUCTOR,
-            MaskPointMouth.CONSTRUCTOR,
-            MaskPointChin.CONSTRUCTOR
+                MaskPointForehead.CONSTRUCTOR,
+                MaskPointEyes.CONSTRUCTOR,
+                MaskPointMouth.CONSTRUCTOR,
+                MaskPointChin.CONSTRUCTOR
         })
         public @interface Constructors {}
 
@@ -15689,46 +15993,46 @@ public class TdApi {
     public abstract static class MessageContent extends Object {
         @Retention(RetentionPolicy.SOURCE)
         @IntDef({
-            MessageText.CONSTRUCTOR,
-            MessageAnimation.CONSTRUCTOR,
-            MessageAudio.CONSTRUCTOR,
-            MessageDocument.CONSTRUCTOR,
-            MessagePhoto.CONSTRUCTOR,
-            MessageExpiredPhoto.CONSTRUCTOR,
-            MessageSticker.CONSTRUCTOR,
-            MessageVideo.CONSTRUCTOR,
-            MessageExpiredVideo.CONSTRUCTOR,
-            MessageVideoNote.CONSTRUCTOR,
-            MessageVoiceNote.CONSTRUCTOR,
-            MessageLocation.CONSTRUCTOR,
-            MessageVenue.CONSTRUCTOR,
-            MessageContact.CONSTRUCTOR,
-            MessageGame.CONSTRUCTOR,
-            MessagePoll.CONSTRUCTOR,
-            MessageInvoice.CONSTRUCTOR,
-            MessageCall.CONSTRUCTOR,
-            MessageBasicGroupChatCreate.CONSTRUCTOR,
-            MessageSupergroupChatCreate.CONSTRUCTOR,
-            MessageChatChangeTitle.CONSTRUCTOR,
-            MessageChatChangePhoto.CONSTRUCTOR,
-            MessageChatDeletePhoto.CONSTRUCTOR,
-            MessageChatAddMembers.CONSTRUCTOR,
-            MessageChatJoinByLink.CONSTRUCTOR,
-            MessageChatDeleteMember.CONSTRUCTOR,
-            MessageChatUpgradeTo.CONSTRUCTOR,
-            MessageChatUpgradeFrom.CONSTRUCTOR,
-            MessagePinMessage.CONSTRUCTOR,
-            MessageScreenshotTaken.CONSTRUCTOR,
-            MessageChatSetTtl.CONSTRUCTOR,
-            MessageCustomServiceAction.CONSTRUCTOR,
-            MessageGameScore.CONSTRUCTOR,
-            MessagePaymentSuccessful.CONSTRUCTOR,
-            MessagePaymentSuccessfulBot.CONSTRUCTOR,
-            MessageContactRegistered.CONSTRUCTOR,
-            MessageWebsiteConnected.CONSTRUCTOR,
-            MessagePassportDataSent.CONSTRUCTOR,
-            MessagePassportDataReceived.CONSTRUCTOR,
-            MessageUnsupported.CONSTRUCTOR
+                MessageText.CONSTRUCTOR,
+                MessageAnimation.CONSTRUCTOR,
+                MessageAudio.CONSTRUCTOR,
+                MessageDocument.CONSTRUCTOR,
+                MessagePhoto.CONSTRUCTOR,
+                MessageExpiredPhoto.CONSTRUCTOR,
+                MessageSticker.CONSTRUCTOR,
+                MessageVideo.CONSTRUCTOR,
+                MessageExpiredVideo.CONSTRUCTOR,
+                MessageVideoNote.CONSTRUCTOR,
+                MessageVoiceNote.CONSTRUCTOR,
+                MessageLocation.CONSTRUCTOR,
+                MessageVenue.CONSTRUCTOR,
+                MessageContact.CONSTRUCTOR,
+                MessageGame.CONSTRUCTOR,
+                MessagePoll.CONSTRUCTOR,
+                MessageInvoice.CONSTRUCTOR,
+                MessageCall.CONSTRUCTOR,
+                MessageBasicGroupChatCreate.CONSTRUCTOR,
+                MessageSupergroupChatCreate.CONSTRUCTOR,
+                MessageChatChangeTitle.CONSTRUCTOR,
+                MessageChatChangePhoto.CONSTRUCTOR,
+                MessageChatDeletePhoto.CONSTRUCTOR,
+                MessageChatAddMembers.CONSTRUCTOR,
+                MessageChatJoinByLink.CONSTRUCTOR,
+                MessageChatDeleteMember.CONSTRUCTOR,
+                MessageChatUpgradeTo.CONSTRUCTOR,
+                MessageChatUpgradeFrom.CONSTRUCTOR,
+                MessagePinMessage.CONSTRUCTOR,
+                MessageScreenshotTaken.CONSTRUCTOR,
+                MessageChatSetTtl.CONSTRUCTOR,
+                MessageCustomServiceAction.CONSTRUCTOR,
+                MessageGameScore.CONSTRUCTOR,
+                MessagePaymentSuccessful.CONSTRUCTOR,
+                MessagePaymentSuccessfulBot.CONSTRUCTOR,
+                MessageContactRegistered.CONSTRUCTOR,
+                MessageWebsiteConnected.CONSTRUCTOR,
+                MessagePassportDataSent.CONSTRUCTOR,
+                MessagePassportDataReceived.CONSTRUCTOR,
+                MessageUnsupported.CONSTRUCTOR
         })
         public @interface Constructors {}
 
@@ -17460,9 +17764,9 @@ public class TdApi {
     public abstract static class MessageForwardOrigin extends Object {
         @Retention(RetentionPolicy.SOURCE)
         @IntDef({
-            MessageForwardOriginUser.CONSTRUCTOR,
-            MessageForwardOriginHiddenUser.CONSTRUCTOR,
-            MessageForwardOriginChannel.CONSTRUCTOR
+                MessageForwardOriginUser.CONSTRUCTOR,
+                MessageForwardOriginHiddenUser.CONSTRUCTOR,
+                MessageForwardOriginChannel.CONSTRUCTOR
         })
         public @interface Constructors {}
 
@@ -17663,8 +17967,8 @@ public class TdApi {
     public abstract static class MessageSchedulingState extends Object {
         @Retention(RetentionPolicy.SOURCE)
         @IntDef({
-            MessageSchedulingStateSendAtDate.CONSTRUCTOR,
-            MessageSchedulingStateSendWhenOnline.CONSTRUCTOR
+                MessageSchedulingStateSendAtDate.CONSTRUCTOR,
+                MessageSchedulingStateSendWhenOnline.CONSTRUCTOR
         })
         public @interface Constructors {}
 
@@ -17746,8 +18050,8 @@ public class TdApi {
     public abstract static class MessageSendingState extends Object {
         @Retention(RetentionPolicy.SOURCE)
         @IntDef({
-            MessageSendingStatePending.CONSTRUCTOR,
-            MessageSendingStateFailed.CONSTRUCTOR
+                MessageSendingStatePending.CONSTRUCTOR,
+                MessageSendingStateFailed.CONSTRUCTOR
         })
         public @interface Constructors {}
 
@@ -17985,8 +18289,8 @@ public class TdApi {
     public abstract static class NetworkStatisticsEntry extends Object {
         @Retention(RetentionPolicy.SOURCE)
         @IntDef({
-            NetworkStatisticsEntryFile.CONSTRUCTOR,
-            NetworkStatisticsEntryCall.CONSTRUCTOR
+                NetworkStatisticsEntryFile.CONSTRUCTOR,
+                NetworkStatisticsEntryCall.CONSTRUCTOR
         })
         public @interface Constructors {}
 
@@ -18117,11 +18421,11 @@ public class TdApi {
     public abstract static class NetworkType extends Object {
         @Retention(RetentionPolicy.SOURCE)
         @IntDef({
-            NetworkTypeNone.CONSTRUCTOR,
-            NetworkTypeMobile.CONSTRUCTOR,
-            NetworkTypeMobileRoaming.CONSTRUCTOR,
-            NetworkTypeWiFi.CONSTRUCTOR,
-            NetworkTypeOther.CONSTRUCTOR
+                NetworkTypeNone.CONSTRUCTOR,
+                NetworkTypeMobile.CONSTRUCTOR,
+                NetworkTypeMobileRoaming.CONSTRUCTOR,
+                NetworkTypeWiFi.CONSTRUCTOR,
+                NetworkTypeOther.CONSTRUCTOR
         })
         public @interface Constructors {}
 
@@ -18383,10 +18687,10 @@ public class TdApi {
     public abstract static class NotificationGroupType extends Object {
         @Retention(RetentionPolicy.SOURCE)
         @IntDef({
-            NotificationGroupTypeMessages.CONSTRUCTOR,
-            NotificationGroupTypeMentions.CONSTRUCTOR,
-            NotificationGroupTypeSecretChat.CONSTRUCTOR,
-            NotificationGroupTypeCalls.CONSTRUCTOR
+                NotificationGroupTypeMessages.CONSTRUCTOR,
+                NotificationGroupTypeMentions.CONSTRUCTOR,
+                NotificationGroupTypeSecretChat.CONSTRUCTOR,
+                NotificationGroupTypeCalls.CONSTRUCTOR
         })
         public @interface Constructors {}
 
@@ -18505,9 +18809,9 @@ public class TdApi {
     public abstract static class NotificationSettingsScope extends Object {
         @Retention(RetentionPolicy.SOURCE)
         @IntDef({
-            NotificationSettingsScopePrivateChats.CONSTRUCTOR,
-            NotificationSettingsScopeGroupChats.CONSTRUCTOR,
-            NotificationSettingsScopeChannelChats.CONSTRUCTOR
+                NotificationSettingsScopePrivateChats.CONSTRUCTOR,
+                NotificationSettingsScopeGroupChats.CONSTRUCTOR,
+                NotificationSettingsScopeChannelChats.CONSTRUCTOR
         })
         public @interface Constructors {}
 
@@ -18601,10 +18905,10 @@ public class TdApi {
     public abstract static class NotificationType extends Object {
         @Retention(RetentionPolicy.SOURCE)
         @IntDef({
-            NotificationTypeNewMessage.CONSTRUCTOR,
-            NotificationTypeNewSecretChat.CONSTRUCTOR,
-            NotificationTypeNewCall.CONSTRUCTOR,
-            NotificationTypeNewPushMessage.CONSTRUCTOR
+                NotificationTypeNewMessage.CONSTRUCTOR,
+                NotificationTypeNewSecretChat.CONSTRUCTOR,
+                NotificationTypeNewCall.CONSTRUCTOR,
+                NotificationTypeNewPushMessage.CONSTRUCTOR
         })
         public @interface Constructors {}
 
@@ -18799,10 +19103,10 @@ public class TdApi {
     public abstract static class OptionValue extends Object {
         @Retention(RetentionPolicy.SOURCE)
         @IntDef({
-            OptionValueBoolean.CONSTRUCTOR,
-            OptionValueEmpty.CONSTRUCTOR,
-            OptionValueInteger.CONSTRUCTOR,
-            OptionValueString.CONSTRUCTOR
+                OptionValueBoolean.CONSTRUCTOR,
+                OptionValueEmpty.CONSTRUCTOR,
+                OptionValueInteger.CONSTRUCTOR,
+                OptionValueString.CONSTRUCTOR
         })
         public @interface Constructors {}
 
@@ -19016,35 +19320,35 @@ public class TdApi {
     public abstract static class PageBlock extends Object {
         @Retention(RetentionPolicy.SOURCE)
         @IntDef({
-            PageBlockTitle.CONSTRUCTOR,
-            PageBlockSubtitle.CONSTRUCTOR,
-            PageBlockAuthorDate.CONSTRUCTOR,
-            PageBlockHeader.CONSTRUCTOR,
-            PageBlockSubheader.CONSTRUCTOR,
-            PageBlockKicker.CONSTRUCTOR,
-            PageBlockParagraph.CONSTRUCTOR,
-            PageBlockPreformatted.CONSTRUCTOR,
-            PageBlockFooter.CONSTRUCTOR,
-            PageBlockDivider.CONSTRUCTOR,
-            PageBlockAnchor.CONSTRUCTOR,
-            PageBlockList.CONSTRUCTOR,
-            PageBlockBlockQuote.CONSTRUCTOR,
-            PageBlockPullQuote.CONSTRUCTOR,
-            PageBlockAnimation.CONSTRUCTOR,
-            PageBlockAudio.CONSTRUCTOR,
-            PageBlockPhoto.CONSTRUCTOR,
-            PageBlockVideo.CONSTRUCTOR,
-            PageBlockVoiceNote.CONSTRUCTOR,
-            PageBlockCover.CONSTRUCTOR,
-            PageBlockEmbedded.CONSTRUCTOR,
-            PageBlockEmbeddedPost.CONSTRUCTOR,
-            PageBlockCollage.CONSTRUCTOR,
-            PageBlockSlideshow.CONSTRUCTOR,
-            PageBlockChatLink.CONSTRUCTOR,
-            PageBlockTable.CONSTRUCTOR,
-            PageBlockDetails.CONSTRUCTOR,
-            PageBlockRelatedArticles.CONSTRUCTOR,
-            PageBlockMap.CONSTRUCTOR
+                PageBlockTitle.CONSTRUCTOR,
+                PageBlockSubtitle.CONSTRUCTOR,
+                PageBlockAuthorDate.CONSTRUCTOR,
+                PageBlockHeader.CONSTRUCTOR,
+                PageBlockSubheader.CONSTRUCTOR,
+                PageBlockKicker.CONSTRUCTOR,
+                PageBlockParagraph.CONSTRUCTOR,
+                PageBlockPreformatted.CONSTRUCTOR,
+                PageBlockFooter.CONSTRUCTOR,
+                PageBlockDivider.CONSTRUCTOR,
+                PageBlockAnchor.CONSTRUCTOR,
+                PageBlockList.CONSTRUCTOR,
+                PageBlockBlockQuote.CONSTRUCTOR,
+                PageBlockPullQuote.CONSTRUCTOR,
+                PageBlockAnimation.CONSTRUCTOR,
+                PageBlockAudio.CONSTRUCTOR,
+                PageBlockPhoto.CONSTRUCTOR,
+                PageBlockVideo.CONSTRUCTOR,
+                PageBlockVoiceNote.CONSTRUCTOR,
+                PageBlockCover.CONSTRUCTOR,
+                PageBlockEmbedded.CONSTRUCTOR,
+                PageBlockEmbeddedPost.CONSTRUCTOR,
+                PageBlockCollage.CONSTRUCTOR,
+                PageBlockSlideshow.CONSTRUCTOR,
+                PageBlockChatLink.CONSTRUCTOR,
+                PageBlockTable.CONSTRUCTOR,
+                PageBlockDetails.CONSTRUCTOR,
+                PageBlockRelatedArticles.CONSTRUCTOR,
+                PageBlockMap.CONSTRUCTOR
         })
         public @interface Constructors {}
 
@@ -20430,9 +20734,9 @@ public class TdApi {
     public abstract static class PageBlockHorizontalAlignment extends Object {
         @Retention(RetentionPolicy.SOURCE)
         @IntDef({
-            PageBlockHorizontalAlignmentLeft.CONSTRUCTOR,
-            PageBlockHorizontalAlignmentCenter.CONSTRUCTOR,
-            PageBlockHorizontalAlignmentRight.CONSTRUCTOR
+                PageBlockHorizontalAlignmentLeft.CONSTRUCTOR,
+                PageBlockHorizontalAlignmentCenter.CONSTRUCTOR,
+                PageBlockHorizontalAlignmentRight.CONSTRUCTOR
         })
         public @interface Constructors {}
 
@@ -20706,9 +21010,9 @@ public class TdApi {
     public abstract static class PageBlockVerticalAlignment extends Object {
         @Retention(RetentionPolicy.SOURCE)
         @IntDef({
-            PageBlockVerticalAlignmentTop.CONSTRUCTOR,
-            PageBlockVerticalAlignmentMiddle.CONSTRUCTOR,
-            PageBlockVerticalAlignmentBottom.CONSTRUCTOR
+                PageBlockVerticalAlignmentTop.CONSTRUCTOR,
+                PageBlockVerticalAlignmentMiddle.CONSTRUCTOR,
+                PageBlockVerticalAlignmentBottom.CONSTRUCTOR
         })
         public @interface Constructors {}
 
@@ -20852,19 +21156,19 @@ public class TdApi {
     public abstract static class PassportElement extends Object {
         @Retention(RetentionPolicy.SOURCE)
         @IntDef({
-            PassportElementPersonalDetails.CONSTRUCTOR,
-            PassportElementPassport.CONSTRUCTOR,
-            PassportElementDriverLicense.CONSTRUCTOR,
-            PassportElementIdentityCard.CONSTRUCTOR,
-            PassportElementInternalPassport.CONSTRUCTOR,
-            PassportElementAddress.CONSTRUCTOR,
-            PassportElementUtilityBill.CONSTRUCTOR,
-            PassportElementBankStatement.CONSTRUCTOR,
-            PassportElementRentalAgreement.CONSTRUCTOR,
-            PassportElementPassportRegistration.CONSTRUCTOR,
-            PassportElementTemporaryRegistration.CONSTRUCTOR,
-            PassportElementPhoneNumber.CONSTRUCTOR,
-            PassportElementEmailAddress.CONSTRUCTOR
+                PassportElementPersonalDetails.CONSTRUCTOR,
+                PassportElementPassport.CONSTRUCTOR,
+                PassportElementDriverLicense.CONSTRUCTOR,
+                PassportElementIdentityCard.CONSTRUCTOR,
+                PassportElementInternalPassport.CONSTRUCTOR,
+                PassportElementAddress.CONSTRUCTOR,
+                PassportElementUtilityBill.CONSTRUCTOR,
+                PassportElementBankStatement.CONSTRUCTOR,
+                PassportElementRentalAgreement.CONSTRUCTOR,
+                PassportElementPassportRegistration.CONSTRUCTOR,
+                PassportElementTemporaryRegistration.CONSTRUCTOR,
+                PassportElementPhoneNumber.CONSTRUCTOR,
+                PassportElementEmailAddress.CONSTRUCTOR
         })
         public @interface Constructors {}
 
@@ -21427,15 +21731,15 @@ public class TdApi {
     public abstract static class PassportElementErrorSource extends Object {
         @Retention(RetentionPolicy.SOURCE)
         @IntDef({
-            PassportElementErrorSourceUnspecified.CONSTRUCTOR,
-            PassportElementErrorSourceDataField.CONSTRUCTOR,
-            PassportElementErrorSourceFrontSide.CONSTRUCTOR,
-            PassportElementErrorSourceReverseSide.CONSTRUCTOR,
-            PassportElementErrorSourceSelfie.CONSTRUCTOR,
-            PassportElementErrorSourceTranslationFile.CONSTRUCTOR,
-            PassportElementErrorSourceTranslationFiles.CONSTRUCTOR,
-            PassportElementErrorSourceFile.CONSTRUCTOR,
-            PassportElementErrorSourceFiles.CONSTRUCTOR
+                PassportElementErrorSourceUnspecified.CONSTRUCTOR,
+                PassportElementErrorSourceDataField.CONSTRUCTOR,
+                PassportElementErrorSourceFrontSide.CONSTRUCTOR,
+                PassportElementErrorSourceReverseSide.CONSTRUCTOR,
+                PassportElementErrorSourceSelfie.CONSTRUCTOR,
+                PassportElementErrorSourceTranslationFile.CONSTRUCTOR,
+                PassportElementErrorSourceTranslationFiles.CONSTRUCTOR,
+                PassportElementErrorSourceFile.CONSTRUCTOR,
+                PassportElementErrorSourceFiles.CONSTRUCTOR
         })
         public @interface Constructors {}
 
@@ -21718,19 +22022,19 @@ public class TdApi {
     public abstract static class PassportElementType extends Object {
         @Retention(RetentionPolicy.SOURCE)
         @IntDef({
-            PassportElementTypePersonalDetails.CONSTRUCTOR,
-            PassportElementTypePassport.CONSTRUCTOR,
-            PassportElementTypeDriverLicense.CONSTRUCTOR,
-            PassportElementTypeIdentityCard.CONSTRUCTOR,
-            PassportElementTypeInternalPassport.CONSTRUCTOR,
-            PassportElementTypeAddress.CONSTRUCTOR,
-            PassportElementTypeUtilityBill.CONSTRUCTOR,
-            PassportElementTypeBankStatement.CONSTRUCTOR,
-            PassportElementTypeRentalAgreement.CONSTRUCTOR,
-            PassportElementTypePassportRegistration.CONSTRUCTOR,
-            PassportElementTypeTemporaryRegistration.CONSTRUCTOR,
-            PassportElementTypePhoneNumber.CONSTRUCTOR,
-            PassportElementTypeEmailAddress.CONSTRUCTOR
+                PassportElementTypePersonalDetails.CONSTRUCTOR,
+                PassportElementTypePassport.CONSTRUCTOR,
+                PassportElementTypeDriverLicense.CONSTRUCTOR,
+                PassportElementTypeIdentityCard.CONSTRUCTOR,
+                PassportElementTypeInternalPassport.CONSTRUCTOR,
+                PassportElementTypeAddress.CONSTRUCTOR,
+                PassportElementTypeUtilityBill.CONSTRUCTOR,
+                PassportElementTypeBankStatement.CONSTRUCTOR,
+                PassportElementTypeRentalAgreement.CONSTRUCTOR,
+                PassportElementTypePassportRegistration.CONSTRUCTOR,
+                PassportElementTypeTemporaryRegistration.CONSTRUCTOR,
+                PassportElementTypePhoneNumber.CONSTRUCTOR,
+                PassportElementTypeEmailAddress.CONSTRUCTOR
         })
         public @interface Constructors {}
 
@@ -22988,8 +23292,8 @@ public class TdApi {
     public abstract static class PollType extends Object {
         @Retention(RetentionPolicy.SOURCE)
         @IntDef({
-            PollTypeRegular.CONSTRUCTOR,
-            PollTypeQuiz.CONSTRUCTOR
+                PollTypeRegular.CONSTRUCTOR,
+                PollTypeQuiz.CONSTRUCTOR
         })
         public @interface Constructors {}
 
@@ -23240,9 +23544,9 @@ public class TdApi {
     public abstract static class ProxyType extends Object {
         @Retention(RetentionPolicy.SOURCE)
         @IntDef({
-            ProxyTypeSocks5.CONSTRUCTOR,
-            ProxyTypeHttp.CONSTRUCTOR,
-            ProxyTypeMtproto.CONSTRUCTOR
+                ProxyTypeSocks5.CONSTRUCTOR,
+                ProxyTypeHttp.CONSTRUCTOR,
+                ProxyTypeMtproto.CONSTRUCTOR
         })
         public @interface Constructors {}
 
@@ -23393,8 +23697,8 @@ public class TdApi {
     public abstract static class PublicChatType extends Object {
         @Retention(RetentionPolicy.SOURCE)
         @IntDef({
-            PublicChatTypeHasUsername.CONSTRUCTOR,
-            PublicChatTypeIsLocationBased.CONSTRUCTOR
+                PublicChatTypeHasUsername.CONSTRUCTOR,
+                PublicChatTypeIsLocationBased.CONSTRUCTOR
         })
         public @interface Constructors {}
 
@@ -23507,32 +23811,32 @@ public class TdApi {
     public abstract static class PushMessageContent extends Object {
         @Retention(RetentionPolicy.SOURCE)
         @IntDef({
-            PushMessageContentHidden.CONSTRUCTOR,
-            PushMessageContentAnimation.CONSTRUCTOR,
-            PushMessageContentAudio.CONSTRUCTOR,
-            PushMessageContentContact.CONSTRUCTOR,
-            PushMessageContentContactRegistered.CONSTRUCTOR,
-            PushMessageContentDocument.CONSTRUCTOR,
-            PushMessageContentGame.CONSTRUCTOR,
-            PushMessageContentGameScore.CONSTRUCTOR,
-            PushMessageContentInvoice.CONSTRUCTOR,
-            PushMessageContentLocation.CONSTRUCTOR,
-            PushMessageContentPhoto.CONSTRUCTOR,
-            PushMessageContentPoll.CONSTRUCTOR,
-            PushMessageContentScreenshotTaken.CONSTRUCTOR,
-            PushMessageContentSticker.CONSTRUCTOR,
-            PushMessageContentText.CONSTRUCTOR,
-            PushMessageContentVideo.CONSTRUCTOR,
-            PushMessageContentVideoNote.CONSTRUCTOR,
-            PushMessageContentVoiceNote.CONSTRUCTOR,
-            PushMessageContentBasicGroupChatCreate.CONSTRUCTOR,
-            PushMessageContentChatAddMembers.CONSTRUCTOR,
-            PushMessageContentChatChangePhoto.CONSTRUCTOR,
-            PushMessageContentChatChangeTitle.CONSTRUCTOR,
-            PushMessageContentChatDeleteMember.CONSTRUCTOR,
-            PushMessageContentChatJoinByLink.CONSTRUCTOR,
-            PushMessageContentMessageForwards.CONSTRUCTOR,
-            PushMessageContentMediaAlbum.CONSTRUCTOR
+                PushMessageContentHidden.CONSTRUCTOR,
+                PushMessageContentAnimation.CONSTRUCTOR,
+                PushMessageContentAudio.CONSTRUCTOR,
+                PushMessageContentContact.CONSTRUCTOR,
+                PushMessageContentContactRegistered.CONSTRUCTOR,
+                PushMessageContentDocument.CONSTRUCTOR,
+                PushMessageContentGame.CONSTRUCTOR,
+                PushMessageContentGameScore.CONSTRUCTOR,
+                PushMessageContentInvoice.CONSTRUCTOR,
+                PushMessageContentLocation.CONSTRUCTOR,
+                PushMessageContentPhoto.CONSTRUCTOR,
+                PushMessageContentPoll.CONSTRUCTOR,
+                PushMessageContentScreenshotTaken.CONSTRUCTOR,
+                PushMessageContentSticker.CONSTRUCTOR,
+                PushMessageContentText.CONSTRUCTOR,
+                PushMessageContentVideo.CONSTRUCTOR,
+                PushMessageContentVideoNote.CONSTRUCTOR,
+                PushMessageContentVoiceNote.CONSTRUCTOR,
+                PushMessageContentBasicGroupChatCreate.CONSTRUCTOR,
+                PushMessageContentChatAddMembers.CONSTRUCTOR,
+                PushMessageContentChatChangePhoto.CONSTRUCTOR,
+                PushMessageContentChatChangeTitle.CONSTRUCTOR,
+                PushMessageContentChatDeleteMember.CONSTRUCTOR,
+                PushMessageContentChatJoinByLink.CONSTRUCTOR,
+                PushMessageContentMessageForwards.CONSTRUCTOR,
+                PushMessageContentMediaAlbum.CONSTRUCTOR
         })
         public @interface Constructors {}
 
@@ -24786,10 +25090,10 @@ public class TdApi {
     public abstract static class ReplyMarkup extends Object {
         @Retention(RetentionPolicy.SOURCE)
         @IntDef({
-            ReplyMarkupRemoveKeyboard.CONSTRUCTOR,
-            ReplyMarkupForceReply.CONSTRUCTOR,
-            ReplyMarkupShowKeyboard.CONSTRUCTOR,
-            ReplyMarkupInlineKeyboard.CONSTRUCTOR
+                ReplyMarkupRemoveKeyboard.CONSTRUCTOR,
+                ReplyMarkupForceReply.CONSTRUCTOR,
+                ReplyMarkupShowKeyboard.CONSTRUCTOR,
+                ReplyMarkupInlineKeyboard.CONSTRUCTOR
         })
         public @interface Constructors {}
 
@@ -24978,21 +25282,21 @@ public class TdApi {
     public abstract static class RichText extends Object {
         @Retention(RetentionPolicy.SOURCE)
         @IntDef({
-            RichTextPlain.CONSTRUCTOR,
-            RichTextBold.CONSTRUCTOR,
-            RichTextItalic.CONSTRUCTOR,
-            RichTextUnderline.CONSTRUCTOR,
-            RichTextStrikethrough.CONSTRUCTOR,
-            RichTextFixed.CONSTRUCTOR,
-            RichTextUrl.CONSTRUCTOR,
-            RichTextEmailAddress.CONSTRUCTOR,
-            RichTextSubscript.CONSTRUCTOR,
-            RichTextSuperscript.CONSTRUCTOR,
-            RichTextMarked.CONSTRUCTOR,
-            RichTextPhoneNumber.CONSTRUCTOR,
-            RichTextIcon.CONSTRUCTOR,
-            RichTextAnchor.CONSTRUCTOR,
-            RichTexts.CONSTRUCTOR
+                RichTextPlain.CONSTRUCTOR,
+                RichTextBold.CONSTRUCTOR,
+                RichTextItalic.CONSTRUCTOR,
+                RichTextUnderline.CONSTRUCTOR,
+                RichTextStrikethrough.CONSTRUCTOR,
+                RichTextFixed.CONSTRUCTOR,
+                RichTextUrl.CONSTRUCTOR,
+                RichTextEmailAddress.CONSTRUCTOR,
+                RichTextSubscript.CONSTRUCTOR,
+                RichTextSuperscript.CONSTRUCTOR,
+                RichTextMarked.CONSTRUCTOR,
+                RichTextPhoneNumber.CONSTRUCTOR,
+                RichTextIcon.CONSTRUCTOR,
+                RichTextAnchor.CONSTRUCTOR,
+                RichTexts.CONSTRUCTOR
         })
         public @interface Constructors {}
 
@@ -25729,22 +26033,22 @@ public class TdApi {
     public abstract static class SearchMessagesFilter extends Object {
         @Retention(RetentionPolicy.SOURCE)
         @IntDef({
-            SearchMessagesFilterEmpty.CONSTRUCTOR,
-            SearchMessagesFilterAnimation.CONSTRUCTOR,
-            SearchMessagesFilterAudio.CONSTRUCTOR,
-            SearchMessagesFilterDocument.CONSTRUCTOR,
-            SearchMessagesFilterPhoto.CONSTRUCTOR,
-            SearchMessagesFilterVideo.CONSTRUCTOR,
-            SearchMessagesFilterVoiceNote.CONSTRUCTOR,
-            SearchMessagesFilterPhotoAndVideo.CONSTRUCTOR,
-            SearchMessagesFilterUrl.CONSTRUCTOR,
-            SearchMessagesFilterChatPhoto.CONSTRUCTOR,
-            SearchMessagesFilterCall.CONSTRUCTOR,
-            SearchMessagesFilterMissedCall.CONSTRUCTOR,
-            SearchMessagesFilterVideoNote.CONSTRUCTOR,
-            SearchMessagesFilterVoiceAndVideoNote.CONSTRUCTOR,
-            SearchMessagesFilterMention.CONSTRUCTOR,
-            SearchMessagesFilterUnreadMention.CONSTRUCTOR
+                SearchMessagesFilterEmpty.CONSTRUCTOR,
+                SearchMessagesFilterAnimation.CONSTRUCTOR,
+                SearchMessagesFilterAudio.CONSTRUCTOR,
+                SearchMessagesFilterDocument.CONSTRUCTOR,
+                SearchMessagesFilterPhoto.CONSTRUCTOR,
+                SearchMessagesFilterVideo.CONSTRUCTOR,
+                SearchMessagesFilterVoiceNote.CONSTRUCTOR,
+                SearchMessagesFilterPhotoAndVideo.CONSTRUCTOR,
+                SearchMessagesFilterUrl.CONSTRUCTOR,
+                SearchMessagesFilterChatPhoto.CONSTRUCTOR,
+                SearchMessagesFilterCall.CONSTRUCTOR,
+                SearchMessagesFilterMissedCall.CONSTRUCTOR,
+                SearchMessagesFilterVideoNote.CONSTRUCTOR,
+                SearchMessagesFilterVoiceAndVideoNote.CONSTRUCTOR,
+                SearchMessagesFilterMention.CONSTRUCTOR,
+                SearchMessagesFilterUnreadMention.CONSTRUCTOR
         })
         public @interface Constructors {}
 
@@ -26275,9 +26579,9 @@ public class TdApi {
     public abstract static class SecretChatState extends Object {
         @Retention(RetentionPolicy.SOURCE)
         @IntDef({
-            SecretChatStatePending.CONSTRUCTOR,
-            SecretChatStateReady.CONSTRUCTOR,
-            SecretChatStateClosed.CONSTRUCTOR
+                SecretChatStatePending.CONSTRUCTOR,
+                SecretChatStateReady.CONSTRUCTOR,
+                SecretChatStateClosed.CONSTRUCTOR
         })
         public @interface Constructors {}
 
@@ -27481,13 +27785,13 @@ public class TdApi {
     public abstract static class SupergroupMembersFilter extends Object {
         @Retention(RetentionPolicy.SOURCE)
         @IntDef({
-            SupergroupMembersFilterRecent.CONSTRUCTOR,
-            SupergroupMembersFilterContacts.CONSTRUCTOR,
-            SupergroupMembersFilterAdministrators.CONSTRUCTOR,
-            SupergroupMembersFilterSearch.CONSTRUCTOR,
-            SupergroupMembersFilterRestricted.CONSTRUCTOR,
-            SupergroupMembersFilterBanned.CONSTRUCTOR,
-            SupergroupMembersFilterBots.CONSTRUCTOR
+                SupergroupMembersFilterRecent.CONSTRUCTOR,
+                SupergroupMembersFilterContacts.CONSTRUCTOR,
+                SupergroupMembersFilterAdministrators.CONSTRUCTOR,
+                SupergroupMembersFilterSearch.CONSTRUCTOR,
+                SupergroupMembersFilterRestricted.CONSTRUCTOR,
+                SupergroupMembersFilterBanned.CONSTRUCTOR,
+                SupergroupMembersFilterBots.CONSTRUCTOR
         })
         public @interface Constructors {}
 
@@ -27777,10 +28081,10 @@ public class TdApi {
     public abstract static class TMeUrlType extends Object {
         @Retention(RetentionPolicy.SOURCE)
         @IntDef({
-            TMeUrlTypeUser.CONSTRUCTOR,
-            TMeUrlTypeSupergroup.CONSTRUCTOR,
-            TMeUrlTypeChatInvite.CONSTRUCTOR,
-            TMeUrlTypeStickerSet.CONSTRUCTOR
+                TMeUrlTypeUser.CONSTRUCTOR,
+                TMeUrlTypeSupergroup.CONSTRUCTOR,
+                TMeUrlTypeChatInvite.CONSTRUCTOR,
+                TMeUrlTypeStickerSet.CONSTRUCTOR
         })
         public @interface Constructors {}
 
@@ -28597,22 +28901,22 @@ public class TdApi {
     public abstract static class TextEntityType extends Object {
         @Retention(RetentionPolicy.SOURCE)
         @IntDef({
-            TextEntityTypeMention.CONSTRUCTOR,
-            TextEntityTypeHashtag.CONSTRUCTOR,
-            TextEntityTypeCashtag.CONSTRUCTOR,
-            TextEntityTypeBotCommand.CONSTRUCTOR,
-            TextEntityTypeUrl.CONSTRUCTOR,
-            TextEntityTypeEmailAddress.CONSTRUCTOR,
-            TextEntityTypePhoneNumber.CONSTRUCTOR,
-            TextEntityTypeBold.CONSTRUCTOR,
-            TextEntityTypeItalic.CONSTRUCTOR,
-            TextEntityTypeUnderline.CONSTRUCTOR,
-            TextEntityTypeStrikethrough.CONSTRUCTOR,
-            TextEntityTypeCode.CONSTRUCTOR,
-            TextEntityTypePre.CONSTRUCTOR,
-            TextEntityTypePreCode.CONSTRUCTOR,
-            TextEntityTypeTextUrl.CONSTRUCTOR,
-            TextEntityTypeMentionName.CONSTRUCTOR
+                TextEntityTypeMention.CONSTRUCTOR,
+                TextEntityTypeHashtag.CONSTRUCTOR,
+                TextEntityTypeCashtag.CONSTRUCTOR,
+                TextEntityTypeBotCommand.CONSTRUCTOR,
+                TextEntityTypeUrl.CONSTRUCTOR,
+                TextEntityTypeEmailAddress.CONSTRUCTOR,
+                TextEntityTypePhoneNumber.CONSTRUCTOR,
+                TextEntityTypeBold.CONSTRUCTOR,
+                TextEntityTypeItalic.CONSTRUCTOR,
+                TextEntityTypeUnderline.CONSTRUCTOR,
+                TextEntityTypeStrikethrough.CONSTRUCTOR,
+                TextEntityTypeCode.CONSTRUCTOR,
+                TextEntityTypePre.CONSTRUCTOR,
+                TextEntityTypePreCode.CONSTRUCTOR,
+                TextEntityTypeTextUrl.CONSTRUCTOR,
+                TextEntityTypeMentionName.CONSTRUCTOR
         })
         public @interface Constructors {}
 
@@ -29070,8 +29374,8 @@ public class TdApi {
     public abstract static class TextParseMode extends Object {
         @Retention(RetentionPolicy.SOURCE)
         @IntDef({
-            TextParseModeMarkdown.CONSTRUCTOR,
-            TextParseModeHTML.CONSTRUCTOR
+                TextParseModeMarkdown.CONSTRUCTOR,
+                TextParseModeHTML.CONSTRUCTOR
         })
         public @interface Constructors {}
 
@@ -29153,13 +29457,13 @@ public class TdApi {
     public abstract static class TopChatCategory extends Object {
         @Retention(RetentionPolicy.SOURCE)
         @IntDef({
-            TopChatCategoryUsers.CONSTRUCTOR,
-            TopChatCategoryBots.CONSTRUCTOR,
-            TopChatCategoryGroups.CONSTRUCTOR,
-            TopChatCategoryChannels.CONSTRUCTOR,
-            TopChatCategoryInlineBots.CONSTRUCTOR,
-            TopChatCategoryCalls.CONSTRUCTOR,
-            TopChatCategoryForwardChats.CONSTRUCTOR
+                TopChatCategoryUsers.CONSTRUCTOR,
+                TopChatCategoryBots.CONSTRUCTOR,
+                TopChatCategoryGroups.CONSTRUCTOR,
+                TopChatCategoryChannels.CONSTRUCTOR,
+                TopChatCategoryInlineBots.CONSTRUCTOR,
+                TopChatCategoryCalls.CONSTRUCTOR,
+                TopChatCategoryForwardChats.CONSTRUCTOR
         })
         public @interface Constructors {}
 
@@ -29353,82 +29657,82 @@ public class TdApi {
     public abstract static class Update extends Object {
         @Retention(RetentionPolicy.SOURCE)
         @IntDef({
-            UpdateAuthorizationState.CONSTRUCTOR,
-            UpdateNewMessage.CONSTRUCTOR,
-            UpdateMessageSendAcknowledged.CONSTRUCTOR,
-            UpdateMessageSendSucceeded.CONSTRUCTOR,
-            UpdateMessageSendFailed.CONSTRUCTOR,
-            UpdateMessageContent.CONSTRUCTOR,
-            UpdateMessageEdited.CONSTRUCTOR,
-            UpdateMessageViews.CONSTRUCTOR,
-            UpdateMessageContentOpened.CONSTRUCTOR,
-            UpdateMessageMentionRead.CONSTRUCTOR,
-            UpdateMessageLiveLocationViewed.CONSTRUCTOR,
-            UpdateNewChat.CONSTRUCTOR,
-            UpdateChatChatList.CONSTRUCTOR,
-            UpdateChatTitle.CONSTRUCTOR,
-            UpdateChatPhoto.CONSTRUCTOR,
-            UpdateChatPermissions.CONSTRUCTOR,
-            UpdateChatLastMessage.CONSTRUCTOR,
-            UpdateChatOrder.CONSTRUCTOR,
-            UpdateChatIsPinned.CONSTRUCTOR,
-            UpdateChatIsMarkedAsUnread.CONSTRUCTOR,
-            UpdateChatIsSponsored.CONSTRUCTOR,
-            UpdateChatHasScheduledMessages.CONSTRUCTOR,
-            UpdateChatDefaultDisableNotification.CONSTRUCTOR,
-            UpdateChatReadInbox.CONSTRUCTOR,
-            UpdateChatReadOutbox.CONSTRUCTOR,
-            UpdateChatUnreadMentionCount.CONSTRUCTOR,
-            UpdateChatNotificationSettings.CONSTRUCTOR,
-            UpdateScopeNotificationSettings.CONSTRUCTOR,
-            UpdateChatActionBar.CONSTRUCTOR,
-            UpdateChatPinnedMessage.CONSTRUCTOR,
-            UpdateChatReplyMarkup.CONSTRUCTOR,
-            UpdateChatDraftMessage.CONSTRUCTOR,
-            UpdateChatOnlineMemberCount.CONSTRUCTOR,
-            UpdateNotification.CONSTRUCTOR,
-            UpdateNotificationGroup.CONSTRUCTOR,
-            UpdateActiveNotifications.CONSTRUCTOR,
-            UpdateHavePendingNotifications.CONSTRUCTOR,
-            UpdateDeleteMessages.CONSTRUCTOR,
-            UpdateUserChatAction.CONSTRUCTOR,
-            UpdateUserStatus.CONSTRUCTOR,
-            UpdateUser.CONSTRUCTOR,
-            UpdateBasicGroup.CONSTRUCTOR,
-            UpdateSupergroup.CONSTRUCTOR,
-            UpdateSecretChat.CONSTRUCTOR,
-            UpdateUserFullInfo.CONSTRUCTOR,
-            UpdateBasicGroupFullInfo.CONSTRUCTOR,
-            UpdateSupergroupFullInfo.CONSTRUCTOR,
-            UpdateServiceNotification.CONSTRUCTOR,
-            UpdateFile.CONSTRUCTOR,
-            UpdateFileGenerationStart.CONSTRUCTOR,
-            UpdateFileGenerationStop.CONSTRUCTOR,
-            UpdateCall.CONSTRUCTOR,
-            UpdateUserPrivacySettingRules.CONSTRUCTOR,
-            UpdateUnreadMessageCount.CONSTRUCTOR,
-            UpdateUnreadChatCount.CONSTRUCTOR,
-            UpdateOption.CONSTRUCTOR,
-            UpdateInstalledStickerSets.CONSTRUCTOR,
-            UpdateTrendingStickerSets.CONSTRUCTOR,
-            UpdateRecentStickers.CONSTRUCTOR,
-            UpdateFavoriteStickers.CONSTRUCTOR,
-            UpdateSavedAnimations.CONSTRUCTOR,
-            UpdateSelectedBackground.CONSTRUCTOR,
-            UpdateLanguagePackStrings.CONSTRUCTOR,
-            UpdateConnectionState.CONSTRUCTOR,
-            UpdateTermsOfService.CONSTRUCTOR,
-            UpdateUsersNearby.CONSTRUCTOR,
-            UpdateNewInlineQuery.CONSTRUCTOR,
-            UpdateNewChosenInlineResult.CONSTRUCTOR,
-            UpdateNewCallbackQuery.CONSTRUCTOR,
-            UpdateNewInlineCallbackQuery.CONSTRUCTOR,
-            UpdateNewShippingQuery.CONSTRUCTOR,
-            UpdateNewPreCheckoutQuery.CONSTRUCTOR,
-            UpdateNewCustomEvent.CONSTRUCTOR,
-            UpdateNewCustomQuery.CONSTRUCTOR,
-            UpdatePoll.CONSTRUCTOR,
-            UpdatePollAnswer.CONSTRUCTOR
+                UpdateAuthorizationState.CONSTRUCTOR,
+                UpdateNewMessage.CONSTRUCTOR,
+                UpdateMessageSendAcknowledged.CONSTRUCTOR,
+                UpdateMessageSendSucceeded.CONSTRUCTOR,
+                UpdateMessageSendFailed.CONSTRUCTOR,
+                UpdateMessageContent.CONSTRUCTOR,
+                UpdateMessageEdited.CONSTRUCTOR,
+                UpdateMessageViews.CONSTRUCTOR,
+                UpdateMessageContentOpened.CONSTRUCTOR,
+                UpdateMessageMentionRead.CONSTRUCTOR,
+                UpdateMessageLiveLocationViewed.CONSTRUCTOR,
+                UpdateNewChat.CONSTRUCTOR,
+                UpdateChatChatList.CONSTRUCTOR,
+                UpdateChatTitle.CONSTRUCTOR,
+                UpdateChatPhoto.CONSTRUCTOR,
+                UpdateChatPermissions.CONSTRUCTOR,
+                UpdateChatLastMessage.CONSTRUCTOR,
+                UpdateChatOrder.CONSTRUCTOR,
+                UpdateChatIsPinned.CONSTRUCTOR,
+                UpdateChatIsMarkedAsUnread.CONSTRUCTOR,
+                UpdateChatIsSponsored.CONSTRUCTOR,
+                UpdateChatHasScheduledMessages.CONSTRUCTOR,
+                UpdateChatDefaultDisableNotification.CONSTRUCTOR,
+                UpdateChatReadInbox.CONSTRUCTOR,
+                UpdateChatReadOutbox.CONSTRUCTOR,
+                UpdateChatUnreadMentionCount.CONSTRUCTOR,
+                UpdateChatNotificationSettings.CONSTRUCTOR,
+                UpdateScopeNotificationSettings.CONSTRUCTOR,
+                UpdateChatActionBar.CONSTRUCTOR,
+                UpdateChatPinnedMessage.CONSTRUCTOR,
+                UpdateChatReplyMarkup.CONSTRUCTOR,
+                UpdateChatDraftMessage.CONSTRUCTOR,
+                UpdateChatOnlineMemberCount.CONSTRUCTOR,
+                UpdateNotification.CONSTRUCTOR,
+                UpdateNotificationGroup.CONSTRUCTOR,
+                UpdateActiveNotifications.CONSTRUCTOR,
+                UpdateHavePendingNotifications.CONSTRUCTOR,
+                UpdateDeleteMessages.CONSTRUCTOR,
+                UpdateUserChatAction.CONSTRUCTOR,
+                UpdateUserStatus.CONSTRUCTOR,
+                UpdateUser.CONSTRUCTOR,
+                UpdateBasicGroup.CONSTRUCTOR,
+                UpdateSupergroup.CONSTRUCTOR,
+                UpdateSecretChat.CONSTRUCTOR,
+                UpdateUserFullInfo.CONSTRUCTOR,
+                UpdateBasicGroupFullInfo.CONSTRUCTOR,
+                UpdateSupergroupFullInfo.CONSTRUCTOR,
+                UpdateServiceNotification.CONSTRUCTOR,
+                UpdateFile.CONSTRUCTOR,
+                UpdateFileGenerationStart.CONSTRUCTOR,
+                UpdateFileGenerationStop.CONSTRUCTOR,
+                UpdateCall.CONSTRUCTOR,
+                UpdateUserPrivacySettingRules.CONSTRUCTOR,
+                UpdateUnreadMessageCount.CONSTRUCTOR,
+                UpdateUnreadChatCount.CONSTRUCTOR,
+                UpdateOption.CONSTRUCTOR,
+                UpdateInstalledStickerSets.CONSTRUCTOR,
+                UpdateTrendingStickerSets.CONSTRUCTOR,
+                UpdateRecentStickers.CONSTRUCTOR,
+                UpdateFavoriteStickers.CONSTRUCTOR,
+                UpdateSavedAnimations.CONSTRUCTOR,
+                UpdateSelectedBackground.CONSTRUCTOR,
+                UpdateLanguagePackStrings.CONSTRUCTOR,
+                UpdateConnectionState.CONSTRUCTOR,
+                UpdateTermsOfService.CONSTRUCTOR,
+                UpdateUsersNearby.CONSTRUCTOR,
+                UpdateNewInlineQuery.CONSTRUCTOR,
+                UpdateNewChosenInlineResult.CONSTRUCTOR,
+                UpdateNewCallbackQuery.CONSTRUCTOR,
+                UpdateNewInlineCallbackQuery.CONSTRUCTOR,
+                UpdateNewShippingQuery.CONSTRUCTOR,
+                UpdateNewPreCheckoutQuery.CONSTRUCTOR,
+                UpdateNewCustomEvent.CONSTRUCTOR,
+                UpdateNewCustomQuery.CONSTRUCTOR,
+                UpdatePoll.CONSTRUCTOR,
+                UpdatePollAnswer.CONSTRUCTOR
         })
         public @interface Constructors {}
 
@@ -33235,14 +33539,14 @@ public class TdApi {
     public abstract static class UserPrivacySetting extends Object {
         @Retention(RetentionPolicy.SOURCE)
         @IntDef({
-            UserPrivacySettingShowStatus.CONSTRUCTOR,
-            UserPrivacySettingShowProfilePhoto.CONSTRUCTOR,
-            UserPrivacySettingShowLinkInForwardedMessages.CONSTRUCTOR,
-            UserPrivacySettingShowPhoneNumber.CONSTRUCTOR,
-            UserPrivacySettingAllowChatInvites.CONSTRUCTOR,
-            UserPrivacySettingAllowCalls.CONSTRUCTOR,
-            UserPrivacySettingAllowPeerToPeerCalls.CONSTRUCTOR,
-            UserPrivacySettingAllowFindingByPhoneNumber.CONSTRUCTOR
+                UserPrivacySettingShowStatus.CONSTRUCTOR,
+                UserPrivacySettingShowProfilePhoto.CONSTRUCTOR,
+                UserPrivacySettingShowLinkInForwardedMessages.CONSTRUCTOR,
+                UserPrivacySettingShowPhoneNumber.CONSTRUCTOR,
+                UserPrivacySettingAllowChatInvites.CONSTRUCTOR,
+                UserPrivacySettingAllowCalls.CONSTRUCTOR,
+                UserPrivacySettingAllowPeerToPeerCalls.CONSTRUCTOR,
+                UserPrivacySettingAllowFindingByPhoneNumber.CONSTRUCTOR
         })
         public @interface Constructors {}
 
@@ -33461,14 +33765,14 @@ public class TdApi {
     public abstract static class UserPrivacySettingRule extends Object {
         @Retention(RetentionPolicy.SOURCE)
         @IntDef({
-            UserPrivacySettingRuleAllowAll.CONSTRUCTOR,
-            UserPrivacySettingRuleAllowContacts.CONSTRUCTOR,
-            UserPrivacySettingRuleAllowUsers.CONSTRUCTOR,
-            UserPrivacySettingRuleAllowChatMembers.CONSTRUCTOR,
-            UserPrivacySettingRuleRestrictAll.CONSTRUCTOR,
-            UserPrivacySettingRuleRestrictContacts.CONSTRUCTOR,
-            UserPrivacySettingRuleRestrictUsers.CONSTRUCTOR,
-            UserPrivacySettingRuleRestrictChatMembers.CONSTRUCTOR
+                UserPrivacySettingRuleAllowAll.CONSTRUCTOR,
+                UserPrivacySettingRuleAllowContacts.CONSTRUCTOR,
+                UserPrivacySettingRuleAllowUsers.CONSTRUCTOR,
+                UserPrivacySettingRuleAllowChatMembers.CONSTRUCTOR,
+                UserPrivacySettingRuleRestrictAll.CONSTRUCTOR,
+                UserPrivacySettingRuleRestrictContacts.CONSTRUCTOR,
+                UserPrivacySettingRuleRestrictUsers.CONSTRUCTOR,
+                UserPrivacySettingRuleRestrictChatMembers.CONSTRUCTOR
         })
         public @interface Constructors {}
 
@@ -33871,12 +34175,12 @@ public class TdApi {
     public abstract static class UserStatus extends Object {
         @Retention(RetentionPolicy.SOURCE)
         @IntDef({
-            UserStatusEmpty.CONSTRUCTOR,
-            UserStatusOnline.CONSTRUCTOR,
-            UserStatusOffline.CONSTRUCTOR,
-            UserStatusRecently.CONSTRUCTOR,
-            UserStatusLastWeek.CONSTRUCTOR,
-            UserStatusLastMonth.CONSTRUCTOR
+                UserStatusEmpty.CONSTRUCTOR,
+                UserStatusOnline.CONSTRUCTOR,
+                UserStatusOffline.CONSTRUCTOR,
+                UserStatusRecently.CONSTRUCTOR,
+                UserStatusLastWeek.CONSTRUCTOR,
+                UserStatusLastMonth.CONSTRUCTOR
         })
         public @interface Constructors {}
 
@@ -34071,10 +34375,10 @@ public class TdApi {
     public abstract static class UserType extends Object {
         @Retention(RetentionPolicy.SOURCE)
         @IntDef({
-            UserTypeRegular.CONSTRUCTOR,
-            UserTypeDeleted.CONSTRUCTOR,
-            UserTypeBot.CONSTRUCTOR,
-            UserTypeUnknown.CONSTRUCTOR
+                UserTypeRegular.CONSTRUCTOR,
+                UserTypeDeleted.CONSTRUCTOR,
+                UserTypeBot.CONSTRUCTOR,
+                UserTypeUnknown.CONSTRUCTOR
         })
         public @interface Constructors {}
 
@@ -39998,6 +40302,58 @@ public class TdApi {
         }
     }
 
+
+
+    public static class GetChannel extends Function{
+
+        //Channel identifier
+        int channelId;
+
+        /**
+         * Default constructor for a function, which returns a list of administrators of the chat with their custom titles.
+         *
+         * <p> Returns {@link GetChannel GetChannel} </p>
+         */
+        public GetChannel() {
+        }
+
+        public GetChannel(int channelId) {
+            this.channelId = channelId;
+        }
+
+        public static final int CONSTRUCTOR = 0xa7f7bbb;
+
+        @Override
+        public int getConstructor() {
+            return CONSTRUCTOR;
+        }
+    }
+
+    public static class GetChannelFull extends Function{
+
+        //Channel identifier
+        int channelId;
+
+        /**
+         * Default constructor for a function, which returns a list of administrators of the chat with their custom titles.
+         *
+         * <p> Returns {@link GetChannelFull GetChannelFull} </p>
+         */
+        public GetChannelFull() {
+        }
+
+        public GetChannelFull(int channelId) {
+            this.channelId = channelId;
+        }
+
+        public static final int CONSTRUCTOR = 0x8736a09;
+
+        @Override
+        public int getConstructor() {
+            return CONSTRUCTOR;
+        }
+    }
+
     /**
      * Returns a list of administrators of the chat with their custom titles.
      *
@@ -40586,6 +40942,58 @@ public class TdApi {
          * Identifier uniquely determining type of the object.
          */
         public static final int CONSTRUCTOR = 1847129537;
+
+        /**
+         * @return this.CONSTRUCTOR
+         */
+        @Override
+        public int getConstructor() {
+            return CONSTRUCTOR;
+        }
+    }
+
+    public static class GetChannels extends Function {
+
+        /**
+         * Chat order to return chats from.
+         */
+        public long offsetOrder;
+        /**
+         * Chat identifier to return chats from.
+         */
+        public long offsetChatId;
+        /**
+         * The maximum number of chats to be returned. It is possible that fewer chats than the limit are returned even if the end of the list is not reached.
+         */
+        public int limit;
+
+        /**
+         * Default constructor for a function, which returns an ordered list of chats in a chat list. Chats are sorted by the pair (order, chatId) in decreasing order. (For example, to get a list of chats from the beginning, the offsetOrder should be equal to a biggest signed 64-bit number 9223372036854775807 == 2^63 - 1). For optimal performance the number of returned chats is chosen by the library.
+         *
+         * <p> Returns {@link Chats Chats} </p>
+         */
+        public GetChannels() {
+        }
+
+        /**
+         * Creates a function, which returns an ordered list of chats in a chat list. Chats are sorted by the pair (order, chatId) in decreasing order. (For example, to get a list of chats from the beginning, the offsetOrder should be equal to a biggest signed 64-bit number 9223372036854775807 == 2^63 - 1). For optimal performance the number of returned chats is chosen by the library.
+         *
+         * <p> Returns {@link Chats Chats} </p>
+         *
+         * @param offsetOrder Chat order to return chats from.
+         * @param offsetChatId Chat identifier to return chats from.
+         * @param limit The maximum number of chats to be returned. It is possible that fewer chats than the limit are returned even if the end of the list is not reached.
+         */
+        public GetChannels(long offsetOrder, long offsetChatId, int limit) {
+            this.offsetOrder = offsetOrder;
+            this.offsetChatId = offsetChatId;
+            this.limit = limit;
+        }
+
+        /**
+         * Identifier uniquely determining type of the object.
+         */
+        public static final int CONSTRUCTOR = 0xa7f6bbb;
 
         /**
          * @return this.CONSTRUCTOR

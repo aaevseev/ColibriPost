@@ -1,9 +1,213 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/new_post_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/holo_red_dark"
-    tools:context=".presentation.ui.newpost.NewPostFragment">
+    android:background="@color/white"
+    tools:context="ru.teamdroid.colibripost.presentation.ui.newpost.NewPostFragment">
 
-</FrameLayout>
+
+    <EditText
+        android:id="@+id/et_post"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/new_post_text_background"
+        android:gravity="start|top"
+        android:padding="16dp"
+        android:textColor="@color/text"
+        android:textSize="14sp"
+        android:inputType="text"
+        android:layout_marginBottom="@dimen/margin_et_rv_new_post_fragment"
+        app:layout_constraintBottom_toTopOf="@id/rv_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Привет! Я пишу свой первый отложенный постинг в Телеграм.С уважением,Ваш Петр." />
+
+    <ImageButton
+        android:id="@+id/btn_clip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="16dp"
+        android:background="@null"
+        android:src="@drawable/ic_clip"
+        app:layout_constraintBottom_toBottomOf="@id/et_post"
+        app:layout_constraintEnd_toEndOf="@id/et_post" />
+
+    <ImageButton
+        android:id="@+id/btn_smiles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@null"
+        android:src="@drawable/ic_smile"
+        app:layout_constraintBottom_toBottomOf="@id/et_post"
+        app:layout_constraintEnd_toStartOf="@id/btn_clip" />
+
+    <View
+        android:id="@+id/view_help"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/new_task_tool_panel_corner_radius"
+        android:background="@color/gray_1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/view_tool_panel" />
+
+    <View
+        android:id="@+id/view_tool_panel"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/new_post_tool_panel_background"
+        app:layout_constraintHeight_default="spread"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_post" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_content"
+        android:layout_width="0dp"
+        android:layout_height="84dp"
+        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:layout_marginTop="@dimen/margin_et_rv_new_post_fragment"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@id/view_tool_panel"
+        app:layout_constraintStart_toStartOf="@id/view_tool_panel"
+        app:layout_constraintTop_toTopOf="@id/view_tool_panel"
+        app:layout_constraintBottom_toTopOf="@id/btn_add_btn"
+        app:layout_constraintVertical_chainStyle="packed"
+        />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_add_btn"
+        style="?attr/borderlessButtonStyle"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:backgroundTint="@color/white"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:text="@string/add_button"
+        android:textAllCaps="false"
+        android:textColor="@color/accent"
+        android:textSize="16sp"
+        app:icon="@drawable/ic_plus"
+        app:iconGravity="textStart"
+        app:iconTint="@color/accent"
+        app:layout_constraintEnd_toEndOf="@id/view_tool_panel"
+        app:layout_constraintStart_toStartOf="@id/view_tool_panel"
+        app:layout_constraintTop_toBottomOf="@id/rv_content"
+        app:layout_constraintBottom_toTopOf="@id/spinner_category"
+        />
+
+    <ru.teamdroid.colibripost.ui.screens.new_task.NewTaskSpinner
+        android:id="@+id/spinner_category"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/new_post_spinner_background"
+        android:spinnerMode="dropdown"
+        app:layout_constraintEnd_toEndOf="@id/view_tool_panel"
+        app:layout_constraintStart_toStartOf="@id/view_tool_panel"
+        app:layout_constraintTop_toBottomOf="@id/btn_add_btn"
+        app:layout_constraintBottom_toTopOf="@id/spinner_publish"
+        />
+
+
+    <ru.teamdroid.colibripost.ui.screens.new_task.NewTaskSpinner
+        android:id="@+id/spinner_publish"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/new_post_spinner_background"
+        app:layout_constraintEnd_toEndOf="@id/view_tool_panel"
+        app:layout_constraintStart_toStartOf="@id/view_tool_panel"
+        app:layout_constraintTop_toBottomOf="@id/spinner_category"
+        app:layout_constraintBottom_toTopOf="@id/tv_date"
+        />
+
+    <TextView
+        android:id="@+id/tv_date"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:singleLine="true"
+        android:background="@drawable/new_post_spinner_background"
+        android:gravity="center_vertical"
+        android:textColor="@color/text"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@id/tv_time"
+        app:layout_constraintStart_toStartOf="@id/view_tool_panel"
+        app:layout_constraintTop_toBottomOf="@id/spinner_publish"
+        app:layout_constraintBottom_toTopOf="@id/btn_preview"
+        />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_time"
+        android:layout_width="74dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/new_post_spinner_background"
+        android:gravity="center"
+        android:singleLine="true"
+        android:textSize="16sp"
+        android:textColor="@color/text"
+        app:layout_constraintBottom_toBottomOf="@id/tv_date"
+        app:layout_constraintEnd_toEndOf="@id/view_tool_panel"
+        app:layout_constraintStart_toEndOf="@id/tv_date"
+        app:layout_constraintTop_toTopOf="@id/tv_date"
+        tools:text="11:00" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_preview"
+        style="?attr/borderlessButtonStyle"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="8dp"
+        android:backgroundTint="@color/white"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:text="@string/preview"
+        android:textAllCaps="false"
+        android:textColor="@color/accent"
+        app:layout_constraintEnd_toStartOf="@id/btn_send_post"
+        app:layout_constraintStart_toStartOf="@id/view_tool_panel"
+        app:layout_constraintTop_toBottomOf="@id/tv_date"
+        app:layout_constraintBottom_toBottomOf="@id/view_tool_panel"
+        app:strokeColor="@color/accent"
+        app:strokeWidth="1dp" />
+
+    <ImageButton
+        android:id="@+id/btn_send_post"
+        android:layout_width="74dp"
+        android:layout_height="0dp"
+        android:background="@drawable/new_post_send_post_background"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:src="@drawable/ic_telegram_white"
+        app:layout_constraintBottom_toBottomOf="@id/btn_preview"
+        app:layout_constraintEnd_toEndOf="@id/tv_time"
+        app:layout_constraintStart_toStartOf="@id/tv_time"
+        app:layout_constraintTop_toTopOf="@id/btn_preview" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

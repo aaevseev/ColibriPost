@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/signInFragment">
+
+    <fragment
+        android:id="@+id/bottomNavigationFragment"
+        android:name="ru.teamdroid.colibripost.presentation.ui.bottomnavigation.BottomNavigationFragment"
+        android:label="BottomNavigationFragment" />
+    <fragment
+        android:id="@+id/signInFragment"
+        android:name="ru.teamdroid.colibripost.presentation.ui.auth.SignInFragment"
+        android:label="fragment_sign_in"
+        tools:layout="@layout/fragment_sign_in">
+        <action
+            android:id="@+id/action_signInFragment_to_waitNumberFragment"
+            app:destination="@id/waitNumberFragment"
+            app:launchSingleTop="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/waitNumberFragment"
+        android:name="ru.teamdroid.colibripost.presentation.ui.auth.WaitNumberFragment"
+        android:label="fragment_wait_number"
+        tools:layout="@layout/fragment_wait_number">
+        <action
+            android:id="@+id/action_waitNumberFragment_to_waitCodeFragment"
+            app:destination="@id/waitCodeFragment"
+            app:launchSingleTop="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/waitCodeFragment"
+        android:name="ru.teamdroid.colibripost.presentation.ui.auth.WaitCodeFragment"
+        android:label="fragment_wait_code"
+        tools:layout="@layout/fragment_wait_code">
+        <action
+            android:id="@+id/action_waitCodeFragment_to_bottomNavigationFragment"
+            app:destination="@id/bottomNavigationFragment"
+            app:launchSingleTop="true" />
+    </fragment>
+</navigation>

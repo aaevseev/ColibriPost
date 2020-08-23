@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="bottom_navigation_corner_radius">15dp</dimen>
+    <dimen name="logo_size">180dp</dimen>
+    <dimen name="spinner_item_height">40dp</dimen>
+    <dimen name="new_task_tool_panel_corner_radius">20dp</dimen>
+    <dimen name="margin_et_rv_new_post_fragment">16dp</dimen>
+
+    <dimen name="size_smedium">12dp</dimen>
+    <dimen name="size_medium">16dp</dimen>
+    <dimen name="size_large">24dp</dimen>
 </resources>

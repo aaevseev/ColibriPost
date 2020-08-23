@@ -1,23 +1,13 @@
 package ru.teamdroid.colibripost.presentation.ui.settings
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import ru.teamdroid.colibripost.R
+import ru.teamdroid.colibripost.presentation.ui.core.BaseFragment
 
-class SettingsFragment : Fragment() {
+class SettingsFragment : BaseFragment() {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_settings, container, false)
-    }
+    override val layoutId = R.layout.fragment_settings
 
     companion object {
-
         const val TAG = "SettingsFragment"
     }
 }
