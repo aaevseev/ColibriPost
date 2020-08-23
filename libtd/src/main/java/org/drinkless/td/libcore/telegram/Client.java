@@ -332,47 +332,6 @@ public final class Client implements Runnable {
         Log.d("DLTD", "Stop TDLib thread");
     }
 
-    /**
-     * Closes Client.
-     */
-    public void close() {
-        writeLock.lock();
-        try {
-            if (isClientDestroyed) {
-                return;
-            }
-            if (!stopFlag) {
-                send(new TdApi.Close(), null);
-            }
-            isClientDestroyed = true;
-            while (!stopFlag) {
-                Thread.yield();
-            }
-            if (handlers.size() != 1) {
-                receiveQueries(0.0);
-
-                for (Long key : handlers.keySet()) {
-                    if (key != 0) {
-                        processResult(key, new TdApi.Error(500, "Client is closed"));
-                    }
-                }
-            }
-            NativeClient.destroyClient(nativeClientId);
-            clientCount.decrementAndGet();
-        } finally {
-            writeLock.unlock();
-        }
-    }
-
-    @Override
-    protected void finalize() throws Throwable {
-        try {
-            close();
-        } finally {
-            super.finalize();
-        }
-    }
-
     private void processResult(long id, TdApi.Object object) {
         Handler handler;
         if (id == 0) {
