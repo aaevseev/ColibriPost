@@ -5,7 +5,7 @@
     android:id="@+id/wait_number_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.ui.auth.WaitNumberFragment">
+    tools:context=".ui.auth.WaitNumberFragment">
 
     <EditText
         android:id="@+id/et_phone"

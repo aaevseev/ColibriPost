@@ -22,4 +22,10 @@
     <string name="cancel">Cancel</string>
     <string name="settings">Settings</string>
     <string name="main">Main</string>
+    <string name="name">Имя</string>
+
+    <!--Errors-->
+    <string name="error_network">Нет сетевого подключения.</string>
+    <string name="error_server">Ошибка сервера.</string>
+    <string name="channels_list_empty_error">Добавьте каналы для отложенноо постинга</string>
 </resources>
