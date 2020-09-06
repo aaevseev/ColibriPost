@@ -7,11 +7,11 @@
 
     <fragment
         android:id="@+id/bottomNavigationFragment"
-        android:name="ru.teamdroid.colibripost.presentation.ui.bottomnavigation.BottomNavigationFragment"
+        android:name="ru.teamdroid.colibripost.ui.bottomnavigation.BottomNavigationFragment"
         android:label="BottomNavigationFragment" />
     <fragment
         android:id="@+id/signInFragment"
-        android:name="ru.teamdroid.colibripost.presentation.ui.auth.SignInFragment"
+        android:name="ru.teamdroid.colibripost.ui.auth.SignInFragment"
         android:label="fragment_sign_in"
         tools:layout="@layout/fragment_sign_in">
         <action
@@ -21,7 +21,7 @@
     </fragment>
     <fragment
         android:id="@+id/waitNumberFragment"
-        android:name="ru.teamdroid.colibripost.presentation.ui.auth.WaitNumberFragment"
+        android:name="ru.teamdroid.colibripost.ui.auth.WaitNumberFragment"
         android:label="fragment_wait_number"
         tools:layout="@layout/fragment_wait_number">
         <action
@@ -31,7 +31,7 @@
     </fragment>
     <fragment
         android:id="@+id/waitCodeFragment"
-        android:name="ru.teamdroid.colibripost.presentation.ui.auth.WaitCodeFragment"
+        android:name="ru.teamdroid.colibripost.ui.auth.WaitCodeFragment"
         android:label="fragment_wait_code"
         tools:layout="@layout/fragment_wait_code">
         <action

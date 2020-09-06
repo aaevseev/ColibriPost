@@ -3,6 +3,7 @@ package ru.teamdroid.colibripost
 import android.app.Activity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -10,11 +11,12 @@ import androidx.lifecycle.observe
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import ru.teamdroid.colibripost.data.AuthHolder
-import ru.teamdroid.colibripost.data.AuthStates
-import ru.teamdroid.colibripost.presentation.ui.auth.SignInFragment
-import ru.teamdroid.colibripost.presentation.ui.bottomnavigation.BottomNavigationFragment
-import ru.teamdroid.colibripost.presentation.ui.newpost.NewPostFragment
+import ru.teamdroid.colibripost.domain.type.Failure
+import ru.teamdroid.colibripost.remote.AuthHolder
+import ru.teamdroid.colibripost.remote.AuthStates
+import ru.teamdroid.colibripost.ui.auth.SignInFragment
+import ru.teamdroid.colibripost.ui.bottomnavigation.BottomNavigationFragment
+import ru.teamdroid.colibripost.ui.newpost.NewPostFragment
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
@@ -26,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        App.instance.appComponent.injectMainActivity(this)
+        App.instance.appComponent.inject(this)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(false)
         supportActionBar?.setHomeButtonEnabled(true)
@@ -90,6 +92,19 @@ class MainActivity : AppCompatActivity() {
                 }
 
             }
+        }
+    }
+
+    fun showMessage(message: String){
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+    fun handleFailure(failure: Failure?){
+        //hide progress
+        when(failure){
+            is Failure.NetworkConnectionError -> showMessage(getString(R.string.error_network))
+            is Failure.ServerError -> showMessage(getString(R.string.error_server))
+            is Failure.ChannelsListIsEmptyError -> showMessage(getString(R.string.channels_list_empty_error))
         }
     }
 }

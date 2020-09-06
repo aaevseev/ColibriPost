@@ -5,9 +5,10 @@ import androidx.lifecycle.ViewModelProvider
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
-import ru.teamdroid.colibripost.di.ViewModelFactory
+import ru.teamdroid.colibripost.di.viewmodel.ViewModelFactory
 import ru.teamdroid.colibripost.di.ViewModelKey
-import ru.teamdroid.colibripost.presentation.ui.newpost.NewPostViewModel
+import ru.teamdroid.colibripost.di.viewmodel.ChannelsViewModel
+import ru.teamdroid.colibripost.ui.newpost.NewPostViewModel
 
 @Module
 abstract class ViewModelsModule {
@@ -18,10 +19,11 @@ abstract class ViewModelsModule {
     @Binds
     @IntoMap
     @ViewModelKey(NewPostViewModel::class)
-    internal abstract fun favoriteViewModel(viewModel: NewPostViewModel): ViewModel
+    abstract fun favoriteViewModel(viewModel: NewPostViewModel): ViewModel
 
-
-
-
+    @Binds
+    @IntoMap
+    @ViewModelKey(ChannelsViewModel::class)
+    abstract fun channelsViewModel(viewModel: ChannelsViewModel): ViewModel
 
 }
