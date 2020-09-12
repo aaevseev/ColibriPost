@@ -68,7 +68,6 @@ class ChannelsSettingsFragment: BaseFragment(){
         }
 
         channelsViewModel.getAddedChannels()
-        channelsViewModel.getAvChannels()
 
     }
 
@@ -114,7 +113,6 @@ class ChannelsSettingsFragment: BaseFragment(){
                     channelsViewModel.setChannels(avChannelsAdapter.getCheckedChannels())
                     state = BottomSheetBehavior.STATE_HIDDEN
                     bottomNavigation.visibility = View.VISIBLE
-                    channelsViewModel.getAvChannels()
                 }
                 btn_cancel_channels.setOnClickListener {
                     state = BottomSheetBehavior.STATE_HIDDEN
@@ -154,7 +152,6 @@ class ChannelsSettingsFragment: BaseFragment(){
 
     fun refreshChannelsListsData(none:None?){
         channelsViewModel.getAddedChannels()
-        channelsViewModel.getAvChannels()
     }
 
     private fun handleAddedChannels(channels: List<ChannelEntity>?){
@@ -162,6 +159,7 @@ class ChannelsSettingsFragment: BaseFragment(){
             if(lrChannelsEmpty.isVisible)
                 lrChannelsEmpty.visibility = View.GONE
             channelsAdapter.submitList(channels)
+            channelsViewModel.getAvChannels()
         }
     }
 
@@ -178,6 +176,7 @@ class ChannelsSettingsFragment: BaseFragment(){
             is Failure.ChannelsListIsEmptyError -> {
                 lrChannelsEmpty.visibility = View.VISIBLE
                 channelsAdapter.clear()
+                channelsViewModel.getAvChannels()
             }
             else -> super.handleFailure(failure)
         }
