@@ -2,8 +2,6 @@ package ru.teamdroid.colibripost.remote
 
 import org.drinkless.td.libcore.telegram.TdApi
 import ru.teamdroid.colibripost.domain.channels.ChannelEntity
-import ru.teamdroid.colibripost.domain.type.flatMap
-import ru.teamdroid.colibripost.domain.type.map
 import ru.teamdroid.colibripost.remote.core.NetworkHandler
 import ru.teamdroid.colibripost.remote.core.TelegramClient
 import javax.inject.Inject
@@ -16,12 +14,6 @@ class Chats @Inject constructor(private val client: TelegramClient, networkHandl
         val getChats = TdApi.GetChats(TdApi.ChatListMain(), Long.MAX_VALUE, 0, 50)
         val chats = client.send<TdApi.Chats>(getChats)
         return chats.chatIds
-    }
-
-    private suspend fun getChannelsIds(): IntArray {
-        val getChannels = TdApi.GetChannels(Long.MAX_VALUE, 0, 50)
-        val channels = client.send<TdApi.Channels>(getChannels)
-        return channels.channelIds
     }
 
     suspend fun getChats(): List<TdApi.Chat> = getChatIds()
@@ -46,38 +38,42 @@ class Chats @Inject constructor(private val client: TelegramClient, networkHandl
             .sortedBy { it.id }
     }
 
-    suspend fun getChannelsInfo(): List<TdApi.SupergroupFullInfo> {
-        return getAdminChannelSupergroups().map { supergroup -> getSupergroupFullInfo(supergroup.id) }
-    }
-
-    suspend fun getChannelInfoBySuperGroup(chatIds: List<Long>): List<TdApi.Chat>{
-        val channelSupergroup = getAdminChannelSupergroups()
+    suspend fun getChannelInfoBySuperGroup(chatIds: List<Long> = listOf(), needAdded: Boolean): List<TdApi.Chat>{
+        val channelsSupergroups = getAdminChannelSupergroups()
         val chats = getChats().filterByChannel()
-        return chats.filter {
+
+        var channels = chats.filter {
             //фильтр на то что это канал пользователя
             val chatFilterId = (it.type as TdApi.ChatTypeSupergroup).supergroupId
-            chatFilterId == channelSupergroup.firstOrNull{it.id == chatFilterId}?.id
-        }.sortedBy { (it.type as TdApi.ChatTypeSupergroup).supergroupId }
+            chatFilterId == channelsSupergroups.firstOrNull{it.id == chatFilterId}?.id
+        }
 
-        /*filter {
-            //фильтр на присутствие канала в бд
-            val chatFilterId = it.id
-            chatFilterId == chatIds.first{ it == chatFilterId }
-        }*/
+        if(chatIds.isNotEmpty()){
+            channels = channels.filter{
+                //фильтр на присутствие канала в бд
+                val chatFilterId = it.id
+                if(needAdded) chatIds.contains(chatFilterId)
+                else !chatIds.contains(chatFilterId)
+            }
+        }
+
+        return  channels.sortedBy { (it.type as TdApi.ChatTypeSupergroup).supergroupId }
     }
 
-    suspend fun getChannelsFullInfo(chatIds: List<Long>):MutableList<ChannelEntity>{
+    suspend fun getChannelsFullInfo(chatIds: List<Long> = listOf(), needAdded: Boolean):MutableList<ChannelEntity>{
         val channelsFullInfo:MutableList<ChannelEntity> = mutableListOf()
-        getChannelInfoBySuperGroup(chatIds).forEach { chat -> val channel = ChannelEntity()
+        getChannelInfoBySuperGroup(chatIds, needAdded).forEach { chat -> val channel = ChannelEntity()
+                chat.photo!!.small = downloadFiles(chat.photo!!.small)
                 channel.fill(chat)
-                channelsFullInfo.add(channel)}
+                channelsFullInfo.add(channel)
+        }
         channelsFullInfo.map { channel ->
             channel.fill(getSupergroupFullInfo(channel.supergroupId)) }
         return channelsFullInfo
     }
 
     suspend fun downloadFiles(file:TdApi.File): TdApi.File{
-        return client.send<TdApi.File>(TdApi.DownloadFile(file.id, 1, file.local.downloadOffset, file.local.downloadedPrefixSize, true))
+        return client.send(TdApi.DownloadFile(file.id, 1, file.local.downloadOffset, file.local.downloadedPrefixSize, true))
     }
 
 }

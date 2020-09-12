@@ -19,7 +19,17 @@
         app:title="lol"
         android:visibility="gone"
         app:titleTextAppearance="@style/Toolbar.TitleText"
-        app:titleTextColor="@color/accent" />
+        app:titleTextColor="@color/accent"/>
+
+    <View
+        android:id="@+id/transpView"
+        android:layout_width="0dp"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/transparent"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <FrameLayout
         android:id="@+id/fragmentContainer"
@@ -29,6 +39,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"/>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

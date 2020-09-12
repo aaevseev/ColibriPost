@@ -33,8 +33,5 @@ interface AppComponent {
     fun inject(fragment: NewPostFragment)
     fun inject(fragment: ChannelsSettingsFragment)
 
-
-    fun inject(holder: ChannelsAdapter.ChannelViewHolder)
-
     fun inject(mainActivity: MainActivity)
 }

@@ -4,6 +4,8 @@ import ru.teamdroid.colibripost.domain.channels.ChannelEntity
 
 interface ChannelsRemote {
 
-    suspend fun getChannels(chatIds:List<Long>):List<ChannelEntity>
+    suspend fun getAddedChannels(chatIds:List<Long>):List<ChannelEntity>
+
+    suspend fun getAvChannels(chatIds:List<Long>):List<ChannelEntity>
 
 }

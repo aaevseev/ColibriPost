@@ -10,12 +10,20 @@ interface ChannelsDao : ChannelsCache{
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insert(friendEntity: ChannelEntity): Long
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insert(entities: List<ChannelEntity>): List<Long>
+
     @Update
     fun update(friendEntity: ChannelEntity)
 
     @Transaction
     override fun saveChannel(entity: ChannelEntity) {
         if(insert(entity) == -1L) update(entity)
+    }
+
+    @Transaction
+    override fun saveChannels(entities: List<ChannelEntity>) {
+        insert(entities)
     }
 
     @Query("SELECT * from channels_table WHERE chat_id = :key")
