@@ -26,7 +26,18 @@
     <string name="name">Имя</string>
 
     <!--Errors-->
-    <string name="error_network">Нет сетевого подключения.</string>
+    <string name="oopsie">Упс!</string>
+    <string name="error_network_toast">Нет сетевого подключения.</string>
+    <string name="error_network">С вашим интернет соединением не все так просто</string>
     <string name="error_server">Ошибка сервера.</string>
-    <string name="channels_list_empty_error">Каналов пока нет</string>
+    <string name="channels_list_empty_error">Каналов пока нет.</string>
+    <string name="need_create_channels_error">С начала нужно создать свой канал.</string>
+
+    <!--Plurals-->
+    <plurals name="channels_count">
+        <item quantity="one">%d канал</item>
+        <item quantity="few">%d канала</item>
+        <item quantity="many">%d каналов</item>
+        <item quantity="other">%d каналов</item>
+    </plurals>
 </resources>

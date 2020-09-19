@@ -10,6 +10,7 @@
     <dimen name="margin_et_rv_new_post_fragment">16dp</dimen>
 
     <dimen name="tiny_photo_dim">32dp</dimen>
+    <dimen name="small_tiny_photo_dim">39dp</dimen>
     <dimen name="small_photo_dim">48dp</dimen>
 
     <dimen name="size_smedium">12dp</dimen>

@@ -26,7 +26,7 @@
     </style>
 
     <style name="DialogFullScreen" parent="android:Theme.Dialog">
-        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">fill_parent</item>
 
         <!--прозрачный, без заголовка, не плавающий-->

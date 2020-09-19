@@ -26,17 +26,65 @@
             android:layout_height="wrap_content"
             android:background="@drawable/bottom_white_sheet_background">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvAvailableChannels"
-                android:layout_width="match_parent"
-                android:layout_height="350dp"
-                android:background="@drawable/bottom_white_sheet_background" />
+
+            <RelativeLayout
+                android:id="@+id/rlChannelsView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvAvailableChannels"
+                    android:layout_width="match_parent"
+                    android:layout_height="350dp"
+                    android:background="@drawable/bottom_white_sheet_background" />
+
+
+                <LinearLayout
+                    android:id="@+id/lrChannelsNotExist"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginBottom="@dimen/size_huge"
+                    android:layout_marginTop="@dimen/size_huge"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="246dp"
+                        android:layout_marginBottom="@dimen/size_huge"
+                        android:src="@drawable/setting_channel" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/size_medium"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:text="@string/oopsie"
+                        android:textAlignment="center"
+                        android:textColor="@color/accent"
+                        android:textSize="24sp" />
+
+                    <TextView
+                        android:id="@+id/tvTextError"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:text="@string/need_create_channels_error"
+                        android:textAlignment="center"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+
 
             <LinearLayout
                 android:id="@+id/lAddChannels"
                 android:layout_width="match_parent"
                 android:layout_height="110dp"
-                android:layout_below="@+id/rvAvailableChannels"
+                android:layout_below="@+id/rlChannelsView"
                 android:orientation="vertical">
 
                 <com.google.android.material.button.MaterialButton

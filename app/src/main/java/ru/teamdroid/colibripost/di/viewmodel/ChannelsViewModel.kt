@@ -1,6 +1,5 @@
 package ru.teamdroid.colibripost.di.viewmodel
 
-import ru.teamdroid.colibripost.domain.UseCase
 import ru.teamdroid.colibripost.domain.channels.*
 import ru.teamdroid.colibripost.domain.type.None
 import ru.teamdroid.colibripost.other.SingleLiveData
@@ -19,6 +18,7 @@ class ChannelsViewModel @Inject constructor(
     var deleteChannelData: SingleLiveData<None> = SingleLiveData()
 
     fun getAddedChannels() {
+        updateRefreshing(true)
         getAddedChannelsUseCase(None()){it.either(::handleFailure) {handleAddedChannels(it)} }
     }
 

@@ -1,21 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="wrap_content"
-    android:layout_height="match_parent"
-    android:layout_marginStart="@dimen/size_large"
-    android:layout_marginEnd="@dimen/size_large"
-    android:clipChildren="false"
-    android:clipToPadding="false">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="@dimen/size_large"
+        android:layout_marginEnd="@dimen/size_large"
+        android:layout_centerInParent="true"
         app:cardCornerRadius="@dimen/size_medium">
 
         <LinearLayout
@@ -27,18 +22,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/size_large"
+                android:layout_marginTop="19dp"
+                android:layout_marginBottom="50dp"
                 android:layout_marginEnd="@dimen/size_large"
-                android:layout_marginTop="20dp"
                 android:fontFamily="@font/roboto_regular"
                 android:text="@string/do_you_want_delete_channel"
-                android:textSize="16sp"
-                android:textColor="@color/text"/>
+                android:textColor="@color/text"
+                android:textSize="16sp" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/size_medium"
-                android:layout_marginTop="@dimen/size_huge"
                 android:orientation="horizontal">
 
                 <TextView
@@ -46,28 +41,31 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/size_huge"
+                    android:layout_toStartOf="@+id/tvDeleteChannel"
                     android:clickable="true"
                     android:focusable="true"
-                    android:textSize="14sp"
-                    android:text="@string/cancel"
-                    android:textColor="@color/accent"
-                    android:textAllCaps="true"
                     android:letterSpacing="0.1"
-                    android:layout_toStartOf="@+id/tvDeleteChannel" />
+                    android:text="@string/cancel"
+                    android:textAllCaps="true"
+                    android:textColor="@color/accent"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:typeface="normal" />
 
                 <TextView
                     android:id="@+id/tvDeleteChannel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="@dimen/size_medium"
                     android:clickable="true"
                     android:focusable="true"
+                    android:letterSpacing="0.1"
                     android:text="@string/ok"
                     android:textColor="@color/accent"
-                    android:textSize="14sp"
-                    android:letterSpacing="0.1"
-                    android:layout_marginEnd="@dimen/size_medium"
 
-                    android:layout_alignParentEnd="true" />
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
 
             </RelativeLayout>
 
@@ -75,4 +73,4 @@
 
     </androidx.cardview.widget.CardView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

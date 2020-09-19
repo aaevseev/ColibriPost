@@ -38,6 +38,7 @@ class AvailableChannelsAdapter() :
 
     override fun submitList(list: List<ChannelEntity>?) {
         checked = BooleanArray(list!!.size)
+        super.submitList(null)
         super.submitList(list)
         notifyDataSetChanged()
     }
@@ -46,6 +47,7 @@ class AvailableChannelsAdapter() :
 
         setCheckedOrNotBackground(holder.root.rlMain, position, checked)
 
+        print(currentList.size)
         holder.root.rlMain.setOnClickListener{
             checked[position] = !checked[position]
 
@@ -110,46 +112,6 @@ class AvailableChannelsAdapter() :
             }
         }
 
-        /*fun bind(item: Any, position: Int, checked: BooleanArray){
-
-            if(position < checked.size)
-                setCheckedOrNotBackground(root.rlMain, position, checked)
-
-            root.rlMain.setOnClickListener{
-                checked[position] = !checked[position]
-
-                root.apply {
-                    setCheckedOrNotBackground(it, position, checked)
-
-                    val tempArray = checked.filter { it == true }
-
-                    if(tempArray.size == 0){
-                        rootView.btn_add_channels.isEnabled = false
-                        rootView.btn_add_channels.backgroundTintList = ContextCompat.getColorStateList(context, R.color.accentEnabledButton)
-                    }else{
-                        rootView.btn_add_channels.isEnabled = true
-                        rootView.btn_add_channels.backgroundTintList = ContextCompat.getColorStateList(context, R.color.accent)
-                    }
-                }
-            }
-            onBind(item)
-        }
-
-        fun setCheckedOrNotBackground(root: View, position: Int, checked: BooleanArray){
-            root.apply {
-                if(checked[position]){
-                    this.background = if(position == 0) ContextCompat.getDrawable(context, R.drawable.bottom_accent_sheet_background)
-                    else context.getColorFromResource(R.color.accent).toDrawable()
-                    this.imgCheck.visibility = View.VISIBLE
-                    this.tvChannelName.setTextColor(root.context.getColorFromResource(R.color.white))
-                }else{
-                    this.background = if(position == 0) ContextCompat.getDrawable(context, R.drawable.bottom_white_sheet_background)
-                    else context.getColorFromResource(R.color.white).toDrawable()
-                    this.imgCheck.visibility = View.GONE
-                    this.tvChannelName.setTextColor(root.context.getColorFromResource(R.color.text))
-                }
-            }
-        }*/
     }
 
 

@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import kotlinx.coroutines.delay
 import ru.teamdroid.colibripost.MainActivity
 import ru.teamdroid.colibripost.base
 import ru.teamdroid.colibripost.domain.type.Failure
@@ -37,6 +38,19 @@ abstract class BaseFragment: Fragment() {
     open fun handleFailure(failure: Failure?) = base { handleFailure(failure) }
 
     fun showMessage(message: String) = base { showMessage(message) }
+
+    open fun updateRefresh (status: Boolean?){
+        if(status == true){
+            showRefreshing()
+        }else{
+            hideRefreshing()
+        }
+    }
+
+    fun showRefreshing() = base { swipeRefreshStatus(true) }
+
+    fun hideRefreshing() = base {
+        swipeRefreshStatus(false) }
 
     inline fun base(block: MainActivity.() -> Unit){
         activity.base(block)//дочернее активити выполняет код у себя

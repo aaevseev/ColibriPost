@@ -2,14 +2,13 @@ package ru.teamdroid.colibripost
 
 import android.app.Activity
 import android.content.Context
-import android.graphics.drawable.Drawable
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.core.graphics.drawable.toDrawable
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.observe
@@ -30,14 +29,24 @@ class MainActivity : AppCompatActivity(), SwitchTransparentView {
     @Inject
     lateinit var authHolder: AuthHolder
 
+    lateinit var connectivityManager: ConnectivityManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_main)
+
         App.instance.appComponent.inject(this)
+
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(false)
         supportActionBar?.setHomeButtonEnabled(true)
+
+        connectivityManager = this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+
+        swipeRefreshLayout.setColorSchemeResources(R.color.accent)
+        swipeRefreshLayout.isEnabled = false
     }
 
     override fun onResume() {
@@ -96,7 +105,6 @@ class MainActivity : AppCompatActivity(), SwitchTransparentView {
                 AuthStates.UNKNOWN -> {
                     Log.d("SplashFragment", "onViewCreated: state UNKNOWN")
                 }
-
             }
         }
     }
@@ -108,7 +116,7 @@ class MainActivity : AppCompatActivity(), SwitchTransparentView {
     fun handleFailure(failure: Failure?){
         //hide progress
         when(failure){
-            is Failure.NetworkConnectionError -> showMessage(getString(R.string.error_network))
+            is Failure.NetworkConnectionError -> showMessage(getString(R.string.error_network_toast))
             is Failure.ServerError -> showMessage(getString(R.string.error_server))
             is Failure.ChannelsListIsEmptyError -> showMessage(getString(R.string.channels_list_empty_error))
         }
@@ -121,6 +129,15 @@ class MainActivity : AppCompatActivity(), SwitchTransparentView {
     override fun hideTransparentView() {
         transpView.visibility = View.GONE
     }
+
+    fun showRefreshing() = swipeRefreshStatus(true)
+
+    fun hideRefreshing() = swipeRefreshStatus(false)
+
+    fun swipeRefreshStatus(refreshStatus: Boolean){
+        swipeRefreshLayout.isRefreshing = refreshStatus
+    }
+
 }
 
 fun Context.getColorFromResource(idColor: Int): Int{

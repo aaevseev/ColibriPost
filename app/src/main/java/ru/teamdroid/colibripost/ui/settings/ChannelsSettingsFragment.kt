@@ -1,6 +1,10 @@
 package ru.teamdroid.colibripost.ui.settings
 
+import android.net.ConnectivityManager
+import android.net.Network
+import android.net.NetworkRequest
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
@@ -64,6 +68,7 @@ class ChannelsSettingsFragment: BaseFragment(){
                     SingleLiveData<None>>(setChannelsData, ::refreshChannelsListsData)
             onSuccess<None,
                     SingleLiveData<None>>(deleteChannelData, ::refreshChannelsListsData)
+            onSuccess(progressData, ::updateRefresh)
             onFailure<SingleLiveData<Failure>>(failureData, ::handleFailure)
         }
 
@@ -139,14 +144,25 @@ class ChannelsSettingsFragment: BaseFragment(){
         }
     }
 
-    fun refreshAvChannels(){
+    private fun bottomSheetSetPlaceHolder(isNetworkError: Boolean){
+        tvTextError.text = if(isNetworkError){
+            resources.getString(R.string.error_network)
+        }else{
+            resources.getString(R.string.need_create_channels_error)
+        }
+        lrChannelsNotExist.visibility = View.VISIBLE
+        avChannelsAdapter.clear()
+        refreshAvChannels()
+    }
+
+    private fun refreshAvChannels(){
         avChannelsAdapter.checked = BooleanArray(avChannelsAdapter.itemCount)
         avChannelsAdapter.notifyDataSetChanged()
         btn_add_channels.isEnabled = false
         btn_add_channels.backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.accentEnabledButton)
     }
 
-    fun deleteChannel(idChannel: Long){
+    private fun deleteChannel(idChannel: Long){
         channelsViewModel.deleteChannel(idChannel)
     }
 
@@ -155,9 +171,11 @@ class ChannelsSettingsFragment: BaseFragment(){
     }
 
     private fun handleAddedChannels(channels: List<ChannelEntity>?){
+        hideRefreshing()
         if(channels != null){
             if(lrChannelsEmpty.isVisible)
                 lrChannelsEmpty.visibility = View.GONE
+            tvChannelsCount.text = this.resources.getQuantityString(R.plurals.channels_count, channels.size,  channels.size )
             channelsAdapter.submitList(channels)
             channelsViewModel.getAvChannels()
         }
@@ -165,18 +183,42 @@ class ChannelsSettingsFragment: BaseFragment(){
 
     private fun handleAvChannels(channels: List<ChannelEntity>?){
         if(channels != null){
+            if(lrChannelsNotExist.isVisible)
+                lrChannelsNotExist.visibility = View.GONE
             avChannelsAdapter.submitList(channels)
         }
     }
 
-
-
     override fun handleFailure(failure: Failure?) {
+        hideRefreshing()
         when(failure){
             is Failure.ChannelsListIsEmptyError -> {
+                hideRefreshing()
                 lrChannelsEmpty.visibility = View.VISIBLE
                 channelsAdapter.clear()
+                val count = this.resources.getQuantityString(R.plurals.channels_count, 0, 0)
+                tvChannelsCount.text = count
                 channelsViewModel.getAvChannels()
+            }
+            is Failure.ChannelsNotCreatedError -> {
+                bottomSheetSetPlaceHolder(false)
+            }
+            is Failure.NetworkPlaceHolderConnectionError -> {
+                bottomSheetSetPlaceHolder(true)
+                (requireActivity() as MainActivity).connectivityManager.let {
+                    it.registerNetworkCallback(NetworkRequest.Builder().build(), object : ConnectivityManager.NetworkCallback(){
+                        override fun onAvailable(network: Network) {
+                            super.onAvailable(network)
+                            channelsViewModel.getAvChannels()
+                            it.unregisterNetworkCallback(this)
+                        }
+
+                        override fun onLost(network: Network) {
+                            super.onLost(network)
+                            Log.i("Test", "Connection lost")
+                        }
+                    })
+                }
             }
             else -> super.handleFailure(failure)
         }
@@ -188,3 +230,5 @@ class ChannelsSettingsFragment: BaseFragment(){
 
 
 }
+
+
