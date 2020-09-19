@@ -22,7 +22,9 @@ data class ChannelEntity(
     fun fill(chat: TdApi.Chat){
         chatId = chat.id
         title = chat.title
-        photoPath = chat.photo!!.small.local.path
+        chat.photo?.let {
+            photoPath = it.small.local.path
+        }
         supergroupId = (chat.type as TdApi.ChatTypeSupergroup).supergroupId
     }
 
