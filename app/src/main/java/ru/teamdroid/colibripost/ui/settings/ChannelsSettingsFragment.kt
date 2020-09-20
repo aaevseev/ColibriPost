@@ -39,6 +39,8 @@ class ChannelsSettingsFragment: BaseFragment(){
     private lateinit var avChannelsRView: RecyclerView
     protected lateinit var lm: RecyclerView.LayoutManager
 
+    private lateinit var bottomSheet: BottomSheetBehavior<View>
+
     private val channelsAdapter : ChannelsAdapter by lazy {
         ChannelsAdapter(
             deleteChannel = {
@@ -92,14 +94,14 @@ class ChannelsSettingsFragment: BaseFragment(){
     }
 
     fun setUpBottomSheet(){
-        val bottomSheet = BottomSheetBehavior.from(include_bottom_sheet_dialog)
+        bottomSheet = BottomSheetBehavior.from(include_bottom_sheet_dialog)
         (requireActivity() as MainActivity).apply {
 
 
             bottomSheet.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback(){
                 override fun onStateChanged(bottomSheet: View, newState: Int) {
                     when (newState){
-                        BottomSheetBehavior.STATE_HIDDEN -> {
+                        BottomSheetBehavior.STATE_SETTLING -> {
                             hideTransparentView()
                             transpBackground.visibility = View.GONE
                             bottomNavigation.visibility = View.VISIBLE
@@ -108,19 +110,23 @@ class ChannelsSettingsFragment: BaseFragment(){
                 }
 
                 override fun onSlide(bottomSheet: View, slideOffset: Float) {
+                    if(transpBackground.visibility == View.VISIBLE)
+                        if(slideOffset <= 0.1) {
+                            bottomNavigation.visibility = View.VISIBLE
+                        }else bottomNavigation.visibility = View.GONE
                 }
 
             })
             bottomSheet.apply {
-                state = BottomSheetBehavior.STATE_HIDDEN
+                //state = BottomSheetBehavior.STATE_COLLAPSED
 
                 btn_add_channels.setOnClickListener {
                     channelsViewModel.setChannels(avChannelsAdapter.getCheckedChannels())
-                    state = BottomSheetBehavior.STATE_HIDDEN
+                    state = BottomSheetBehavior.STATE_COLLAPSED
                     bottomNavigation.visibility = View.VISIBLE
                 }
                 btn_cancel_channels.setOnClickListener {
-                    state = BottomSheetBehavior.STATE_HIDDEN
+                    state = BottomSheetBehavior.STATE_COLLAPSED
                     bottomNavigation.visibility = View.VISIBLE
                     refreshAvChannels()
                 }
@@ -131,12 +137,12 @@ class ChannelsSettingsFragment: BaseFragment(){
                     bottomNavigation.visibility = View.GONE
                 }
                 transpView.setOnClickListener {
-                    state = BottomSheetBehavior.STATE_HIDDEN
+                    state = BottomSheetBehavior.STATE_COLLAPSED
                     bottomNavigation.visibility = View.VISIBLE
                     refreshAvChannels()
                 }
                 transpBackground.setOnClickListener{
-                    state = BottomSheetBehavior.STATE_HIDDEN
+                    state = BottomSheetBehavior.STATE_COLLAPSED
                     bottomNavigation.visibility = View.VISIBLE
                     refreshAvChannels()
                 }
@@ -222,6 +228,10 @@ class ChannelsSettingsFragment: BaseFragment(){
             }
             else -> super.handleFailure(failure)
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
     }
 
     companion object {
