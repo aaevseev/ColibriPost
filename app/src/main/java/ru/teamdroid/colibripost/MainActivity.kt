@@ -36,22 +36,18 @@ class MainActivity : AppCompatActivity(), SwitchTransparentView {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_main)
-
         App.instance.appComponent.inject(this)
 
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(false)
         supportActionBar?.setHomeButtonEnabled(true)
 
-        connectivityManager = this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        connectivityManager =
+            this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
         swipeRefreshLayout.setColorSchemeResources(R.color.accent)
         swipeRefreshLayout.isEnabled = false
-    }
 
-    override fun onResume() {
-        super.onResume()
-        authStateLog()
         lifecycleScope.launch {
             //TODO: проверка авторизации должна быть без Delay
             delay(500)
@@ -61,6 +57,11 @@ class MainActivity : AppCompatActivity(), SwitchTransparentView {
                 setNavigationFragment(SignInFragment())
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        authStateLog()
     }
 
     fun setNavigationFragment(fragment: Fragment) {
@@ -109,13 +110,13 @@ class MainActivity : AppCompatActivity(), SwitchTransparentView {
         }
     }
 
-    fun showMessage(message: String){
+    fun showMessage(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
-    fun handleFailure(failure: Failure?){
+    fun handleFailure(failure: Failure?) {
         //hide progress
-        when(failure){
+        when (failure) {
             is Failure.NetworkConnectionError -> showMessage(getString(R.string.error_network_toast))
             is Failure.ServerError -> showMessage(getString(R.string.error_server))
             is Failure.ChannelsListIsEmptyError -> showMessage(getString(R.string.channels_list_empty_error))
@@ -134,13 +135,13 @@ class MainActivity : AppCompatActivity(), SwitchTransparentView {
 
     fun hideRefreshing() = swipeRefreshStatus(false)
 
-    fun swipeRefreshStatus(refreshStatus: Boolean){
+    fun swipeRefreshStatus(refreshStatus: Boolean) {
         swipeRefreshLayout.isRefreshing = refreshStatus
     }
 
 }
 
-fun Context.getColorFromResource(idColor: Int): Int{
+fun Context.getColorFromResource(idColor: Int): Int {
     return ContextCompat.getColor(this, idColor)
 }
 
