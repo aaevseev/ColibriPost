@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -8,10 +10,10 @@
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/size_large"
-        android:layout_marginEnd="@dimen/size_large"
         android:layout_centerInParent="true"
-        app:cardCornerRadius="@dimen/size_medium">
+        android:layout_marginEnd="@dimen/size_large"
+        android:layout_marginStart="@dimen/size_large"
+        app:cardCornerRadius="@dimen/size_smedium">
 
         <LinearLayout
             android:layout_width="match_parent"

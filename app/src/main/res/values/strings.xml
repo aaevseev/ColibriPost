@@ -15,7 +15,7 @@
     <string name="channels">Channels</string>
 
     <string name="add_button">Add button</string>
-    <string name="add_channel">Add Channel</string>
+    <string name="add_channel">Добавить канал</string>
     <string name="preview">Preview</string>
     <string name="choose_category">Choose category</string>
     <string name="select_time">Select time</string>
@@ -32,6 +32,7 @@
     <string name="error_server">Ошибка сервера.</string>
     <string name="channels_list_empty_error">Каналов пока нет.</string>
     <string name="need_create_channels_error">С начала нужно создать свой канал.</string>
+    <string name="network_waiting">Ожидание сети…</string>
 
     <!--Plurals-->
     <plurals name="channels_count">

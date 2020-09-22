@@ -41,15 +41,12 @@ class ChannelsRepositoryImpl(
 
     override suspend fun setChannels(channels: List<ChannelEntity>): Either<Failure, None> {
         channelsCache.saveChannels(channels)
-        return if(networkHandler.isConnected != null) {
-            Either.Right(None())
-        } else Either.Left(Failure.NetworkConnectionError)
+        return Either.Right(None())
     }
 
     override suspend fun deleteChannel(idChannel:Long): Either<Failure, None> {
         channelsCache.removeChannelEntity(idChannel)
-        return if(networkHandler.isConnected != null) {
-            Either.Right(None())
-        } else Either.Left(Failure.NetworkConnectionError)
+        return Either.Right(None())
+
     }
 }

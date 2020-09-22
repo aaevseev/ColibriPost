@@ -2,7 +2,7 @@ package ru.teamdroid.colibripost.ui
 
 interface SwitchTransparentView {
 
-    fun showTransparentView()
+    fun setTranspViewVisibility(isVisible:Boolean)
 
     fun hideTransparentView()
 

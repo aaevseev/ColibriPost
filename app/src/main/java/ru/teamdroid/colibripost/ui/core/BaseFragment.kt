@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import kotlinx.coroutines.delay
 import ru.teamdroid.colibripost.MainActivity
+import ru.teamdroid.colibripost.R
 import ru.teamdroid.colibripost.base
 import ru.teamdroid.colibripost.domain.type.Failure
 import javax.inject.Inject
@@ -51,6 +52,14 @@ abstract class BaseFragment: Fragment() {
 
     fun hideRefreshing() = base {
         swipeRefreshStatus(false) }
+
+    open fun setNetworkAvailbleUi(isCallback:Boolean){
+        setToolbarTitle(getString(R.string.app_name))
+    }
+
+    open fun setNetworkLostUi(){
+        setToolbarTitle(getString(R.string.network_waiting))
+    }
 
     inline fun base(block: MainActivity.() -> Unit){
         activity.base(block)//дочернее активити выполняет код у себя

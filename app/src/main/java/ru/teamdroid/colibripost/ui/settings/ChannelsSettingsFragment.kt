@@ -1,14 +1,11 @@
 package ru.teamdroid.colibripost.ui.settings
 
-import android.net.ConnectivityManager
-import android.net.Network
-import android.net.NetworkRequest
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -17,6 +14,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.channels_bottom_sheet.*
 import kotlinx.android.synthetic.main.fragment_bottom_navigation.*
 import kotlinx.android.synthetic.main.fragment_channels_settings.*
+import kotlinx.coroutines.launch
 import ru.teamdroid.colibripost.App
 import ru.teamdroid.colibripost.MainActivity
 import ru.teamdroid.colibripost.R
@@ -27,9 +25,15 @@ import ru.teamdroid.colibripost.domain.type.None
 import ru.teamdroid.colibripost.other.SingleLiveData
 import ru.teamdroid.colibripost.other.onFailure
 import ru.teamdroid.colibripost.other.onSuccess
+import ru.teamdroid.colibripost.remote.core.NetworkHandler
+import ru.teamdroid.colibripost.remote.core.setNetworkCallback
 import ru.teamdroid.colibripost.ui.core.BaseFragment
+import javax.inject.Inject
 
 class ChannelsSettingsFragment: BaseFragment(){
+
+    @Inject
+    lateinit var networkHandler: NetworkHandler
 
     lateinit var channelsViewModel: ChannelsViewModel
 
@@ -57,7 +61,10 @@ class ChannelsSettingsFragment: BaseFragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setToolbarTitle(getString(R.string.channels))
+
+        if(networkHandler.isConnected != null)
+            setNetworkAvailbleUi(false)
+        else setNetworkLostUi()
 
         setUpFragmentUi(view)
 
@@ -74,9 +81,14 @@ class ChannelsSettingsFragment: BaseFragment(){
             onFailure<SingleLiveData<Failure>>(failureData, ::handleFailure)
         }
 
+        (requireActivity() as MainActivity).connectivityManager.let {
+            it.setNetworkCallback({setNetworkAvailbleUi(true)}, ::setNetworkLostUi)
+        }
         channelsViewModel.getAddedChannels()
 
     }
+
+    //region UI control
 
     fun setUpFragmentUi(view: View){
         addedChannelsRView =view.findViewById<RecyclerView>(R.id.rvChannels).apply{
@@ -100,12 +112,11 @@ class ChannelsSettingsFragment: BaseFragment(){
 
             bottomSheet.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback(){
                 override fun onStateChanged(bottomSheet: View, newState: Int) {
-                    when (newState){
-                        BottomSheetBehavior.STATE_SETTLING -> {
-                            hideTransparentView()
-                            transpBackground.visibility = View.GONE
-                            bottomNavigation.visibility = View.VISIBLE
-                        }
+                    if(newState == BottomSheetBehavior.STATE_SETTLING)
+                    {
+                        setTranspViewVisibility(false)
+                        transpBackground.visibility = View.GONE
+                        bottomNavigation.visibility = View.VISIBLE
                     }
                 }
 
@@ -118,7 +129,6 @@ class ChannelsSettingsFragment: BaseFragment(){
 
             })
             bottomSheet.apply {
-                //state = BottomSheetBehavior.STATE_COLLAPSED
 
                 btn_add_channels.setOnClickListener {
                     channelsViewModel.setChannels(avChannelsAdapter.getCheckedChannels())
@@ -132,7 +142,7 @@ class ChannelsSettingsFragment: BaseFragment(){
                 }
                 btnShowAvChannels.setOnClickListener{
                     state = BottomSheetBehavior.STATE_EXPANDED
-                    showTransparentView()
+                    setTranspViewVisibility(true)
                     transpBackground.visibility = View.VISIBLE
                     bottomNavigation.visibility = View.GONE
                 }
@@ -150,12 +160,8 @@ class ChannelsSettingsFragment: BaseFragment(){
         }
     }
 
-    private fun bottomSheetSetPlaceHolder(isNetworkError: Boolean){
-        tvTextError.text = if(isNetworkError){
-            resources.getString(R.string.error_network)
-        }else{
-            resources.getString(R.string.need_create_channels_error)
-        }
+    private fun bottomSheetSetPlaceHolder(){
+        tvTextError.text = resources.getString(R.string.need_create_channels_error)
         lrChannelsNotExist.visibility = View.VISIBLE
         avChannelsAdapter.clear()
         refreshAvChannels()
@@ -176,6 +182,38 @@ class ChannelsSettingsFragment: BaseFragment(){
         channelsViewModel.getAddedChannels()
     }
 
+    override fun setNetworkAvailbleUi(isCallback:Boolean) {
+        lifecycleScope.launch {
+            setToolbarTitle(getString(R.string.channels))
+            if(isCallback){
+                setBtnShowAvChannelsState(true)
+                channelsViewModel.getAvChannels()
+            }
+        }
+    }
+
+    override fun setNetworkLostUi() {
+        lifecycleScope.launch {
+            setToolbarTitle(getString(R.string.network_waiting))
+            setBtnShowAvChannelsState(false)
+        }
+    }
+
+    fun setBtnShowAvChannelsState(isEnable:Boolean){
+        if(isEnable){
+            btnShowAvChannels.isEnabled = true
+            btnShowAvChannels.setTextColor(ContextCompat.getColor(requireContext(), R.color.accent))
+            btnShowAvChannels.iconTint = ContextCompat.getColorStateList(requireContext(), R.color.accent)
+        }else{
+            btnShowAvChannels.isEnabled = false
+            btnShowAvChannels.setTextColor(ContextCompat.getColor(requireContext(), R.color.accentEnabledButton))
+            btnShowAvChannels.iconTint = ContextCompat.getColorStateList(requireContext(), R.color.accentEnabledButton)
+        }
+    }
+
+    //endregion
+
+    //region Handle events
     private fun handleAddedChannels(channels: List<ChannelEntity>?){
         hideRefreshing()
         if(channels != null){
@@ -183,6 +221,7 @@ class ChannelsSettingsFragment: BaseFragment(){
                 lrChannelsEmpty.visibility = View.GONE
             tvChannelsCount.text = this.resources.getQuantityString(R.plurals.channels_count, channels.size,  channels.size )
             channelsAdapter.submitList(channels)
+
             channelsViewModel.getAvChannels()
         }
     }
@@ -207,32 +246,15 @@ class ChannelsSettingsFragment: BaseFragment(){
                 channelsViewModel.getAvChannels()
             }
             is Failure.ChannelsNotCreatedError -> {
-                bottomSheetSetPlaceHolder(false)
+                bottomSheetSetPlaceHolder()
             }
             is Failure.NetworkPlaceHolderConnectionError -> {
-                bottomSheetSetPlaceHolder(true)
-                (requireActivity() as MainActivity).connectivityManager.let {
-                    it.registerNetworkCallback(NetworkRequest.Builder().build(), object : ConnectivityManager.NetworkCallback(){
-                        override fun onAvailable(network: Network) {
-                            super.onAvailable(network)
-                            channelsViewModel.getAvChannels()
-                            it.unregisterNetworkCallback(this)
-                        }
-
-                        override fun onLost(network: Network) {
-                            super.onLost(network)
-                            Log.i("Test", "Connection lost")
-                        }
-                    })
-                }
+                //bottomSheetSetPlaceHolder(true)
             }
             else -> super.handleFailure(failure)
         }
     }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-    }
+    //endregion
 
     companion object {
         const val TAG = "ChannelsSettingsFragment"

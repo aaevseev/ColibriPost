@@ -3,6 +3,9 @@ package ru.teamdroid.colibripost.ui.settings
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
+import android.content.DialogInterface
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.view.ContextMenu
 import android.view.LayoutInflater
 import android.view.View
@@ -47,9 +50,13 @@ open class ChannelsAdapter(
         val view = LayoutInflater.from(context).inflate(
             R.layout.delete_channel_dialog, null
         )
-        val dialog = Dialog(context, R.style.DialogFullScreen)
+        /*val dialog = Dialog(context, R.style.DialogFullScreen)
 
-        dialog.setContentView(view)
+        dialog.setContentView(view)*/
+
+        val dialog = AlertDialog.Builder(context).setView(view)
+            .create()
+        dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         view.tvDeleteChannel.setOnClickListener {
             deleteChannel(item.chatId)
@@ -58,6 +65,8 @@ open class ChannelsAdapter(
         view.tvCancelDelete.setOnClickListener { dialog.dismiss() }
 
         dialog.show()
+
+
     }
 
     class ChannelDiffCallback: DiffUtil.ItemCallback<ChannelEntity>(){

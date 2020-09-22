@@ -123,8 +123,10 @@ class MainActivity : AppCompatActivity(), SwitchTransparentView {
         }
     }
 
-    override fun showTransparentView() {
-        transpView.visibility = View.VISIBLE
+    override fun setTranspViewVisibility(isVisible:Boolean) {
+        if(isVisible)
+            transpView.visibility = View.VISIBLE
+        else transpView.visibility = View.GONE
     }
 
     override fun hideTransparentView() {
