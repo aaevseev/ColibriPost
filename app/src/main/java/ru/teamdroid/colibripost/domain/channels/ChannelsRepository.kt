@@ -8,7 +8,7 @@ interface ChannelsRepository {
 
     suspend fun getAddedChannels(): Either<Failure, List<ChannelEntity>>
 
-    suspend fun getAvChannels(): Either<Failure, List<ChannelEntity>>
+    suspend fun getAvailableChannels(): Either<Failure, List<ChannelEntity>>
 
     suspend fun setChannels(channels: List<ChannelEntity>): Either<Failure, None>
 

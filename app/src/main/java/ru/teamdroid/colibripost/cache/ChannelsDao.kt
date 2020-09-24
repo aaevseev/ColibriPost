@@ -7,7 +7,7 @@ import ru.teamdroid.colibripost.domain.channels.ChannelEntity
 @Dao
 interface ChannelsDao : ChannelsCache{
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(friendEntity: ChannelEntity): Long
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -18,7 +18,7 @@ interface ChannelsDao : ChannelsCache{
 
     @Transaction
     override fun saveChannel(entity: ChannelEntity) {
-        if(insert(entity) == -1L) update(entity)
+        insert(entity)
     }
 
     @Transaction

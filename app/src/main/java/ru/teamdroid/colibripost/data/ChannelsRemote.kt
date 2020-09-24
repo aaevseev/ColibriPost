@@ -6,6 +6,6 @@ interface ChannelsRemote {
 
     suspend fun getAddedChannels(chatIds:List<Long>):List<ChannelEntity>
 
-    suspend fun getAvChannels(chatIds:List<Long>):List<ChannelEntity>
+    suspend fun getAvailableChannels(chatIds:List<Long>):List<ChannelEntity>
 
 }

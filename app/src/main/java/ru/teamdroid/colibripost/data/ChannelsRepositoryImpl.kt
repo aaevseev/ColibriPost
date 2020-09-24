@@ -27,13 +27,13 @@ class ChannelsRepositoryImpl(
         }
     }
 
-    override suspend fun getAvChannels(): Either<Failure, List<ChannelEntity>> {
+    override suspend fun getAvailableChannels(): Either<Failure, List<ChannelEntity>> {
         val actualChannels = channelsCache.getChannels()
 
         return if (networkHandler.isConnected != null){
-            val avChannels = channelsRemote.getAvChannels(
+            val availableChannels = channelsRemote.getAvailableChannels(
                 if (actualChannels.isNotEmpty()) actualChannels.map { it.chatId } else listOf())
-            if(avChannels.isNotEmpty()) Either.Right(avChannels)
+            if(availableChannels.isNotEmpty()) Either.Right(availableChannels)
             else Either.Left(Failure.ChannelsNotCreatedError)
         }
         else Either.Left(Failure.NetworkPlaceHolderConnectionError)

@@ -109,7 +109,7 @@
                 android:orientation="vertical">
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnShowAvChannels"
+                    android:id="@+id/btnShowAvailableChannels"
                     style="?attr/borderlessButtonStyle"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"

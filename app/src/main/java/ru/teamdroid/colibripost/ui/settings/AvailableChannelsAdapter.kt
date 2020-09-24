@@ -9,14 +9,14 @@ import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toDrawable
 import kotlinx.android.synthetic.main.channels_bottom_sheet.view.*
 import kotlinx.android.synthetic.main.item_av_channel.view.*
-import kotlinx.android.synthetic.main.item_channel.view.*
 import kotlinx.android.synthetic.main.item_channel.view.imgPhoto
 import kotlinx.android.synthetic.main.item_channel.view.rlMain
 import kotlinx.android.synthetic.main.item_channel.view.tvChannelName
 import ru.teamdroid.colibripost.R
 import ru.teamdroid.colibripost.domain.channels.ChannelEntity
-import ru.teamdroid.colibripost.getColorFromResource
 import ru.teamdroid.colibripost.ui.core.PicassoHelper
+import ru.teamdroid.colibripost.ui.core.getColorFromResource
+import ru.teamdroid.colibripost.ui.core.getColorState
 
 class AvailableChannelsAdapter() :
     ru.teamdroid.colibripost.ui.core.BaseAdapter<ChannelEntity,
@@ -58,10 +58,10 @@ class AvailableChannelsAdapter() :
 
                 if(tempArray.size == 0){
                     rootView.btn_add_channels.isEnabled = false
-                    rootView.btn_add_channels.backgroundTintList = ContextCompat.getColorStateList(context, R.color.accentEnabledButton)
+                    rootView.btn_add_channels.backgroundTintList = context.getColorState(R.color.accentEnabledButton)
                 }else{
                     rootView.btn_add_channels.isEnabled = true
-                    rootView.btn_add_channels.backgroundTintList = ContextCompat.getColorStateList(context, R.color.accent)
+                    rootView.btn_add_channels.backgroundTintList = context.getColorState(R.color.accent)
                 }
             }
         }

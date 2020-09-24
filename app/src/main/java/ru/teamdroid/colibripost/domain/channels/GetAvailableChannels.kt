@@ -4,10 +4,10 @@ import ru.teamdroid.colibripost.domain.UseCase
 import ru.teamdroid.colibripost.domain.type.None
 import javax.inject.Inject
 
-class GetAvChannels @Inject constructor(
+class GetAvailableChannels @Inject constructor(
     private val channelsRepository: ChannelsRepository
 ) : UseCase<List<ChannelEntity>, None>(){
 
     override suspend fun run(params: None)=
-        channelsRepository.getAvChannels()
+        channelsRepository.getAvailableChannels()
 }

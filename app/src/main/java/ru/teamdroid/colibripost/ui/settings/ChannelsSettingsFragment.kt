@@ -3,7 +3,6 @@ package ru.teamdroid.colibripost.ui.settings
 import android.os.Bundle
 import android.view.View
 import android.widget.LinearLayout
-import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -28,6 +27,8 @@ import ru.teamdroid.colibripost.other.onSuccess
 import ru.teamdroid.colibripost.remote.core.NetworkHandler
 import ru.teamdroid.colibripost.remote.core.setNetworkCallback
 import ru.teamdroid.colibripost.ui.core.BaseFragment
+import ru.teamdroid.colibripost.ui.core.getColorFromResource
+import ru.teamdroid.colibripost.ui.core.getColorState
 import javax.inject.Inject
 
 class ChannelsSettingsFragment: BaseFragment(){
@@ -40,7 +41,7 @@ class ChannelsSettingsFragment: BaseFragment(){
     override val layoutId = R.layout.fragment_channels_settings
 
     private lateinit var addedChannelsRView: RecyclerView
-    private lateinit var avChannelsRView: RecyclerView
+    private lateinit var availableChannelsRView: RecyclerView
     protected lateinit var lm: RecyclerView.LayoutManager
 
     private lateinit var bottomSheet: BottomSheetBehavior<View>
@@ -52,7 +53,7 @@ class ChannelsSettingsFragment: BaseFragment(){
             }
         )
     }
-    val avChannelsAdapter = AvailableChannelsAdapter()
+    val availableChannelsAdapter = AvailableChannelsAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,7 +73,7 @@ class ChannelsSettingsFragment: BaseFragment(){
             onSuccess<List<ChannelEntity>,
                     SingleLiveData<List<ChannelEntity>>>(addedChannelsData, ::handleAddedChannels)
             onSuccess<List<ChannelEntity>,
-                    SingleLiveData<List<ChannelEntity>>>(avChannelsData, ::handleAvChannels)
+                    SingleLiveData<List<ChannelEntity>>>(avChannelsData, ::handleAvailableChannels)
             onSuccess<None,
                     SingleLiveData<None>>(setChannelsData, ::refreshChannelsListsData)
             onSuccess<None,
@@ -97,9 +98,9 @@ class ChannelsSettingsFragment: BaseFragment(){
         }
         addedChannelsRView.addItemDecoration(DividerItemDecoration(context, LinearLayout.VERTICAL))
 
-        avChannelsRView =view.findViewById<RecyclerView>(R.id.rvAvailableChannels).apply{
+        availableChannelsRView =view.findViewById<RecyclerView>(R.id.rvAvailableChannels).apply{
             layoutManager = LinearLayoutManager(context)
-            adapter = avChannelsAdapter
+            adapter = availableChannelsAdapter
         }
 
         setUpBottomSheet()
@@ -131,16 +132,16 @@ class ChannelsSettingsFragment: BaseFragment(){
             bottomSheet.apply {
 
                 btn_add_channels.setOnClickListener {
-                    channelsViewModel.setChannels(avChannelsAdapter.getCheckedChannels())
+                    channelsViewModel.setChannels(availableChannelsAdapter.getCheckedChannels())
                     state = BottomSheetBehavior.STATE_COLLAPSED
                     bottomNavigation.visibility = View.VISIBLE
                 }
                 btn_cancel_channels.setOnClickListener {
                     state = BottomSheetBehavior.STATE_COLLAPSED
                     bottomNavigation.visibility = View.VISIBLE
-                    refreshAvChannels()
+                    refreshAvailableChannels()
                 }
-                btnShowAvChannels.setOnClickListener{
+                btnShowAvailableChannels.setOnClickListener{
                     state = BottomSheetBehavior.STATE_EXPANDED
                     setTranspViewVisibility(true)
                     transpBackground.visibility = View.VISIBLE
@@ -149,12 +150,12 @@ class ChannelsSettingsFragment: BaseFragment(){
                 transpView.setOnClickListener {
                     state = BottomSheetBehavior.STATE_COLLAPSED
                     bottomNavigation.visibility = View.VISIBLE
-                    refreshAvChannels()
+                    refreshAvailableChannels()
                 }
                 transpBackground.setOnClickListener{
                     state = BottomSheetBehavior.STATE_COLLAPSED
                     bottomNavigation.visibility = View.VISIBLE
-                    refreshAvChannels()
+                    refreshAvailableChannels()
                 }
             }
         }
@@ -163,15 +164,15 @@ class ChannelsSettingsFragment: BaseFragment(){
     private fun bottomSheetSetPlaceHolder(){
         tvTextError.text = resources.getString(R.string.need_create_channels_error)
         lrChannelsNotExist.visibility = View.VISIBLE
-        avChannelsAdapter.clear()
-        refreshAvChannels()
+        availableChannelsAdapter.clear()
+        refreshAvailableChannels()
     }
 
-    private fun refreshAvChannels(){
-        avChannelsAdapter.checked = BooleanArray(avChannelsAdapter.itemCount)
-        avChannelsAdapter.notifyDataSetChanged()
+    private fun refreshAvailableChannels(){
+        availableChannelsAdapter.checked = BooleanArray(availableChannelsAdapter.itemCount)
+        availableChannelsAdapter.notifyDataSetChanged()
         btn_add_channels.isEnabled = false
-        btn_add_channels.backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.accentEnabledButton)
+        btn_add_channels.backgroundTintList = requireContext().getColorState(R.color.accentEnabledButton)
     }
 
     private fun deleteChannel(idChannel: Long){
@@ -186,7 +187,7 @@ class ChannelsSettingsFragment: BaseFragment(){
         lifecycleScope.launch {
             setToolbarTitle(getString(R.string.channels))
             if(isCallback){
-                setBtnShowAvChannelsState(true)
+                setBtnShowAvailableChannelsState(true)
                 channelsViewModel.getAvChannels()
             }
         }
@@ -195,19 +196,19 @@ class ChannelsSettingsFragment: BaseFragment(){
     override fun setNetworkLostUi() {
         lifecycleScope.launch {
             setToolbarTitle(getString(R.string.network_waiting))
-            setBtnShowAvChannelsState(false)
+            setBtnShowAvailableChannelsState(false)
         }
     }
 
-    fun setBtnShowAvChannelsState(isEnable:Boolean){
+    fun setBtnShowAvailableChannelsState(isEnable:Boolean){
         if(isEnable){
-            btnShowAvChannels.isEnabled = true
-            btnShowAvChannels.setTextColor(ContextCompat.getColor(requireContext(), R.color.accent))
-            btnShowAvChannels.iconTint = ContextCompat.getColorStateList(requireContext(), R.color.accent)
+            btnShowAvailableChannels.isEnabled = true
+            btnShowAvailableChannels.setTextColor(requireContext().getColorFromResource(R.color.accent))
+            btnShowAvailableChannels.iconTint = requireContext().getColorState(R.color.accent)
         }else{
-            btnShowAvChannels.isEnabled = false
-            btnShowAvChannels.setTextColor(ContextCompat.getColor(requireContext(), R.color.accentEnabledButton))
-            btnShowAvChannels.iconTint = ContextCompat.getColorStateList(requireContext(), R.color.accentEnabledButton)
+            btnShowAvailableChannels.isEnabled = false
+            btnShowAvailableChannels.setTextColor(requireContext().getColorFromResource(R.color.accentEnabledButton))
+            btnShowAvailableChannels.iconTint = requireContext().getColorState(R.color.accentEnabledButton)
         }
     }
 
@@ -226,11 +227,11 @@ class ChannelsSettingsFragment: BaseFragment(){
         }
     }
 
-    private fun handleAvChannels(channels: List<ChannelEntity>?){
+    private fun handleAvailableChannels(channels: List<ChannelEntity>?){
         if(channels != null){
             if(lrChannelsNotExist.isVisible)
                 lrChannelsNotExist.visibility = View.GONE
-            avChannelsAdapter.submitList(channels)
+            availableChannelsAdapter.submitList(channels)
         }
     }
 

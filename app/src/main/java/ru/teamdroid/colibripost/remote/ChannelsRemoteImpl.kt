@@ -12,7 +12,7 @@ class ChannelsRemoteImpl @Inject constructor(
         return chats.getChannelsFullInfo(chatIds, true)
     }
 
-    override suspend fun getAvChannels(chatIds:List<Long>): List<ChannelEntity> {
+    override suspend fun getAvailableChannels(chatIds:List<Long>): List<ChannelEntity> {
         return chats.getChannelsFullInfo(chatIds, false)
     }
 }

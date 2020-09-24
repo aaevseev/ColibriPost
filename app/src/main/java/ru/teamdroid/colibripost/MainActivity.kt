@@ -129,22 +129,10 @@ class MainActivity : AppCompatActivity(), SwitchTransparentView {
         else transpView.visibility = View.GONE
     }
 
-    override fun hideTransparentView() {
-        transpView.visibility = View.GONE
-    }
-
-    fun showRefreshing() = swipeRefreshStatus(true)
-
-    fun hideRefreshing() = swipeRefreshStatus(false)
-
     fun swipeRefreshStatus(refreshStatus: Boolean) {
         swipeRefreshLayout.isRefreshing = refreshStatus
     }
 
-}
-
-fun Context.getColorFromResource(idColor: Int): Int {
-    return ContextCompat.getColor(this, idColor)
 }
 
 inline fun Activity?.base(block: MainActivity.() -> Unit) {

@@ -7,7 +7,7 @@ import javax.inject.Inject
 
 class ChannelsViewModel @Inject constructor(
     val getAddedChannelsUseCase: GetAddedChannels,
-    val getAvChannelsUseCase: GetAvChannels,
+    val getAvailableChannelsUseCase: GetAvailableChannels,
     val setChannelsUseCase: SetChannels,
     val deleteChannelUseCase: DeleteChannel
 ) : BaseViewModel(){
@@ -23,7 +23,7 @@ class ChannelsViewModel @Inject constructor(
     }
 
     fun getAvChannels(){
-        getAvChannelsUseCase(None()){it.either(::handleFailure) {handleAvChannels(it)} }
+        getAvailableChannelsUseCase(None()){it.either(::handleFailure) {handleAvailableChannels(it)} }
     }
 
     fun setChannels(channels: List<ChannelEntity>){
@@ -39,7 +39,7 @@ class ChannelsViewModel @Inject constructor(
         addedChannelsData.value = channels
     }
 
-    fun handleAvChannels(channels: List<ChannelEntity>){
+    fun handleAvailableChannels(channels: List<ChannelEntity>){
         avChannelsData.value = channels
     }
 
@@ -54,7 +54,7 @@ class ChannelsViewModel @Inject constructor(
     override fun onCleared() {
         super.onCleared()
         getAddedChannelsUseCase.unsubscribe()
-        getAvChannelsUseCase.unsubscribe()
+        getAvailableChannelsUseCase.unsubscribe()
         setChannelsUseCase.unsubscribe()
         deleteChannelUseCase.unsubscribe()
     }
