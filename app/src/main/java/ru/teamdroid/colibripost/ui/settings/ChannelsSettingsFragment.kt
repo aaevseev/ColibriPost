@@ -258,7 +258,7 @@ class ChannelsSettingsFragment: BaseFragment(){
     //endregion
 
     companion object {
-        const val TAG = "ChannelsSettingsFragment"
+        const val TAG = "ChannelsSettingsFragment1"
     }
 
 
