@@ -10,25 +10,26 @@ import ru.teamdroid.colibripost.domain.channels.ChannelEntity
 import ru.teamdroid.colibripost.ui.core.BaseAdapter
 import ru.teamdroid.colibripost.ui.core.PicassoHelper
 
-class ChannelsAdapter: BaseAdapter<ChannelEntity, ChannelsAdapter.ChannelViewHolder>(
+open class ChannelsAdapter(
+    var showDeleteChannelDialog: (idChannel: Long) -> Unit
+): BaseAdapter<ChannelEntity, ChannelsAdapter.ChannelViewHolder>(
     ChannelDiffCallback()
 ) {
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChannelViewHolder {
         val view = LayoutInflater.from(parent.context).
         inflate(R.layout.item_channel, parent, false)
-        return ChannelViewHolder(view)
+        return ChannelViewHolder(view, this)
     }
 
-
-    class ChannelViewHolder(val root: View): BaseAdapter.BaseViewHolder(root){
+    class ChannelViewHolder(val root: View, val adapter: ChannelsAdapter): BaseAdapter.BaseViewHolder(root){
 
         override fun onBind(item: Any) {
             (item as? ChannelEntity)?.let {
                 root.tvChannelName.text = item.title
                 root.tvCount.text = item.memberCount.toString()
-
+                root.btnChannelDelete.setOnClickListener {
+                    adapter.showDeleteChannelDialog(item.chatId)
+                }
                 PicassoHelper.loadImageFile(root.context, item.photoPath, root.imgPhoto)
             }
         }

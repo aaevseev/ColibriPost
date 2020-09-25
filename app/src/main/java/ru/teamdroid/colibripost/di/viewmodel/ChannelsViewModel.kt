@@ -1,29 +1,61 @@
 package ru.teamdroid.colibripost.di.viewmodel
 
-import androidx.lifecycle.MutableLiveData
-import ru.teamdroid.colibripost.domain.channels.ChannelEntity
-import ru.teamdroid.colibripost.domain.channels.GetChannels
-import ru.teamdroid.colibripost.domain.type.Failure
+import ru.teamdroid.colibripost.domain.channels.*
 import ru.teamdroid.colibripost.domain.type.None
 import ru.teamdroid.colibripost.other.SingleLiveData
 import javax.inject.Inject
 
 class ChannelsViewModel @Inject constructor(
-    val getChannelsUseCase: GetChannels
+    val getAddedChannelsUseCase: GetAddedChannels,
+    val getAvailableChannelsUseCase: GetAvailableChannels,
+    val setChannelsUseCase: SetChannels,
+    val deleteChannelUseCase: DeleteChannel
 ) : BaseViewModel(){
 
-    var channelsData: SingleLiveData<List<ChannelEntity>> = SingleLiveData()
+    var addedChannelsData: SingleLiveData<List<ChannelEntity>> = SingleLiveData()
+    var avChannelsData: SingleLiveData<List<ChannelEntity>> = SingleLiveData()
+    var setChannelsData: SingleLiveData<None> = SingleLiveData()
+    var deleteChannelData: SingleLiveData<None> = SingleLiveData()
 
-    fun getChannels() {
-        getChannelsUseCase(None()){it.either(::handleFailure) {handleChannels(it)} }
+    fun getAddedChannels() {
+        updateRefreshing(true)
+        getAddedChannelsUseCase(None()){it.either(::handleFailure) {handleAddedChannels(it)} }
     }
 
-    fun handleChannels(channels: List<ChannelEntity>){
-        channelsData.value = channels
+    fun getAvChannels(){
+        getAvailableChannelsUseCase(None()){it.either(::handleFailure) {handleAvailableChannels(it)} }
+    }
+
+    fun setChannels(channels: List<ChannelEntity>){
+        setChannelsUseCase(channels){it.either(::handleFailure) { handleSetChannels(it) } }
+    }
+
+    fun deleteChannel(idChannel: Long){
+        deleteChannelUseCase(idChannel){it.either(::handleFailure) {handleDeleteChannel(it)} }
+    }
+
+
+    fun handleAddedChannels(channels: List<ChannelEntity>){
+        addedChannelsData.value = channels
+    }
+
+    fun handleAvailableChannels(channels: List<ChannelEntity>){
+        avChannelsData.value = channels
+    }
+
+    fun handleSetChannels(none: None){
+        setChannelsData.value = none
+    }
+
+    fun handleDeleteChannel(none: None){
+        deleteChannelData.value = none
     }
 
     override fun onCleared() {
         super.onCleared()
-        getChannelsUseCase.unsubscribe()
+        getAddedChannelsUseCase.unsubscribe()
+        getAvailableChannelsUseCase.unsubscribe()
+        setChannelsUseCase.unsubscribe()
+        deleteChannelUseCase.unsubscribe()
     }
 }

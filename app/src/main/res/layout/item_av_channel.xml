@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout
+    xmlns:android = "http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bottom_white_sheet_background"
+    android:divider="@drawable/devider">
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rlMain"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="8dp"
+        android:background="@drawable/bottom_white_sheet_background"
+        android:clickable="true"
+        android:focusable="true">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imgPhoto"
+            android:layout_width="@dimen/small_tiny_photo_dim"
+            android:layout_height="@dimen/small_tiny_photo_dim"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="@dimen/size_smedium"
+            android:layout_margin="@dimen/size_smedium"
+            android:src="@drawable/ic_account_circle" />
+
+        <LinearLayout
+            android:id="@+id/channelName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="72dp"
+            android:layout_marginEnd="40dp"
+            android:layout_alignParentStart="true"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <TextView
+                android:id="@+id/tvChannelName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:fontFamily="@font/roboto_regular"
+                android:gravity="center"
+                android:letterSpacing="0.03"
+                android:maxLines="1"
+                android:textAlignment="textStart"
+                android:textColor="@color/text"
+                android:textSize="21sp"
+                android:ellipsize="end"
+                android:scrollHorizontally="true"
+                tools:text="@string/channels"
+                tools:ignore="RtlCompat" />
+
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/imgCheck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_done" />
+
+    </RelativeLayout>
+
+</LinearLayout>
+

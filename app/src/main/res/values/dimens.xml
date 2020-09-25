@@ -9,13 +9,17 @@
     <dimen name="new_task_tool_panel_corner_radius">20dp</dimen>
     <dimen name="margin_et_rv_new_post_fragment">16dp</dimen>
 
+    <dimen name="tiny_photo_dim">32dp</dimen>
+    <dimen name="small_tiny_photo_dim">39dp</dimen>
     <dimen name="small_photo_dim">48dp</dimen>
 
     <dimen name="size_smedium">12dp</dimen>
     <dimen name="size_medium">16dp</dimen>
     <dimen name="size_large">24dp</dimen>
+    <dimen name="size_huge">32dp</dimen>
 
     <dimen name="small_margin8">8dp</dimen>
     <dimen name="small_margin">10dp</dimen>
     <dimen name="medium_margin">15dp</dimen>
+    <dimen name="big_margin">22dp</dimen>
 </resources>

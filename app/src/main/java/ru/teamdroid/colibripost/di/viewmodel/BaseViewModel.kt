@@ -15,7 +15,7 @@ open class BaseViewModel: ViewModel(){
         this.failureData.value = failure
     }
 
-    protected fun updateProgress(progress: Boolean){
+    protected fun updateRefreshing(progress: Boolean){
         this.progressData.value = progress
     }
 

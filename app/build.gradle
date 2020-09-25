@@ -47,6 +47,11 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
+    //support
+    implementation 'com.android.support:appcompat-v7:29.0.0'
+    implementation 'com.android.support:design:29.0.0'
+    implementation 'com.android.support:support-v4:29.0.0'
+
     //ktx
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.0-alpha07'
 

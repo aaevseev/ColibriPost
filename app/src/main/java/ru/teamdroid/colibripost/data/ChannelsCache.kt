@@ -6,6 +6,8 @@ interface ChannelsCache {
 
     fun saveChannel(entity: ChannelEntity)
 
+    fun saveChannels(entities: List<ChannelEntity>)
+
     fun getChannel(key: Long): ChannelEntity?
 
     fun getChannels(): List<ChannelEntity>

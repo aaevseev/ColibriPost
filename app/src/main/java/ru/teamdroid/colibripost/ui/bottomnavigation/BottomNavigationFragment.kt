@@ -21,7 +21,7 @@ import ru.teamdroid.colibripost.ui.settings.SettingsFragment
 class BottomNavigationFragment : BaseFragment(), OnBackPressedListener {
 
     override val layoutId: Int = R.layout.fragment_bottom_navigation
-    private var selectedFragment = ChannelsSettingsFragment.TAG
+    private var selectedFragment = MainFragment.TAG
 
     private var _binding: FragmentBottomNavigationBinding? = null
     private val binding: FragmentBottomNavigationBinding

@@ -7,15 +7,23 @@ import ru.teamdroid.colibripost.domain.channels.ChannelEntity
 @Dao
 interface ChannelsDao : ChannelsCache{
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(friendEntity: ChannelEntity): Long
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insert(entities: List<ChannelEntity>): List<Long>
 
     @Update
     fun update(friendEntity: ChannelEntity)
 
     @Transaction
     override fun saveChannel(entity: ChannelEntity) {
-        if(insert(entity) == -1L) update(entity)
+        insert(entity)
+    }
+
+    @Transaction
+    override fun saveChannels(entities: List<ChannelEntity>) {
+        insert(entities)
     }
 
     @Query("SELECT * from channels_table WHERE chat_id = :key")
