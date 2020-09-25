@@ -8,6 +8,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.room.Delete
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.channels_bottom_sheet.*
@@ -48,8 +49,8 @@ class ChannelsSettingsFragment: BaseFragment(){
 
     private val channelsAdapter : ChannelsAdapter by lazy {
         ChannelsAdapter(
-            deleteChannel = {
-                deleteChannel(it)
+            showDeleteChannelDialog = {
+                showDeleteChannelDialog(it)
             }
         )
     }
@@ -175,8 +176,10 @@ class ChannelsSettingsFragment: BaseFragment(){
         btn_add_channels.backgroundTintList = requireContext().getColorState(R.color.accentEnabledButton)
     }
 
-    private fun deleteChannel(idChannel: Long){
-        channelsViewModel.deleteChannel(idChannel)
+    private fun showDeleteChannelDialog(idChannel: Long){
+        DeleteChannelDialog(idChannel){
+            channelsViewModel.deleteChannel(it)
+        }.show((requireActivity() as MainActivity).supportFragmentManager, DeleteChannelDialog.TAG)
     }
 
     fun refreshChannelsListsData(none:None?){
@@ -258,7 +261,7 @@ class ChannelsSettingsFragment: BaseFragment(){
     //endregion
 
     companion object {
-        const val TAG = "ChannelsSettingsFragment1"
+        const val TAG = "ChannelsSettingsFragment"
     }
 
 

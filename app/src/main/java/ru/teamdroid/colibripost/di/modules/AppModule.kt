@@ -23,6 +23,7 @@ class AppModule(private val app: Application) {
         return app.applicationContext
     }
 
+
     @Provides
     @Singleton
     fun provideChannelsRepository(remote: ChannelsRemote, cache: ChannelsCache, context: Context):
