@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout
+    xmlns:android = "http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/gray_1"
+    android:divider="@drawable/devider">
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rlMain"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="8dp"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_centerVertical="true"
+            android:id="@+id/imgPhoto"
+            android:src="@drawable/ic_account_circle"
+            android:layout_width="@dimen/small_photo_dim"
+            android:layout_height="@dimen/small_photo_dim" />
+
+        <LinearLayout
+            android:layout_centerVertical="true"
+            android:id="@+id/channelName_and_Count"
+            android:layout_toEndOf="@+id/imgPhoto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp"
+            android:layout_marginStart="@dimen/medium_margin">
+
+            <TextView
+                android:id="@+id/tvChannelName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:fontFamily="@font/montserrat_medium"
+                android:letterSpacing="0.03"
+                android:gravity="center"
+                android:maxLines="1"
+                android:textColor="#191919"
+                android:textSize="19sp"
+                tools:text="@string/name" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                tools:ignore="UseCompoundDrawables">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_groups" />
+
+                <TextView
+                    android:id="@+id/tvCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="@dimen/small_margin8"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:letterSpacing="0.03"
+                    tools:text="209"
+                    android:textSize="17sp" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/btnChannelDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_delete"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_marginTop="16dp"
+            android:layout_alignParentEnd="true">
+        </ImageView>
+
+    </RelativeLayout>
+
+</LinearLayout>
+
