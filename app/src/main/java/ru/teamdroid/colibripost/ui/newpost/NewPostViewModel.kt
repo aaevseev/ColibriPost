@@ -9,7 +9,7 @@ import android.util.Log
 import androidx.lifecycle.*
 import kotlinx.coroutines.launch
 import org.drinkless.td.libcore.telegram.TdApi.*
-import ru.teamdroid.colibripost.remote.Chats
+import ru.teamdroid.colibripost.remote.channels.ChatsRequests
 import ru.teamdroid.colibripost.remote.Messages
 import ru.teamdroid.colibripost.remote.core.TelegramClient
 import ru.teamdroid.colibripost.other.SingleLiveData
@@ -21,7 +21,7 @@ import javax.inject.Inject
 
 class NewPostViewModel @Inject constructor(
     val client: TelegramClient,
-    val chats: Chats,
+    val chatsRequests: ChatsRequests,
     val messages: Messages,
     val context: Context
 ) : ViewModel() {
@@ -31,7 +31,7 @@ class NewPostViewModel @Inject constructor(
     }
 
     private val _chatList =
-        liveData(viewModelScope.coroutineContext) { emit(chats.getChats()) }
+        liveData(viewModelScope.coroutineContext) { emit(chatsRequests.getChats()) }
     val chatList: LiveData<List<Chat>>
         get() = _chatList
 

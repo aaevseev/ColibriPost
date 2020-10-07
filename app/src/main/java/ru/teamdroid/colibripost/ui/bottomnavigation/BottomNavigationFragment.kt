@@ -8,14 +8,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.launch
+import ru.teamdroid.colibripost.MainActivity
 import ru.teamdroid.colibripost.OnBackPressedListener
 import ru.teamdroid.colibripost.R
 import ru.teamdroid.colibripost.databinding.FragmentBottomNavigationBinding
+import ru.teamdroid.colibripost.ui.auth.SignInFragment
 import ru.teamdroid.colibripost.ui.core.BaseFragment
 import ru.teamdroid.colibripost.ui.main.MainFragment
 import ru.teamdroid.colibripost.ui.newpost.NewPostFragment
-import ru.teamdroid.colibripost.ui.settings.ChannelsSettingsFragment
+import ru.teamdroid.colibripost.ui.settings.channels.ChannelsSettingsFragment
 import ru.teamdroid.colibripost.ui.settings.SettingsFragment
 
 class BottomNavigationFragment : BaseFragment(), OnBackPressedListener {
@@ -69,7 +73,6 @@ class BottomNavigationFragment : BaseFragment(), OnBackPressedListener {
         displayFragment(selectedFragment)
         setToolbarTitle(getString(R.string.main))
     }
-
     private fun changeActionBar(title: String, isShowHomeButton: Boolean = false) {
         setToolbarTitle(title)
         (requireActivity() as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(
@@ -77,7 +80,12 @@ class BottomNavigationFragment : BaseFragment(), OnBackPressedListener {
         )
     }
 
-    private fun displayFragment(tag: String) {
+     fun displayFragment(tag: String) {
+        if(tag == SignInFragment.TAG)
+             base {
+                setNavigationFragment(SignInFragment())
+                 lifecycleScope.launch { authHolder.logOut() }
+             }
         childFragmentManager.beginTransaction().apply {
             childFragmentManager.findFragmentByTag(selectedFragment)
                 ?.let { if (it.isAdded) hide(it) }
@@ -102,6 +110,7 @@ class BottomNavigationFragment : BaseFragment(), OnBackPressedListener {
             NewPostFragment.TAG -> NewPostFragment()
             SettingsFragment.TAG -> SettingsFragment()
             ChannelsSettingsFragment.TAG -> ChannelsSettingsFragment()
+            SignInFragment.TAG -> SignInFragment()
             else -> MainFragment()
         }
     }

@@ -7,7 +7,7 @@
     android:background="@color/gray_1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.settings.ChannelsSettingsFragment">
+    tools:context=".ui.settings.channels.ChannelsSettingsFragment">
 
 
     <LinearLayout
@@ -28,9 +28,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/size_medium"
-                android:layout_marginTop="@dimen/size_smedium"
+                android:layout_marginTop="@dimen/size_small"
                 android:layout_marginEnd="@dimen/size_medium"
-                android:layout_marginBottom="@dimen/size_smedium"
+                android:layout_marginBottom="@dimen/size_small"
                 android:background="@color/gray_1"
                 android:fontFamily="@font/montserrat_bold"
                 android:letterSpacing="0.1"

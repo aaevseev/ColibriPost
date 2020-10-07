@@ -8,7 +8,6 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.observe
@@ -16,8 +15,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import ru.teamdroid.colibripost.domain.type.Failure
-import ru.teamdroid.colibripost.remote.AuthHolder
-import ru.teamdroid.colibripost.remote.AuthStates
+import ru.teamdroid.colibripost.remote.auth.AuthHolder
+import ru.teamdroid.colibripost.remote.auth.AuthStates
 import ru.teamdroid.colibripost.ui.SwitchTransparentView
 import ru.teamdroid.colibripost.ui.auth.SignInFragment
 import ru.teamdroid.colibripost.ui.bottomnavigation.BottomNavigationFragment
@@ -57,6 +56,8 @@ class MainActivity : AppCompatActivity(), SwitchTransparentView {
                 setNavigationFragment(SignInFragment())
             }
         }
+
+        Log.d("lol", "lol 2")
     }
 
     override fun onResume() {
@@ -74,15 +75,20 @@ class MainActivity : AppCompatActivity(), SwitchTransparentView {
         val childFragmentManager = supportFragmentManager.fragments[0].childFragmentManager
         val fragment = childFragmentManager.findFragmentByTag(NewPostFragment.TAG)
 
-        if (fragment != null && fragment.isVisible) {
-            val backPressListener = supportFragmentManager.fragments[0] as OnBackPressedListener
-            backPressListener.backPressed()
-        } else {
-            if (supportFragmentManager.backStackEntryCount > 1)
-                supportFragmentManager.popBackStack()
-            else
-                finish()
+        childFragmentManager.also {
+            if (fragment != null && fragment.isVisible) {
+                val backPressListener = supportFragmentManager.fragments[0] as OnBackPressedListener
+                backPressListener.backPressed()
+            } else {
+                if (it.backStackEntryCount  > 1){
+                    it.popBackStack()
+                    if(it.backStackEntryCount == 3) supportActionBar?.setDisplayHomeAsUpEnabled(false)
+                }
+                else
+                    finish()
+            }
         }
+
     }
 
     fun authStateLog() {

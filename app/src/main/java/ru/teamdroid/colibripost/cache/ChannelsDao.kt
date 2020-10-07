@@ -1,11 +1,11 @@
 package ru.teamdroid.colibripost.cache
 
 import androidx.room.*
-import ru.teamdroid.colibripost.data.ChannelsCache
+import ru.teamdroid.colibripost.data.channels.ChannelsCache
 import ru.teamdroid.colibripost.domain.channels.ChannelEntity
 
 @Dao
-interface ChannelsDao : ChannelsCache{
+interface ChannelsDao : ChannelsCache {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(friendEntity: ChannelEntity): Long

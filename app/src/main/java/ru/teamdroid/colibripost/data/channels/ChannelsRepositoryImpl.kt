@@ -1,4 +1,4 @@
-package ru.teamdroid.colibripost.data
+package ru.teamdroid.colibripost.data.channels
 
 import ru.teamdroid.colibripost.domain.channels.ChannelEntity
 import ru.teamdroid.colibripost.domain.channels.ChannelsRepository
@@ -12,15 +12,17 @@ class ChannelsRepositoryImpl(
     private val channelsRemote: ChannelsRemote,
     private val channelsCache: ChannelsCache,
     private val networkHandler: NetworkHandler
-) : ChannelsRepository{
+) : ChannelsRepository {
 
     suspend override fun getAddedChannels(): Either<Failure, List<ChannelEntity>> {
         val actualChannels = channelsCache.getChannels()
         return  when (actualChannels.size) {
             0 -> Either.Left(Failure.ChannelsListIsEmptyError)
             else -> {
-                return if (networkHandler.isConnected != null) Either.Right(channelsRemote.getAddedChannels(
-                    actualChannels.map { it.chatId }))
+                return if (networkHandler.isConnected != null) Either.Right(
+                    channelsRemote.getAddedChannels(
+                        actualChannels.map { it.chatId })
+                )
                                 .onNext { it.map { channelsCache.saveChannel(it) } }
                 else Either.Right(actualChannels)
             }

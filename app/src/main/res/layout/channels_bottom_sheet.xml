@@ -95,7 +95,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
-                    android:backgroundTint="@color/accentEnabledButton"
+                    android:backgroundTint="@color/accentEnabled"
                     android:fontFamily="@font/montserrat_medium"
                     android:insetTop="0dp"
                     android:insetBottom="0dp"

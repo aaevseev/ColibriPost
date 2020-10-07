@@ -4,6 +4,6 @@
     <solid android:color="@color/accent" />
 
     <corners
-        android:topLeftRadius="@dimen/big_margin"
-        android:topRightRadius="@dimen/big_margin" />
+        android:topLeftRadius="@dimen/size_big"
+        android:topRightRadius="@dimen/size_big" />
 </shape>

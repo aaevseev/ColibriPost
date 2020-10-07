@@ -10,8 +10,8 @@ import androidx.lifecycle.observe
 import kotlinx.coroutines.launch
 import ru.teamdroid.colibripost.App
 import ru.teamdroid.colibripost.R
-import ru.teamdroid.colibripost.remote.AuthHolder
-import ru.teamdroid.colibripost.remote.AuthStates.*
+import ru.teamdroid.colibripost.remote.auth.AuthHolder
+import ru.teamdroid.colibripost.remote.auth.AuthStates.*
 import ru.teamdroid.colibripost.databinding.FragmentWaitNumberBinding
 import ru.teamdroid.colibripost.ui.core.BaseFragment
 import javax.inject.Inject
