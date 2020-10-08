@@ -1,7 +1,6 @@
 package ru.teamdroid.colibripost.data
 
-import ru.teamdroid.colibripost.domain.channels.ChannelEntity
-import ru.teamdroid.colibripost.domain.user.AccountEntity
+import ru.teamdroid.colibripost.domain.account.AccountEntity
 
 interface AccountCache {
 

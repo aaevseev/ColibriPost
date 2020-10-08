@@ -1,4 +1,4 @@
-package ru.teamdroid.colibripost.domain.user
+package ru.teamdroid.colibripost.domain.account
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

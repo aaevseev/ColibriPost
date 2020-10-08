@@ -22,6 +22,7 @@ import kotlinx.coroutines.launch
 import ru.teamdroid.colibripost.App
 import ru.teamdroid.colibripost.MainActivity
 import ru.teamdroid.colibripost.R
+import ru.teamdroid.colibripost.databinding.FragmentBottomNavigationBinding
 import ru.teamdroid.colibripost.di.viewmodel.ChannelsViewModel
 import ru.teamdroid.colibripost.domain.channels.ChannelEntity
 import ru.teamdroid.colibripost.domain.type.Failure
@@ -63,6 +64,7 @@ class ChannelsSettingsFragment: BaseFragment(){
             }
         )
     }
+
     val availableChannelsAdapter = AvailableChannelsAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -11,7 +11,7 @@ import ru.teamdroid.colibripost.data.channels.ChannelsCache
 import ru.teamdroid.colibripost.data.channels.ChannelsRemote
 import ru.teamdroid.colibripost.data.channels.ChannelsRepositoryImpl
 import ru.teamdroid.colibripost.domain.channels.ChannelsRepository
-import ru.teamdroid.colibripost.domain.user.AccountRepository
+import ru.teamdroid.colibripost.domain.account.AccountRepository
 import ru.teamdroid.colibripost.remote.core.NetworkHandler
 import javax.inject.Singleton
 

@@ -2,7 +2,6 @@ package ru.teamdroid.colibripost.ui.settings
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
@@ -10,15 +9,12 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.graphics.drawable.toDrawable
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_settings.*
 import ru.teamdroid.colibripost.App
-import ru.teamdroid.colibripost.MainActivity
 import ru.teamdroid.colibripost.R
 import ru.teamdroid.colibripost.di.viewmodel.AccountViewModel
-import ru.teamdroid.colibripost.domain.channels.ChannelEntity
 import ru.teamdroid.colibripost.domain.type.Failure
-import ru.teamdroid.colibripost.domain.user.AccountEntity
+import ru.teamdroid.colibripost.domain.account.AccountEntity
 import ru.teamdroid.colibripost.other.SingleLiveData
 import ru.teamdroid.colibripost.other.onFailure
 import ru.teamdroid.colibripost.other.onSuccess
@@ -29,7 +25,6 @@ import ru.teamdroid.colibripost.ui.core.PicassoHelper
 import ru.teamdroid.colibripost.ui.core.getColorFromResource
 import ru.teamdroid.colibripost.ui.core.getImageDrawable
 import ru.teamdroid.colibripost.ui.settings.channels.ChannelsSettingsFragment
-import kotlin.math.log
 
 class SettingsFragment : BaseFragment() {
 

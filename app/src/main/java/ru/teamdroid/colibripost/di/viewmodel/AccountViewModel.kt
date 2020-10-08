@@ -1,10 +1,9 @@
 package ru.teamdroid.colibripost.di.viewmodel
 
 
-import ru.teamdroid.colibripost.domain.channels.ChannelEntity
 import ru.teamdroid.colibripost.domain.type.None
-import ru.teamdroid.colibripost.domain.user.AccountEntity
-import ru.teamdroid.colibripost.domain.user.GetAccount
+import ru.teamdroid.colibripost.domain.account.AccountEntity
+import ru.teamdroid.colibripost.domain.account.GetAccount
 import ru.teamdroid.colibripost.other.SingleLiveData
 import javax.inject.Inject
 

@@ -2,8 +2,7 @@ package ru.teamdroid.colibripost.cache
 
 import androidx.room.*
 import ru.teamdroid.colibripost.data.AccountCache
-import ru.teamdroid.colibripost.domain.channels.ChannelEntity
-import ru.teamdroid.colibripost.domain.user.AccountEntity
+import ru.teamdroid.colibripost.domain.account.AccountEntity
 
 @Dao
 interface AccountDao : AccountCache{

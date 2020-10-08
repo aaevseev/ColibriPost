@@ -83,7 +83,9 @@ class BottomNavigationFragment : BaseFragment(), OnBackPressedListener {
      fun displayFragment(tag: String) {
         if(tag == SignInFragment.TAG)
              base {
-                setNavigationFragment(SignInFragment())
+                 setNavigationFragment(SignInFragment())
+                 changeActionBar(getString(R.string.main))
+                 (requireActivity() as AppCompatActivity).supportActionBar?.hide()
                  lifecycleScope.launch { authHolder.logOut() }
              }
         childFragmentManager.beginTransaction().apply {

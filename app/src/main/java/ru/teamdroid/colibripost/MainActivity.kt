@@ -56,8 +56,6 @@ class MainActivity : AppCompatActivity(), SwitchTransparentView {
                 setNavigationFragment(SignInFragment())
             }
         }
-
-        Log.d("lol", "lol 2")
     }
 
     override fun onResume() {

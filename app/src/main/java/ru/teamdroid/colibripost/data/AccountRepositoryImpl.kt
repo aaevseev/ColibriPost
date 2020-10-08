@@ -3,8 +3,8 @@ package ru.teamdroid.colibripost.data
 import ru.teamdroid.colibripost.domain.type.Either
 import ru.teamdroid.colibripost.domain.type.Failure
 import ru.teamdroid.colibripost.domain.type.onNext
-import ru.teamdroid.colibripost.domain.user.AccountEntity
-import ru.teamdroid.colibripost.domain.user.AccountRepository
+import ru.teamdroid.colibripost.domain.account.AccountEntity
+import ru.teamdroid.colibripost.domain.account.AccountRepository
 import ru.teamdroid.colibripost.remote.core.NetworkHandler
 
 class AccountRepositoryImpl(

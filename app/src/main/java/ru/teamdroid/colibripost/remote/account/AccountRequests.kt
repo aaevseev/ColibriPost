@@ -1,8 +1,7 @@
 package ru.teamdroid.colibripost.remote.account
 
 import org.drinkless.td.libcore.telegram.TdApi
-import ru.teamdroid.colibripost.domain.user.AccountEntity
-import ru.teamdroid.colibripost.remote.core.NetworkHandler
+import ru.teamdroid.colibripost.domain.account.AccountEntity
 import ru.teamdroid.colibripost.remote.core.TelegramClient
 import javax.inject.Inject
 import javax.inject.Singleton
