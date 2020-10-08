@@ -32,6 +32,8 @@ class SettingsFragment : BaseFragment() {
 
     override val layoutId = R.layout.fragment_settings
 
+    override val toolbarTitle = R.string.settings
+
     private lateinit var gestureDetector:GestureDetector
 
     lateinit var accountViewModel: AccountViewModel

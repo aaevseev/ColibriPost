@@ -51,6 +51,8 @@ class ChannelsSettingsFragment: BaseFragment(){
 
     override val layoutId = R.layout.fragment_channels_settings
 
+    override val toolbarTitle = R.string.channels
+
     private lateinit var addedChannelsRView: RecyclerView
     private lateinit var availableChannelsRView: RecyclerView
     protected lateinit var lm: RecyclerView.LayoutManager
@@ -198,7 +200,7 @@ class ChannelsSettingsFragment: BaseFragment(){
 
     override fun setNetworkAvailbleUi(isCallback:Boolean) {
         lifecycleScope.launch {
-            setToolbarTitle(getString(R.string.channels))
+            setToolbarTitle()
             if(isCallback){
                 setBtnShowAvailableChannelsState(true)
                 channelsViewModel.getAvChannels()

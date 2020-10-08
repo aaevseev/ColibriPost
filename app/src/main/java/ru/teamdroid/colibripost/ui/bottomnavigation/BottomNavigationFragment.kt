@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.lifecycleScope
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.launch
@@ -25,6 +26,7 @@ import ru.teamdroid.colibripost.ui.settings.SettingsFragment
 class BottomNavigationFragment : BaseFragment(), OnBackPressedListener {
 
     override val layoutId: Int = R.layout.fragment_bottom_navigation
+    override val toolbarTitle = 0
     private var selectedFragment = MainFragment.TAG
 
     private var _binding: FragmentBottomNavigationBinding? = null
@@ -49,6 +51,7 @@ class BottomNavigationFragment : BaseFragment(), OnBackPressedListener {
 
     private fun setupBottomNavigator() {
         binding.bottomNavigation.setOnNavigationItemSelectedListener {
+            childFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
             when (it.itemId) {
                 R.id.navigation_main -> {
                     changeActionBar(getString(R.string.main))
@@ -84,7 +87,6 @@ class BottomNavigationFragment : BaseFragment(), OnBackPressedListener {
         if(tag == SignInFragment.TAG)
              base {
                  setNavigationFragment(SignInFragment())
-                 changeActionBar(getString(R.string.main))
                  (requireActivity() as AppCompatActivity).supportActionBar?.hide()
                  lifecycleScope.launch { authHolder.logOut() }
              }

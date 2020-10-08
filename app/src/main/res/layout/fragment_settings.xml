@@ -13,9 +13,8 @@
     <LinearLayout
         android:id="@+id/layout_user_info"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_above="@+id/rv_settings_menu"
-        android:layout_alignParentTop="true"
         android:background="@color/user_info_background_color"
         android:orientation="vertical">
 

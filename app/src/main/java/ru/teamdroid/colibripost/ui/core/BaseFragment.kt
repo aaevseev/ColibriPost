@@ -19,6 +19,8 @@ abstract class BaseFragment: Fragment() {
 
     abstract val layoutId:Int
 
+    abstract val toolbarTitle: Int
+
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
@@ -30,9 +32,13 @@ abstract class BaseFragment: Fragment() {
         return inflater.inflate(layoutId, container, false)
     }
 
-    fun setToolbarTitle(title: String) {
+    fun setToolbarTitle(stringTitle: String = "") {
         base {
-            supportActionBar?.title = title
+            supportActionBar?.apply {
+                if(stringTitle == "")
+                    this.title = getString(toolbarTitle)
+                else this.title  = stringTitle
+            }
         }
     }
 

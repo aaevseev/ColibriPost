@@ -19,6 +19,7 @@ import javax.inject.Inject
 class WaitNumberFragment : BaseFragment() {
 
     override val layoutId = R.layout.fragment_wait_number
+    override val toolbarTitle = 0
     private var _binding: FragmentWaitNumberBinding? = null
     private val binding: FragmentWaitNumberBinding
         get() = _binding!!

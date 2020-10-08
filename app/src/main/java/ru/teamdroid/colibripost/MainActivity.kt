@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.observe
 import kotlinx.android.synthetic.main.activity_main.*
@@ -20,6 +21,7 @@ import ru.teamdroid.colibripost.remote.auth.AuthStates
 import ru.teamdroid.colibripost.ui.SwitchTransparentView
 import ru.teamdroid.colibripost.ui.auth.SignInFragment
 import ru.teamdroid.colibripost.ui.bottomnavigation.BottomNavigationFragment
+import ru.teamdroid.colibripost.ui.core.BaseFragment
 import ru.teamdroid.colibripost.ui.newpost.NewPostFragment
 import javax.inject.Inject
 
@@ -79,14 +81,22 @@ class MainActivity : AppCompatActivity(), SwitchTransparentView {
                 backPressListener.backPressed()
             } else {
                 if (it.backStackEntryCount  > 1){
+                    setBackStackToolBarTitle(it)
                     it.popBackStack()
-                    if(it.backStackEntryCount == 3) supportActionBar?.setDisplayHomeAsUpEnabled(false)
+                    if(it.backStackEntryCount == 2) supportActionBar?.setDisplayHomeAsUpEnabled(false)
                 }
                 else
                     finish()
             }
         }
+    }
 
+    fun setBackStackToolBarTitle(fragmentManager: FragmentManager){
+        fragmentManager.also {
+            if(it.fragments.size > 1){
+                (it.fragments[it.fragments.size - 2] as BaseFragment).setToolbarTitle()
+            }
+        }
     }
 
     fun authStateLog() {

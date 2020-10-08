@@ -38,6 +38,7 @@ import javax.inject.Inject
 class NewPostFragment : BaseFragment(), FragmentResultListener {
 
     override val layoutId = R.layout.fragment_channels_settings
+    override val toolbarTitle = R.string.new_post
 
     private var _binding: FragmentNewPostBinding? = null
     private val binding: FragmentNewPostBinding

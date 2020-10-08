@@ -17,6 +17,7 @@ class MainFragment : BaseFragment() {
     lateinit var messages: Messages
 
     override val layoutId = R.layout.fragment_main
+    override val toolbarTitle = R.string.main
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
