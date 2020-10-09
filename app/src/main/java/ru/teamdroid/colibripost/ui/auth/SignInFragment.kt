@@ -32,7 +32,7 @@ class SignInFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.btnSignIn.setOnClickListener {
-            base{setNavigationFragment(WaitNumberFragment())}
+            base { setNavigationFragment(WaitNumberFragment()) }
         }
     }
 

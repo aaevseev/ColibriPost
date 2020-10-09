@@ -12,7 +12,6 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.lifecycleScope
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.launch
-import ru.teamdroid.colibripost.MainActivity
 import ru.teamdroid.colibripost.OnBackPressedListener
 import ru.teamdroid.colibripost.R
 import ru.teamdroid.colibripost.databinding.FragmentBottomNavigationBinding
@@ -20,8 +19,8 @@ import ru.teamdroid.colibripost.ui.auth.SignInFragment
 import ru.teamdroid.colibripost.ui.core.BaseFragment
 import ru.teamdroid.colibripost.ui.main.MainFragment
 import ru.teamdroid.colibripost.ui.newpost.NewPostFragment
-import ru.teamdroid.colibripost.ui.settings.channels.ChannelsSettingsFragment
 import ru.teamdroid.colibripost.ui.settings.SettingsFragment
+import ru.teamdroid.colibripost.ui.settings.channels.ChannelsSettingsFragment
 
 class BottomNavigationFragment : BaseFragment(), OnBackPressedListener {
 
@@ -76,6 +75,7 @@ class BottomNavigationFragment : BaseFragment(), OnBackPressedListener {
         displayFragment(selectedFragment)
         setToolbarTitle(getString(R.string.main))
     }
+
     private fun changeActionBar(title: String, isShowHomeButton: Boolean = false) {
         setToolbarTitle(title)
         (requireActivity() as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(
@@ -83,13 +83,13 @@ class BottomNavigationFragment : BaseFragment(), OnBackPressedListener {
         )
     }
 
-     fun displayFragment(tag: String) {
-        if(tag == SignInFragment.TAG)
-             base {
-                 setNavigationFragment(SignInFragment())
-                 (requireActivity() as AppCompatActivity).supportActionBar?.hide()
-                 lifecycleScope.launch { authHolder.logOut() }
-             }
+    fun displayFragment(tag: String) {
+        if (tag == SignInFragment.TAG)
+            base {
+                setNavigationFragment(SignInFragment())
+                (requireActivity() as AppCompatActivity).supportActionBar?.hide()
+                lifecycleScope.launch { authHolder.logOut() }
+            }
         childFragmentManager.beginTransaction().apply {
             childFragmentManager.findFragmentByTag(selectedFragment)
                 ?.let { if (it.isAdded) hide(it) }

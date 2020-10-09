@@ -2,7 +2,6 @@ package ru.teamdroid.colibripost.remote.channels
 
 import org.drinkless.td.libcore.telegram.TdApi
 import ru.teamdroid.colibripost.domain.channels.ChannelEntity
-import ru.teamdroid.colibripost.remote.core.NetworkHandler
 import ru.teamdroid.colibripost.remote.core.TelegramClient
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -10,8 +9,7 @@ import javax.inject.Singleton
 @Singleton
 class ChatsRequests @Inject constructor(
     private val client: TelegramClient
-)
-{
+) {
 
     private suspend fun getChatIds(): LongArray {
         val getChats = TdApi.GetChats(TdApi.ChatListMain(), Long.MAX_VALUE, 0, 50)

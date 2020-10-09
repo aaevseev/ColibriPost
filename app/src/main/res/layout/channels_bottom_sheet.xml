@@ -4,10 +4,10 @@
     android:id="@+id/bottom_sheet"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    app:behavior_hideable="true"
-    android:visibility="visible"
     android:background="@drawable/bottom_white_sheet_background"
+    android:orientation="vertical"
+    android:visibility="visible"
+    app:behavior_hideable="true"
     app:behavior_peekHeight="0dp"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
@@ -44,8 +44,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:layout_marginBottom="@dimen/size_huge"
                     android:layout_marginTop="@dimen/size_huge"
+                    android:layout_marginBottom="@dimen/size_huge"
                     android:orientation="vertical"
                     android:visibility="gone">
 
@@ -79,7 +79,6 @@
             </RelativeLayout>
 
 
-
             <LinearLayout
                 android:id="@+id/lAddChannels"
                 android:layout_width="match_parent"
@@ -96,12 +95,12 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
                     android:backgroundTint="@color/accentEnabled"
+                    android:enabled="false"
                     android:fontFamily="@font/montserrat_medium"
                     android:insetTop="0dp"
                     android:insetBottom="0dp"
                     android:text="@string/ok"
                     android:textAllCaps="false"
-                    android:enabled="false"
                     android:textColor="@color/white"
                     android:textSize="16sp"
                     app:cornerRadius="10dp" />

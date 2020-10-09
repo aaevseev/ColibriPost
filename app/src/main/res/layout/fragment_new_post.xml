@@ -13,13 +13,13 @@
         android:id="@+id/et_post"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/margin_et_rv_new_post_fragment"
         android:background="@drawable/new_post_text_background"
         android:gravity="start|top"
+        android:inputType="text"
         android:padding="16dp"
         android:textColor="@color/text"
         android:textSize="14sp"
-        android:inputType="text"
-        android:layout_marginBottom="@dimen/margin_et_rv_new_post_fragment"
         app:layout_constraintBottom_toTopOf="@id/rv_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -62,9 +62,9 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@drawable/new_post_tool_panel_background"
-        app:layout_constraintHeight_default="spread"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_default="spread"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_post" />
 
@@ -72,18 +72,17 @@
         android:id="@+id/rv_content"
         android:layout_width="0dp"
         android:layout_height="84dp"
-        android:orientation="horizontal"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:layout_marginTop="@dimen/margin_et_rv_new_post_fragment"
         android:layout_marginStart="32dp"
+        android:layout_marginTop="@dimen/margin_et_rv_new_post_fragment"
         android:layout_marginEnd="32dp"
+        android:orientation="horizontal"
         android:visibility="gone"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="@id/btn_add_btn"
         app:layout_constraintEnd_toEndOf="@id/view_tool_panel"
         app:layout_constraintStart_toStartOf="@id/view_tool_panel"
         app:layout_constraintTop_toTopOf="@id/view_tool_panel"
-        app:layout_constraintBottom_toTopOf="@id/btn_add_btn"
-        app:layout_constraintVertical_chainStyle="packed"
-        />
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_add_btn"
@@ -103,11 +102,10 @@
         app:icon="@drawable/ic_plus"
         app:iconGravity="textStart"
         app:iconTint="@color/accent"
+        app:layout_constraintBottom_toTopOf="@id/spinner_category"
         app:layout_constraintEnd_toEndOf="@id/view_tool_panel"
         app:layout_constraintStart_toStartOf="@id/view_tool_panel"
-        app:layout_constraintTop_toBottomOf="@id/rv_content"
-        app:layout_constraintBottom_toTopOf="@id/spinner_category"
-        />
+        app:layout_constraintTop_toBottomOf="@id/rv_content" />
 
     <ru.teamdroid.colibripost.ui.screens.new_task.NewTaskSpinner
         android:id="@+id/spinner_category"
@@ -118,11 +116,10 @@
         android:layout_marginEnd="32dp"
         android:background="@drawable/new_post_spinner_background"
         android:spinnerMode="dropdown"
+        app:layout_constraintBottom_toTopOf="@id/spinner_publish"
         app:layout_constraintEnd_toEndOf="@id/view_tool_panel"
         app:layout_constraintStart_toStartOf="@id/view_tool_panel"
-        app:layout_constraintTop_toBottomOf="@id/btn_add_btn"
-        app:layout_constraintBottom_toTopOf="@id/spinner_publish"
-        />
+        app:layout_constraintTop_toBottomOf="@id/btn_add_btn" />
 
 
     <ru.teamdroid.colibripost.ui.screens.new_task.NewTaskSpinner
@@ -133,11 +130,10 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
         android:background="@drawable/new_post_spinner_background"
+        app:layout_constraintBottom_toTopOf="@id/tv_date"
         app:layout_constraintEnd_toEndOf="@id/view_tool_panel"
         app:layout_constraintStart_toStartOf="@id/view_tool_panel"
-        app:layout_constraintTop_toBottomOf="@id/spinner_category"
-        app:layout_constraintBottom_toTopOf="@id/tv_date"
-        />
+        app:layout_constraintTop_toBottomOf="@id/spinner_category" />
 
     <TextView
         android:id="@+id/tv_date"
@@ -146,18 +142,17 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
+        android:background="@drawable/new_post_spinner_background"
+        android:gravity="center_vertical"
         android:paddingStart="8dp"
         android:paddingEnd="8dp"
         android:singleLine="true"
-        android:background="@drawable/new_post_spinner_background"
-        android:gravity="center_vertical"
         android:textColor="@color/text"
         android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@id/btn_preview"
         app:layout_constraintEnd_toStartOf="@id/tv_time"
         app:layout_constraintStart_toStartOf="@id/view_tool_panel"
-        app:layout_constraintTop_toBottomOf="@id/spinner_publish"
-        app:layout_constraintBottom_toTopOf="@id/btn_preview"
-        />
+        app:layout_constraintTop_toBottomOf="@id/spinner_publish" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tv_time"
@@ -167,8 +162,8 @@
         android:background="@drawable/new_post_spinner_background"
         android:gravity="center"
         android:singleLine="true"
-        android:textSize="16sp"
         android:textColor="@color/text"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@id/tv_date"
         app:layout_constraintEnd_toEndOf="@id/view_tool_panel"
         app:layout_constraintStart_toEndOf="@id/tv_date"
@@ -182,18 +177,18 @@
         android:layout_height="40dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
         android:backgroundTint="@color/white"
         android:insetTop="0dp"
         android:insetBottom="0dp"
         android:text="@string/preview"
         android:textAllCaps="false"
         android:textColor="@color/accent"
+        app:layout_constraintBottom_toBottomOf="@id/view_tool_panel"
         app:layout_constraintEnd_toStartOf="@id/btn_send_post"
         app:layout_constraintStart_toStartOf="@id/view_tool_panel"
         app:layout_constraintTop_toBottomOf="@id/tv_date"
-        app:layout_constraintBottom_toBottomOf="@id/view_tool_panel"
         app:strokeColor="@color/accent"
         app:strokeWidth="1dp" />
 

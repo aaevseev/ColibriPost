@@ -3,8 +3,8 @@
     <item>
         <!--Shape - фигура. shape атрибут - тип фигуры, прямоугольник-->
         <shape android:shape="rectangle">
-            <size android:height="1dp"/>
-            <solid android:color="#f4555454"/>
+            <size android:height="1dp" />
+            <solid android:color="#f4555454" />
         </shape>
     </item>
 </layer-list>

@@ -10,10 +10,10 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import ru.teamdroid.colibripost.R
 
-class DeleteChannelDialog (
+class DeleteChannelDialog(
     private val channelId: Long,
-    private val deleteChannel: (channelId:Long) -> Unit
-): DialogFragment(){
+    private val deleteChannel: (channelId: Long) -> Unit
+) : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let {
             val builder = AlertDialog.Builder(it)
@@ -36,7 +36,8 @@ class DeleteChannelDialog (
             deleteChannel(channelId)
             dialog!!.dismiss()
         }
-        dialog?.findViewById<TextView>(R.id.tvCancelDelete)?.setOnClickListener { dialog!!.dismiss() }
+        dialog?.findViewById<TextView>(R.id.tvCancelDelete)
+            ?.setOnClickListener { dialog!!.dismiss() }
 
     }
 

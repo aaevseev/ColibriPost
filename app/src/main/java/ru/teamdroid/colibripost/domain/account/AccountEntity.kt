@@ -8,15 +8,15 @@ import org.drinkless.td.libcore.telegram.TdApi
 @Entity(tableName = "accounts_table")
 data class AccountEntity(
     @PrimaryKey
-    var id:Int = 0,
-    @ColumnInfo(name ="first_name")
+    var id: Int = 0,
+    @ColumnInfo(name = "first_name")
     var firstName: String = "",
-    @ColumnInfo(name ="last_name")
+    @ColumnInfo(name = "last_name")
     var lastName: String = "",
-    @ColumnInfo(name ="photo_path")
+    @ColumnInfo(name = "photo_path")
     var photoPath: String = ""
-){
-    fun fill(user: TdApi.User){
+) {
+    fun fill(user: TdApi.User) {
         id = user.id
         firstName = user.firstName
         lastName = user.lastName

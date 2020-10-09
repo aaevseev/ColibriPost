@@ -24,7 +24,7 @@ class CalendarDialogFragment : DialogFragment() {
                     KEY_YEAR to year,
                     KEY_MONTH to month,
                     KEY_DAY to dayOfMonth
-                    )
+                )
             )
             this.dismiss()
         }

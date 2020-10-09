@@ -28,9 +28,10 @@ class MessageContentAdapter() :
     override fun getItemCount(): Int {
         return items.size
     }
-    fun setItems(paths:List<Uri>){
+
+    fun setItems(paths: List<Uri>) {
         items.clear()
-        items+=paths
+        items += paths
         notifyDataSetChanged()//пока просто "жёстко" обновляю данные
     }
 

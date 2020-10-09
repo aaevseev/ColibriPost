@@ -13,7 +13,7 @@ class CacheModule {
 
     @Provides
     @Singleton
-    fun provideColibriDatabase(context:Context): ColibriDatabase{
+    fun provideColibriDatabase(context: Context): ColibriDatabase {
         return ColibriDatabase.getInstance(context)
     }
 

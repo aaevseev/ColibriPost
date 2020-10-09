@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,9 +8,9 @@
     <androidx.coordinatorlayout.widget.CoordinatorLayout
 
         android:id="@+id/channels_settings_container"
-        android:background="@color/gray_1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/gray_1"
         tools:context=".ui.settings.channels.ChannelsSettingsFragment">
 
 
@@ -71,8 +70,8 @@
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
                         android:layout_centerVertical="true"
-                        android:visibility="gone"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:visibility="gone">
 
                         <ImageView
                             android:layout_width="wrap_content"
@@ -80,8 +79,8 @@
                             android:layout_gravity="center"
                             android:layout_marginBottom="@dimen/size_huge"
 
-                            android:scaleType="fitXY"
                             android:layout_weight="1"
+                            android:scaleType="fitXY"
                             android:src="@drawable/setting_channel" />
 
                         <TextView
@@ -96,9 +95,9 @@
                             android:textSize="24sp" />
 
                         <TextView
-                            android:layout_gravity="center"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:fontFamily="@font/montserrat_regular"
                             android:text="@string/channels_list_empty_error"
                             android:textAlignment="center"
@@ -150,8 +149,9 @@
             android:visibility="gone"
             app:layout_anchor="@+id/include_bottom_sheet_dialog" />
 
-        <include android:id="@+id/include_bottom_sheet_dialog"
-            layout="@layout/channels_bottom_sheet"/>
+        <include
+            android:id="@+id/include_bottom_sheet_dialog"
+            layout="@layout/channels_bottom_sheet" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

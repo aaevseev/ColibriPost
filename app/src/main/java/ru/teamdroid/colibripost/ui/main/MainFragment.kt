@@ -3,8 +3,8 @@ package ru.teamdroid.colibripost.ui.main
 import android.os.Bundle
 import ru.teamdroid.colibripost.App
 import ru.teamdroid.colibripost.R
-import ru.teamdroid.colibripost.remote.channels.ChatsRequests
 import ru.teamdroid.colibripost.remote.Messages
+import ru.teamdroid.colibripost.remote.channels.ChatsRequests
 import ru.teamdroid.colibripost.ui.core.BaseFragment
 import javax.inject.Inject
 
