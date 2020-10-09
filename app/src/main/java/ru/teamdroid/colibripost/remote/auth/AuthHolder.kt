@@ -1,4 +1,4 @@
-package ru.teamdroid.colibripost.remote
+package ru.teamdroid.colibripost.remote.auth
 
 import android.app.Application
 import android.os.Build

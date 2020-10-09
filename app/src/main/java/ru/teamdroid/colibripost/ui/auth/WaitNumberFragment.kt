@@ -10,8 +10,8 @@ import androidx.lifecycle.observe
 import kotlinx.coroutines.launch
 import ru.teamdroid.colibripost.App
 import ru.teamdroid.colibripost.R
-import ru.teamdroid.colibripost.remote.AuthHolder
-import ru.teamdroid.colibripost.remote.AuthStates.*
+import ru.teamdroid.colibripost.remote.auth.AuthHolder
+import ru.teamdroid.colibripost.remote.auth.AuthStates.*
 import ru.teamdroid.colibripost.databinding.FragmentWaitNumberBinding
 import ru.teamdroid.colibripost.ui.core.BaseFragment
 import javax.inject.Inject
@@ -19,6 +19,7 @@ import javax.inject.Inject
 class WaitNumberFragment : BaseFragment() {
 
     override val layoutId = R.layout.fragment_wait_number
+    override val toolbarTitle = 0
     private var _binding: FragmentWaitNumberBinding? = null
     private val binding: FragmentWaitNumberBinding
         get() = _binding!!

@@ -1,19 +1,31 @@
 <resources>
     <string name="app_name">Colibri Post</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
     <string name="navigation_main_title">Main</string>
     <string name="navigation_new_post_title">New post</string>
     <string name="navigation_settings_title">Settings</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="telegram_api_hash">68b8be724f9f786fdd51e22047d6a2c2</string>
+
+    <!--Auth-->
     <string name="splash_colibri_post"><b>Colibri</b> Post</string>
     <string name="sign_in_text">Войдите, чтобы начать создавать отложенные посты для Telegram.</string>
     <string name="sign_in_btn_text">Войти через Telegram</string>
-    <string name="do_you_want_delete_channel">Вы хотите удалить канал?</string>
 
-    <string name="new_post">New post</string>
-    <string name="channels">Channels</string>
 
+
+    <!--Settings Menu and ToolBarTitle-->
+    <string name="channels">Каналы</string>
+    <string name="accounts">Аккаунты</string>
+    <string name="managers">Менеджеры</string>
+    <string name="paying">Оплата</string>
+    <string name="notifications">Уведомления</string>
+    <string name="help">Помощь</string>
+    <string name="quit">Выйти</string>
+
+    <!--Notes-->
     <string name="add_button">Add button</string>
     <string name="add_channel">Добавить канал</string>
     <string name="preview">Preview</string>
@@ -21,9 +33,11 @@
     <string name="select_time">Select time</string>
     <string name="ok">OK</string>
     <string name="cancel">Отмена</string>
-    <string name="settings">Settings</string>
+    <string name="settings">Настройки</string>
     <string name="main">Main</string>
     <string name="name">Имя</string>
+    <string name="do_you_want_delete_channel">Вы хотите удалить канал?</string>
+    <string name="new_post">New post</string>
 
     <!--Errors-->
     <string name="oopsie">Упс!</string>
@@ -41,4 +55,10 @@
         <item quantity="many">%d каналов</item>
         <item quantity="other">%d каналов</item>
     </plurals>
+    <string name="settings_fragment_title">Настройки</string>
+    <string name="user_image_description">User photo</string>
+
+    <!--placeholders-->
+    <string name="first_name_and_last_name">%1$s %2$s</string>
+
 </resources>

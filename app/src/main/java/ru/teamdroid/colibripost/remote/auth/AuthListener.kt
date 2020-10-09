@@ -1,4 +1,4 @@
-package ru.teamdroid.colibripost.remote
+package ru.teamdroid.colibripost.remote.auth
 
 import org.drinkless.td.libcore.telegram.TdApi
 

@@ -1,17 +1,12 @@
-package ru.teamdroid.colibripost.ui.settings
+package ru.teamdroid.colibripost.ui.settings.channels
 
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toDrawable
 import kotlinx.android.synthetic.main.channels_bottom_sheet.view.*
 import kotlinx.android.synthetic.main.item_av_channel.view.*
-import kotlinx.android.synthetic.main.item_channel.view.imgPhoto
-import kotlinx.android.synthetic.main.item_channel.view.rlMain
-import kotlinx.android.synthetic.main.item_channel.view.tvChannelName
 import ru.teamdroid.colibripost.R
 import ru.teamdroid.colibripost.domain.channels.ChannelEntity
 import ru.teamdroid.colibripost.ui.core.PicassoHelper
@@ -58,7 +53,7 @@ class AvailableChannelsAdapter() :
 
                 if(tempArray.size == 0){
                     rootView.btn_add_channels.isEnabled = false
-                    rootView.btn_add_channels.backgroundTintList = context.getColorState(R.color.accentEnabledButton)
+                    rootView.btn_add_channels.backgroundTintList = context.getColorState(R.color.accentEnabled)
                 }else{
                     rootView.btn_add_channels.isEnabled = true
                     rootView.btn_add_channels.backgroundTintList = context.getColorState(R.color.accent)
@@ -71,12 +66,18 @@ class AvailableChannelsAdapter() :
     fun setCheckedOrNotBackground(root: View, position: Int, checked: BooleanArray){
         root.apply {
             if(checked[position]){
-                this.background = if(position == 0) ContextCompat.getDrawable(context, R.drawable.bottom_accent_sheet_background)
+                this.background = if(position == 0) ContextCompat.getDrawable(
+                    context,
+                    R.drawable.bottom_accent_sheet_background
+                )
                 else context.getColorFromResource(R.color.accent).toDrawable()
                 this.imgCheck.visibility = View.VISIBLE
                 this.tvChannelName.setTextColor(root.context.getColorFromResource(R.color.white))
             }else{
-                this.background = if(position == 0) ContextCompat.getDrawable(context, R.drawable.bottom_white_sheet_background)
+                this.background = if(position == 0) ContextCompat.getDrawable(
+                    context,
+                    R.drawable.bottom_white_sheet_background
+                )
                 else context.getColorFromResource(R.color.white).toDrawable()
                 this.imgCheck.visibility = View.GONE
                 this.tvChannelName.setTextColor(root.context.getColorFromResource(R.color.text))

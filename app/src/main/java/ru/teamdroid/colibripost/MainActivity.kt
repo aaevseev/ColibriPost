@@ -8,19 +8,20 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.observe
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import ru.teamdroid.colibripost.domain.type.Failure
-import ru.teamdroid.colibripost.remote.AuthHolder
-import ru.teamdroid.colibripost.remote.AuthStates
+import ru.teamdroid.colibripost.remote.auth.AuthHolder
+import ru.teamdroid.colibripost.remote.auth.AuthStates
 import ru.teamdroid.colibripost.ui.SwitchTransparentView
 import ru.teamdroid.colibripost.ui.auth.SignInFragment
 import ru.teamdroid.colibripost.ui.bottomnavigation.BottomNavigationFragment
+import ru.teamdroid.colibripost.ui.core.BaseFragment
 import ru.teamdroid.colibripost.ui.newpost.NewPostFragment
 import javax.inject.Inject
 
@@ -41,6 +42,9 @@ class MainActivity : AppCompatActivity(), SwitchTransparentView {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(false)
         supportActionBar?.setHomeButtonEnabled(true)
+        toolbar.setNavigationOnClickListener {
+            onBackPressed()
+        }
 
         connectivityManager =
             this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -74,14 +78,27 @@ class MainActivity : AppCompatActivity(), SwitchTransparentView {
         val childFragmentManager = supportFragmentManager.fragments[0].childFragmentManager
         val fragment = childFragmentManager.findFragmentByTag(NewPostFragment.TAG)
 
-        if (fragment != null && fragment.isVisible) {
-            val backPressListener = supportFragmentManager.fragments[0] as OnBackPressedListener
-            backPressListener.backPressed()
-        } else {
-            if (supportFragmentManager.backStackEntryCount > 1)
-                supportFragmentManager.popBackStack()
-            else
-                finish()
+        childFragmentManager.also {
+            if (fragment != null && fragment.isVisible) {
+                val backPressListener = supportFragmentManager.fragments[0] as OnBackPressedListener
+                backPressListener.backPressed()
+            } else {
+                if (it.backStackEntryCount  > 1){
+                    setBackStackToolBarTitle(it)
+                    it.popBackStack()
+                    if(it.backStackEntryCount == 2) supportActionBar?.setDisplayHomeAsUpEnabled(false)
+                }
+                else
+                    finish()
+            }
+        }
+    }
+
+    fun setBackStackToolBarTitle(fragmentManager: FragmentManager){
+        fragmentManager.also {
+            if(it.fragments.size > 1){
+                (it.fragments[it.fragments.size - 2] as BaseFragment).setToolbarTitle()
+            }
         }
     }
 

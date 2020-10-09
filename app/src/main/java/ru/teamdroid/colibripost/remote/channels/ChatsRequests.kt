@@ -1,4 +1,4 @@
-package ru.teamdroid.colibripost.remote
+package ru.teamdroid.colibripost.remote.channels
 
 import org.drinkless.td.libcore.telegram.TdApi
 import ru.teamdroid.colibripost.domain.channels.ChannelEntity
@@ -8,10 +8,10 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class Chats @Inject constructor(
-    private val client: TelegramClient,
-    networkHandler: NetworkHandler
-) {
+class ChatsRequests @Inject constructor(
+    private val client: TelegramClient
+)
+{
 
     private suspend fun getChatIds(): LongArray {
         val getChats = TdApi.GetChats(TdApi.ChatListMain(), Long.MAX_VALUE, 0, 50)
@@ -95,8 +95,9 @@ class Chats @Inject constructor(
         )
     }
 
+    fun List<TdApi.Chat>.filterByChannel(): List<TdApi.Chat> {
+        return this.filter { it.type is TdApi.ChatTypeSupergroup && (it.type as TdApi.ChatTypeSupergroup).isChannel }
+    }
+
 }
 
-fun List<TdApi.Chat>.filterByChannel(): List<TdApi.Chat> {
-    return this.filter { it.type is TdApi.ChatTypeSupergroup && (it.type as TdApi.ChatTypeSupergroup).isChannel }
-}

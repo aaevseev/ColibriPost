@@ -16,10 +16,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:navigationIcon="@drawable/ic_arrow_back_24"
-        app:title="lol"
         android:visibility="gone"
+        android:background="@color/white"
+
         app:titleTextAppearance="@style/Toolbar.TitleText"
-        app:titleTextColor="@color/accent"/>
+        app:titleTextColor="@color/accent" />
 
     <View
         android:id="@+id/transpView"

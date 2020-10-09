@@ -17,7 +17,7 @@
             android:layout_centerInParent="true"
             android:layout_marginEnd="@dimen/size_large"
             android:layout_marginStart="@dimen/size_large"
-            app:cardCornerRadius="@dimen/size_smedium">
+            app:cardCornerRadius="@dimen/size_small">
 
             <LinearLayout
                 android:layout_width="match_parent"

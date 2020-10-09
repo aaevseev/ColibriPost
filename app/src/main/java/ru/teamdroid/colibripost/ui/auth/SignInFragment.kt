@@ -19,6 +19,8 @@ class SignInFragment : BaseFragment() {
 
     override val layoutId = R.layout.fragment_sign_in
 
+    override val toolbarTitle: Int = 0
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

@@ -1,4 +1,4 @@
-package ru.teamdroid.colibripost.data
+package ru.teamdroid.colibripost.data.channels
 
 import ru.teamdroid.colibripost.domain.channels.ChannelEntity
 

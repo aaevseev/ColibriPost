@@ -5,11 +5,13 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import ru.teamdroid.colibripost.domain.channels.ChannelEntity
+import ru.teamdroid.colibripost.domain.account.AccountEntity
 
-@Database(entities = [ChannelEntity::class], version = 1)
+@Database(entities = [ChannelEntity::class, AccountEntity::class], version = 2)
 abstract class ColibriDatabase: RoomDatabase() {
 
     abstract val channelsDao: ChannelsDao
+    abstract val accountDao: AccountDao
 
     companion object{
         @Volatile //актуальность объекта во всех потоках

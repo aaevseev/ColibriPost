@@ -1,17 +1,14 @@
-package ru.teamdroid.colibripost.ui.settings
+package ru.teamdroid.colibripost.ui.settings.channels
 
 import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
-import kotlinx.android.synthetic.main.delete_channel_dialog.view.*
 import ru.teamdroid.colibripost.R
-import ru.teamdroid.colibripost.domain.channels.ChannelEntity
 
 class DeleteChannelDialog (
     private val channelId: Long,

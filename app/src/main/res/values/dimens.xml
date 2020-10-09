@@ -13,13 +13,29 @@
     <dimen name="small_tiny_photo_dim">39dp</dimen>
     <dimen name="small_photo_dim">48dp</dimen>
 
-    <dimen name="size_smedium">12dp</dimen>
+    <dimen name="size_tiny">8dp</dimen>
+    <dimen name="size_small">12dp</dimen>
     <dimen name="size_medium">16dp</dimen>
+    <dimen name="size_big">20dp</dimen>
     <dimen name="size_large">24dp</dimen>
     <dimen name="size_huge">32dp</dimen>
+    <dimen name="size_extra_large">48dp</dimen>
 
     <dimen name="small_margin8">8dp</dimen>
     <dimen name="small_margin">10dp</dimen>
     <dimen name="medium_margin">15dp</dimen>
-    <dimen name="big_margin">22dp</dimen>
+
+
+    <dimen name="negative_translation">-16dp</dimen>
+
+    <dimen name="account_image_size">100dp</dimen>
+
+    <dimen name="bottom_navigation_height">56dp</dimen>
+
+    <dimen name="fragment_title_text_size">24sp</dimen>
+    <dimen name="user_name_text_size">20sp</dimen>
+    <dimen name="user_subscription_text_size">12sp</dimen>
+    <dimen name="user_subscription_background_radius">16dp</dimen>
+    <dimen name="settings_menu_item_height">64dp</dimen>
+    <dimen name="item_setting_menu_text_size">16sp</dimen>
 </resources>

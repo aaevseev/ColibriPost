@@ -10,8 +10,8 @@ import ru.teamdroid.colibripost.ui.auth.WaitCodeFragment
 import ru.teamdroid.colibripost.ui.auth.WaitNumberFragment
 import ru.teamdroid.colibripost.ui.main.MainFragment
 import ru.teamdroid.colibripost.ui.newpost.NewPostFragment
-import ru.teamdroid.colibripost.ui.settings.ChannelsAdapter
-import ru.teamdroid.colibripost.ui.settings.ChannelsSettingsFragment
+import ru.teamdroid.colibripost.ui.settings.SettingsFragment
+import ru.teamdroid.colibripost.ui.settings.channels.ChannelsSettingsFragment
 import ru.teamdroid.colibripost.ui.splash.SplashFragment
 import javax.inject.Singleton
 
@@ -32,6 +32,7 @@ interface AppComponent {
     fun inject(fragment: MainFragment)
     fun inject(fragment: NewPostFragment)
     fun inject(fragment: ChannelsSettingsFragment)
+    fun inject(fragment: SettingsFragment)
 
     fun inject(mainActivity: MainActivity)
 }

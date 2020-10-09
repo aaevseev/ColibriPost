@@ -8,8 +8,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.observe
 import ru.teamdroid.colibripost.App
-import ru.teamdroid.colibripost.remote.AuthHolder
-import ru.teamdroid.colibripost.remote.AuthStates
+import ru.teamdroid.colibripost.remote.auth.AuthHolder
+import ru.teamdroid.colibripost.remote.auth.AuthStates
 import ru.teamdroid.colibripost.databinding.FragmentSplashBinding
 import javax.inject.Inject
 

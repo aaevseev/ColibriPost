@@ -2,8 +2,8 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/primary</item>
-        <item name="colorPrimaryDark">@color/primaryDark</item>
+        <item name="colorPrimary">@color/accent</item>
+        <item name="colorPrimaryDark">@color/accent</item>
         <item name="colorAccent">@color/accent</item>
 
         <item name="colorControlNormal">@color/accent</item>
@@ -11,6 +11,9 @@
 
     <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
         <item name="android:textStyle">bold</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:letterSpacing">0.03</item>
+        <item name="android:lineSpacingExtra">3sp</item>
     </style>
 
     <style name="Divider">
@@ -33,5 +36,51 @@
         <item name="android:windowBackground">@color/transparent</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowIsFloating">false</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="bottomNavigationViewHeight">@dimen/bottom_navigation_height</item>
     </style>
+
+
+
+    <style name="userNameTextStyle">
+        <item name="android:textSize">@dimen/user_name_text_size</item>
+        <item name="android:letterSpacing">0.03</item>
+        <item name="android:textColor">@color/user_name_text_color</item>
+    </style>
+
+    <style name="user_subscription_text_style">
+        <item name="android:textSize">@dimen/user_subscription_text_size</item>
+        <item name="android:textColor">@color/user_subscription_text_color</item>
+        <item name="android:letterSpacing">0.04</item>
+    </style>
+
+    <style name="SettingMenuItemStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/bottom_navigation_height</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+    </style>
+
+    <style name="itemSettingMenuTextStyle">
+        <item name="android:textSize">@dimen/item_setting_menu_text_size</item>
+        <item name="android:textColor">@color/item_setting_menu_text_color</item>
+        <item name="android:layout_marginStart">@dimen/size_medium</item>
+        <item name="android:letterSpacing">0.03</item>
+        <item name="fontFamily">@font/montserrat_regular</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_gravity">center_vertical</item>
+    </style>
+
+    <style name="itemSettingMenuImageStyle">
+        <item name="android:layout_width">@dimen/size_large</item>
+        <item name="android:layout_height">@dimen/size_large</item>
+        <item name="android:layout_marginTop">1dp</item>
+        <item name="android:layout_marginStart">@dimen/size_big</item>
+        <item name="android:layout_gravity">center_vertical</item>
+    </style>
+
+    <attr name="bottomNavigationViewHeight" format="dimension" />
 </resources>

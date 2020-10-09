@@ -1,4 +1,4 @@
-package ru.teamdroid.colibripost.ui.settings
+package ru.teamdroid.colibripost.ui.settings.channels
 
 import android.view.LayoutInflater
 import android.view.View
@@ -21,7 +21,7 @@ open class ChannelsAdapter(
         return ChannelViewHolder(view, this)
     }
 
-    class ChannelViewHolder(val root: View, val adapter: ChannelsAdapter): BaseAdapter.BaseViewHolder(root){
+    class ChannelViewHolder(val root: View, val adapter: ChannelsAdapter): BaseViewHolder(root){
 
         override fun onBind(item: Any) {
             (item as? ChannelEntity)?.let {
