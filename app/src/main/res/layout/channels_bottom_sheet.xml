@@ -47,7 +47,7 @@
                     android:layout_marginBottom="@dimen/size_huge"
                     android:layout_marginTop="@dimen/size_huge"
                     android:orientation="vertical"
-                    android:visibility="visible">
+                    android:visibility="gone">
 
                     <ImageView
                         android:layout_width="match_parent"
