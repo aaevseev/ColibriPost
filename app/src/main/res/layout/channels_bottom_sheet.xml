@@ -41,17 +41,17 @@
 
                 <LinearLayout
                     android:id="@+id/lrChannelsNotExist"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:layout_marginBottom="@dimen/size_huge"
                     android:layout_marginTop="@dimen/size_huge"
                     android:orientation="vertical"
-                    android:visibility="gone">
+                    android:visibility="visible">
 
                     <ImageView
                         android:layout_width="match_parent"
-                        android:layout_height="246dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/size_huge"
                         android:src="@drawable/setting_channel" />
 
