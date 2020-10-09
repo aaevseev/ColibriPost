@@ -1,219 +1,217 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gray_1"
-    android:fitsSystemWindows="true"
-    android:orientation="vertical"
-    tools:context=".ui.settings.SettingsFragment">
-
+    android:fillViewport="true">
 
     <LinearLayout
-        android:id="@+id/layout_user_info"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/rv_settings_menu"
-        android:background="@color/user_info_background_color"
-        android:orientation="vertical">
-
-        <FrameLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/size_large"
-            android:layout_gravity="center_horizontal">
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/iv_user_image"
-                android:layout_width="@dimen/account_image_size"
-                android:layout_height="@dimen/account_image_size"
-                android:contentDescription="@string/user_image_description"
-                tools:src = "@drawable/ic_account_circle"/>
-
-            <ProgressBar
-                android:id="@+id/progressBar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/accent"
-                android:indeterminateTint="@color/accent"
-                android:indeterminateTintMode="src_in"
-                android:visibility="gone"
-                android:layout_gravity="center"/>
-
-        </FrameLayout>
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_user_name"
-            style="@style/userNameTextStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/size_medium"
-            android:lineSpacingExtra="8sp"
-            tools:text="Chuck Norris" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_user_subscription"
-            style="@style/user_subscription_text_style"
-            android:layout_width="wrap_content"
-            android:layout_height="32dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/size_tiny"
-            android:layout_marginBottom="@dimen/size_huge"
-            android:background="@drawable/user_subscription_ok_background"
-            android:gravity="center_vertical"
-            android:lineSpacingExtra="16sp"
-            android:paddingStart="@dimen/size_medium"
-            android:paddingEnd="@dimen/size_medium"
-            android:text="31 день"
-            tools:text="31 день" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/rv_settings_menu"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="@drawable/settings_menu_background"
+        android:layout_height="0dp"
+        android:background="@color/gray_1"
+        android:fitsSystemWindows="true"
         android:orientation="vertical"
-        android:paddingBottom="80dp"
-        android:paddingTop="16dp">
+        tools:context=".ui.settings.SettingsFragment">
 
         <LinearLayout
-            android:id="@+id/lrAccountsSettings"
-            style="@style/SettingMenuItemStyle"
-            tools:ignore="UseCompoundDrawables">
+            android:id="@+id/layout_user_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/user_info_background_color"
+            android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/ivAccounts"
-                style="@style/itemSettingMenuImageStyle"
-                android:src="@drawable/ic_account"
-                tools:ignore="ContentDescription" />
-
-            <TextView
-                android:id="@+id/tvAccounts"
-                style="@style/itemSettingMenuTextStyle"
+            <FrameLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/accounts" />
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/size_large">
 
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/iv_user_image"
+                    android:layout_width="@dimen/account_image_size"
+                    android:layout_height="@dimen/account_image_size"
+                    android:contentDescription="@string/user_image_description"
+                    tools:src="@drawable/ic_account_circle" />
+
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:backgroundTint="@color/accent"
+                    android:indeterminateTint="@color/accent"
+                    android:indeterminateTintMode="src_in"
+                    android:visibility="gone" />
+            </FrameLayout>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_user_name"
+                style="@style/userNameTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/size_medium"
+                android:lineSpacingExtra="8sp"
+                tools:text="Chuck Norris" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_user_subscription"
+                style="@style/user_subscription_text_style"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/size_tiny"
+                android:layout_marginBottom="@dimen/size_huge"
+                android:background="@drawable/user_subscription_ok_background"
+                android:gravity="center_vertical"
+                android:lineSpacingExtra="16sp"
+                android:paddingStart="@dimen/size_medium"
+                android:paddingEnd="@dimen/size_medium"
+                android:text="31 день"
+                tools:text="31 день" />
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/lrChannelsSettings"
-            style="@style/SettingMenuItemStyle"
-            tools:ignore="UseCompoundDrawables">
+            android:id="@+id/rv_settings_menu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/settings_menu_background"
+            android:orientation="vertical"
+            android:paddingTop="16dp"
+            android:paddingBottom="80dp">
 
-            <ImageView
-                android:id="@+id/ivChannels"
-                style="@style/itemSettingMenuImageStyle"
-                android:src="@drawable/ic_channels" />
+            <LinearLayout
+                android:id="@+id/lrAccountsSettings"
+                style="@style/SettingMenuItemStyle"
+                tools:ignore="UseCompoundDrawables">
 
-            <TextView
-                android:id="@+id/tvChannels"
-                style="@style/itemSettingMenuTextStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/channels" />
+                <ImageView
+                    android:id="@+id/ivAccounts"
+                    style="@style/itemSettingMenuImageStyle"
+                    android:src="@drawable/ic_account"
+                    tools:ignore="ContentDescription" />
 
+                <TextView
+                    android:id="@+id/tvAccounts"
+                    style="@style/itemSettingMenuTextStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/accounts" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lrChannelsSettings"
+                style="@style/SettingMenuItemStyle"
+                tools:ignore="UseCompoundDrawables">
+
+                <ImageView
+                    android:id="@+id/ivChannels"
+                    style="@style/itemSettingMenuImageStyle"
+                    android:src="@drawable/ic_channels" />
+
+                <TextView
+                    android:id="@+id/tvChannels"
+                    style="@style/itemSettingMenuTextStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/channels" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lrManagersSettings"
+                style="@style/SettingMenuItemStyle"
+                tools:ignore="UseCompoundDrawables">
+
+                <ImageView
+                    android:id="@+id/ivManagers"
+                    style="@style/itemSettingMenuImageStyle"
+                    android:src="@drawable/ic_admin" />
+
+                <TextView
+                    android:id="@+id/tvManagers"
+                    style="@style/itemSettingMenuTextStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/managers" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lrPayingSettings"
+                style="@style/SettingMenuItemStyle"
+                tools:ignore="UseCompoundDrawables">
+
+                <ImageView
+                    android:id="@+id/ivPaying"
+                    style="@style/itemSettingMenuImageStyle"
+                    android:src="@drawable/ic_card" />
+
+                <TextView
+                    android:id="@+id/tvPaying"
+                    style="@style/itemSettingMenuTextStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/paying" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lrNotificationsSettings"
+                style="@style/SettingMenuItemStyle"
+                tools:ignore="UseCompoundDrawables">
+
+                <ImageView
+                    android:id="@+id/ivNotifications"
+                    style="@style/itemSettingMenuImageStyle"
+                    android:src="@drawable/ic_bail" />
+
+                <TextView
+                    android:id="@+id/tvNotifications"
+                    style="@style/itemSettingMenuTextStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/notifications" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lrHelp"
+                style="@style/SettingMenuItemStyle"
+                tools:ignore="UseCompoundDrawables">
+
+                <ImageView
+                    android:id="@+id/ivHelp"
+                    style="@style/itemSettingMenuImageStyle"
+                    android:src="@drawable/ic_help_circle" />
+
+                <TextView
+                    android:id="@+id/tvHelp"
+                    style="@style/itemSettingMenuTextStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/help" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lrQuit"
+                style="@style/SettingMenuItemStyle"
+                tools:ignore="UseCompoundDrawables">
+
+                <ImageView
+                    android:id="@+id/ivQuit"
+                    style="@style/itemSettingMenuImageStyle"
+                    android:src="@drawable/ic_quit" />
+
+                <TextView
+                    android:id="@+id/tvQuit"
+                    style="@style/itemSettingMenuTextStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/quit" />
+            </LinearLayout>
         </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/lrManagersSettings"
-            style="@style/SettingMenuItemStyle"
-            tools:ignore="UseCompoundDrawables">
-
-            <ImageView
-                android:id="@+id/ivManagers"
-                style="@style/itemSettingMenuImageStyle"
-                android:src="@drawable/ic_admin" />
-
-            <TextView
-                android:id="@+id/tvManagers"
-                style="@style/itemSettingMenuTextStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/managers" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/lrPayingSettings"
-            style="@style/SettingMenuItemStyle"
-            tools:ignore="UseCompoundDrawables">
-
-            <ImageView
-                android:id="@+id/ivPaying"
-                style="@style/itemSettingMenuImageStyle"
-                android:src="@drawable/ic_card" />
-
-            <TextView
-                android:id="@+id/tvPaying"
-                style="@style/itemSettingMenuTextStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/paying" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/lrNotificationsSettings"
-            style="@style/SettingMenuItemStyle"
-            tools:ignore="UseCompoundDrawables">
-
-            <ImageView
-                android:id="@+id/ivNotifications"
-                style="@style/itemSettingMenuImageStyle"
-                android:src="@drawable/ic_bail" />
-
-            <TextView
-                android:id="@+id/tvNotifications"
-                style="@style/itemSettingMenuTextStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/notifications" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/lrHelp"
-            style="@style/SettingMenuItemStyle"
-            tools:ignore="UseCompoundDrawables">
-
-            <ImageView
-                android:id="@+id/ivHelp"
-                style="@style/itemSettingMenuImageStyle"
-                android:src="@drawable/ic_help_circle" />
-
-            <TextView
-                android:id="@+id/tvHelp"
-                style="@style/itemSettingMenuTextStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/help" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/lrQuit"
-            style="@style/SettingMenuItemStyle"
-            tools:ignore="UseCompoundDrawables">
-
-            <ImageView
-                android:id="@+id/ivQuit"
-                style="@style/itemSettingMenuImageStyle"
-                android:src="@drawable/ic_quit" />
-
-            <TextView
-                android:id="@+id/tvQuit"
-                style="@style/itemSettingMenuTextStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/quit" />
-
-        </LinearLayout>
-
     </LinearLayout>
-
-</RelativeLayout>
+</androidx.core.widget.NestedScrollView>
