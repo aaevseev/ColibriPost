@@ -18,7 +18,6 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.FragmentResultListener
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import com.srgpanov.telegrammsmm.ui.screen.SpinnerAdapter
 import com.srgpanov.telegrammsmm.ui.screen.SpinnerItem
@@ -33,7 +32,6 @@ import ru.teamdroid.colibripost.ui.newpost.CalendarDialogFragment.Companion.REQU
 import ru.teamdroid.colibripost.ui.newpost.TimeDialogFragment.Companion.KEY_HOUR
 import ru.teamdroid.colibripost.ui.newpost.TimeDialogFragment.Companion.KEY_MUNUTE
 import ru.teamdroid.colibripost.ui.newpost.TimeDialogFragment.Companion.REQUEST_TIME
-import javax.inject.Inject
 
 class NewPostFragment : BaseFragment(), FragmentResultListener {
 
@@ -93,7 +91,7 @@ class NewPostFragment : BaseFragment(), FragmentResultListener {
                 val year = result.getInt(KEY_YEAR)
                 val month = result.getInt(KEY_MONTH)
                 val dayOfMonth = result.getInt(KEY_DAY)
-                val day = "${formatTime(dayOfMonth)}.${formatTime(month+1)}.$year"
+                val day = "${formatTime(dayOfMonth)}.${formatTime(month + 1)}.$year"
                 binding.tvDate.text = day
                 viewModel.setPublishDay(day)
             }
@@ -112,13 +110,13 @@ class NewPostFragment : BaseFragment(), FragmentResultListener {
         setupListeners()
         setupRv()
 
-        binding.tvDate.text=viewModel.publishDay.value
-        binding.tvTime.text=viewModel.publishTime.value
+        binding.tvDate.text = viewModel.publishDay.value
+        binding.tvTime.text = viewModel.publishTime.value
 
     }
 
     private fun setupRv() {
-        binding.rvContent.adapter=adapter
+        binding.rvContent.adapter = adapter
         binding.rvContent.setHasFixedSize(true)
     }
 
@@ -130,15 +128,15 @@ class NewPostFragment : BaseFragment(), FragmentResultListener {
             }
             publishAdapter.addAll(publishList)
         }
-        viewModel.takeBitmap.observe(viewLifecycleOwner){bitmap->
+        viewModel.takeBitmap.observe(viewLifecycleOwner) { bitmap ->
             if (bitmap != null) {
                 Log.d("NewPostFragment", "observeViewModel: ${bitmap.width} ${bitmap.height}")
 
-            }else{
-                Log.e(TAG, "observeViewModel: take bitmap null" )
+            } else {
+                Log.e(TAG, "observeViewModel: take bitmap null")
             }
         }
-        viewModel.inputFiles.observe(viewLifecycleOwner){pathList->
+        viewModel.inputFiles.observe(viewLifecycleOwner) { pathList ->
             Log.d("NewPostFragment", "observeViewModel: $pathList")
             setupRvVisibility(pathList)
             adapter.setItems(pathList)

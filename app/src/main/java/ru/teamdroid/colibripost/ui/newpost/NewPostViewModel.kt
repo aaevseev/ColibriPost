@@ -9,10 +9,10 @@ import android.util.Log
 import androidx.lifecycle.*
 import kotlinx.coroutines.launch
 import org.drinkless.td.libcore.telegram.TdApi.*
-import ru.teamdroid.colibripost.remote.channels.ChatsRequests
-import ru.teamdroid.colibripost.remote.Messages
-import ru.teamdroid.colibripost.remote.core.TelegramClient
 import ru.teamdroid.colibripost.other.SingleLiveData
+import ru.teamdroid.colibripost.remote.Messages
+import ru.teamdroid.colibripost.remote.channels.ChatsRequests
+import ru.teamdroid.colibripost.remote.core.TelegramClient
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.Date
@@ -101,8 +101,8 @@ class NewPostViewModel @Inject constructor(
 
     private fun createAlbum(): Array<InputMessageContent> {
         val list = mutableListOf<InputMessageContent>()
-        for ((index, uri) in (inputFiles.value?:return list.toTypedArray()).withIndex()){
-            val file = InputFileLocal(uri.recievePath()?:break)
+        for ((index, uri) in (inputFiles.value ?: return list.toTypedArray()).withIndex()) {
+            val file = InputFileLocal(uri.recievePath() ?: break)
             val photo =
                 if (index == 0) {
                     InputMessagePhoto().apply { caption = getTextContent() }
@@ -130,7 +130,7 @@ class NewPostViewModel @Inject constructor(
     }
 
     private fun getEpochTime(): Int {
-        val date = SimpleDateFormat("$dayFormat $timeFormat",Locale.getDefault())
+        val date = SimpleDateFormat("$dayFormat $timeFormat", Locale.getDefault())
         val cal = Calendar.getInstance()
         val timeZone = cal.timeZone
         Log.d("NewPostViewModel", "getEpochTime: $timeZone")
@@ -167,10 +167,7 @@ class NewPostViewModel @Inject constructor(
     }
 
 
-
-
-
-    private fun Uri.recievePath():String?{
+    private fun Uri.recievePath(): String? {
         val cursor: Cursor =
             context.getContentResolver().query(this, null, null, null, null) ?: return null
         cursor.moveToFirst()
@@ -182,6 +179,6 @@ class NewPostViewModel @Inject constructor(
         val path = uri.recievePath() ?: return
         Log.d("NewPostViewModel", "onFileChosen: ${uri.path} $path")
         _inputFiles.value?.add(uri)
-        _inputFiles.value= _inputFiles.value
+        _inputFiles.value = _inputFiles.value
     }
 }

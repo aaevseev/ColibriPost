@@ -12,16 +12,15 @@ import ru.teamdroid.colibripost.ui.core.PicassoHelper
 
 open class ChannelsAdapter(
     var showDeleteChannelDialog: (idChannel: Long) -> Unit
-): BaseAdapter<ChannelEntity, ChannelsAdapter.ChannelViewHolder>(
+) : BaseAdapter<ChannelEntity, ChannelsAdapter.ChannelViewHolder>(
     ChannelDiffCallback()
 ) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChannelViewHolder {
-        val view = LayoutInflater.from(parent.context).
-        inflate(R.layout.item_channel, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_channel, parent, false)
         return ChannelViewHolder(view, this)
     }
 
-    class ChannelViewHolder(val root: View, val adapter: ChannelsAdapter): BaseViewHolder(root){
+    class ChannelViewHolder(val root: View, val adapter: ChannelsAdapter) : BaseViewHolder(root) {
 
         override fun onBind(item: Any) {
             (item as? ChannelEntity)?.let {
@@ -35,7 +34,7 @@ open class ChannelsAdapter(
         }
     }
 
-    class ChannelDiffCallback: DiffUtil.ItemCallback<ChannelEntity>(){
+    class ChannelDiffCallback : DiffUtil.ItemCallback<ChannelEntity>() {
         override fun areItemsTheSame(oldItem: ChannelEntity, newItem: ChannelEntity): Boolean {
             return oldItem.chatId == newItem.chatId
         }
@@ -44,8 +43,6 @@ open class ChannelsAdapter(
             return oldItem == newItem
         }
     }
-
-
 
 
 }

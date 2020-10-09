@@ -6,8 +6,8 @@ import javax.inject.Inject
 
 class GetAvailableChannels @Inject constructor(
     private val channelsRepository: ChannelsRepository
-) : UseCase<List<ChannelEntity>, None>(){
+) : UseCase<List<ChannelEntity>, None>() {
 
-    override suspend fun run(params: None)=
+    override suspend fun run(params: None) =
         channelsRepository.getAvailableChannels()
 }

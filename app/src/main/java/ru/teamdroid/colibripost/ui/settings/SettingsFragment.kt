@@ -13,8 +13,8 @@ import kotlinx.android.synthetic.main.fragment_settings.*
 import ru.teamdroid.colibripost.App
 import ru.teamdroid.colibripost.R
 import ru.teamdroid.colibripost.di.viewmodel.AccountViewModel
-import ru.teamdroid.colibripost.domain.type.Failure
 import ru.teamdroid.colibripost.domain.account.AccountEntity
+import ru.teamdroid.colibripost.domain.type.Failure
 import ru.teamdroid.colibripost.other.SingleLiveData
 import ru.teamdroid.colibripost.other.onFailure
 import ru.teamdroid.colibripost.other.onSuccess
@@ -29,12 +29,11 @@ import ru.teamdroid.colibripost.ui.settings.channels.ChannelsSettingsFragment
 class SettingsFragment : BaseFragment() {
 
 
-
     override val layoutId = R.layout.fragment_settings
 
     override val toolbarTitle = R.string.settings
 
-    private lateinit var gestureDetector:GestureDetector
+    private lateinit var gestureDetector: GestureDetector
 
     lateinit var accountViewModel: AccountViewModel
 
@@ -48,7 +47,8 @@ class SettingsFragment : BaseFragment() {
         R.drawable.ic_blue_bail, R.drawable.ic_blue_help_circle, R.drawable.ic_blue_quit
     )
 
-    val menuFragmentList = listOf("", ChannelsSettingsFragment.TAG, "", "", "", "", SignInFragment.TAG)
+    val menuFragmentList =
+        listOf("", ChannelsSettingsFragment.TAG, "", "", "", "", SignInFragment.TAG)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,7 +74,7 @@ class SettingsFragment : BaseFragment() {
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    fun setListeners(){
+    fun setListeners() {
         val linearList = listOf<LinearLayout>(
             lrAccountsSettings, lrChannelsSettings,
             lrManagersSettings, lrPayingSettings, lrNotificationsSettings, lrHelp, lrQuit
@@ -88,8 +88,8 @@ class SettingsFragment : BaseFragment() {
             ivPaying, ivNotifications, ivHelp, ivQuit
         )
 
-        for(i in 0..6){
-            linearList.get(i).setOnTouchListener{ v: View, motionEvent: MotionEvent ->
+        for (i in 0..6) {
+            linearList.get(i).setOnTouchListener { v: View, motionEvent: MotionEvent ->
                 onTouchMenuItem(
                     linearList.get(i), textViewList.get(i), imageViewList.get(i),
                     iconList.get(i), blueIconList.get(i), motionEvent, menuFragmentList.get(i)
@@ -102,30 +102,47 @@ class SettingsFragment : BaseFragment() {
     fun onTouchMenuItem(
         linearLayout: LinearLayout, textView: TextView, imageView: ImageView,
         whiteIconId: Int, blueIconId: Int, motionEvent: MotionEvent, tag: String
-    )
-    {
-        if (gestureDetector.onTouchEvent(motionEvent)){
+    ) {
+        if (gestureDetector.onTouchEvent(motionEvent)) {
             setDefaultMenuItemState(linearLayout, textView, imageView, whiteIconId = whiteIconId)
-            if(tag == ChannelsSettingsFragment.TAG || tag == SignInFragment.TAG) onClickMenuItem(tag)
-        }else{
-            when(motionEvent.action){
+            if (tag == ChannelsSettingsFragment.TAG || tag == SignInFragment.TAG) onClickMenuItem(
+                tag
+            )
+        } else {
+            when (motionEvent.action) {
                 MotionEvent.ACTION_DOWN, MotionEvent.ACTION_MOVE -> {
-                    setDefaultMenuItemState(linearLayout, textView, imageView, blueIconId = blueIconId)
+                    setDefaultMenuItemState(
+                        linearLayout,
+                        textView,
+                        imageView,
+                        blueIconId = blueIconId
+                    )
                 }
                 MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
-                    setDefaultMenuItemState(linearLayout, textView, imageView, whiteIconId = whiteIconId)
+                    setDefaultMenuItemState(
+                        linearLayout,
+                        textView,
+                        imageView,
+                        whiteIconId = whiteIconId
+                    )
                 }
             }
         }
     }
 
-    fun setDefaultMenuItemState(linearLayout: LinearLayout, textView: TextView, imageView: ImageView, whiteIconId: Int = 0, blueIconId: Int = 0){
-        if(whiteIconId != 0){
+    fun setDefaultMenuItemState(
+        linearLayout: LinearLayout,
+        textView: TextView,
+        imageView: ImageView,
+        whiteIconId: Int = 0,
+        blueIconId: Int = 0
+    ) {
+        if (whiteIconId != 0) {
             linearLayout.background =
                 requireActivity().getColorFromResource(R.color.accent).toDrawable()
             textView.setTextColor(requireActivity().getColorFromResource(R.color.white))
             imageView.setImageDrawable(requireActivity().getImageDrawable(whiteIconId))
-        }else{
+        } else {
             linearLayout.background =
                 requireActivity().getColorFromResource(R.color.whiteEnabled).toDrawable()
             textView.setTextColor(requireActivity().getColorFromResource(R.color.accent))
@@ -134,20 +151,22 @@ class SettingsFragment : BaseFragment() {
 
     }
 
-    fun onClickMenuItem(tag: String){
+    fun onClickMenuItem(tag: String) {
 
         (requireParentFragment() as BottomNavigationFragment).displayFragment(tag)
     }
 
-    fun handleAccount(accountEntity: AccountEntity?){
-        tv_user_name.text = String.format(getString(R.string.first_name_and_last_name),
-            accountEntity!!.firstName, accountEntity.lastName)
+    fun handleAccount(accountEntity: AccountEntity?) {
+        tv_user_name.text = String.format(
+            getString(R.string.first_name_and_last_name),
+            accountEntity!!.firstName, accountEntity.lastName
+        )
         PicassoHelper.loadImageFile(requireContext(), accountEntity.photoPath, iv_user_image)
         updateRefresh(false)
     }
 
     override fun updateRefresh(status: Boolean?) {
-        if(status == true){
+        if (status == true) {
             progressBar.visibility = View.VISIBLE
         } else {
             progressBar.visibility = View.GONE

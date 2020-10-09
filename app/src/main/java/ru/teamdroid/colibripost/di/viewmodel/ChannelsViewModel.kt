@@ -10,7 +10,7 @@ class ChannelsViewModel @Inject constructor(
     val getAvailableChannelsUseCase: GetAvailableChannels,
     val setChannelsUseCase: SetChannels,
     val deleteChannelUseCase: DeleteChannel
-) : BaseViewModel(){
+) : BaseViewModel() {
 
     var addedChannelsData: SingleLiveData<List<ChannelEntity>> = SingleLiveData()
     var avChannelsData: SingleLiveData<List<ChannelEntity>> = SingleLiveData()
@@ -19,35 +19,41 @@ class ChannelsViewModel @Inject constructor(
 
     fun getAddedChannels() {
         updateRefreshing(true)
-        getAddedChannelsUseCase(None()){it.either(::handleFailure) {handleAddedChannels(it)} }
+        getAddedChannelsUseCase(None()) { it.either(::handleFailure) { handleAddedChannels(it) } }
     }
 
-    fun getAvChannels(){
-        getAvailableChannelsUseCase(None()){it.either(::handleFailure) {handleAvailableChannels(it)} }
+    fun getAvChannels() {
+        getAvailableChannelsUseCase(None()) {
+            it.either(::handleFailure) {
+                handleAvailableChannels(
+                    it
+                )
+            }
+        }
     }
 
-    fun setChannels(channels: List<ChannelEntity>){
-        setChannelsUseCase(channels){it.either(::handleFailure) { handleSetChannels(it) } }
+    fun setChannels(channels: List<ChannelEntity>) {
+        setChannelsUseCase(channels) { it.either(::handleFailure) { handleSetChannels(it) } }
     }
 
-    fun deleteChannel(idChannel: Long){
-        deleteChannelUseCase(idChannel){it.either(::handleFailure) {handleDeleteChannel(it)} }
+    fun deleteChannel(idChannel: Long) {
+        deleteChannelUseCase(idChannel) { it.either(::handleFailure) { handleDeleteChannel(it) } }
     }
 
 
-    fun handleAddedChannels(channels: List<ChannelEntity>){
+    fun handleAddedChannels(channels: List<ChannelEntity>) {
         addedChannelsData.value = channels
     }
 
-    fun handleAvailableChannels(channels: List<ChannelEntity>){
+    fun handleAvailableChannels(channels: List<ChannelEntity>) {
         avChannelsData.value = channels
     }
 
-    fun handleSetChannels(none: None){
+    fun handleSetChannels(none: None) {
         setChannelsData.value = none
     }
 
-    fun handleDeleteChannel(none: None){
+    fun handleDeleteChannel(none: None) {
         deleteChannelData.value = none
     }
 

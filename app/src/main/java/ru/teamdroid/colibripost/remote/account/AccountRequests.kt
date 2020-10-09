@@ -7,11 +7,11 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class AccountRequests@Inject constructor(
+class AccountRequests @Inject constructor(
     private val client: TelegramClient
 ) {
 
-    suspend fun getUserInfo(): AccountEntity{
+    suspend fun getUserInfo(): AccountEntity {
         val user = client.send<TdApi.User>(TdApi.GetMe())
         user.profilePhoto?.let { it.big = downloadFiles(it.big) }
         val account = AccountEntity()

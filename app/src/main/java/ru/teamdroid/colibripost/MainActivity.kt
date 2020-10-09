@@ -83,20 +83,21 @@ class MainActivity : AppCompatActivity(), SwitchTransparentView {
                 val backPressListener = supportFragmentManager.fragments[0] as OnBackPressedListener
                 backPressListener.backPressed()
             } else {
-                if (it.backStackEntryCount  > 1){
+                if (it.backStackEntryCount > 1) {
                     setBackStackToolBarTitle(it)
                     it.popBackStack()
-                    if(it.backStackEntryCount == 2) supportActionBar?.setDisplayHomeAsUpEnabled(false)
-                }
-                else
+                    if (it.backStackEntryCount == 2) supportActionBar?.setDisplayHomeAsUpEnabled(
+                        false
+                    )
+                } else
                     finish()
             }
         }
     }
 
-    fun setBackStackToolBarTitle(fragmentManager: FragmentManager){
+    fun setBackStackToolBarTitle(fragmentManager: FragmentManager) {
         fragmentManager.also {
-            if(it.fragments.size > 1){
+            if (it.fragments.size > 1) {
                 (it.fragments[it.fragments.size - 2] as BaseFragment).setToolbarTitle()
             }
         }
@@ -140,8 +141,8 @@ class MainActivity : AppCompatActivity(), SwitchTransparentView {
         }
     }
 
-    override fun setTranspViewVisibility(isVisible:Boolean) {
-        if(isVisible)
+    override fun setTranspViewVisibility(isVisible: Boolean) {
+        if (isVisible)
             transpView.visibility = View.VISIBLE
         else transpView.visibility = View.GONE
     }

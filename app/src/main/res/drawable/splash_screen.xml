@@ -2,12 +2,12 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android"
     android:opacity="opaque">
 
-    <item android:drawable="@color/accent"/>
+    <item android:drawable="@color/accent" />
 
     <!-- Set the Background Image-->
     <item android:gravity="center">
         <bitmap
             android:gravity="center"
-            android:src="@drawable/icon_colibri"/>
+            android:src="@drawable/icon_colibri" />
     </item>
 </layer-list>

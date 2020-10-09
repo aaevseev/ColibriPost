@@ -8,16 +8,15 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
-import kotlinx.coroutines.delay
 import ru.teamdroid.colibripost.MainActivity
 import ru.teamdroid.colibripost.R
 import ru.teamdroid.colibripost.base
 import ru.teamdroid.colibripost.domain.type.Failure
 import javax.inject.Inject
 
-abstract class BaseFragment: Fragment() {
+abstract class BaseFragment : Fragment() {
 
-    abstract val layoutId:Int
+    abstract val layoutId: Int
 
     abstract val toolbarTitle: Int
 
@@ -35,9 +34,9 @@ abstract class BaseFragment: Fragment() {
     fun setToolbarTitle(stringTitle: String = "") {
         base {
             supportActionBar?.apply {
-                if(stringTitle == "")
+                if (stringTitle == "")
                     this.title = getString(toolbarTitle)
-                else this.title  = stringTitle
+                else this.title = stringTitle
             }
         }
     }
@@ -46,10 +45,10 @@ abstract class BaseFragment: Fragment() {
 
     fun showMessage(message: String) = base { showMessage(message) }
 
-    open fun updateRefresh (status: Boolean?){
-        if(status == true){
+    open fun updateRefresh(status: Boolean?) {
+        if (status == true) {
             showRefreshing()
-        }else{
+        } else {
             hideRefreshing()
         }
     }
@@ -57,17 +56,18 @@ abstract class BaseFragment: Fragment() {
     fun showRefreshing() = base { swipeRefreshStatus(true) }
 
     fun hideRefreshing() = base {
-        swipeRefreshStatus(false) }
+        swipeRefreshStatus(false)
+    }
 
-    open fun setNetworkAvailbleUi(isCallback:Boolean){
+    open fun setNetworkAvailbleUi(isCallback: Boolean) {
         setToolbarTitle(getString(R.string.app_name))
     }
 
-    open fun setNetworkLostUi(){
+    open fun setNetworkLostUi() {
         setToolbarTitle(getString(R.string.network_waiting))
     }
 
-    inline fun base(block: MainActivity.() -> Unit){
+    inline fun base(block: MainActivity.() -> Unit) {
         activity.base(block)//дочернее активити выполняет код у себя
     }
 

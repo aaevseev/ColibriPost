@@ -5,7 +5,7 @@ import ru.teamdroid.colibripost.data.AccountCache
 import ru.teamdroid.colibripost.domain.account.AccountEntity
 
 @Dao
-interface AccountDao : AccountCache{
+interface AccountDao : AccountCache {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(friendEntity: AccountEntity): Long

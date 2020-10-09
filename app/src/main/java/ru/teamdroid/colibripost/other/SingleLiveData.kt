@@ -2,7 +2,6 @@ package ru.teamdroid.colibripost.other
 
 import androidx.annotation.MainThread
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import java.util.concurrent.atomic.AtomicBoolean
@@ -25,7 +24,6 @@ open class SingleLiveData<T> : MutableLiveData<T?>() {
         mPending.set(true)
         super.setValue(value)
     }
-
 
 
     fun call() {

@@ -6,14 +6,14 @@ import javax.inject.Inject
 
 class ChannelsRemoteImpl @Inject constructor(
     private val chatsRequests: ChatsRequests
-): ChannelsRemote {
+) : ChannelsRemote {
 
 
-    override suspend fun getAddedChannels(chatIds:List<Long>): List<ChannelEntity> {
+    override suspend fun getAddedChannels(chatIds: List<Long>): List<ChannelEntity> {
         return chatsRequests.getChannelsFullInfo(chatIds, true)
     }
 
-    override suspend fun getAvailableChannels(chatIds:List<Long>): List<ChannelEntity> {
+    override suspend fun getAvailableChannels(chatIds: List<Long>): List<ChannelEntity> {
         return chatsRequests.getChannelsFullInfo(chatIds, false)
     }
 }

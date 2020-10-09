@@ -77,8 +77,8 @@
             android:layout_height="wrap_content"
             android:background="@drawable/settings_menu_background"
             android:orientation="vertical"
-            android:paddingBottom="56dp"
-            android:paddingTop="16dp">
+            android:paddingTop="16dp"
+            android:paddingBottom="56dp">
 
             <LinearLayout
                 android:id="@+id/lrAccountsSettings"

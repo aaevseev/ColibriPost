@@ -6,7 +6,7 @@ import com.squareup.picasso.Picasso
 
 object PicassoHelper {
 
-    fun loadImageFile(context: Context, path:String, iv: ImageView){
+    fun loadImageFile(context: Context, path: String, iv: ImageView) {
         Picasso.with(context)
             .load(java.io.File(path))
             .into(iv)

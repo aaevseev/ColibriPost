@@ -43,7 +43,6 @@
     </style>
 
 
-
     <style name="userNameTextStyle">
         <item name="android:textSize">@dimen/user_name_text_size</item>
         <item name="android:letterSpacing">0.03</item>
