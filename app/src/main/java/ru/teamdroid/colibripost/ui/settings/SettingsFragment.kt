@@ -135,12 +135,13 @@ class SettingsFragment : BaseFragment() {
     }
 
     fun onClickMenuItem(tag: String){
-        base { supportActionBar?.setDisplayHomeAsUpEnabled(true) }
+
         (requireParentFragment() as BottomNavigationFragment).displayFragment(tag)
     }
 
     fun handleAccount(accountEntity: AccountEntity?){
-        tv_user_name.text = accountEntity!!.firstName + " " +  accountEntity.lastName
+        tv_user_name.text = String.format(getString(R.string.first_name_and_last_name),
+            accountEntity!!.firstName, accountEntity.lastName)
         PicassoHelper.loadImageFile(requireContext(), accountEntity.photoPath, iv_user_image)
         updateRefresh(false)
     }

@@ -77,6 +77,7 @@ class ChannelsSettingsFragment: BaseFragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        base { supportActionBar?.setDisplayHomeAsUpEnabled(true) }
         if(networkHandler.isConnected != null)
             setNetworkAvailbleUi(false)
         else setNetworkLostUi()

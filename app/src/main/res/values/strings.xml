@@ -58,4 +58,7 @@
     <string name="settings_fragment_title">Настройки</string>
     <string name="user_image_description">User photo</string>
 
+    <!--placeholders-->
+    <string name="first_name_and_last_name">%1$s %2$s</string>
+
 </resources>

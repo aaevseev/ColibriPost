@@ -67,23 +67,27 @@
 
                     <LinearLayout
                         android:id="@+id/lrChannelsEmpty"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
                         android:layout_centerVertical="true"
-                        android:visibility="gone"
+                        android:visibility="visible"
                         android:orientation="vertical">
 
                         <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="266dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="0dp"
                             android:layout_gravity="center"
                             android:layout_marginBottom="@dimen/size_huge"
+
+                            android:scaleType="fitXY"
+                            android:layout_weight="1"
                             android:src="@drawable/setting_channel" />
 
                         <TextView
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:layout_marginBottom="@dimen/size_medium"
                             android:fontFamily="@font/montserrat_bold"
                             android:text="@string/oopsie"
@@ -92,7 +96,8 @@
                             android:textSize="24sp" />
 
                         <TextView
-                            android:layout_width="match_parent"
+                            android:layout_gravity="center"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/montserrat_regular"
                             android:text="@string/channels_list_empty_error"
@@ -102,8 +107,6 @@
                     </LinearLayout>
 
                 </RelativeLayout>
-
-
 
                 <LinearLayout
                     android:id="@+id/lAddChannels"
