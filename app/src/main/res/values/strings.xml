@@ -7,7 +7,7 @@
     <string name="navigation_settings_title">Settings</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="telegram_api_hash">68b8be724f9f786fdd51e22047d6a2c2</string>
+    <string name="telegram_api_hash">6f91c98460399b8ec039fdc500de3a0b</string>
 
     <!--Auth-->
     <string name="splash_colibri_post"><b>Colibri</b> Post</string>
