@@ -1,4 +1,4 @@
-package ru.teamdroid.colibripost.data
+package ru.teamdroid.colibripost.data.account
 
 import ru.teamdroid.colibripost.domain.account.AccountEntity
 import ru.teamdroid.colibripost.domain.account.AccountRepository

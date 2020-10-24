@@ -16,8 +16,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import ru.teamdroid.colibripost.domain.type.Failure
-import ru.teamdroid.colibripost.remote.auth.AuthHolder
-import ru.teamdroid.colibripost.remote.auth.AuthStates
+import ru.teamdroid.colibripost.remote.account.auth.AuthHolder
+import ru.teamdroid.colibripost.remote.account.auth.AuthStates
 import ru.teamdroid.colibripost.ui.SwitchTransparentView
 import ru.teamdroid.colibripost.ui.auth.SignInFragment
 import ru.teamdroid.colibripost.ui.bottomnavigation.BottomNavigationFragment
@@ -51,6 +51,7 @@ class MainActivity : AppCompatActivity(), SwitchTransparentView {
 
         swipeRefreshLayout.setColorSchemeResources(R.color.accent)
         swipeRefreshLayout.isEnabled = false
+
 
         lifecycleScope.launch {
             //TODO: проверка авторизации должна быть без Delay

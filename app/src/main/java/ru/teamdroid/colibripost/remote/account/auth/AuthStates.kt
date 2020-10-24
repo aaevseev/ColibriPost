@@ -1,4 +1,4 @@
-package ru.teamdroid.colibripost.remote.auth
+package ru.teamdroid.colibripost.remote.account.auth
 
 enum class AuthStates {
     UNAUTHENTICATED,

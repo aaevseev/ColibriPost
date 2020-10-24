@@ -36,7 +36,12 @@ abstract class BaseFragment : Fragment() {
             supportActionBar?.apply {
                 if (stringTitle == "")
                     this.title = getString(toolbarTitle)
-                else this.title = stringTitle
+                else if(stringTitle == "empty") {
+                    this.title = ""
+                }
+                else {
+                    this.title = stringTitle
+                }
             }
         }
     }

@@ -9,8 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.observe
 import ru.teamdroid.colibripost.App
 import ru.teamdroid.colibripost.databinding.FragmentSplashBinding
-import ru.teamdroid.colibripost.remote.auth.AuthHolder
-import ru.teamdroid.colibripost.remote.auth.AuthStates
+import ru.teamdroid.colibripost.remote.account.auth.AuthHolder
+import ru.teamdroid.colibripost.remote.account.auth.AuthStates
 import javax.inject.Inject
 
 class SplashFragment : Fragment() {

@@ -6,6 +6,8 @@ sealed class Failure {
     object NetworkPlaceHolderConnectionError : Failure()
 
     object ServerError : Failure()
+    object InvalidCodeError:Failure()
+    object NumberHasBeenBannedError:Failure()
 
     object ChannelsListIsEmptyError : Failure()
     object ChannelsNotCreatedError : Failure()

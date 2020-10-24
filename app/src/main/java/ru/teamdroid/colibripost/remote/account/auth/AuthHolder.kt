@@ -1,4 +1,4 @@
-package ru.teamdroid.colibripost.remote.auth
+package ru.teamdroid.colibripost.remote.account.auth
 
 import android.app.Application
 import android.os.Build
@@ -10,6 +10,7 @@ import org.drinkless.td.libcore.telegram.Client
 import org.drinkless.td.libcore.telegram.TdApi
 import ru.teamdroid.colibripost.R
 import ru.teamdroid.colibripost.remote.core.TelegramClient
+import ru.teamdroid.colibripost.remote.core.TelegramException
 import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -68,7 +69,7 @@ class AuthHolder @Inject constructor(
         )
     }
 
-    suspend fun insertPhoneNumber(phoneNumber: String) {
+    suspend fun insertPhoneNumber(phoneNumber: String, isSmsCode: Boolean = false) {
         Log.d("TelegramClient", "phoneNumber: $phoneNumber")
         val settings = TdApi.PhoneNumberAuthenticationSettings(
             false,
@@ -80,9 +81,15 @@ class AuthHolder @Inject constructor(
         )
     }
 
-    suspend fun insertCode(code: String) {
+    suspend fun insertCode(code: String): Boolean {
         Log.d("TelegramClient", "code: $code")
-        client.sendFunctionLaunch(TdApi.CheckAuthenticationCode(code))
+        try{
+            client.sendFunctionLaunch(TdApi.CheckAuthenticationCode(code))
+            return true
+        }catch (e: TelegramException){
+            print(e.message)
+            return false
+        }
     }
 
     suspend fun logOut() {

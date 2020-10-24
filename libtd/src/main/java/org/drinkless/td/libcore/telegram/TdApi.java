@@ -23015,7 +23015,9 @@ public class TdApi {
          *
          * @param allowFlashCall Pass true if the authentication code may be sent via flash call to the specified phone number.
          * @param isCurrentPhoneNumber Pass true if the authenticated phone number is used on the current device.
-         * @param allowSmsRetrieverApi For official applications only. True, if the app can use Android SMS Retriever API (requires Google Play Services &gt;= 10.2) to automatically receive the authentication code from the SMS. See https://developers.google.com/identity/sms-retriever/ for more details.
+         * @param allowSmsRetrieverApi For official applications only.
+         *                             True, if the app can use Android SMS Retriever API (requires Google Play Services &gt;= 10.2)
+         *                             to automatically receive the authentication code from the SMS. See https://developers.google.com/identity/sms-retriever/ for more details.
          */
         public PhoneNumberAuthenticationSettings(boolean allowFlashCall, boolean isCurrentPhoneNumber, boolean allowSmsRetrieverApi) {
             this.allowFlashCall = allowFlashCall;

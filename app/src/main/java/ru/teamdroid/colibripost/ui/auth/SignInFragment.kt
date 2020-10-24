@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import kotlinx.android.synthetic.main.activity_main.*
 import ru.teamdroid.colibripost.R
 import ru.teamdroid.colibripost.databinding.FragmentSignInBinding
 import ru.teamdroid.colibripost.ui.core.BaseFragment

@@ -3,7 +3,7 @@ package ru.teamdroid.colibripost.remote.core
 import android.util.Log
 import org.drinkless.td.libcore.telegram.Client
 import org.drinkless.td.libcore.telegram.TdApi
-import ru.teamdroid.colibripost.remote.auth.AuthListener
+import ru.teamdroid.colibripost.remote.account.auth.AuthListener
 import javax.inject.Inject
 import javax.inject.Singleton
 import kotlin.coroutines.resume

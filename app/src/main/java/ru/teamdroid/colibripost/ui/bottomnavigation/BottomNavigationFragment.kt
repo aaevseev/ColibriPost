@@ -7,6 +7,8 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.graphics.drawable.toDrawable
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.lifecycleScope
@@ -17,6 +19,8 @@ import ru.teamdroid.colibripost.R
 import ru.teamdroid.colibripost.databinding.FragmentBottomNavigationBinding
 import ru.teamdroid.colibripost.ui.auth.SignInFragment
 import ru.teamdroid.colibripost.ui.core.BaseFragment
+import ru.teamdroid.colibripost.ui.core.getColorFromResource
+import ru.teamdroid.colibripost.ui.core.getImageDrawable
 import ru.teamdroid.colibripost.ui.main.MainFragment
 import ru.teamdroid.colibripost.ui.newpost.NewPostFragment
 import ru.teamdroid.colibripost.ui.settings.SettingsFragment
@@ -44,7 +48,9 @@ class BottomNavigationFragment : BaseFragment(), OnBackPressedListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
-        base { toolbar.visibility = View.VISIBLE }
+        base {
+            toolbar.visibility = View.VISIBLE
+        }
         setupBottomNavigator()
     }
 
@@ -58,7 +64,7 @@ class BottomNavigationFragment : BaseFragment(), OnBackPressedListener {
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.navigation_newPost -> {
-                    changeActionBar(getString(R.string.new_post), true)
+                    changeActionBar(getString(R.string.new_post))
                     binding.bottomNavigation.visibility = View.GONE
                     displayFragment(NewPostFragment.TAG)
                     return@setOnNavigationItemSelectedListener true

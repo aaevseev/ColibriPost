@@ -1,27 +1,41 @@
 package ru.teamdroid.colibripost.ui.auth
 
+import android.content.IntentFilter
 import android.os.Bundle
 import android.os.Handler
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.os.bundleOf
+import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.observe
+import com.google.android.gms.auth.api.phone.SmsRetriever
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_wait_code.*
 import kotlinx.coroutines.launch
+import org.drinkless.td.libcore.telegram.TdApi
 import ru.teamdroid.colibripost.App
 import ru.teamdroid.colibripost.R
 import ru.teamdroid.colibripost.databinding.FragmentWaitCodeBinding
-import ru.teamdroid.colibripost.remote.auth.AuthHolder
-import ru.teamdroid.colibripost.remote.auth.AuthStates
+import ru.teamdroid.colibripost.di.viewmodel.AuthViewModel
+import ru.teamdroid.colibripost.domain.type.Failure
+import ru.teamdroid.colibripost.domain.type.None
+import ru.teamdroid.colibripost.other.SingleLiveData
+import ru.teamdroid.colibripost.other.onFailure
+import ru.teamdroid.colibripost.other.onSuccess
+import ru.teamdroid.colibripost.remote.account.auth.AuthHolder
+import ru.teamdroid.colibripost.remote.account.auth.AuthStates
 import ru.teamdroid.colibripost.ui.bottomnavigation.BottomNavigationFragment
 import ru.teamdroid.colibripost.ui.core.BaseFragment
 import ru.teamdroid.colibripost.ui.core.getColorFromResource
-import ru.teamdroid.colibripost.ui.core.getColorState
 import javax.inject.Inject
+
 
 class WaitCodeFragment : BaseFragment() {
 
@@ -32,11 +46,16 @@ class WaitCodeFragment : BaseFragment() {
     private val binding: FragmentWaitCodeBinding
         get() = _binding!!
 
+    lateinit var authViewModel: AuthViewModel
+
+    private var mySMSBroadcastReceiver: MySMSBroadcastReceiver? = null
+
     @Inject
     lateinit var authHolder: AuthHolder
 
     lateinit var phoneNumber: String
 
+    var isAuth = false
     var seconds: Int = 59
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -79,12 +98,31 @@ class WaitCodeFragment : BaseFragment() {
             }
         }
 
+        authViewModel = viewModel {
+            onSuccess<None, SingleLiveData<None>>(codeData, ::handleCheckAuthCode)
+            onSuccess(progressData, ::updateRefresh)
+            onFailure<SingleLiveData<Failure>>(failureData, ::handleFailure)
+        }
 
+        setUpUi()
+    }
+
+    fun setUpUi(){
         setBtnSendState(false)
         refreshSendItAgainView()
 
+        base {
+            ibBackstack.setOnClickListener {
+                setNavigationFragment(WaitNumberFragment())
+            }
+        }
+
         arguments?.let {
-            binding.tvHints.text = String.format(getString(R.string.we_sent_you_code), it.getString(FORMATTED_NUMBER_WITH_PLUS))
+            binding.tvHints.text = String.format(
+                getString(R.string.we_sent_you_code), it.getString(
+                    FORMATTED_NUMBER_WITH_PLUS
+                )
+            )
             phoneNumber = it.getString(NUMBER_WITH_PLUS)!!
         }
 
@@ -92,10 +130,13 @@ class WaitCodeFragment : BaseFragment() {
             if (event?.action == KeyEvent.ACTION_DOWN) {
                 when (keyCode) {
                     KeyEvent.KEYCODE_ENTER, KeyEvent.KEYCODE_DPAD_CENTER -> {
+                        isAuth = true
                         lifecycleScope.launch {
-                            seconds = 0
-                            binding.tvHints.text = getString(R.string.checking)
-                            authHolder.insertCode(binding.etCode.text.toString())
+                            authViewModel.insertCode(binding.etCode.text.toString())
+                            base {
+                                toolbar.visibility = View.GONE
+                                lnWhiteBackStack.visibility = View.GONE
+                            }
                         }
                     }
                 }
@@ -103,10 +144,37 @@ class WaitCodeFragment : BaseFragment() {
             false
         }
 
+        binding.etCode.addTextChangedListener { object : TextWatcher {
+                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                    TODO("Not yet implemented")
+                }
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                    if(count == 5) {
+                        isAuth = true
+                        lifecycleScope.launch {
+                            authViewModel.insertCode(binding.etCode.text.toString())
+                            base {
+                                toolbar.visibility = View.GONE
+                                lnWhiteBackStack.visibility = View.GONE }
+                        }
+                    }
+                }
+
+                override fun afterTextChanged(s: Editable?) {
+                    TODO("Not yet implemented")
+                }
+            }
+        }
+
         binding.btnSendAgain.setOnClickListener {
+
+
             if (authHolder.authState.value == AuthStates.WAIT_FOR_CODE) {
+                registerSmsReciver();
+                smsReceiverCall();
                 lifecycleScope.launch {
-                    authHolder.insertPhoneNumber(phoneNumber)
+                    authHolder.insertPhoneNumber(phoneNumber, true)
                 }
                 seconds = 59
                 refreshSendItAgainView()
@@ -115,17 +183,55 @@ class WaitCodeFragment : BaseFragment() {
         }
     }
 
-    fun refreshSendItAgainView(){
+    private fun smsReceiverCall(){
+        val client = SmsRetriever.getClient(requireContext())
+        val task = client.startSmsRetriever()
+
+        task.addOnSuccessListener { // Successfully started retriever, expect broadcast intent
+            Log.d("TAG", "smsRetrieverCall SUCCESS")
+        }
+
+        task.addOnFailureListener { // Failed to start retriever, inspect Exception for more details
+            // ...
+            Log.d("TAG", "smsRetrieverCall FAIL")
+            Toast.makeText(requireContext(), "Retriever start Fail", Toast.LENGTH_LONG).show()
+        }
+    }
+
+    private fun registerSmsReciver(){
+        if (mySMSBroadcastReceiver == null) {
+            mySMSBroadcastReceiver = MySMSBroadcastReceiver(object : OnAuthNumberReceivedListener {
+                override fun onAuthNumberReceived(authNumber: String?) {
+                    Log.d("TAG", "************************")
+                    Log.d("TAG", "RECEIVED String : $authNumber")
+                    Log.d("TAG", "************************")
+                    Toast.makeText(requireContext(), authNumber, Toast.LENGTH_LONG).show()
+                }
+            })
+        }
+
+        val filter = IntentFilter()
+        filter.addAction(MySMSBroadcastReceiver.SMSRetrievedAction)
+
+        base {
+            registerReceiver(mySMSBroadcastReceiver, filter)
+        }
+    }
+
+    private fun refreshSendItAgainView(){
         if(_binding != null){
-            binding.btnSendAgain.text = String.format(getString(R.string.seconds), seconds.toString())
+            binding.btnSendAgain.text = String.format(
+                getString(R.string.seconds),
+                seconds.toString()
+            )
             seconds--
             if(seconds > 0)
-                Handler().postDelayed({refreshSendItAgainView()}, 1000)
+                Handler().postDelayed({ refreshSendItAgainView() }, 1000)
             else setBtnSendState(true)
         }
     }
 
-    fun setBtnSendState(isEnable: Boolean) {
+    private fun setBtnSendState(isEnable: Boolean) {
         if (isEnable) {
             binding.btnSendAgain.isEnabled = true
             binding.btnSendAgain.setTextColor(requireContext().getColorFromResource(R.color.accent))
@@ -140,17 +246,44 @@ class WaitCodeFragment : BaseFragment() {
         base { setNavigationFragment(BottomNavigationFragment()) }
     }
 
+    private fun logOut(){
+        lifecycleScope.launch { authHolder.logOut() }
+    }
+
+    private fun handleCheckAuthCode(none: None?){
+        seconds = 0
+        updateRefresh(false)
+        startMainFragment()
+    }
+
+    override fun handleFailure(failure: Failure?) {
+        when(failure){
+            is Failure.InvalidCodeError -> tvHints.text = getString(R.string.invalid_code_oops)
+            else -> super.handleFailure(failure)
+        }
+    }
+
+    override fun updateRefresh(status: Boolean?) {
+        if(status == true) tvHints.text = getString(R.string.checking)
+        else tvHints.text = ""
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        if(!isAuth) logOut()
     }
 
     companion object {
+        const val TAG = "WaitCodeFragment"
         private const val NUMBER_WITH_PLUS = "numberWithPlus"
         private const val FORMATTED_NUMBER_WITH_PLUS = "formattedNumberWithPlus"
 
         fun newInstance(numberWithPlus: String, formattedNumberWithPlus: String) = WaitCodeFragment().apply {
-            arguments = bundleOf(NUMBER_WITH_PLUS to numberWithPlus, FORMATTED_NUMBER_WITH_PLUS to formattedNumberWithPlus)
+            arguments = bundleOf(
+                NUMBER_WITH_PLUS to numberWithPlus,
+                FORMATTED_NUMBER_WITH_PLUS to formattedNumberWithPlus
+            )
         }
     }
 }

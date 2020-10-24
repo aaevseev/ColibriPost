@@ -5,19 +5,19 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.observe
 import com.hbb20.CountryCodePicker
-import kotlinx.android.synthetic.main.fragment_channels_settings.*
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.launch
 import ru.teamdroid.colibripost.App
 import ru.teamdroid.colibripost.R
 import ru.teamdroid.colibripost.databinding.FragmentWaitNumberBinding
-import ru.teamdroid.colibripost.remote.auth.AuthHolder
-import ru.teamdroid.colibripost.remote.auth.AuthStates.*
+import ru.teamdroid.colibripost.remote.account.auth.AuthHolder
+import ru.teamdroid.colibripost.remote.account.auth.AuthStates.*
 import ru.teamdroid.colibripost.ui.core.BaseFragment
 import ru.teamdroid.colibripost.ui.core.getColorFromResource
-import ru.teamdroid.colibripost.ui.core.getColorState
 import javax.inject.Inject
 
 class WaitNumberFragment : BaseFragment() {
@@ -30,18 +30,15 @@ class WaitNumberFragment : BaseFragment() {
 
     lateinit var countryCodePicker: CountryCodePicker
 
+    var isAuth = false
+
     @Inject
     lateinit var authHolder: AuthHolder
-
-    companion object {
-        const val TAG = "WaitNumberFragment"
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         App.instance.appComponent.inject(this)
     }
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -64,7 +61,7 @@ class WaitNumberFragment : BaseFragment() {
                 }
                 WAIT_FOR_CODE -> {
                     Log.d("WaitNumberFragment", "onViewCreated: state WAIT_FOR_CODE")
-                    startWaitCodeFragment()
+                    if(isAuth) startWaitCodeFragment()
                 }
                 WAIT_FOR_PASSWORD -> Log.d(
                     "WaitNumberFragment",
@@ -84,13 +81,23 @@ class WaitNumberFragment : BaseFragment() {
 
         binding.btnOk.setOnClickListener {
             if (authHolder.authState.value == WAIT_FOR_NUMBER) {
+                isAuth = true
                 lifecycleScope.launch {
                     authHolder.insertPhoneNumber(binding.etPhone.fullNumberWithPlus)
                 }
             }
             Log.d("WaitNumberFragment", "onViewCreated: click ${authHolder.authState.value}")
         }
+
+        base {
+            toolbar.visibility = View.VISIBLE
+            lnWhiteBackStack.visibility = View.VISIBLE
+            ibBackstack.setOnClickListener {
+                setNavigationFragment(SignInFragment())
+            }
+        }
     }
+
 
     fun setBtnOkState(isEnable: Boolean) {
         if (isEnable) {
@@ -109,8 +116,21 @@ class WaitNumberFragment : BaseFragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        if(!isAuth) logOut()
     }
 
+    fun logOut(){
+        lifecycleScope.launch { authHolder.logOut() }
+    }
 
+    companion object {
+
+        const val TAG = "WaitNumberFragment"
+        private const val IS_CODE_NEED = "isCodeNeed"
+
+        fun newInstance(isCodeNeed:Boolean) = WaitNumberFragment().apply {
+            arguments = bundleOf(IS_CODE_NEED to isCodeNeed)
+        }
+    }
 
 }

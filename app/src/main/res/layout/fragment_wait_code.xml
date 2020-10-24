@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="64dp"
         android:fontFamily="@font/montserrat_bold"
-        android:text="@string/enter_your_phone_number"
+        android:text="@string/enter_your_wait_code"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="24sp"
@@ -24,12 +24,10 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/et_cardView"
-        android:layout_width="111dp"
+        android:layout_width="116dp"
         android:layout_height="wrap_content"
         android:background="@color/white"
         app:cardCornerRadius="@dimen/size_tiny"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,11 +39,9 @@
 
             <EditText
                 android:id="@+id/etCode"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp"
                 android:autofillHints="@string/code_hint"

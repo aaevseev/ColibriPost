@@ -1,7 +1,7 @@
 package ru.teamdroid.colibripost.cache
 
 import androidx.room.*
-import ru.teamdroid.colibripost.data.AccountCache
+import ru.teamdroid.colibripost.data.account.AccountCache
 import ru.teamdroid.colibripost.domain.account.AccountEntity
 
 @Dao
