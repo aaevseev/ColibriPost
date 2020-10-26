@@ -73,12 +73,25 @@ class AuthHolder @Inject constructor(
         Log.d("TelegramClient", "phoneNumber: $phoneNumber")
         val settings = TdApi.PhoneNumberAuthenticationSettings(
             false,
-            false,
-            false
+            true,
+            true
         )
-        client.sendFunctionLaunch(
-            TdApi.SetAuthenticationPhoneNumber(phoneNumber, settings)
-        )
+        try{
+            client.sendFunctionLaunch(
+                TdApi.SetAuthenticationPhoneNumber(phoneNumber, settings)
+            )
+        }catch (e:TelegramException){
+            print(e.message + "lol")
+        }
+
+    }
+
+    suspend fun resendCode(){
+        try {
+            client.sendFunctionLaunch(TdApi.ResendAuthenticationCode())
+        }catch (e:TelegramException){
+            print(e.message + "lol")
+        }
     }
 
     suspend fun insertCode(code: String): Boolean {
@@ -87,7 +100,7 @@ class AuthHolder @Inject constructor(
             client.sendFunctionLaunch(TdApi.CheckAuthenticationCode(code))
             return true
         }catch (e: TelegramException){
-            print(e.message)
+            print(e.message + "lol")
             return false
         }
     }

@@ -73,6 +73,14 @@ class WaitCodeFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        base{
+            smsBroadcast.initSmsListener(object : OnAuthNumberReceivedListener{
+                override fun onAuthNumberReceived(authNumber: String?) {
+                    binding.etCode.setText(authNumber)
+                }
+            })
+        }
         authHolder.authState.observe(viewLifecycleOwner) { state: AuthStates ->
             when (state) {
                 AuthStates.UNAUTHENTICATED -> Log.d(
@@ -168,13 +176,11 @@ class WaitCodeFragment : BaseFragment() {
         }
 
         binding.btnSendAgain.setOnClickListener {
-
-
             if (authHolder.authState.value == AuthStates.WAIT_FOR_CODE) {
-                registerSmsReciver();
-                smsReceiverCall();
+
                 lifecycleScope.launch {
-                    authHolder.insertPhoneNumber(phoneNumber, true)
+                    //authHolder.insertPhoneNumber(phoneNumber, true)
+                    authHolder.resendCode()
                 }
                 seconds = 59
                 refreshSendItAgainView()
@@ -183,40 +189,7 @@ class WaitCodeFragment : BaseFragment() {
         }
     }
 
-    private fun smsReceiverCall(){
-        val client = SmsRetriever.getClient(requireContext())
-        val task = client.startSmsRetriever()
 
-        task.addOnSuccessListener { // Successfully started retriever, expect broadcast intent
-            Log.d("TAG", "smsRetrieverCall SUCCESS")
-        }
-
-        task.addOnFailureListener { // Failed to start retriever, inspect Exception for more details
-            // ...
-            Log.d("TAG", "smsRetrieverCall FAIL")
-            Toast.makeText(requireContext(), "Retriever start Fail", Toast.LENGTH_LONG).show()
-        }
-    }
-
-    private fun registerSmsReciver(){
-        if (mySMSBroadcastReceiver == null) {
-            mySMSBroadcastReceiver = MySMSBroadcastReceiver(object : OnAuthNumberReceivedListener {
-                override fun onAuthNumberReceived(authNumber: String?) {
-                    Log.d("TAG", "************************")
-                    Log.d("TAG", "RECEIVED String : $authNumber")
-                    Log.d("TAG", "************************")
-                    Toast.makeText(requireContext(), authNumber, Toast.LENGTH_LONG).show()
-                }
-            })
-        }
-
-        val filter = IntentFilter()
-        filter.addAction(MySMSBroadcastReceiver.SMSRetrievedAction)
-
-        base {
-            registerReceiver(mySMSBroadcastReceiver, filter)
-        }
-    }
 
     private fun refreshSendItAgainView(){
         if(_binding != null){

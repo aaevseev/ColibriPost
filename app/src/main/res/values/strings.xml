@@ -55,6 +55,9 @@
     <string name="number_has_been_banned">Этот номер все еще забанен. Повторите попытку через %1$s</string>
     <string name="code_is_old">Код устарел. Введите свой номер чтобы получить новый</string>
 
+    <!--TelegramErrors-->
+    <string name="phone_code_invalid">PHONE_CODE_INVALID</string>
+
     <!--Plurals-->
     <plurals name="channels_count">
         <item quantity="one">%d канал</item>

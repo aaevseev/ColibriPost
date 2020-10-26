@@ -2,6 +2,7 @@ package ru.teamdroid.colibripost
 
 import android.app.Activity
 import android.content.Context
+import android.content.IntentFilter
 import android.net.ConnectivityManager
 import android.os.Bundle
 import android.util.Log
@@ -12,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.observe
+import com.google.android.gms.auth.api.phone.SmsRetriever
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -19,6 +21,7 @@ import ru.teamdroid.colibripost.domain.type.Failure
 import ru.teamdroid.colibripost.remote.account.auth.AuthHolder
 import ru.teamdroid.colibripost.remote.account.auth.AuthStates
 import ru.teamdroid.colibripost.ui.SwitchTransparentView
+import ru.teamdroid.colibripost.ui.auth.MySMSBroadcastReceiver
 import ru.teamdroid.colibripost.ui.auth.SignInFragment
 import ru.teamdroid.colibripost.ui.bottomnavigation.BottomNavigationFragment
 import ru.teamdroid.colibripost.ui.core.BaseFragment
@@ -32,12 +35,17 @@ class MainActivity : AppCompatActivity(), SwitchTransparentView {
 
     lateinit var connectivityManager: ConnectivityManager
 
+    val smsBroadcast = MySMSBroadcastReceiver()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_main)
         App.instance.appComponent.inject(this)
+
+        smsReceiverCall()
+        registerSmsReciver()
 
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(false)
@@ -127,6 +135,26 @@ class MainActivity : AppCompatActivity(), SwitchTransparentView {
                 }
             }
         }
+    }
+
+    private fun smsReceiverCall(){
+        SmsRetriever.getClient(this).startSmsRetriever()
+            .addOnSuccessListener { // Successfully started retriever, expect broadcast intent
+                Log.d("TAG", "smsRetrieverCall SUCCESS")
+            }
+            .addOnFailureListener { // Failed to start retriever, inspect Exception for more details
+                Log.d("TAG", "smsRetrieverCall FAIL")
+                Toast.makeText(this, "Retriever start Fail", Toast.LENGTH_LONG).show()
+            }
+    }
+
+    private fun registerSmsReciver(){
+
+        val filter = IntentFilter()
+        filter.addAction(SmsRetriever.SMS_RETRIEVED_ACTION)
+
+        applicationContext.registerReceiver(smsBroadcast, filter)
+
     }
 
     fun showMessage(message: String) {
