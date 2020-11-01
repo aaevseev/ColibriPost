@@ -48,7 +48,7 @@ class WaitCodeFragment : BaseFragment() {
 
     lateinit var authViewModel: AuthViewModel
 
-    private var mySMSBroadcastReceiver: MySMSBroadcastReceiver? = null
+
 
     @Inject
     lateinit var authHolder: AuthHolder
@@ -74,13 +74,7 @@ class WaitCodeFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        base{
-            smsBroadcast.initSmsListener(object : OnAuthNumberReceivedListener{
-                override fun onAuthNumberReceived(authNumber: String?) {
-                    binding.etCode.setText(authNumber)
-                }
-            })
-        }
+
         authHolder.authState.observe(viewLifecycleOwner) { state: AuthStates ->
             when (state) {
                 AuthStates.UNAUTHENTICATED -> Log.d(
@@ -116,9 +110,6 @@ class WaitCodeFragment : BaseFragment() {
     }
 
     fun setUpUi(){
-        setBtnSendState(false)
-        refreshSendItAgainView()
-
         base {
             ibBackstack.setOnClickListener {
                 setNavigationFragment(WaitNumberFragment())
@@ -152,7 +143,7 @@ class WaitCodeFragment : BaseFragment() {
             false
         }
 
-        binding.etCode.addTextChangedListener { object : TextWatcher {
+        binding.etCode.addTextChangedListener { object : TextWatcher    {
                 override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
                     TODO("Not yet implemented")
                 }
@@ -175,9 +166,18 @@ class WaitCodeFragment : BaseFragment() {
             }
         }
 
-        binding.btnSendAgain.setOnClickListener {
+        binding.tvSendSmsCode.setOnClickListener {
             if (authHolder.authState.value == AuthStates.WAIT_FOR_CODE) {
-
+                base{
+                    smsBroadcast = MySMSBroadcastReceiver()
+                    smsReceiverCall()
+                    registerSmsReciver()
+                    smsBroadcast?.initSmsListener(object : OnAuthNumberReceivedListener{
+                        override fun onAuthNumberReceived(authNumber: String?) {
+                            binding.etCode.setText(authNumber)
+                        }
+                    })
+                }
                 lifecycleScope.launch {
                     //authHolder.insertPhoneNumber(phoneNumber, true)
                     authHolder.resendCode()
@@ -190,10 +190,9 @@ class WaitCodeFragment : BaseFragment() {
     }
 
 
-
     private fun refreshSendItAgainView(){
         if(_binding != null){
-            binding.btnSendAgain.text = String.format(
+            binding.tvSendSmsCode.text = String.format(
                 getString(R.string.seconds),
                 seconds.toString()
             )
@@ -206,12 +205,12 @@ class WaitCodeFragment : BaseFragment() {
 
     private fun setBtnSendState(isEnable: Boolean) {
         if (isEnable) {
-            binding.btnSendAgain.isEnabled = true
-            binding.btnSendAgain.setTextColor(requireContext().getColorFromResource(R.color.accent))
-            binding.btnSendAgain.text = getString(R.string.send_it_again)
+            binding.tvSendSmsCode.isEnabled = true
+            binding.tvSendSmsCode.setTextColor(requireContext().getColorFromResource(R.color.white))
+            binding.tvSendSmsCode.text = getString(R.string.send_it_by_sms)
         } else {
-            binding.btnSendAgain.isEnabled = false
-            binding.btnSendAgain.setTextColor(requireContext().getColorFromResource(R.color.accentEnabled))
+            binding.tvSendSmsCode.isEnabled = false
+            binding.btnSendAgain.setTextColor(requireContext().getColorFromResource(R.color.white))
         }
     }
 
@@ -237,8 +236,8 @@ class WaitCodeFragment : BaseFragment() {
     }
 
     override fun updateRefresh(status: Boolean?) {
-        if(status == true) tvHints.text = getString(R.string.checking)
-        else tvHints.text = ""
+        if(status == true) binding.tvHints.text = getString(R.string.checking)
+        else binding.tvHints.text = ""
     }
 
     override fun onDestroyView() {

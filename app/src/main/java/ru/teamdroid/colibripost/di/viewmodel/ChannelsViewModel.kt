@@ -41,19 +41,19 @@ class ChannelsViewModel @Inject constructor(
     }
 
 
-    fun handleAddedChannels(channels: List<ChannelEntity>) {
+    private fun handleAddedChannels(channels: List<ChannelEntity>) {
         addedChannelsData.value = channels
     }
 
-    fun handleAvailableChannels(channels: List<ChannelEntity>) {
+    private fun handleAvailableChannels(channels: List<ChannelEntity>) {
         avChannelsData.value = channels
     }
 
-    fun handleSetChannels(none: None) {
+    private fun handleSetChannels(none: None) {
         setChannelsData.value = none
     }
 
-    fun handleDeleteChannel(none: None) {
+    private fun handleDeleteChannel(none: None) {
         deleteChannelData.value = none
     }
 

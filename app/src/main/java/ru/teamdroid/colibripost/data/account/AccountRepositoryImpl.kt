@@ -17,7 +17,7 @@ class AccountRepositoryImpl(
         val account = accountCache.getAccount()
         return if (networkHandler.isConnected != null)
             Either.Right(accountRemote.getAccount())
-                .onNext { account?.let { accountCache.saveAccount(account) } }
+                .onNext { it.let { accountCache.saveAccount(it) } }
         else Either.Right(account!!)
     }
 }

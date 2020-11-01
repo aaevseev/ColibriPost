@@ -69,7 +69,7 @@ class AuthHolder @Inject constructor(
         )
     }
 
-    suspend fun insertPhoneNumber(phoneNumber: String, isSmsCode: Boolean = false) {
+    suspend fun insertPhoneNumber(phoneNumber: String, isSmsCode: Boolean = false): Boolean {
         Log.d("TelegramClient", "phoneNumber: $phoneNumber")
         val settings = TdApi.PhoneNumberAuthenticationSettings(
             false,
@@ -77,11 +77,11 @@ class AuthHolder @Inject constructor(
             true
         )
         try{
-            client.sendFunctionLaunch(
-                TdApi.SetAuthenticationPhoneNumber(phoneNumber, settings)
-            )
+            client.sendFunctionLaunch(TdApi.SetAuthenticationPhoneNumber(phoneNumber, settings))
+            return true
         }catch (e:TelegramException){
             print(e.message + "lol")
+            return false
         }
 
     }
@@ -106,7 +106,10 @@ class AuthHolder @Inject constructor(
     }
 
     suspend fun logOut() {
-        client.sendFunctionLaunch(TdApi.LogOut())
+        try {
+            client.sendFunctionLaunch(TdApi.LogOut())
+            Log.d("AuthHolder", "onAuthorizationStateUpdated: LoggedOut")
+        }catch (e:TelegramException){ Log.d("AuthHolder", "onAuthorizationStateUpdated: AlreadyLoggingOut") }
     }
 
     override fun onAuthorizationStateUpdated(state: TdApi.AuthorizationState) {

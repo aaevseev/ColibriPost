@@ -35,7 +35,7 @@ class MySMSBroadcastReceiver constructor() : BroadcastReceiver() {
                 }
                 CommonStatusCodes.TIMEOUT -> {
                     // Waiting for SMS timed out (5 minutes)
-                    LocalBroadcastManager.getInstance(context!!).unregisterReceiver(this)
+                    //LocalBroadcastManager.getInstance(context!!).unregisterReceiver(this)
                     Log.d("TAG", "MySMSBroadcastReceiver : onReceiver(CommonStatusCodes.TIMEOUT)")
                 }
             }

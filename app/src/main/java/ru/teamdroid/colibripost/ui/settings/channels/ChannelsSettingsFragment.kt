@@ -1,5 +1,7 @@
+
 package ru.teamdroid.colibripost.ui.settings.channels
 
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.view.View
 import android.widget.LinearLayout
@@ -37,6 +39,8 @@ class ChannelsSettingsFragment : BaseFragment() {
     lateinit var networkHandler: NetworkHandler
 
     lateinit var channelsViewModel: ChannelsViewModel
+
+    lateinit var networkCallback: ConnectivityManager.NetworkCallback
 
     override val layoutId = R.layout.fragment_channels_settings
 
@@ -87,7 +91,7 @@ class ChannelsSettingsFragment : BaseFragment() {
         }
 
         (requireActivity() as MainActivity).connectivityManager.let {
-            it.setNetworkCallback({ setNetworkAvailbleUi(true) }, ::setNetworkLostUi)
+            networkCallback = it.setNetworkCallback({ setNetworkAvailbleUi(true) }, ::setNetworkLostUi)
         }
 
         channelsViewModel.getAddedChannels()
@@ -199,6 +203,7 @@ class ChannelsSettingsFragment : BaseFragment() {
 
     override fun setNetworkLostUi() {
         lifecycleScope.launch {
+            super.setNetworkLostUi()
             setBtnShowAvailableChannelsState(false)
         }
     }
@@ -264,6 +269,11 @@ class ChannelsSettingsFragment : BaseFragment() {
         }
     }
     //endregion
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        (requireActivity() as MainActivity).connectivityManager.unregisterNetworkCallback(networkCallback)
+    }
 
     companion object {
         const val TAG = "ChannelsSettingsFragment"

@@ -10,4 +10,8 @@ class AuthRemoteImpl @Inject constructor(
         return authHolder.insertCode(code)
     }
 
+    override suspend fun insertPhoneNumber(phone: String): Boolean {
+        return authHolder.insertPhoneNumber(phone)
+    }
+
 }

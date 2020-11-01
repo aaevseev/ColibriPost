@@ -9,7 +9,7 @@
     tools:context=".ui.auth.WaitNumberFragment">
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/tvInputPhone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="64dp"
@@ -80,7 +80,7 @@
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/tvInputPhone" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnSendAgain"
@@ -96,6 +96,7 @@
         android:layout_marginBottom="32dp"
         android:text="@string/send_it_again"
         android:textAllCaps="false"
+        android:visibility="gone"
         android:textColor="@color/accent"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -103,5 +104,19 @@
         app:layout_constraintBottom_toBottomOf="parent"
         tools:layout_editor_absoluteX="0dp" />
 
+    <TextView
+        android:id="@+id/tvSendSmsCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="18dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:fontFamily="@font/montserrat_regular"
+        android:text="@string/send_it_by_sms"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

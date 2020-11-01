@@ -15,4 +15,9 @@ class AuthRepositoryImpl(
         return if(authRemote.insertCode(code)) Either.Right(None())
         else Either.Left(Failure.InvalidCodeError)
     }
+
+    override suspend fun insertPhoneNumber(phone: String): Either<Failure, None> {
+        return if(authRemote.insertPhoneNumber(phone)) Either.Right(None())
+        else Either.Left(Failure.NumberHasBeenBannedError)
+    }
 }

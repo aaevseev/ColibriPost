@@ -6,6 +6,7 @@ import ru.teamdroid.colibripost.di.modules.AppModule
 import ru.teamdroid.colibripost.di.modules.CacheModule
 import ru.teamdroid.colibripost.di.modules.RemoteModule
 import ru.teamdroid.colibripost.di.modules.ViewModelsModule
+import ru.teamdroid.colibripost.ui.auth.LogOutService
 import ru.teamdroid.colibripost.ui.auth.WaitCodeFragment
 import ru.teamdroid.colibripost.ui.auth.WaitNumberFragment
 import ru.teamdroid.colibripost.ui.main.MainFragment
@@ -35,4 +36,7 @@ interface AppComponent {
     fun inject(fragment: SettingsFragment)
 
     fun inject(mainActivity: MainActivity)
+
+
+    fun inject(service: LogOutService)
 }

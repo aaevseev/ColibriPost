@@ -2,6 +2,7 @@ package ru.teamdroid.colibripost
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.content.IntentFilter
 import android.net.ConnectivityManager
 import android.os.Bundle
@@ -21,6 +22,7 @@ import ru.teamdroid.colibripost.domain.type.Failure
 import ru.teamdroid.colibripost.remote.account.auth.AuthHolder
 import ru.teamdroid.colibripost.remote.account.auth.AuthStates
 import ru.teamdroid.colibripost.ui.SwitchTransparentView
+import ru.teamdroid.colibripost.ui.auth.LogOutService
 import ru.teamdroid.colibripost.ui.auth.MySMSBroadcastReceiver
 import ru.teamdroid.colibripost.ui.auth.SignInFragment
 import ru.teamdroid.colibripost.ui.bottomnavigation.BottomNavigationFragment
@@ -35,7 +37,7 @@ class MainActivity : AppCompatActivity(), SwitchTransparentView {
 
     lateinit var connectivityManager: ConnectivityManager
 
-    val smsBroadcast = MySMSBroadcastReceiver()
+    var smsBroadcast: MySMSBroadcastReceiver? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
@@ -44,8 +46,9 @@ class MainActivity : AppCompatActivity(), SwitchTransparentView {
         setContentView(R.layout.activity_main)
         App.instance.appComponent.inject(this)
 
-        smsReceiverCall()
-        registerSmsReciver()
+        startService(Intent(this, LogOutService::class.java))
+        /*smsReceiverCall()
+        registerSmsReciver()*/
 
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(false)
@@ -137,7 +140,7 @@ class MainActivity : AppCompatActivity(), SwitchTransparentView {
         }
     }
 
-    private fun smsReceiverCall(){
+     fun smsReceiverCall(){
         SmsRetriever.getClient(this).startSmsRetriever()
             .addOnSuccessListener { // Successfully started retriever, expect broadcast intent
                 Log.d("TAG", "smsRetrieverCall SUCCESS")
@@ -148,7 +151,7 @@ class MainActivity : AppCompatActivity(), SwitchTransparentView {
             }
     }
 
-    private fun registerSmsReciver(){
+    fun registerSmsReciver(){
 
         val filter = IntentFilter()
         filter.addAction(SmsRetriever.SMS_RETRIEVED_ACTION)
@@ -179,6 +182,8 @@ class MainActivity : AppCompatActivity(), SwitchTransparentView {
     fun swipeRefreshStatus(refreshStatus: Boolean) {
         swipeRefreshLayout.isRefreshing = refreshStatus
     }
+
+    
 
 }
 

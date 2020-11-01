@@ -9,10 +9,10 @@
     tools:context=".ui.auth.WaitNumberFragment">
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/tvInputPhone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/size_large"
+        android:layout_marginBottom="88dp"
         android:fontFamily="@font/montserrat_bold"
         android:text="@string/enter_your_phone_number"
         android:textAlignment="center"
@@ -79,6 +79,7 @@
                 android:hint="@string/phone_number_hint"
                 android:inputType="phone"
                 android:singleLine="true"
+                android:focusable="true"
                 android:autofillHints="@string/phone_number_hint" />
 
         </LinearLayout>
@@ -91,13 +92,16 @@
         android:id="@+id/tvHints"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/size_medium"
-        android:layout_marginTop="@dimen/size_tiny"
         android:fontFamily="@font/montserrat_regular"
         android:text="@string/will_send_you_code"
         android:textColor="@color/white"
+        android:textSize="14sp"
+        android:maxLines="2"
+        app:layout_constraintBottom_toTopOf="@+id/et_cardView"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_cardView" />
+        app:layout_constraintTop_toBottomOf="@+id/tvInputPhone"
+        app:layout_constraintVertical_bias="0.455" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_ok"

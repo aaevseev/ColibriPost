@@ -17,6 +17,7 @@
     <string name="enter_your_wait_code">Введите код</string>
     <string name="do_you_want_delete_channel">Вы хотите удалить канал?</string>
     <string name="checking">Проверочка…</string>
+    <string name="waiting">Ожидание…</string>
 
 
     <!--Settings Menu and ToolBarTitle-->
@@ -41,7 +42,8 @@
     <string name="name">Имя</string>
     <string name="new_post">New post</string>
     <string name="continuing">Далее</string>
-    <string name="send_it_again">Отправить еще раз</string>
+    <string name="send_it_again">Отправить sms еще раз</string>
+    <string name="send_it_by_sms">Выслать код по sms</string>
 
     <!--Errors-->
     <string name="oopsie">Упс!</string>
@@ -71,7 +73,7 @@
     <!--placeholders and hints-->
     <string name="first_name_and_last_name">%1$s %2$s</string>
     <string name="we_sent_you_code">Код мы выслали в Telegram на номер %1$s</string>
-    <string name="seconds">Отправить еще раз через %1$s</string>
+    <string name="seconds">Отправить sms еще раз через %1$s</string>
 
     <string name="will_send_you_code">Мы вышлем тебе 5-значный код в Telegram</string>
     <string name="phone_number_hint">999 111 22 33</string>
