@@ -19,7 +19,6 @@
     <string name="checking">Проверочка…</string>
     <string name="waiting">Ожидание…</string>
 
-
     <!--Settings Menu and ToolBarTitle-->
     <string name="channels">Каналы</string>
     <string name="accounts">Аккаунты</string>
@@ -45,7 +44,7 @@
     <string name="new_post">New post</string>
     <string name="continuing">Далее</string>
     <string name="send_it_again">Отправить sms еще раз</string>
-    <string name="send_it_by_sms">Выслать код по sms?</string>
+    <string name="send_it_by_sms">Выслать код по sms</string>
 
     <!--Errors-->
     <string name="oopsie">Упс!</string>
@@ -83,19 +82,15 @@
         <item quantity="other">%d минут</item>
     </plurals>
 
-
-
     <!--placeholders and hints-->
     <string name="first_name_and_last_name">%1$s %2$s</string>
     <string name="we_sent_you_code">Код мы выслали в Telegram на номер %1$s</string>
     <string name="seconds">Отправить sms еще раз через %1$s</string>
     <string name="number_have_been_banned_before">Этот номер все еще забанен.\nПовторите попытку через %1$s.</string>
-    <string name="count_of_attempts">Код не верный. У вас осталось %1$s попытки</string>
-
+    <string name="count_of_attempts">Код не верный.\n У вас осталось %1$s попытки</string>
 
     <string name="will_send_you_code">Мы вышлем тебе 5-значный код в Telegram</string>
     <string name="phone_number_hint">999 111 22 33</string>
     <string name="code_hint">12345</string>
-
 
 </resources>
