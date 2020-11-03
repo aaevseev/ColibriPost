@@ -97,6 +97,13 @@ class WaitNumberFragment : BaseFragment() {
             onFailure<SingleLiveData<Failure>>(failureData, ::handleFailure)
         }
 
+        arguments?.let {
+            if(it.getBoolean(IS_CODE_NEED))
+                CodeIsNotActualDialog(
+                    getString(R.string.code_is_old)
+                ).show((requireActivity() as MainActivity).supportFragmentManager, CodeIsNotActualDialog.TAG)
+        }
+
         binding.etPhone.registerCarrierNumberEditText(binding.editTextCarrierNumber)
         binding.etPhone.setPhoneNumberValidityChangeListener(object :
             CountryCodePicker.PhoneNumberValidityChangeListener {
@@ -227,10 +234,10 @@ class WaitNumberFragment : BaseFragment() {
     companion object {
 
         const val TAG = "WaitNumberFragment"
-        private const val IS_CODE_NEED = "isCodeNeed"
+        private const val IS_CODE_NEED = "isCodeFailure"
 
-        fun newInstance(isCodeNeed: Boolean) = WaitNumberFragment().apply {
-            arguments = bundleOf(IS_CODE_NEED to isCodeNeed)
+        fun newInstance(isCodeFailure: Boolean) = WaitNumberFragment().apply {
+            arguments = bundleOf(IS_CODE_NEED to isCodeFailure)
         }
     }
 

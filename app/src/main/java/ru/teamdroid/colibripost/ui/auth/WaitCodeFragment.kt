@@ -48,6 +48,7 @@ class WaitCodeFragment : BaseFragment() {
 
     var isAuth = false
     var seconds: Int = 59
+    private var countOfAttempts = 5
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -98,6 +99,11 @@ class WaitCodeFragment : BaseFragment() {
         }
 
         setUpUi()
+
+        binding.etCode1.setOnFocusChangeListener { v, hasFocus ->
+            if(hasFocus) { showKeyboard(v) }
+        }
+        binding.etCode1.requestFocus()
     }
 
     fun setUpUi(){
@@ -118,65 +124,21 @@ class WaitCodeFragment : BaseFragment() {
 
         //GenericTextWatcher here works only for moving to next EditText when a number is entered
         //first parameter is the current EditText and second parameter is next EditText
-        etCode1.addTextChangedListener(AuthCodeTextWatcher(etCode1, etCode2))
-        etCode2.addTextChangedListener(AuthCodeTextWatcher(etCode2, etCode3))
-        etCode3.addTextChangedListener(AuthCodeTextWatcher(etCode3, etCode4))
-        etCode4.addTextChangedListener(AuthCodeTextWatcher(etCode4, etCode5))
-        etCode5.addTextChangedListener(AuthCodeTextWatcher(etCode5, null) { insertCode() })
+        binding.etCode1.addTextChangedListener(AuthCodeTextWatcher(etCode1, etCode2))
+        binding.etCode2.addTextChangedListener(AuthCodeTextWatcher(etCode2, etCode3))
+        binding.etCode3.addTextChangedListener(AuthCodeTextWatcher(etCode3, etCode4))
+        binding.etCode4.addTextChangedListener(AuthCodeTextWatcher(etCode4, etCode5))
+        binding.etCode5.addTextChangedListener(AuthCodeTextWatcher(etCode5, null) { insertCode() })
 
         //GenericKeyEvent here works for deleting the element and to switch back to previous EditText
         //first parameter is the current EditText and second parameter is previous EditText
-        etCode1.setOnKeyListener(GenericKeyEvent(etCode1, null))
-        etCode2.setOnKeyListener(GenericKeyEvent(etCode2, etCode1))
-        etCode3.setOnKeyListener(GenericKeyEvent(etCode3, etCode2))
-        etCode4.setOnKeyListener(GenericKeyEvent(etCode4,etCode3))
-        etCode5.setOnKeyListener(GenericKeyEvent(etCode5,etCode4))
+        binding.etCode1.setOnKeyListener(GenericKeyEvent(etCode1, null))
+        binding.etCode2.setOnKeyListener(GenericKeyEvent(etCode2, etCode1))
+        binding.etCode3.setOnKeyListener(GenericKeyEvent(etCode3, etCode2))
+        binding.etCode4.setOnKeyListener(GenericKeyEvent(etCode4,etCode3))
+        binding.etCode5.setOnKeyListener(GenericKeyEvent(etCode5,etCode4))
 
-        /*binding.otpView.setOtpCompletionListener(object : OnOtpCompletionListener{
-            override fun onOtpCompleted(otp: String?) {
 
-            }
-        })*/
-
-        /*binding.etCode.setOnKeyListener { v, keyCode, event ->
-            if (event?.action == KeyEvent.ACTION_DOWN) {
-                when (keyCode) {
-                    KeyEvent.KEYCODE_ENTER, KeyEvent.KEYCODE_DPAD_CENTER -> {
-                        isAuth = true
-                        lifecycleScope.launch {
-                            authViewModel.insertCode(binding.etCode.text.toString())
-                            base {
-                                toolbar.visibility = View.GONE
-                                lnWhiteBackStack.visibility = View.GONE
-                            }
-                        }
-                    }
-                }
-            }
-            false
-        }
-
-        binding.etCode.addTextChangedListener (object : TextWatcher    {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                TODO("Not yet implemented")
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if(count == 5) {
-                    isAuth = true
-                    lifecycleScope.launch {
-                        authViewModel.insertCode(binding.etCode.text.toString())
-                        base {
-                            toolbar.visibility = View.GONE
-                            lnWhiteBackStack.visibility = View.GONE }
-                    }
-                }
-            }
-
-            override fun afterTextChanged(s: Editable?) {
-                TODO("Not yet implemented")
-            }
-        })*/
 
         binding.tvSendSmsCode.setOnClickListener {
             if (authHolder.authState.value == AuthStates.WAIT_FOR_CODE) {
@@ -190,13 +152,10 @@ class WaitCodeFragment : BaseFragment() {
                         }
                     })
                 }*/
+                binding.tvSendSmsCode.visibility = View.GONE
                 lifecycleScope.launch {
-                    //authHolder.insertPhoneNumber(phoneNumber, true)
                     authHolder.resendCode()
                 }
-                seconds = 59
-                refreshSendItAgainView()
-                setBtnSendState(false)
             }
         }
     }
@@ -254,13 +213,23 @@ class WaitCodeFragment : BaseFragment() {
 
     override fun handleFailure(failure: Failure?) {
         when(failure){
-            is Failure.InvalidCodeError -> tvHints.text = getString(R.string.invalid_code_oops)
+            is Failure.InvalidCodeError -> {
+                isAuth = false
+                countOfAttempts--
+                if(countOfAttempts == 0) {
+                    base { setNavigationFragment(WaitNumberFragment.newInstance(true)) }
+                }
+                else tvHints.text = String.format(
+                    getString(R.string.count_of_attempts),
+                    countOfAttempts
+                )
+            }
             else -> super.handleFailure(failure)
         }
     }
 
     override fun updateRefresh(status: Boolean?) {
-        if(status == true) binding.tvHints.text = getString(R.string.checking)
+        if(status == true) binding.tvHints.text = getString(R.string.waiting)
         else binding.tvHints.text = ""
     }
 

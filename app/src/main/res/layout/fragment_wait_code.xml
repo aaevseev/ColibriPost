@@ -33,62 +33,57 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <LinearLayout
+            android:id="@+id/clAuthCode"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="@dimen/size_medium"
+            android:layout_marginEnd="@dimen/size_medium"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
             <EditText
                 android:id="@+id/etCode1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginStart="@dimen/size_medium"
-                android:layout_marginBottom="@dimen/size_medium"
-                android:layout_marginTop="@dimen/size_medium"
                 android:autofillHints="@string/code_hint"
                 android:background="@android:color/transparent"
                 android:fontFamily="@font/montserrat_regular"
+                android:layout_weight="1"
                 android:hint="1"
                 android:inputType="number"
                 android:letterSpacing="0.3"
+                android:maxLength="1"
                 android:singleLine="true"
                 android:textAlignment="textStart"
                 android:textColor="@color/accent"
                 android:textSize="18sp"
-                android:maxLength="1"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/etCode2"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="RtlCompat"
-                />
+                tools:ignore="RtlCompat" />
 
             <EditText
                 android:id="@+id/etCode2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginStart="@dimen/size_medium"
-                android:layout_marginBottom="@dimen/size_medium"
-                android:layout_marginTop="@dimen/size_medium"
                 android:layout_margin="@dimen/size_medium"
+                android:layout_marginTop="@dimen/size_medium"
+                android:layout_marginBottom="@dimen/size_medium"
                 android:autofillHints="@string/code_hint"
                 android:background="@android:color/transparent"
                 android:fontFamily="@font/montserrat_regular"
+                android:layout_weight="1"
                 android:hint="2"
                 android:inputType="number"
                 android:letterSpacing="0.3"
+                android:maxLength="1"
                 android:singleLine="true"
                 android:textAlignment="textStart"
                 android:textColor="@color/accent"
                 android:textSize="18sp"
-                android:maxLength="1"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/etCode3"
-                app:layout_constraintStart_toEndOf="@id/etCode1"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="RtlCompat"
-                />
+                tools:ignore="RtlCompat" />
 
             <EditText
                 android:id="@+id/etCode3"
@@ -109,10 +104,6 @@
                 android:textColor="@color/accent"
                 android:textSize="18sp"
                 android:maxLength="1"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/etCode4"
-                app:layout_constraintStart_toEndOf="@id/etCode2"
-                app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="RtlCompat"
                 />
 
@@ -128,6 +119,7 @@
                 android:background="@android:color/transparent"
                 android:fontFamily="@font/montserrat_regular"
                 android:hint="4"
+
                 android:inputType="number"
                 android:letterSpacing="0.3"
                 android:singleLine="true"
@@ -135,10 +127,6 @@
                 android:textColor="@color/accent"
                 android:textSize="18sp"
                 android:maxLength="1"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/etCode5"
-                app:layout_constraintStart_toEndOf="@id/etCode3"
-                app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="RtlCompat"
                 />
 
@@ -149,26 +137,22 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginBottom="@dimen/size_medium"
                 android:layout_marginTop="@dimen/size_medium"
-                android:layout_marginEnd="@dimen/size_medium"
                 android:autofillHints="@string/code_hint"
                 android:background="@android:color/transparent"
                 android:fontFamily="@font/montserrat_regular"
                 android:hint="5"
                 android:inputType="number"
                 android:letterSpacing="0.3"
+                android:layout_weight="1"
                 android:singleLine="true"
                 android:textAlignment="textStart"
                 android:textColor="@color/accent"
                 android:textSize="18sp"
                 android:maxLength="1"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/etCode4"
-                app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="RtlCompat"
                 />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
 
 
     </androidx.cardview.widget.CardView>
@@ -214,15 +198,15 @@
         android:id="@+id/tvSendSmsCode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="18dp"
+        android:layout_marginTop="43dp"
         android:clickable="true"
         android:focusable="true"
         android:fontFamily="@font/montserrat_regular"
         android:text="@string/send_it_by_sms"
         android:textColor="@color/white"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_cardView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -45,7 +45,7 @@
     <string name="new_post">New post</string>
     <string name="continuing">Далее</string>
     <string name="send_it_again">Отправить sms еще раз</string>
-    <string name="send_it_by_sms">Выслать код по sms</string>
+    <string name="send_it_by_sms">Выслать код по sms?</string>
 
     <!--Errors-->
     <string name="oopsie">Упс!</string>
@@ -90,6 +90,7 @@
     <string name="we_sent_you_code">Код мы выслали в Telegram на номер %1$s</string>
     <string name="seconds">Отправить sms еще раз через %1$s</string>
     <string name="number_have_been_banned_before">Этот номер все еще забанен.\nПовторите попытку через %1$s.</string>
+    <string name="count_of_attempts">Код не верный. У вас осталось %1$s попытки</string>
 
 
     <string name="will_send_you_code">Мы вышлем тебе 5-значный код в Telegram</string>
