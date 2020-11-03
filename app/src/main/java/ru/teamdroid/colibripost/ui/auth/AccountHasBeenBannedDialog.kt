@@ -1,18 +1,18 @@
-package ru.teamdroid.colibripost.ui.settings.channels
+package ru.teamdroid.colibripost.ui.auth
 
 import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import ru.teamdroid.colibripost.R
 
-class DeleteChannelDialog(
-    private val channelId: Long,
-    private val deleteChannel: (channelId: Long) -> Unit
+class AccountHasBeenBannedDialog(
+    private val textWithTime: String
 ) : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let {
@@ -32,18 +32,16 @@ class DeleteChannelDialog(
             ViewGroup.LayoutParams.WRAP_CONTENT
         )
 
-        dialog?.findViewById<TextView>(R.id.tvMessage)?.setText(getString(R.string.do_you_want_delete_channel))
+        dialog?.findViewById<TextView>(R.id.tvMessage)?.setText(textWithTime)
 
         dialog?.findViewById<TextView>(R.id.tvOk)?.setOnClickListener {
-            deleteChannel(channelId)
             dialog!!.dismiss()
         }
-        dialog?.findViewById<TextView>(R.id.tvCancel)
-            ?.setOnClickListener { dialog!!.dismiss() }
+        dialog?.findViewById<TextView>(R.id.tvCancel)?.visibility = View.GONE
 
     }
 
     companion object {
-        const val TAG = "DeleteChannelDialogFragment"
+        const val TAG = "AccountHasBeenBannedDialog"
     }
 }

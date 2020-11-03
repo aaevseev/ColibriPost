@@ -4,6 +4,9 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import androidx.core.content.ContextCompat
+import org.drinkless.td.libcore.telegram.TdApi
+import java.text.DateFormat
+import java.text.SimpleDateFormat
 
 fun Context.getColorFromResource(idColor: Int): Int {
     return ContextCompat.getColor(this, idColor)

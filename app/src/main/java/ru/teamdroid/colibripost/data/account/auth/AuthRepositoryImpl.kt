@@ -16,8 +16,13 @@ class AuthRepositoryImpl(
         else Either.Left(Failure.InvalidCodeError)
     }
 
-    override suspend fun insertPhoneNumber(phone: String): Either<Failure, None> {
-        return if(authRemote.insertPhoneNumber(phone)) Either.Right(None())
-        else Either.Left(Failure.NumberHasBeenBannedError)
+    override suspend fun insertPhoneNumber(phone: String): Either<Failure, String> {
+        val response = authRemote.insertPhoneNumber(phone)
+        return if(response.contains("Success")) Either.Right(response)
+        else if(response.contains("retry after")) {
+            val matchResult = Regex("""[0-9]+""").find(response)?.value
+            Either.Right(if(matchResult != null) matchResult else "Banned")
+        }
+        else Either.Left(Failure.ServerError)
     }
 }

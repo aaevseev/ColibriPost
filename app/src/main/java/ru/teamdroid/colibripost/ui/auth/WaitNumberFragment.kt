@@ -1,22 +1,17 @@
 package ru.teamdroid.colibripost.ui.auth
 
-import android.content.Context
 import android.net.ConnectivityManager
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.os.bundleOf
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.observe
 import com.hbb20.CountryCodePicker
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_wait_code.*
-import kotlinx.android.synthetic.main.fragment_wait_number.*
 import kotlinx.android.synthetic.main.fragment_wait_number.tvHints
 import kotlinx.coroutines.launch
 import ru.teamdroid.colibripost.App
@@ -25,7 +20,6 @@ import ru.teamdroid.colibripost.R
 import ru.teamdroid.colibripost.databinding.FragmentWaitNumberBinding
 import ru.teamdroid.colibripost.di.viewmodel.AuthViewModel
 import ru.teamdroid.colibripost.domain.type.Failure
-import ru.teamdroid.colibripost.domain.type.None
 import ru.teamdroid.colibripost.other.SingleLiveData
 import ru.teamdroid.colibripost.other.onFailure
 import ru.teamdroid.colibripost.other.onSuccess
@@ -35,6 +29,7 @@ import ru.teamdroid.colibripost.remote.core.NetworkHandler
 import ru.teamdroid.colibripost.remote.core.setNetworkCallback
 import ru.teamdroid.colibripost.ui.core.BaseFragment
 import ru.teamdroid.colibripost.ui.core.getColorFromResource
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 
@@ -97,7 +92,7 @@ class WaitNumberFragment : BaseFragment() {
         }
 
         authViewModel = viewModel {
-            onSuccess<None, SingleLiveData<None>>(insertPhoneData, ::handleInsertPhoneNumber)
+            onSuccess<String, SingleLiveData<String>>(insertPhoneData, ::handleInsertPhoneNumber)
             onSuccess(progressData, ::updateRefresh)
             onFailure<SingleLiveData<Failure>>(failureData, ::handleFailure)
         }
@@ -178,8 +173,31 @@ class WaitNumberFragment : BaseFragment() {
 
     }
 
-    fun handleInsertPhoneNumber(none: None?){
+    fun handleInsertPhoneNumber(response: String?){
         updateRefresh(false)
+        if(response != "Success") {
+
+            var minutes = TimeUnit.SECONDS.toMinutes(response!!.toLong()).toInt()
+            val hours = TimeUnit.SECONDS.toHours(response.toLong()).toInt()
+
+            if(hours != 0){
+                val hoursPlus = minutes/60.00
+                if(hoursPlus > hours.toLong()) minutes = minutes - hours * 60
+                else if(minutes/60 == hours) minutes = 0
+            }
+
+            val hourTimeText = this.resources.getQuantityString(R.plurals.hours_count, hours, hours)
+            val minutesTimeText = this.resources.getQuantityString(R.plurals.minutes_count, minutes, minutes)
+            val formattedBanTime = if(minutes != 0 && hours != 0) hourTimeText + " " + minutesTimeText
+                                          else if(minutes != 0) minutesTimeText
+                                          else hourTimeText
+            AccountHasBeenBannedDialog(
+                String.format(
+                    getString(R.string.number_have_been_banned_before),
+                    formattedBanTime
+                )
+            ).show((requireActivity() as MainActivity).supportFragmentManager, AccountHasBeenBannedDialog.TAG)
+        }
     }
 
     override fun handleFailure(failure: Failure?) {
@@ -191,7 +209,7 @@ class WaitNumberFragment : BaseFragment() {
 
     override fun updateRefresh(status: Boolean?) {
         if(status == true) binding.tvHints.text = getString(R.string.waiting)
-        else binding.tvHints.text = ""
+        else binding.tvHints.text = getString(R.string.will_send_you_code)
     }
 
     override fun onDestroyView() {

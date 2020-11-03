@@ -69,7 +69,7 @@ class AuthHolder @Inject constructor(
         )
     }
 
-    suspend fun insertPhoneNumber(phoneNumber: String, isSmsCode: Boolean = false): Boolean {
+    suspend fun insertPhoneNumber(phoneNumber: String, isSmsCode: Boolean = false): String {
         Log.d("TelegramClient", "phoneNumber: $phoneNumber")
         val settings = TdApi.PhoneNumberAuthenticationSettings(
             false,
@@ -78,10 +78,10 @@ class AuthHolder @Inject constructor(
         )
         try{
             client.sendFunctionLaunch(TdApi.SetAuthenticationPhoneNumber(phoneNumber, settings))
-            return true
+            return "Success"
         }catch (e:TelegramException){
             print(e.message + "lol")
-            return false
+            return e.message!!
         }
 
     }

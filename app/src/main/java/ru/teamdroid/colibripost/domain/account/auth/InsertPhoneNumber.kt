@@ -6,6 +6,6 @@ import javax.inject.Inject
 
 class InsertPhoneNumber @Inject constructor(
     private val authRepository: AuthRepository
-): UseCase<None, String>(){
+): UseCase<String, String>(){
     override suspend fun run(params: String) = authRepository.insertPhoneNumber(params)
 }

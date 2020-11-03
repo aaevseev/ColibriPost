@@ -6,5 +6,5 @@ import ru.teamdroid.colibripost.domain.type.None
 
 interface AuthRepository{
     suspend fun insertCode(code: String): Either<Failure, None>
-    suspend fun insertPhoneNumber(phone: String): Either<Failure, None>
+    suspend fun insertPhoneNumber(phone: String): Either<Failure, String>
 }

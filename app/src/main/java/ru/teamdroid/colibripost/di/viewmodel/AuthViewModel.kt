@@ -12,7 +12,7 @@ class AuthViewModel @Inject constructor(
 ): BaseViewModel(){
 
     val codeData: SingleLiveData<None> = SingleLiveData()
-    val insertPhoneData: SingleLiveData<None> = SingleLiveData()
+    val insertPhoneData: SingleLiveData<String> = SingleLiveData()
 
     fun insertCode(code: String) {
         updateRefreshing(true)
@@ -28,8 +28,8 @@ class AuthViewModel @Inject constructor(
         codeData.value = none
     }
 
-    private fun handleInsertPhoneNumber(none: None){
-        insertPhoneData.value = none
+    private fun handleInsertPhoneNumber(response: String){
+        insertPhoneData.value = response
     }
 
     override fun onCleared() {

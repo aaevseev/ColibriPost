@@ -28,6 +28,8 @@
     <string name="notifications">Уведомления</string>
     <string name="help">Помощь</string>
     <string name="quit">Выйти</string>
+    <string name="settings_fragment_title">Настройки</string>
+    <string name="user_image_description">User photo</string>
 
     <!--Buttons-->
     <string name="add_button">Add button</string>
@@ -67,17 +69,32 @@
         <item quantity="many">%d каналов</item>
         <item quantity="other">%d каналов</item>
     </plurals>
-    <string name="settings_fragment_title">Настройки</string>
-    <string name="user_image_description">User photo</string>
+
+    <plurals name="hours_count">
+        <item quantity="one">%d час</item>
+        <item quantity="few">%d часа</item>
+        <item quantity="many">%d часов</item>
+        <item quantity="other">%d часов</item>
+    </plurals>
+    <plurals name="minutes_count">
+        <item quantity="one">%d минуту</item>
+        <item quantity="few">%d минуты</item>
+        <item quantity="many">%d минут</item>
+        <item quantity="other">%d минут</item>
+    </plurals>
+
+
 
     <!--placeholders and hints-->
     <string name="first_name_and_last_name">%1$s %2$s</string>
     <string name="we_sent_you_code">Код мы выслали в Telegram на номер %1$s</string>
     <string name="seconds">Отправить sms еще раз через %1$s</string>
+    <string name="number_have_been_banned_before">Этот номер все еще забанен.\nПовторите попытку через %1$s.</string>
+
 
     <string name="will_send_you_code">Мы вышлем тебе 5-значный код в Telegram</string>
     <string name="phone_number_hint">999 111 22 33</string>
-    <string name="code_hint">01234</string>
+    <string name="code_hint">12345</string>
 
 
 </resources>

@@ -1,25 +1,18 @@
 package ru.teamdroid.colibripost.ui.auth
 
-import android.content.IntentFilter
 import android.os.Bundle
 import android.os.Handler
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
-import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.os.bundleOf
-import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.observe
-import com.google.android.gms.auth.api.phone.SmsRetriever
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_wait_code.*
 import kotlinx.coroutines.launch
-import org.drinkless.td.libcore.telegram.TdApi
 import ru.teamdroid.colibripost.App
 import ru.teamdroid.colibripost.R
 import ru.teamdroid.colibripost.databinding.FragmentWaitCodeBinding
@@ -47,8 +40,6 @@ class WaitCodeFragment : BaseFragment() {
         get() = _binding!!
 
     lateinit var authViewModel: AuthViewModel
-
-
 
     @Inject
     lateinit var authHolder: AuthHolder
@@ -125,7 +116,29 @@ class WaitCodeFragment : BaseFragment() {
             phoneNumber = it.getString(NUMBER_WITH_PLUS)!!
         }
 
-        binding.etCode.setOnKeyListener { v, keyCode, event ->
+        //GenericTextWatcher here works only for moving to next EditText when a number is entered
+        //first parameter is the current EditText and second parameter is next EditText
+        etCode1.addTextChangedListener(AuthCodeTextWatcher(etCode1, etCode2))
+        etCode2.addTextChangedListener(AuthCodeTextWatcher(etCode2, etCode3))
+        etCode3.addTextChangedListener(AuthCodeTextWatcher(etCode3, etCode4))
+        etCode4.addTextChangedListener(AuthCodeTextWatcher(etCode4, etCode5))
+        etCode5.addTextChangedListener(AuthCodeTextWatcher(etCode5, null) { insertCode() })
+
+        //GenericKeyEvent here works for deleting the element and to switch back to previous EditText
+        //first parameter is the current EditText and second parameter is previous EditText
+        etCode1.setOnKeyListener(GenericKeyEvent(etCode1, null))
+        etCode2.setOnKeyListener(GenericKeyEvent(etCode2, etCode1))
+        etCode3.setOnKeyListener(GenericKeyEvent(etCode3, etCode2))
+        etCode4.setOnKeyListener(GenericKeyEvent(etCode4,etCode3))
+        etCode5.setOnKeyListener(GenericKeyEvent(etCode5,etCode4))
+
+        /*binding.otpView.setOtpCompletionListener(object : OnOtpCompletionListener{
+            override fun onOtpCompleted(otp: String?) {
+
+            }
+        })*/
+
+        /*binding.etCode.setOnKeyListener { v, keyCode, event ->
             if (event?.action == KeyEvent.ACTION_DOWN) {
                 when (keyCode) {
                     KeyEvent.KEYCODE_ENTER, KeyEvent.KEYCODE_DPAD_CENTER -> {
@@ -143,32 +156,31 @@ class WaitCodeFragment : BaseFragment() {
             false
         }
 
-        binding.etCode.addTextChangedListener { object : TextWatcher    {
-                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                    TODO("Not yet implemented")
-                }
+        binding.etCode.addTextChangedListener (object : TextWatcher    {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                TODO("Not yet implemented")
+            }
 
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                    if(count == 5) {
-                        isAuth = true
-                        lifecycleScope.launch {
-                            authViewModel.insertCode(binding.etCode.text.toString())
-                            base {
-                                toolbar.visibility = View.GONE
-                                lnWhiteBackStack.visibility = View.GONE }
-                        }
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if(count == 5) {
+                    isAuth = true
+                    lifecycleScope.launch {
+                        authViewModel.insertCode(binding.etCode.text.toString())
+                        base {
+                            toolbar.visibility = View.GONE
+                            lnWhiteBackStack.visibility = View.GONE }
                     }
                 }
-
-                override fun afterTextChanged(s: Editable?) {
-                    TODO("Not yet implemented")
-                }
             }
-        }
+
+            override fun afterTextChanged(s: Editable?) {
+                TODO("Not yet implemented")
+            }
+        })*/
 
         binding.tvSendSmsCode.setOnClickListener {
             if (authHolder.authState.value == AuthStates.WAIT_FOR_CODE) {
-                base{
+                /*base{
                     smsBroadcast = MySMSBroadcastReceiver()
                     smsReceiverCall()
                     registerSmsReciver()
@@ -177,7 +189,7 @@ class WaitCodeFragment : BaseFragment() {
                             binding.etCode.setText(authNumber)
                         }
                     })
-                }
+                }*/
                 lifecycleScope.launch {
                     //authHolder.insertPhoneNumber(phoneNumber, true)
                     authHolder.resendCode()
@@ -216,6 +228,18 @@ class WaitCodeFragment : BaseFragment() {
 
     private fun startMainFragment() {
         base { setNavigationFragment(BottomNavigationFragment()) }
+    }
+
+    fun insertCode(){
+        isAuth = true
+        lifecycleScope.launch {
+            val code = etCode1.text.toString() + etCode2.text.toString() + etCode3.text.toString() + etCode4.text.toString() + etCode5.text.toString()
+            //Toast.makeText(requireContext(), code, Toast.LENGTH_SHORT).show()
+            authViewModel.insertCode(code)
+            base {
+                toolbar.visibility = View.GONE
+                lnWhiteBackStack.visibility = View.GONE }
+        }
     }
 
     private fun logOut(){
