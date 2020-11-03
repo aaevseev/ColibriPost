@@ -1,19 +1,21 @@
 package ru.teamdroid.colibripost.ui.auth
 
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.observe
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_wait_code.*
+import kotlinx.android.synthetic.main.fragment_wait_code.tvHints
 import kotlinx.coroutines.launch
 import ru.teamdroid.colibripost.App
+import ru.teamdroid.colibripost.MainActivity
 import ru.teamdroid.colibripost.R
 import ru.teamdroid.colibripost.databinding.FragmentWaitCodeBinding
 import ru.teamdroid.colibripost.di.viewmodel.AuthViewModel
@@ -24,6 +26,8 @@ import ru.teamdroid.colibripost.other.onFailure
 import ru.teamdroid.colibripost.other.onSuccess
 import ru.teamdroid.colibripost.remote.account.auth.AuthHolder
 import ru.teamdroid.colibripost.remote.account.auth.AuthStates
+import ru.teamdroid.colibripost.remote.core.NetworkHandler
+import ru.teamdroid.colibripost.remote.core.setNetworkCallback
 import ru.teamdroid.colibripost.ui.bottomnavigation.BottomNavigationFragment
 import ru.teamdroid.colibripost.ui.core.BaseFragment
 import ru.teamdroid.colibripost.ui.core.getColorFromResource
@@ -44,7 +48,14 @@ class WaitCodeFragment : BaseFragment() {
     @Inject
     lateinit var authHolder: AuthHolder
 
+    @Inject
+    lateinit var networkHandler: NetworkHandler
+
+    var networkCallbackIsInitializied = false
+    lateinit var networkCallback: ConnectivityManager.NetworkCallback
+
     lateinit var phoneNumber: String
+    lateinit var formattedPhoneNumberHint: String
 
     var isAuth = false
     var seconds: Int = 59
@@ -114,11 +125,12 @@ class WaitCodeFragment : BaseFragment() {
         }
 
         arguments?.let {
-            binding.tvHints.text = String.format(
+            formattedPhoneNumberHint = String.format(
                 getString(R.string.we_sent_you_code), it.getString(
                     FORMATTED_NUMBER_WITH_PLUS
                 )
             )
+            binding.tvHints.text = formattedPhoneNumberHint
             phoneNumber = it.getString(NUMBER_WITH_PLUS)!!
         }
 
@@ -190,19 +202,37 @@ class WaitCodeFragment : BaseFragment() {
     }
 
     fun insertCode(){
-        isAuth = true
-        lifecycleScope.launch {
-            val code = etCode1.text.toString() + etCode2.text.toString() + etCode3.text.toString() + etCode4.text.toString() + etCode5.text.toString()
-            //Toast.makeText(requireContext(), code, Toast.LENGTH_SHORT).show()
-            authViewModel.insertCode(code)
-            base {
-                toolbar.visibility = View.GONE
-                lnWhiteBackStack.visibility = View.GONE }
+        if(networkHandler.isConnected != null){
+            isAuth = true
+            lifecycleScope.launch {
+                val code = etCode1.text.toString() + etCode2.text.toString() + etCode3.text.toString() + etCode4.text.toString() + etCode5.text.toString()
+                //Toast.makeText(requireContext(), code, Toast.LENGTH_SHORT).show()
+                authViewModel.insertCode(code)
+                base {
+                    toolbar.visibility = View.GONE
+                    lnWhiteBackStack.visibility = View.GONE }
+            }
+        } else if(!networkCallbackIsInitializied) {
+            setNetworkLostUi()
+            (requireActivity() as MainActivity).connectivityManager.let {
+                networkCallback = it.setNetworkCallback({ setNetworkAvailbleUi(true) }, ::setNetworkLostUi)
+                networkCallbackIsInitializied = true
+            }
         }
+
     }
 
     private fun logOut(){
         lifecycleScope.launch { authHolder.logOut() }
+    }
+
+    override fun setNetworkAvailbleUi(isCallback: Boolean) {
+        lifecycleScope.launch { tvHints.text = formattedPhoneNumberHint}
+    }
+
+    override fun setNetworkLostUi() {
+        lifecycleScope.launch { tvHints.text = getString(R.string.network_waiting) }
+
     }
 
     private fun handleCheckAuthCode(none: None?){
@@ -236,6 +266,10 @@ class WaitCodeFragment : BaseFragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        if(networkCallbackIsInitializied)
+            (requireActivity() as MainActivity).connectivityManager.unregisterNetworkCallback(
+                networkCallback
+            )
         if(!isAuth) logOut()
     }
 
