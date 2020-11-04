@@ -55,7 +55,7 @@
 
         <LinearLayout
             android:id="@+id/clAuthCode"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:clickable="true"
             android:focusable="true"
@@ -63,12 +63,12 @@
 
             <EditText
                 android:id="@+id/etCode1"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:layout_marginStart="@dimen/size_medium"
-                android:autofillHints="@string/code_hint"
+                android:autofillHints="7"
                 android:background="@android:color/transparent"
                 android:fontFamily="@font/montserrat_regular"
                 android:hint="1"
@@ -83,7 +83,7 @@
 
             <EditText
                 android:id="@+id/etCode2"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
@@ -102,7 +102,7 @@
 
             <EditText
                 android:id="@+id/etCode3"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
@@ -121,7 +121,7 @@
 
             <EditText
                 android:id="@+id/etCode4"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
@@ -142,7 +142,7 @@
 
             <EditText
                 android:id="@+id/etCode5"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginEnd="@dimen/size_medium"
@@ -159,9 +159,7 @@
                 android:textColor="@color/accent"
                 android:textSize="18sp"
                 tools:ignore="RtlCompat" />
-
         </LinearLayout>
-
 
     </androidx.cardview.widget.CardView>
 

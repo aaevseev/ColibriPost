@@ -26,7 +26,6 @@ class SplashFragment : Fragment() {
         App.instance.appComponent.inject(this)
     }
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -78,6 +77,4 @@ class SplashFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
-
 }

@@ -12,7 +12,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.observe
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_wait_code.*
-import kotlinx.android.synthetic.main.fragment_wait_code.tvHints
 import kotlinx.coroutines.launch
 import ru.teamdroid.colibripost.App
 import ru.teamdroid.colibripost.MainActivity
@@ -32,7 +31,6 @@ import ru.teamdroid.colibripost.ui.bottomnavigation.BottomNavigationFragment
 import ru.teamdroid.colibripost.ui.core.BaseFragment
 import ru.teamdroid.colibripost.ui.core.getColorFromResource
 import javax.inject.Inject
-
 
 class WaitCodeFragment : BaseFragment() {
 
@@ -77,7 +75,6 @@ class WaitCodeFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         authHolder.authState.observe(viewLifecycleOwner) { state: AuthStates ->
             when (state) {
                 AuthStates.UNAUTHENTICATED -> Log.d(
@@ -112,12 +109,14 @@ class WaitCodeFragment : BaseFragment() {
         setUpUi()
 
         binding.etCode1.setOnFocusChangeListener { v, hasFocus ->
-            if(hasFocus) { showKeyboard(v) }
+            if (hasFocus) {
+                showKeyboard(v)
+            }
         }
         binding.etCode1.requestFocus()
     }
 
-    fun setUpUi(){
+    private fun setUpUi() {
         base {
             ibBackstack.setOnClickListener {
                 setNavigationFragment(WaitNumberFragment())
@@ -147,10 +146,8 @@ class WaitCodeFragment : BaseFragment() {
         binding.etCode1.setOnKeyListener(GenericKeyEvent(etCode1, null))
         binding.etCode2.setOnKeyListener(GenericKeyEvent(etCode2, etCode1))
         binding.etCode3.setOnKeyListener(GenericKeyEvent(etCode3, etCode2))
-        binding.etCode4.setOnKeyListener(GenericKeyEvent(etCode4,etCode3))
-        binding.etCode5.setOnKeyListener(GenericKeyEvent(etCode5,etCode4))
-
-
+        binding.etCode4.setOnKeyListener(GenericKeyEvent(etCode4, etCode3))
+        binding.etCode5.setOnKeyListener(GenericKeyEvent(etCode5, etCode4))
 
         binding.tvSendSmsCode.setOnClickListener {
             if (authHolder.authState.value == AuthStates.WAIT_FOR_CODE) {
@@ -172,15 +169,14 @@ class WaitCodeFragment : BaseFragment() {
         }
     }
 
-
-    private fun refreshSendItAgainView(){
-        if(_binding != null){
+    private fun refreshSendItAgainView() {
+        if (_binding != null) {
             binding.tvSendSmsCode.text = String.format(
                 getString(R.string.seconds),
                 seconds.toString()
             )
             seconds--
-            if(seconds > 0)
+            if (seconds > 0)
                 Handler().postDelayed({ refreshSendItAgainView() }, 1000)
             else setBtnSendState(true)
         }
@@ -201,55 +197,55 @@ class WaitCodeFragment : BaseFragment() {
         base { setNavigationFragment(BottomNavigationFragment()) }
     }
 
-    fun insertCode(){
-        if(networkHandler.isConnected != null){
+    private fun insertCode() {
+        if (networkHandler.isConnected != null) {
             isAuth = true
             lifecycleScope.launch {
-                val code = etCode1.text.toString() + etCode2.text.toString() + etCode3.text.toString() + etCode4.text.toString() + etCode5.text.toString()
+                val code =
+                    etCode1.text.toString() + etCode2.text.toString() + etCode3.text.toString() + etCode4.text.toString() + etCode5.text.toString()
                 //Toast.makeText(requireContext(), code, Toast.LENGTH_SHORT).show()
                 authViewModel.insertCode(code)
                 base {
                     toolbar.visibility = View.GONE
-                    lnWhiteBackStack.visibility = View.GONE }
+                    lnWhiteBackStack.visibility = View.GONE
+                }
             }
-        } else if(!networkCallbackIsInitializied) {
+        } else if (!networkCallbackIsInitializied) {
             setNetworkLostUi()
             (requireActivity() as MainActivity).connectivityManager.let {
-                networkCallback = it.setNetworkCallback({ setNetworkAvailbleUi(true) }, ::setNetworkLostUi)
+                networkCallback =
+                    it.setNetworkCallback({ setNetworkAvailbleUi(true) }, ::setNetworkLostUi)
                 networkCallbackIsInitializied = true
             }
         }
-
     }
 
-    private fun logOut(){
+    private fun logOut() {
         lifecycleScope.launch { authHolder.logOut() }
     }
 
     override fun setNetworkAvailbleUi(isCallback: Boolean) {
-        lifecycleScope.launch { tvHints.text = formattedPhoneNumberHint}
+        lifecycleScope.launch { tvHints.text = formattedPhoneNumberHint }
     }
 
     override fun setNetworkLostUi() {
         lifecycleScope.launch { tvHints.text = getString(R.string.network_waiting) }
-
     }
 
-    private fun handleCheckAuthCode(none: None?){
+    private fun handleCheckAuthCode(none: None?) {
         seconds = 0
         updateRefresh(false)
         startMainFragment()
     }
 
     override fun handleFailure(failure: Failure?) {
-        when(failure){
+        when (failure) {
             is Failure.InvalidCodeError -> {
                 isAuth = false
                 countOfAttempts--
-                if(countOfAttempts == 0) {
+                if (countOfAttempts == 0) {
                     base { setNavigationFragment(WaitNumberFragment.newInstance(true)) }
-                }
-                else tvHints.text = String.format(
+                } else tvHints.text = String.format(
                     getString(R.string.count_of_attempts),
                     countOfAttempts
                 )
@@ -259,18 +255,18 @@ class WaitCodeFragment : BaseFragment() {
     }
 
     override fun updateRefresh(status: Boolean?) {
-        if(status == true) binding.tvHints.text = getString(R.string.waiting)
+        if (status == true) binding.tvHints.text = getString(R.string.waiting)
         else binding.tvHints.text = ""
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-        if(networkCallbackIsInitializied)
+        if (networkCallbackIsInitializied)
             (requireActivity() as MainActivity).connectivityManager.unregisterNetworkCallback(
                 networkCallback
             )
-        if(!isAuth) logOut()
+        if (!isAuth) logOut()
     }
 
     companion object {
@@ -278,11 +274,12 @@ class WaitCodeFragment : BaseFragment() {
         private const val NUMBER_WITH_PLUS = "numberWithPlus"
         private const val FORMATTED_NUMBER_WITH_PLUS = "formattedNumberWithPlus"
 
-        fun newInstance(numberWithPlus: String, formattedNumberWithPlus: String) = WaitCodeFragment().apply {
-            arguments = bundleOf(
-                NUMBER_WITH_PLUS to numberWithPlus,
-                FORMATTED_NUMBER_WITH_PLUS to formattedNumberWithPlus
-            )
-        }
+        fun newInstance(numberWithPlus: String, formattedNumberWithPlus: String) =
+            WaitCodeFragment().apply {
+                arguments = bundleOf(
+                    NUMBER_WITH_PLUS to numberWithPlus,
+                    FORMATTED_NUMBER_WITH_PLUS to formattedNumberWithPlus
+                )
+            }
     }
 }

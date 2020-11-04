@@ -25,6 +25,7 @@ import ru.teamdroid.colibripost.ui.SwitchTransparentView
 import ru.teamdroid.colibripost.ui.auth.LogOutService
 import ru.teamdroid.colibripost.ui.auth.MySMSBroadcastReceiver
 import ru.teamdroid.colibripost.ui.auth.SignInFragment
+import ru.teamdroid.colibripost.ui.auth.WaitCodeFragment
 import ru.teamdroid.colibripost.ui.bottomnavigation.BottomNavigationFragment
 import ru.teamdroid.colibripost.ui.core.BaseFragment
 import ru.teamdroid.colibripost.ui.newpost.NewPostFragment
