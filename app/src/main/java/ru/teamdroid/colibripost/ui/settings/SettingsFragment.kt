@@ -60,7 +60,7 @@ class SettingsFragment : BaseFragment() {
 
         gestureDetector = GestureDetector(requireContext(), SingleTapConfirm())
 
-        setListeners()
+        setUpUi()
 
         accountViewModel = viewModel {
             onSuccess<AccountEntity,
@@ -74,7 +74,7 @@ class SettingsFragment : BaseFragment() {
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    fun setListeners() {
+    fun setUpUi() {
         val linearList = listOf<LinearLayout>(
             lrAccountsSettings, lrChannelsSettings,
             lrManagersSettings, lrPayingSettings, lrNotificationsSettings, lrHelp, lrQuit

@@ -9,11 +9,15 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="telegram_api_hash">6f91c98460399b8ec039fdc500de3a0b</string>
 
-    <!--Auth-->
+    <!--Dialog Strings-->
     <string name="splash_colibri_post"><b>Colibri</b> Post</string>
     <string name="sign_in_text">Войдите, чтобы начать создавать отложенные посты для Telegram.</string>
     <string name="sign_in_btn_text">Войти через Telegram</string>
-
+    <string name="enter_your_phone_number">Введите телефон</string>
+    <string name="enter_your_wait_code">Введите код</string>
+    <string name="do_you_want_delete_channel">Вы хотите удалить канал?</string>
+    <string name="checking">Проверочка…</string>
+    <string name="waiting">Ожидание…</string>
 
     <!--Settings Menu and ToolBarTitle-->
     <string name="channels">Каналы</string>
@@ -23,8 +27,10 @@
     <string name="notifications">Уведомления</string>
     <string name="help">Помощь</string>
     <string name="quit">Выйти</string>
+    <string name="settings_fragment_title">Настройки</string>
+    <string name="user_image_description">User photo</string>
 
-    <!--Notes-->
+    <!--Buttons-->
     <string name="add_button">Add button</string>
     <string name="add_channel">Добавить канал</string>
     <string name="preview">Preview</string>
@@ -35,8 +41,10 @@
     <string name="settings">Настройки</string>
     <string name="main">Main</string>
     <string name="name">Имя</string>
-    <string name="do_you_want_delete_channel">Вы хотите удалить канал?</string>
     <string name="new_post">New post</string>
+    <string name="continuing">Далее</string>
+    <string name="send_it_again">Отправить sms еще раз</string>
+    <string name="send_it_by_sms">Выслать код по sms</string>
 
     <!--Errors-->
     <string name="oopsie">Упс!</string>
@@ -46,6 +54,12 @@
     <string name="channels_list_empty_error">Каналов пока нет.</string>
     <string name="need_create_channels_error">С начала нужно создать свой канал.</string>
     <string name="network_waiting">Ожидание сети…</string>
+    <string name="invalid_code_oops">Упс! Не верный код</string>
+    <string name="number_has_been_banned">Этот номер все еще забанен. Повторите попытку через %1$s</string>
+    <string name="code_is_old">Код устарел. Введите свой номер чтобы получить новый</string>
+
+    <!--TelegramErrors-->
+    <string name="phone_code_invalid">PHONE_CODE_INVALID</string>
 
     <!--Plurals-->
     <plurals name="channels_count">
@@ -54,10 +68,29 @@
         <item quantity="many">%d каналов</item>
         <item quantity="other">%d каналов</item>
     </plurals>
-    <string name="settings_fragment_title">Настройки</string>
-    <string name="user_image_description">User photo</string>
 
-    <!--placeholders-->
+    <plurals name="hours_count">
+        <item quantity="one">%d час</item>
+        <item quantity="few">%d часа</item>
+        <item quantity="many">%d часов</item>
+        <item quantity="other">%d часов</item>
+    </plurals>
+    <plurals name="minutes_count">
+        <item quantity="one">%d минуту</item>
+        <item quantity="few">%d минуты</item>
+        <item quantity="many">%d минут</item>
+        <item quantity="other">%d минут</item>
+    </plurals>
+
+    <!--placeholders and hints-->
     <string name="first_name_and_last_name">%1$s %2$s</string>
+    <string name="we_sent_you_code">Код мы выслали в Telegram на номер %1$s</string>
+    <string name="seconds">Отправить sms еще раз через %1$s</string>
+    <string name="number_have_been_banned_before">Этот номер все еще забанен.\nПовторите попытку через %1$s.</string>
+    <string name="count_of_attempts">Код не верный.\n У вас осталось %1$s попытки</string>
+
+    <string name="will_send_you_code">Мы вышлем тебе 5-значный код в Telegram</string>
+    <string name="phone_number_hint">999 111 22 33</string>
+    <string name="code_hint">12345</string>
 
 </resources>

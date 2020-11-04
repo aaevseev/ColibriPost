@@ -4,7 +4,7 @@ import android.content.Context
 import dagger.Module
 import dagger.Provides
 import ru.teamdroid.colibripost.cache.ColibriDatabase
-import ru.teamdroid.colibripost.data.AccountCache
+import ru.teamdroid.colibripost.data.account.AccountCache
 import ru.teamdroid.colibripost.data.channels.ChannelsCache
 import javax.inject.Singleton
 

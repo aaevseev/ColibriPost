@@ -22,18 +22,23 @@ val Context.networkInfo: NetworkInfo?
 fun ConnectivityManager.setNetworkCallback(
     setNetworkAvailableUi: () -> Unit,
     setNetworkLostUi: () -> Unit
-): Unit {
+): ConnectivityManager.NetworkCallback {
+
+    val networkCallback = object : ConnectivityManager.NetworkCallback() {
+        override fun onAvailable(network: Network) {
+            super.onAvailable(network)
+            setNetworkAvailableUi()
+        }
+
+        override fun onLost(network: Network) {
+            super.onLost(network)
+            setNetworkLostUi()
+        }
+    }
+
     this.registerNetworkCallback(
         NetworkRequest.Builder().build(),
-        object : ConnectivityManager.NetworkCallback() {
-            override fun onAvailable(network: Network) {
-                super.onAvailable(network)
-                setNetworkAvailableUi()
-            }
+        networkCallback)
 
-            override fun onLost(network: Network) {
-                super.onLost(network)
-                setNetworkLostUi()
-            }
-        })
+    return networkCallback
 }

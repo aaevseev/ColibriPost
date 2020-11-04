@@ -1,6 +1,7 @@
 package ru.teamdroid.colibripost.ui.main
 
 import android.os.Bundle
+import android.view.View
 import ru.teamdroid.colibripost.App
 import ru.teamdroid.colibripost.R
 import ru.teamdroid.colibripost.remote.Messages
@@ -22,6 +23,10 @@ class MainFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         App.instance.appComponent.inject(this)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
     }
 
     companion object {

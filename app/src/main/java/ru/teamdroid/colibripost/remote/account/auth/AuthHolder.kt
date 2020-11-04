@@ -1,4 +1,4 @@
-package ru.teamdroid.colibripost.remote.auth
+package ru.teamdroid.colibripost.remote.account.auth
 
 import android.app.Application
 import android.os.Build
@@ -10,6 +10,7 @@ import org.drinkless.td.libcore.telegram.Client
 import org.drinkless.td.libcore.telegram.TdApi
 import ru.teamdroid.colibripost.R
 import ru.teamdroid.colibripost.remote.core.TelegramClient
+import ru.teamdroid.colibripost.remote.core.TelegramException
 import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -68,25 +69,47 @@ class AuthHolder @Inject constructor(
         )
     }
 
-    suspend fun insertPhoneNumber(phoneNumber: String) {
+    suspend fun insertPhoneNumber(phoneNumber: String, isSmsCode: Boolean = false): String {
         Log.d("TelegramClient", "phoneNumber: $phoneNumber")
         val settings = TdApi.PhoneNumberAuthenticationSettings(
             false,
-            false,
-            false
+            true,
+            true
         )
-        client.sendFunctionLaunch(
-            TdApi.SetAuthenticationPhoneNumber(phoneNumber, settings)
-        )
+        try{
+            client.sendFunctionLaunch(TdApi.SetAuthenticationPhoneNumber(phoneNumber, settings))
+            return "Success"
+        }catch (e:TelegramException){
+            print(e.message + "lol")
+            return e.message!!
+        }
+
     }
 
-    suspend fun insertCode(code: String) {
+    suspend fun resendCode(){
+        try {
+            client.sendFunctionLaunch(TdApi.ResendAuthenticationCode())
+        }catch (e:TelegramException){
+            print(e.message + "lol")
+        }
+    }
+
+    suspend fun insertCode(code: String): Boolean {
         Log.d("TelegramClient", "code: $code")
-        client.sendFunctionLaunch(TdApi.CheckAuthenticationCode(code))
+        try{
+            client.sendFunctionLaunch(TdApi.CheckAuthenticationCode(code))
+            return true
+        }catch (e: TelegramException){
+            print(e.message + "lol")
+            return false
+        }
     }
 
     suspend fun logOut() {
-        client.sendFunctionLaunch(TdApi.LogOut())
+        try {
+            client.sendFunctionLaunch(TdApi.LogOut())
+            Log.d("AuthHolder", "onAuthorizationStateUpdated: LoggedOut")
+        }catch (e:TelegramException){ Log.d("AuthHolder", "onAuthorizationStateUpdated: AlreadyLoggingOut") }
     }
 
     override fun onAuthorizationStateUpdated(state: TdApi.AuthorizationState) {

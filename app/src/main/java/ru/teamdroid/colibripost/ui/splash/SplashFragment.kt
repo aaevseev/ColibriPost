@@ -9,8 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.observe
 import ru.teamdroid.colibripost.App
 import ru.teamdroid.colibripost.databinding.FragmentSplashBinding
-import ru.teamdroid.colibripost.remote.auth.AuthHolder
-import ru.teamdroid.colibripost.remote.auth.AuthStates
+import ru.teamdroid.colibripost.remote.account.auth.AuthHolder
+import ru.teamdroid.colibripost.remote.account.auth.AuthStates
 import javax.inject.Inject
 
 class SplashFragment : Fragment() {
@@ -25,7 +25,6 @@ class SplashFragment : Fragment() {
         super.onCreate(savedInstanceState)
         App.instance.appComponent.inject(this)
     }
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -78,6 +77,4 @@ class SplashFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
-
 }

@@ -1,9 +1,11 @@
 package ru.teamdroid.colibripost.ui.core
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -36,7 +38,12 @@ abstract class BaseFragment : Fragment() {
             supportActionBar?.apply {
                 if (stringTitle == "")
                     this.title = getString(toolbarTitle)
-                else this.title = stringTitle
+                else if(stringTitle == "empty") {
+                    this.title = ""
+                }
+                else {
+                    this.title = stringTitle
+                }
             }
         }
     }
@@ -53,6 +60,19 @@ abstract class BaseFragment : Fragment() {
         }
     }
 
+    open fun showKeyboard(v:View) {
+        base{
+            (getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).showSoftInput(v, InputMethodManager.SHOW_IMPLICIT)
+        }
+    }
+
+    open fun hideSoftKeyboard() {
+        base{
+            if(currentFocus != null)
+                (getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).hideSoftInputFromWindow(currentFocus!!.windowToken, 0)
+        }
+    }
+
     fun showRefreshing() = base { swipeRefreshStatus(true) }
 
     fun hideRefreshing() = base {
@@ -66,6 +86,8 @@ abstract class BaseFragment : Fragment() {
     open fun setNetworkLostUi() {
         setToolbarTitle(getString(R.string.network_waiting))
     }
+
+
 
     inline fun base(block: MainActivity.() -> Unit) {
         activity.base(block)//дочернее активити выполняет код у себя

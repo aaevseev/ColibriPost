@@ -1,6 +1,6 @@
 package ru.teamdroid.colibripost.remote.account
 
-import ru.teamdroid.colibripost.data.AccountRemote
+import ru.teamdroid.colibripost.data.account.AccountRemote
 import ru.teamdroid.colibripost.domain.account.AccountEntity
 import javax.inject.Inject
 

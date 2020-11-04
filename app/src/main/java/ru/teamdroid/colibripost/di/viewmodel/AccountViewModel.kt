@@ -18,7 +18,7 @@ class AccountViewModel @Inject constructor(
         getAccountUseCase(None()) { it.either(::handleFailure) { handleAccount(it) } }
     }
 
-    fun handleAccount(accountEntity: AccountEntity) {
+    private fun handleAccount(accountEntity: AccountEntity) {
         accountData.value = accountEntity
     }
 

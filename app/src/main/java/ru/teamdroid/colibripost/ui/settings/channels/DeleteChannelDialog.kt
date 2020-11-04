@@ -18,7 +18,7 @@ class DeleteChannelDialog(
         return activity?.let {
             val builder = AlertDialog.Builder(it)
             val inflater = requireActivity().layoutInflater
-            builder.setView(inflater.inflate(R.layout.delete_channel_dialog, null))
+            builder.setView(inflater.inflate(R.layout.dialog_window, null))
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null")
     }
@@ -32,11 +32,13 @@ class DeleteChannelDialog(
             ViewGroup.LayoutParams.WRAP_CONTENT
         )
 
-        dialog?.findViewById<TextView>(R.id.tvDeleteChannel)?.setOnClickListener {
+        dialog?.findViewById<TextView>(R.id.tvMessage)?.setText(getString(R.string.do_you_want_delete_channel))
+
+        dialog?.findViewById<TextView>(R.id.tvOk)?.setOnClickListener {
             deleteChannel(channelId)
             dialog!!.dismiss()
         }
-        dialog?.findViewById<TextView>(R.id.tvCancelDelete)
+        dialog?.findViewById<TextView>(R.id.tvCancel)
             ?.setOnClickListener { dialog!!.dismiss() }
 
     }
