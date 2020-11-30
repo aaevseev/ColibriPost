@@ -18,6 +18,7 @@
     <string name="do_you_want_delete_channel">Вы хотите удалить канал?</string>
     <string name="checking">Проверочка…</string>
     <string name="waiting">Ожидание…</string>
+    <string name="filter">Фильтр по каналам</string>
 
     <!--Settings Menu and ToolBarTitle-->
     <string name="channels">Каналы</string>
@@ -88,6 +89,7 @@
     <string name="seconds">Отправить sms еще раз через %1$s</string>
     <string name="number_have_been_banned_before">Этот номер все еще забанен.\nПовторите попытку через %1$s.</string>
     <string name="count_of_attempts">Код не верный.\n У вас осталось %1$s попытки</string>
+    <string name="oclock_and_minutes">%1$s:%2$s</string>
 
     <string name="will_send_you_code">Мы вышлем тебе 5-значный код в Telegram</string>
     <string name="phone_number_hint">999 111 22 33</string>

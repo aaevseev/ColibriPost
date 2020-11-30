@@ -24,37 +24,37 @@
         <Constraint android:id="@id/tv_number_first">
             <CustomAttribute
                 app:attributeName="textColor"
-                app:customColorValue="@color/textColor" />
+                app:customColorValue="@color/text" />
         </Constraint>
         <Constraint android:id="@id/tv_number_second">
             <CustomAttribute
                 app:attributeName="textColor"
-                app:customColorValue="@color/textColor" />
+                app:customColorValue="@color/text" />
         </Constraint>
         <Constraint android:id="@id/tv_number_third">
             <CustomAttribute
                 app:attributeName="textColor"
-                app:customColorValue="@color/textColor" />
+                app:customColorValue="@color/text" />
         </Constraint>
         <Constraint android:id="@id/tv_number_fourth">
             <CustomAttribute
                 app:attributeName="textColor"
-                app:customColorValue="@color/textColor" />
+                app:customColorValue="@color/text" />
         </Constraint>
         <Constraint android:id="@id/tv_number_fifth">
             <CustomAttribute
                 app:attributeName="textColor"
-                app:customColorValue="@color/textColor" />
+                app:customColorValue="@color/text" />
         </Constraint>
         <Constraint android:id="@id/tv_number_sixth">
             <CustomAttribute
                 app:attributeName="textColor"
-                app:customColorValue="@color/textColor" />
+                app:customColorValue="@color/text" />
         </Constraint>
         <Constraint android:id="@id/tv_number_seventh">
             <CustomAttribute
                 app:attributeName="textColor"
-                app:customColorValue="@color/textColor" />
+                app:customColorValue="@color/text" />
         </Constraint>
     </ConstraintSet>
     <ConstraintSet

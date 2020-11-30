@@ -6,10 +6,7 @@ import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
 import ru.teamdroid.colibripost.di.ViewModelKey
-import ru.teamdroid.colibripost.di.viewmodel.AccountViewModel
-import ru.teamdroid.colibripost.di.viewmodel.AuthViewModel
-import ru.teamdroid.colibripost.di.viewmodel.ChannelsViewModel
-import ru.teamdroid.colibripost.di.viewmodel.ViewModelFactory
+import ru.teamdroid.colibripost.di.viewmodel.*
 import ru.teamdroid.colibripost.ui.newpost.NewPostViewModel
 
 @Module
@@ -37,5 +34,10 @@ abstract class ViewModelsModule {
     @IntoMap
     @ViewModelKey(AuthViewModel::class)
     abstract fun authViewModel(viewModel: AuthViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(PostViewModel::class)
+    abstract fun postViewModel(viewModel: PostViewModel): ViewModel
 
 }

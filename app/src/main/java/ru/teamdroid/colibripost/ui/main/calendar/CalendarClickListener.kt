@@ -1,4 +1,4 @@
-package ru.teamdroid.colibripost.ui.screens.main.CalendarView
+package ru.teamdroid.colibripost.ui.main.calendar
 
 interface CalendarClickListener {
     fun onDaySelected(day: Day)

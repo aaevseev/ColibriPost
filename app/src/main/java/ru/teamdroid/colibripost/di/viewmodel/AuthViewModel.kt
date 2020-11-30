@@ -7,8 +7,8 @@ import ru.teamdroid.colibripost.other.SingleLiveData
 import javax.inject.Inject
 
 class AuthViewModel @Inject constructor(
-    val checkAuthCodeUseCase: CheckAuthCode,
-    val insertPhoneNumberUseCase:InsertPhoneNumber
+        private val checkAuthCodeUseCase: CheckAuthCode,
+        private val insertPhoneNumberUseCase:InsertPhoneNumber
 ): BaseViewModel(){
 
     val codeData: SingleLiveData<None> = SingleLiveData()

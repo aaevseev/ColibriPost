@@ -8,7 +8,7 @@ import ru.teamdroid.colibripost.other.SingleLiveData
 import javax.inject.Inject
 
 class AccountViewModel @Inject constructor(
-    val getAccountUseCase: GetAccount
+        private val getAccountUseCase: GetAccount
 ) : BaseViewModel() {
 
     var accountData: SingleLiveData<AccountEntity> = SingleLiveData()

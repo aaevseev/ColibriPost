@@ -50,8 +50,8 @@ class NewPostFragment : BaseFragment(), FragmentResultListener {
 
     val publishAdapter by lazy {
         ArrayAdapter<String>(
-            requireActivity(),
-            android.R.layout.simple_spinner_item
+                requireActivity(),
+                android.R.layout.simple_spinner_item
         )
     }
 
@@ -65,8 +65,8 @@ class NewPostFragment : BaseFragment(), FragmentResultListener {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentNewPostBinding.inflate(inflater, container, false)
         return binding.root
@@ -201,30 +201,30 @@ class NewPostFragment : BaseFragment(), FragmentResultListener {
         binding.spinnerPublish.adapter = publishAdapter
         binding.spinnerPublish.setSelection(1)
         binding.spinnerPublish.onItemSelectedListener =
-            object : AdapterView.OnItemSelectedListener {
-                override fun onNothingSelected(parent: AdapterView<*>?) {
+                object : AdapterView.OnItemSelectedListener {
+                    override fun onNothingSelected(parent: AdapterView<*>?) {
 
-                }
+                    }
 
-                override fun onItemSelected(
-                    parent: AdapterView<*>?,
-                    view: View?,
-                    position: Int,
-                    id: Long
-                ) {
-                    val item = viewModel.chatList.value?.get(position)
-                    item?.let { viewModel.setPublishChat(it) }
+                    override fun onItemSelected(
+                            parent: AdapterView<*>?,
+                            view: View?,
+                            position: Int,
+                            id: Long
+                    ) {
+                        val item = viewModel.chatList.value?.get(position)
+                        item?.let { viewModel.setPublishChat(it) }
+                    }
                 }
-            }
     }
 
     //спиннер нужно переделать
     private fun setupCategorySpinner(spinnerHeight: Int) {
         val categoryList = getSpinnerCategoryList()
         val categoryAdapter = SpinnerAdapter(
-            requireActivity(),
-            R.layout.simple_spinner_item,
-            categoryList
+                requireActivity(),
+                R.layout.simple_spinner_item,
+                categoryList
         )
         categoryAdapter.setDropDownViewResource(R.layout.simple_spinner_item)
         binding.spinnerCategory.dropDownVerticalOffset = spinnerHeight
@@ -247,15 +247,16 @@ class NewPostFragment : BaseFragment(), FragmentResultListener {
     //Мок данные для спиннера
     private fun getSpinnerCategoryList(): MutableList<SpinnerItem> {
         val drawable: LayerDrawable = requireActivity().resources.getDrawable(
-            R.drawable.spinner_circle,
-            null
+                R.drawable.spinner_circle,
+                null
         ) as LayerDrawable
         return mutableListOf(
-            SpinnerItem(drawable.findDrawableByLayerId(R.id.spinner_green), "News"),
-            SpinnerItem(drawable.findDrawableByLayerId(R.id.spinner_blue), "Advertising"),
-            SpinnerItem(drawable.findDrawableByLayerId(R.id.spinner_orange), "Entertainment"),
-            SpinnerItem(drawable.findDrawableByLayerId(R.id.spinner_purple), "Involvement"),
-            SpinnerItem(drawable.findDrawableByLayerId(R.id.spinner_hint), "Choose category")
+                SpinnerItem(drawable.findDrawableByLayerId(R.id.spinner_green), "News"),
+                SpinnerItem(drawable.findDrawableByLayerId(R.id.spinner_blue), "Advertising"),
+                SpinnerItem(drawable.findDrawableByLayerId(R.id.spinner_orange), "Entertainment"),
+                SpinnerItem(drawable.findDrawableByLayerId(R.id.spinner_purple), "Involvement"),
+                SpinnerItem(drawable.findDrawableByLayerId(R.id.spinner_hint), "Choose category")
         )
     }
 }
+

@@ -1,6 +1,6 @@
-package ru.teamdroid.colibripost.ui.screens.main.CalendarView
+package ru.teamdroid.colibripost.ui.main.calendar
 
-import java.util.Calendar.*
+import java.util.*
 
 class Day(var time: Long) {
     var dayOfMonth: Int = 1
@@ -13,12 +13,12 @@ class Day(var time: Long) {
 
 
     init {
-        val cal = getInstance()
+        val cal = Calendar.getInstance()
         cal.timeInMillis = time
-        dayOfMonth = cal[DAY_OF_MONTH]
-        dayOfWeek = cal[DAY_OF_WEEK]
-        month = cal[MONTH] + 1
-        year = cal[YEAR]
+        dayOfMonth = cal[Calendar.DAY_OF_MONTH]
+        dayOfWeek = cal[Calendar.DAY_OF_WEEK]
+        month = cal[Calendar.MONTH] + 1
+        year = cal[Calendar.YEAR]
     }
 
     operator fun compareTo(other: Day): Int {

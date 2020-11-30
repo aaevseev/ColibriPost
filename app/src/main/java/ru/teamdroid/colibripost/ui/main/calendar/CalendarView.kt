@@ -1,4 +1,4 @@
-package ru.teamdroid.colibripost.ui.screens.main.CalendarView
+package ru.teamdroid.colibripost.ui.main.calendar
 
 import android.content.Context
 import android.util.AttributeSet

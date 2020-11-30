@@ -9,7 +9,9 @@
     <color name="bottom_navigation_item_color">#FF0081C3</color>
     <color name="white">#FFFFFF</color>
     <color name="transparent">#70000000</color>
+    <color name="transparent_2">#00000000</color>
     <color name="hint">#B2BCC8</color>
+
 
     <color name="accentEnabled">#800081C3</color>
     <color name="whiteEnabled">#80FFFFFF</color>
@@ -19,6 +21,7 @@
     <color name="gray_1">#F0F2F4</color>
     <color name="gray_2">#E1E5E9</color>
     <color name="gray_3">#B4B7BA</color>
+    <color name="gray_4">#B2BCC8</color>
     <color name="text">#1B1B1B</color>
     <color name="smile">#FFC10E</color>
     <color name="red">#E74C3C</color>

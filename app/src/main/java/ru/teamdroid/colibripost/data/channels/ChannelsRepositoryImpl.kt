@@ -2,6 +2,7 @@ package ru.teamdroid.colibripost.data.channels
 
 import ru.teamdroid.colibripost.domain.channels.ChannelEntity
 import ru.teamdroid.colibripost.domain.channels.ChannelsRepository
+import ru.teamdroid.colibripost.domain.post.PostEntity
 import ru.teamdroid.colibripost.domain.type.Either
 import ru.teamdroid.colibripost.domain.type.Failure
 import ru.teamdroid.colibripost.domain.type.None
@@ -39,6 +40,14 @@ class ChannelsRepositoryImpl(
             else Either.Left(Failure.ChannelsNotCreatedError)
         } else Either.Left(Failure.NetworkPlaceHolderConnectionError)
     }
+
+    override suspend fun getPostsChannelPhoto(posts: List<PostEntity>): Either<Failure, List<PostEntity>> {
+        return Either.Right(posts.map {
+            it.channelPhotoPath = channelsCache.getChannel(it.chatId)?.photoPath.toString()
+            return@map it
+        })
+    }
+
 
     override suspend fun setChannels(channels: List<ChannelEntity>): Either<Failure, None> {
         channelsCache.saveChannels(channels)

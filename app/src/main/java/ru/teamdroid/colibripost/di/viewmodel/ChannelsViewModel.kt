@@ -1,21 +1,24 @@
 package ru.teamdroid.colibripost.di.viewmodel
 
 import ru.teamdroid.colibripost.domain.channels.*
+import ru.teamdroid.colibripost.domain.post.PostEntity
 import ru.teamdroid.colibripost.domain.type.None
 import ru.teamdroid.colibripost.other.SingleLiveData
 import javax.inject.Inject
 
 class ChannelsViewModel @Inject constructor(
-    val getAddedChannelsUseCase: GetAddedChannels,
-    val getAvailableChannelsUseCase: GetAvailableChannels,
-    val setChannelsUseCase: SetChannels,
-    val deleteChannelUseCase: DeleteChannel
+    private val getAddedChannelsUseCase: GetAddedChannels,
+    private val getAvailableChannelsUseCase: GetAvailableChannels,
+    private val setChannelsUseCase: SetChannels,
+    private val deleteChannelUseCase: DeleteChannel,
+    private val getPostsChannelPhotoUseCase: GetPostsChannelsPhoto
 ) : BaseViewModel() {
 
     var addedChannelsData: SingleLiveData<List<ChannelEntity>> = SingleLiveData()
     var avChannelsData: SingleLiveData<List<ChannelEntity>> = SingleLiveData()
     var setChannelsData: SingleLiveData<None> = SingleLiveData()
     var deleteChannelData: SingleLiveData<None> = SingleLiveData()
+    var getPostsChannelPhotoData: SingleLiveData<List<PostEntity>> = SingleLiveData()
 
     fun getAddedChannels() {
         updateRefreshing(true)
@@ -30,6 +33,12 @@ class ChannelsViewModel @Inject constructor(
                 )
             }
         }
+    }
+
+    fun getPostsChannelPhoto(posts:List<PostEntity>){
+        getPostsChannelPhotoUseCase(posts){it.either(::handleFailure) {
+            handlePostsChannelPhoto(it)
+        } }
     }
 
     fun setChannels(channels: List<ChannelEntity>) {
@@ -55,6 +64,10 @@ class ChannelsViewModel @Inject constructor(
 
     private fun handleDeleteChannel(none: None) {
         deleteChannelData.value = none
+    }
+
+    private fun handlePostsChannelPhoto(posts:List<PostEntity>){
+        getPostsChannelPhotoData.value = posts
     }
 
     override fun onCleared() {

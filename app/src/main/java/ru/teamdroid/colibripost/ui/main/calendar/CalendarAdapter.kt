@@ -1,4 +1,4 @@
-package ru.teamdroid.colibripost.ui.screens.main.CalendarView
+package ru.teamdroid.colibripost.ui.main.calendar
 
 import android.content.res.ColorStateList
 import android.graphics.Color
@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintSet
-import androidx.constraintlayout.widget.ConstraintSet.*
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.Dispatchers
@@ -153,43 +152,43 @@ class CalendarAdapter : RecyclerView.Adapter<CalendarAdapter.WeekHolder>() {
             tvNumberFirst.setTextColor(
                 ContextCompat.getColor(
                     binding.root.context,
-                    R.color.textColor
+                    R.color.text
                 )
             )
             tvNumberSecond.setTextColor(
                 ContextCompat.getColor(
                     binding.root.context,
-                    R.color.textColor
+                    R.color.text
                 )
             )
             tvNumberThird.setTextColor(
                 ContextCompat.getColor(
                     binding.root.context,
-                    R.color.textColor
+                    R.color.text
                 )
             )
             tvNumberFourth.setTextColor(
                 ContextCompat.getColor(
                     binding.root.context,
-                    R.color.textColor
+                    R.color.text
                 )
             )
             tvNumberFifth.setTextColor(
                 ContextCompat.getColor(
                     binding.root.context,
-                    R.color.textColor
+                    R.color.text
                 )
             )
             tvNumberSixth.setTextColor(
                 ContextCompat.getColor(
                     binding.root.context,
-                    R.color.textColor
+                    R.color.text
                 )
             )
             tvNumberSeventh.setTextColor(
                 ContextCompat.getColor(
                     binding.root.context,
-                    R.color.textColor
+                    R.color.text
                 )
             )
 
@@ -231,11 +230,15 @@ class CalendarAdapter : RecyclerView.Adapter<CalendarAdapter.WeekHolder>() {
 
         private fun removeDaySelection() {
             set.clone(binding.container)
-            set.clear(binding.viewSelectedDay.id, START)
-            set.clear(binding.viewSelectedDay.id, END)
-            set.clear(binding.viewSelectedDay.id, LEFT)
-            set.clear(binding.viewSelectedDay.id, RIGHT)
-            set.connect(binding.viewSelectedDay.id, END, PARENT_ID, START)
+            set.clear(binding.viewSelectedDay.id, ConstraintSet.START)
+            set.clear(binding.viewSelectedDay.id, ConstraintSet.END)
+            set.clear(binding.viewSelectedDay.id, ConstraintSet.LEFT)
+            set.clear(binding.viewSelectedDay.id, ConstraintSet.RIGHT)
+            set.connect(binding.viewSelectedDay.id,
+                ConstraintSet.END,
+                ConstraintSet.PARENT_ID,
+                ConstraintSet.START
+            )
             set.applyTo(binding.container)
         }
 
@@ -266,12 +269,15 @@ class CalendarAdapter : RecyclerView.Adapter<CalendarAdapter.WeekHolder>() {
         }
 
         private fun setupViewPosition(viewId: Int) {
-            set.clear(binding.viewSelectedDay.id, START)
-            set.clear(binding.viewSelectedDay.id, END)
-            set.clear(binding.viewSelectedDay.id, LEFT)
-            set.clear(binding.viewSelectedDay.id, RIGHT)
-            set.connect(binding.viewSelectedDay.id, START, viewId, START)
-            set.connect(binding.viewSelectedDay.id, END, viewId, END)
+            set.clear(binding.viewSelectedDay.id, ConstraintSet.START)
+            set.clear(binding.viewSelectedDay.id, ConstraintSet.END)
+            set.clear(binding.viewSelectedDay.id, ConstraintSet.LEFT)
+            set.clear(binding.viewSelectedDay.id, ConstraintSet.RIGHT)
+            set.connect(binding.viewSelectedDay.id,
+                ConstraintSet.START, viewId,
+                ConstraintSet.START
+            )
+            set.connect(binding.viewSelectedDay.id, ConstraintSet.END, viewId, ConstraintSet.END)
         }
 
         private fun getWeekDay(day: Int): String {

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".ui.screens.main.MainFragment">
+    tools:context=".ui.main.MainFragment">
 
     <TextView
         android:id="@+id/tv_week"
@@ -12,7 +12,7 @@
         android:layout_height="32dp"
         android:layout_marginStart="16dp"
         android:gravity="center_vertical"
-        android:textColor="@color/textColor"
+        android:textColor="@color/text"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

@@ -1,4 +1,4 @@
-package ru.teamdroid.colibripost.ui.screens.main.CalendarView
+package ru.teamdroid.colibripost.ui.main.calendar
 
 import android.content.Context
 import android.graphics.Color
@@ -11,7 +11,6 @@ import androidx.transition.Transition
 import androidx.transition.TransitionManager
 import ru.teamdroid.colibripost.R
 import ru.teamdroid.colibripost.databinding.ItemCalendarBinding
-
 
 class AnimatorHelper(val binding: ItemCalendarBinding, val week: Week) :
     Transition.TransitionListener {
@@ -52,7 +51,7 @@ class AnimatorHelper(val binding: ItemCalendarBinding, val week: Week) :
         if (week.containsDay(selectedDay) && week.containsDay(previousSelectedDay)) {
             val positionOfDay = week.getPositionOfDay(previousSelectedDay)
             previousSelectedDayIndex = positionOfDay
-            startTransitionTextColor = colorRes(binding.container.context, R.color.textColor)
+            startTransitionTextColor = colorRes(binding.container.context, R.color.text)
             animateFromStartToEnd(selectedDay)
         } else {
             setupStartAnimationState(previousSelectedDay)

@@ -21,7 +21,6 @@ open class ChannelsAdapter(
     }
 
     class ChannelViewHolder(val root: View, val adapter: ChannelsAdapter) : BaseViewHolder(root) {
-
         override fun onBind(item: Any) {
             (item as? ChannelEntity)?.let {
                 root.tvChannelName.text = item.title
@@ -34,7 +33,7 @@ open class ChannelsAdapter(
         }
     }
 
-    class ChannelDiffCallback : DiffUtil.ItemCallback<ChannelEntity>() {
+    class ChannelDiffCallback : DiffUtil.ItemCallback<ChannelEntity>(){
         override fun areItemsTheSame(oldItem: ChannelEntity, newItem: ChannelEntity): Boolean {
             return oldItem.chatId == newItem.chatId
         }

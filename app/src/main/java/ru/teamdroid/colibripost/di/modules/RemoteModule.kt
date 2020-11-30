@@ -5,12 +5,15 @@ import dagger.Provides
 import ru.teamdroid.colibripost.data.account.AccountRemote
 import ru.teamdroid.colibripost.data.account.auth.AuthRemote
 import ru.teamdroid.colibripost.data.channels.ChannelsRemote
+import ru.teamdroid.colibripost.data.post.PostRemote
 import ru.teamdroid.colibripost.remote.account.AccountRemoteImpl
 import ru.teamdroid.colibripost.remote.account.AccountRequests
 import ru.teamdroid.colibripost.remote.account.auth.AuthHolder
 import ru.teamdroid.colibripost.remote.account.auth.AuthRemoteImpl
 import ru.teamdroid.colibripost.remote.channels.ChannelsRemoteImpl
 import ru.teamdroid.colibripost.remote.channels.ChatsRequests
+import ru.teamdroid.colibripost.remote.post.PostRemoteImpl
+import ru.teamdroid.colibripost.remote.post.PostRequests
 import javax.inject.Singleton
 
 @Module
@@ -33,6 +36,12 @@ class RemoteModule {
     @Provides
     fun provideAuthRemote(authHolder: AuthHolder): AuthRemote {
         return AuthRemoteImpl(authHolder)
+    }
+
+    @Singleton
+    @Provides
+    fun providePostRemote(postRequests: PostRequests): PostRemote {
+        return PostRemoteImpl(postRequests)
     }
 
 
