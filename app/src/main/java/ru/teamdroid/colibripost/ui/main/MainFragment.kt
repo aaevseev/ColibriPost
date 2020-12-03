@@ -48,8 +48,8 @@ class MainFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         postViewModel = viewModel {
-            onSuccess<List<PostEntity>, SingleLiveData<List<PostEntity>>>(postsData, ::handleSchedulePosts)
-            onFailure<SingleLiveData<Failure>>(failureData, ::handleFailure)
+            onSuccess(postsData, ::handleSchedulePosts)
+            onFailure(failureData, ::handleFailure)
         }
 
         channelsViewModel = viewModel {
@@ -78,7 +78,13 @@ class MainFragment : BaseFragment() {
 
     private fun handlePostsChannelPhoto(schedulePosts:List<PostEntity>?){
         Toast.makeText(requireContext(), "Отлож. Посты: ${schedulePosts!!.size}", Toast.LENGTH_SHORT).show()
-        if(schedulePosts != null) postAdapter.submitList(schedulePosts)
+        if(schedulePosts != null) {
+            val scheduleList: MutableList<PostEntity> = mutableListOf()
+            scheduleList.add(PostEntity())
+            scheduleList.addAll(schedulePosts)
+            scheduleList.add(PostEntity())
+            postAdapter.submitList(scheduleList)
+        }
     }
 
     override fun handleFailure(failure: Failure?) {

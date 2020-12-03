@@ -14,7 +14,7 @@ abstract class BaseAdapter<Item : Any, VH : BaseAdapter.BaseViewHolder>(
         holder.onBind(getItem(position))
     }
 
-    abstract class BaseViewHolder(protected val view: View) : RecyclerView.ViewHolder(view) {
+    abstract class BaseViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
         abstract fun onBind(item: Any)
     }
 

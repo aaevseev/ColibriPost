@@ -3,11 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/accent"
     android:layout_height="100dp">
 
     <TextView
         android:id="@+id/tvPostDate"
-        android:layout_width="wrap_content"
+        android:layout_width="45dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:fontFamily="@font/montserrat_regular"
@@ -16,7 +17,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="9:00" />
+        tools:text="19:45" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -60,8 +61,6 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="248dp"
@@ -74,18 +73,29 @@
         app:layout_constraintTop_toTopOf="parent">
 
 
-        <ImageView
-            android:id="@+id/ivChannelPhoto"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/llChannelPhoto"
             android:layout_width="39dp"
             android:layout_height="39dp"
-            android:layout_gravity="center_vertical"
             android:layout_marginStart="@dimen/size_medium"
-            android:background="@drawable/preview_post_channel_avatar"
-            android:src="@drawable/ptichka_letaet"
+            app:cardElevation="0dp"
+            app:cardCornerRadius="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:backgroundTint="@color/white" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/ivChannelPhoto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/ptichka_letaet"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.cardview.widget.CardView>
+
+
 
         <TextView
             android:id="@+id/tvPostTitle"
@@ -94,28 +104,27 @@
             android:layout_gravity="center_vertical"
             android:layout_marginStart="@dimen/size_tiny"
             android:layout_marginTop="@dimen/size_tiny"
-            android:layout_marginEnd="12dp"
+            android:layout_marginEnd="18dp"
             android:layout_marginBottom="@dimen/size_tiny"
             android:ellipsize="end"
             android:fontFamily="@font/montserrat_regular"
             android:maxLines="3"
             android:textColor="@color/white"
             android:textSize="12sp"
+            android:lineSpacingExtra="3dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/ivPostState"
-            app:layout_constraintStart_toEndOf="@+id/ivChannelPhoto"
+            app:layout_constraintStart_toEndOf="@+id/llChannelPhoto"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Рекордные 657 тысяч случаев заражения коронавируса nnjnnj" />
 
         <ImageView
             android:id="@+id/ivPostState"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
             android:layout_marginEnd="@dimen/size_medium"
-            android:background="@drawable/white_post_state_background"
-            android:backgroundTint="@color/white"
-            android:src="@drawable/accent_pen"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="@dimen/size_small"
+            android:src="@drawable/menu_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
