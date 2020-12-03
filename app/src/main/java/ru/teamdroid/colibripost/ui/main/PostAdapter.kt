@@ -31,13 +31,13 @@ class PostAdapter : BaseAdapter<PostEntity, BaseAdapter.BaseViewHolder>(PostDiff
     }
 
     fun bind(holder: BaseViewHolder, position: Int, items: List<PostEntity>) {
-//        if (holder is PostViewHolder) {
-//            if (position == 1) {
-//                holder.view.igTimeLineUp.visibility = View.INVISIBLE
-//                holder.view.background =
-//                    holder.view.context.getImageDrawable(R.drawable.settings_menu_background)
-//            }
-//        }
+        if (holder is PostViewHolder) {
+            if (position == 1) {
+                holder.view.igTimeLineUp.visibility = View.INVISIBLE
+                holder.view.background =
+                    holder.view.context.getImageDrawable(R.drawable.settings_menu_background)
+            }
+        }
         holder.onBind(currentList[position])
     }
 
