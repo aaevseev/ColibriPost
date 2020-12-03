@@ -16,16 +16,14 @@ import java.util.*
 class PostAdapter : BaseAdapter<PostEntity, BaseAdapter.BaseViewHolder>(PostDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
-        return if (viewType == 0)
-            HeaderPostViewHolder(
-                LayoutInflater.from(parent.context)
-                    .inflate(R.layout.post_header_item, parent, false)
-            )
-        else
-            PostViewHolder(
-                LayoutInflater.from(parent.context)
-                    .inflate(R.layout.post_item, parent, false)
-            )
+        return when (viewType) {
+            1 -> PostViewHolder(LayoutInflater.from(parent.context)
+                .inflate(R.layout.post_item, parent, false))
+            2 -> BottomPostViewHolder(LayoutInflater.from(parent.context)
+                .inflate(R.layout.post_bottom_item, parent, false))
+            else -> HeaderPostViewHolder(LayoutInflater.from(parent.context)
+                .inflate(R.layout.post_header_item, parent,false))
+        }
     }
 
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
@@ -85,8 +83,9 @@ class PostAdapter : BaseAdapter<PostEntity, BaseAdapter.BaseViewHolder>(PostDiff
     }
 
     override fun getItemViewType(position: Int): Int {
-        return when (position) {
-            0 -> 0
+        return when(position){
+            0 -> {0}
+            currentList.size-1 -> 2
             else -> 1
         }
     }
