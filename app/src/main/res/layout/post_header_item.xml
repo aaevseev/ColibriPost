@@ -3,8 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/white"
-    android:layout_marginBottom="@dimen/size_medium"
+    android:background="@drawable/calendar_background"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -30,6 +29,7 @@
         android:clickable="true"
         android:focusable="true"
         app:cardCornerRadius="@dimen/small_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/calendarView">
 
         <RelativeLayout
