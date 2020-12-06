@@ -12,4 +12,6 @@ sealed class Failure {
     object ChannelsListIsEmptyError : Failure()
     object ChannelsNotCreatedError : Failure()
 
+    object PostsListIsEmptyError : Failure()
+
 }

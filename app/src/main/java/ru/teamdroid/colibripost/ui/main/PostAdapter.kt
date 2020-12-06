@@ -21,35 +21,31 @@ class PostAdapter(
         BaseAdapter.BaseViewHolder>(PostDiffCallback()){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
-        return if(viewType == 1)
-                    PostViewHolder(LayoutInflater.from(parent.context)
+        return PostViewHolder(LayoutInflater.from(parent.context)
                             .inflate(R.layout.post_item, parent, false))
-               else if (viewType == 2) BottomPostViewHolder(LayoutInflater.from(parent.context)
-                            .inflate(R.layout.post_bottom_item, parent, false))
-               else
-                    HeaderPostViewHolder(LayoutInflater.from(parent.context)
-                            .inflate(R.layout.post_header_item, parent,false))
     }
 
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
-        bind(holder, position, currentList)
+        bind(holder, position)
     }
 
-    fun bind(holder: BaseViewHolder, position:Int, items:List<PostEntity>){
-        if(holder is PostViewHolder){
-            if(position == 1) {
+    fun bind(holder: BaseViewHolder, position:Int){
+        if(currentList.size > 1) when(position){
+            0 -> {
                 holder.view.igTimeLineUp.visibility = View.INVISIBLE
                 holder.view.background = holder.view.context.getImageDrawable(R.drawable.settings_menu_background)
             }
-            else if (position == currentList.size - 2) {
+            currentList.size - 1 -> {
                 holder.view.igTimeLineDown.visibility = View.INVISIBLE
             }
+        } else {
+            holder.view.igTimeLineUp.visibility = View.INVISIBLE
+            holder.view.igTimeLineDown.visibility = View.INVISIBLE
         }
         holder.onBind(currentList[position])
     }
 
-    class PostViewHolder(val root: View):
-            ru.teamdroid.colibripost.ui.core.BaseAdapter.BaseViewHolder(root){
+    class PostViewHolder(val root: View):BaseAdapter.BaseViewHolder(root){
 
         @SuppressLint("SetTextI18n")
         override fun onBind(item: Any) {
@@ -64,22 +60,6 @@ class PostAdapter(
                 calendar.time = date
                 root.tvPostDate.text = calendar.get(Calendar.HOUR_OF_DAY).toString() + ":" + calendar.get(Calendar.MINUTE).toString()
             }
-        }
-
-    }
-
-    class HeaderPostViewHolder(val root: View): ru.teamdroid.colibripost.ui.core.BaseAdapter.BaseViewHolder(root){
-
-        override fun onBind(item: Any) {
-            //чо нибудь потом
-        }
-
-    }
-
-    class BottomPostViewHolder(val root: View): BaseAdapter.BaseViewHolder(root){
-        override fun onBind(item: Any) {
-            //nothing
-
         }
 
     }

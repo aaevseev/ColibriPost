@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.graphics.drawable.toDrawable
 import kotlinx.android.synthetic.main.fragment_settings.*
 import ru.teamdroid.colibripost.App
@@ -75,6 +76,9 @@ class SettingsFragment : BaseFragment() {
 
     @SuppressLint("ClickableViewAccessibility")
     fun setUpUi() {
+
+        setToolbarTitle(getString(toolbarTitle))
+        (requireActivity() as AppCompatActivity).supportActionBar?.show()
         val linearList = listOf<LinearLayout>(
             lrAccountsSettings, lrChannelsSettings,
             lrManagersSettings, lrPayingSettings, lrNotificationsSettings, lrHelp, lrQuit

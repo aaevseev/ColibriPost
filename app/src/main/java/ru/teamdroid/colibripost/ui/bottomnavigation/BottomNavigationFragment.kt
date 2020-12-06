@@ -59,7 +59,7 @@ class BottomNavigationFragment : BaseFragment(), OnBackPressedListener {
             childFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
             when (it.itemId) {
                 R.id.navigation_main -> {
-                    changeActionBar(getString(R.string.main))
+                    changeActionBar(getString(R.string.main), isVisible = false)
                     displayFragment(MainFragment.TAG)
                     return@setOnNavigationItemSelectedListener true
                 }
@@ -79,14 +79,18 @@ class BottomNavigationFragment : BaseFragment(), OnBackPressedListener {
         }
 
         displayFragment(selectedFragment)
-        setToolbarTitle(getString(R.string.main))
+        changeActionBar(getString(R.string.main), isVisible = false)
     }
 
-    private fun changeActionBar(title: String, isShowHomeButton: Boolean = false) {
+    private fun changeActionBar(title: String, isShowHomeButton: Boolean = false, isVisible:Boolean = true) {
         setToolbarTitle(title)
         (requireActivity() as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(
             isShowHomeButton
         )
+        if(!isVisible) (requireActivity() as AppCompatActivity).supportActionBar?.hide()
+        else {
+                (requireActivity() as AppCompatActivity).supportActionBar?.show()
+        }
     }
 
     fun displayFragment(tag: String) {

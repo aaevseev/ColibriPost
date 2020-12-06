@@ -15,6 +15,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.FragmentResultListener
 import androidx.fragment.app.viewModels
@@ -106,6 +107,10 @@ class NewPostFragment : BaseFragment(), FragmentResultListener {
     }
 
     private fun setupViews() {
+
+        setToolbarTitle(getString(toolbarTitle))
+        (requireActivity() as AppCompatActivity).supportActionBar?.show()
+
         setupSpinners()
         setupListeners()
         setupRv()

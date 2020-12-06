@@ -13,6 +13,7 @@ class PostRepositoryImpl(
 
     override suspend fun getChatSchedulesMessages(chatIds: List<Long>):
             Either<Failure, List<PostEntity>> {
-        return Either.Right(postRemote.getChatScheduledMessages(chatIds))
+        val posts = postRemote.getChatScheduledMessages(chatIds)
+        return if(posts.size == 0) Either.Left(Failure.PostsListIsEmptyError) else Either.Right(postRemote.getChatScheduledMessages(chatIds))
     }
 }

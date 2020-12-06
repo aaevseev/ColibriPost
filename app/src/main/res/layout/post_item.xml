@@ -111,6 +111,8 @@
             android:maxLines="3"
             android:textColor="@color/white"
             android:textSize="12sp"
+            android:textAlignment="gravity"
+            android:gravity="center_vertical"
             android:lineSpacingExtra="3dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/ivPostState"

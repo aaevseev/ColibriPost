@@ -12,6 +12,7 @@ class PostViewModel @Inject constructor(
     var postsData: SingleLiveData<List<PostEntity>> = SingleLiveData()
 
     fun getScheduledPosts(chatIds:List<Long>){
+        updateRefreshing(true)
         getChatScheduledMessagesUseCase(chatIds){ it ->
             it.either(::handleFailure) {handlePosts(it)}
         }

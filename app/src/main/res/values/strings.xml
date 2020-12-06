@@ -49,6 +49,7 @@
 
     <!--Errors-->
     <string name="oopsie">Упс!</string>
+    <string name="Empty">Пусто</string>
     <string name="error_network_toast">Нет сетевого подключения.</string>
     <string name="error_network">С вашим интернет соединением не все так просто</string>
     <string name="error_server">Ошибка сервера.</string>

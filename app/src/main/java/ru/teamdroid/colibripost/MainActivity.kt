@@ -51,12 +51,7 @@ class MainActivity : AppCompatActivity(), SwitchTransparentView {
         /*smsReceiverCall()
         registerSmsReciver()*/
 
-        setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(false)
-        supportActionBar?.setHomeButtonEnabled(true)
-        toolbar.setNavigationOnClickListener {
-            onBackPressed()
-        }
+        setMainToolbar()
 
         connectivityManager =
             this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -73,6 +68,15 @@ class MainActivity : AppCompatActivity(), SwitchTransparentView {
             } else {
                 setNavigationFragment(SignInFragment())
             }
+        }
+    }
+
+    fun setMainToolbar(){
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(false)
+        supportActionBar?.setHomeButtonEnabled(true)
+        toolbar.setNavigationOnClickListener {
+            onBackPressed()
         }
     }
 

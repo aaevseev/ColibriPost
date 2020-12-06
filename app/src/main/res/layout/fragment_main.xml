@@ -1,10 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/accent"
+    app:cardElevation="0dp"
+    android:elevation="0dp"
+    android:fitsSystemWindows="true"
+    tools:context=".ui.main.MainFragment">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        app:elevation="0dp"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/toolbar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            app:titleEnabled="true"
+            app:title="@string/splash_colibri_post"
+            app:expandedTitleTextAppearance="@style/scheduleToolBarTitle"
+            app:collapsedTitleTextAppearance="@style/scheduleToolBarTitle"
+            android:background="@drawable/schedule_toolbar_corners"
+            app:contentScrim="@drawable/schedule_toolbar_corners"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:toolbarId="@+id/scheduleToolbar">
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:background="@color/white"
+                android:layout_marginBottom="@dimen/size_medium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <ru.teamdroid.colibripost.ui.main.calendar.CalendarView
+                    android:id="@+id/calendarView"
+                    android:layout_width="match_parent"
+                    android:layout_height="145dp"
+                    android:layout_marginTop="?attr/actionBarSize"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/ingredientCardView"
+                    android:layout_width="match_parent"
+                    android:layout_height="39dp"
+                    android:layout_marginTop="@dimen/size_tiny"
+                    android:layout_marginEnd="@dimen/size_medium"
+                    android:layout_marginStart="@dimen/size_medium"
+                    app:cardElevation="0dp"
+                    android:background="@drawable/disabled_accent_border_background"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:cardCornerRadius="@dimen/small_margin"
+                    app:layout_constraintTop_toBottomOf="@+id/calendarView">
+
+                    <RelativeLayout
+                        android:id="@+id/ingredientRelativeLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/disabled_accent_border_background"
+                        android:orientation="horizontal">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/titleIngredientTextView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="12dp"
+                            android:layout_marginEnd="10dp"
+                            android:width="100dp"
+                            android:background="@android:color/transparent"
+                            android:completionThreshold="1"
+                            android:fontFamily="@font/montserrat_regular"
+                            android:hint="@string/filter"
+                            android:inputType="textCapWords"
+                            android:textColor="@color/gray_3"
+                            android:textColorHint="@color/gray_3"
+                            android:textSize="16sp" />
+
+                    </RelativeLayout>
+
+                </androidx.cardview.widget.CardView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/scheduleToolbar"
+                android:layout_width="match_parent"
+                app:title="@string/splash_colibri_post"
+                app:titleTextColor="@color/accent"
+                app:titleTextAppearance="@style/scheduleToolBarTitle"
+                android:layout_height="?attr/actionBarSize" />
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvSchedulePosts"
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        android:background="@color/transparent_2"
         tools:context=".ui.main.MainFragment"/>
+
+    <ProgressBar
+        android:id="@+id/postProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:indeterminateTint="@color/white" />
+    
+    
+    <TextView
+        android:id="@+id/tvEmpty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:fontFamily="@font/montserrat_regular"
+        android:text="@string/Empty"
+        android:textColor="@color/white"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:textSize="18sp" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
