@@ -10,5 +10,4 @@ class SetChannels @Inject constructor(
 
     override suspend fun run(params: List<ChannelEntity>) =
         channelsRepository.setChannels(params)
-
 }

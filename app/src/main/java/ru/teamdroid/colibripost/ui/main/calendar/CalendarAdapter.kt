@@ -30,6 +30,7 @@ class CalendarAdapter : RecyclerView.Adapter<CalendarAdapter.WeekHolder>() {
     private var previousSelectedDay = selectedDay
     var calendarClickListener: CalendarClickListener? = null
 
+    lateinit var loadPostsByData:()->Unit
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WeekHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -259,6 +260,7 @@ class CalendarAdapter : RecyclerView.Adapter<CalendarAdapter.WeekHolder>() {
         private fun onClick(week: Week, dayWeek: Int) {
             selectedDay = week.dayOfWeek(dayWeek)
             animatorHelper?.animateChangeSelection(selectedDay, previousSelectedDay)
+            loadPostsByData()
         }
 
 

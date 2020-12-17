@@ -42,6 +42,4 @@ open class ChannelsAdapter(
             return oldItem == newItem
         }
     }
-
-
 }

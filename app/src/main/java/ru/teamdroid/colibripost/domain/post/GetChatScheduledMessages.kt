@@ -10,8 +10,10 @@ import javax.inject.Inject
 
 class GetChatScheduledMessages @Inject constructor(
         private val postRepository: PostRepository
-) : UseCase<List<PostEntity>, List<Long>>() {
+) : UseCase<List<PostEntity>, GetChatScheduledMessages.Params>() {
 
-    override suspend fun run(params: List<Long>) = postRepository.getChatSchedulesMessages(params)
+    override suspend fun run(params: Params) = postRepository.getChatSchedulesMessages(params.chatIds, params.calendarDay)
+
+    data class Params(val chatIds: List<Long>, val calendarDay:Long)
 
 }

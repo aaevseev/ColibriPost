@@ -24,7 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
-            app:titleEnabled="true"
+            app:titleEnabled="false"
             app:title="@string/splash_colibri_post"
             app:expandedTitleTextAppearance="@style/scheduleToolBarTitle"
             app:collapsedTitleTextAppearance="@style/scheduleToolBarTitle"
@@ -46,6 +46,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="145dp"
                     android:layout_marginTop="?attr/actionBarSize"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
 
@@ -71,7 +73,7 @@
                         android:orientation="horizontal">
 
                         <AutoCompleteTextView
-                            android:id="@+id/titleIngredientTextView"
+                            android:id="@+id/channelFilterTextView"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"

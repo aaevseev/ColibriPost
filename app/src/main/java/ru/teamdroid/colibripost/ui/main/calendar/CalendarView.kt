@@ -25,9 +25,12 @@ class CalendarView @JvmOverloads constructor(
             adapter.selectDay(value)
             binding.vpCalendar.setCurrentItem(adapter.getPageOfDay(value), false)
         }
+
     private val binding: CalendarViewBinding
-    private val adapter =
+    val adapter =
         CalendarAdapter()
+
+
 
 
     init {

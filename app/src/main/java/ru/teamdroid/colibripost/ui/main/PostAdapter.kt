@@ -21,22 +21,31 @@ class PostAdapter(
         BaseAdapter.BaseViewHolder>(PostDiffCallback()){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
-        return PostViewHolder(LayoutInflater.from(parent.context)
+        return if(viewType == 1) PostViewHolder(LayoutInflater.from(parent.context)
                             .inflate(R.layout.post_item, parent, false))
+                else PostBottomViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.post_bottom_item, parent, false))
     }
 
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
         bind(holder, position)
     }
 
+    override fun submitList(list: List<PostEntity>?) {
+        super.submitList(null)
+        super.submitList(list)
+        notifyDataSetChanged()
+    }
+
     fun bind(holder: BaseViewHolder, position:Int){
-        if(currentList.size > 1) when(position){
-            0 -> {
-                holder.view.igTimeLineUp.visibility = View.INVISIBLE
-                holder.view.background = holder.view.context.getImageDrawable(R.drawable.settings_menu_background)
-            }
-            currentList.size - 1 -> {
-                holder.view.igTimeLineDown.visibility = View.INVISIBLE
+        if(currentList.size > 2) {
+            when(position){
+                0 -> {
+                    holder.view.igTimeLineUp.visibility = View.INVISIBLE
+                    holder.view.background = holder.view.context.getImageDrawable(R.drawable.settings_menu_background)
+                }
+                currentList.size - 2 -> {
+                    holder.view.igTimeLineDown.visibility = View.INVISIBLE
+                }
             }
         } else {
             holder.view.igTimeLineUp.visibility = View.INVISIBLE
@@ -64,9 +73,17 @@ class PostAdapter(
 
     }
 
+    class PostBottomViewHolder(val root: View):BaseAdapter.BaseViewHolder(root){
+
+
+        override fun onBind(item: Any) {
+            //Nont needed
+        }
+
+    }
+
     override fun getItemViewType(position: Int): Int {
         return when(position){
-            0 -> {0}
             currentList.size-1 -> 2
             else -> 1
         }
@@ -74,7 +91,7 @@ class PostAdapter(
 
     class PostDiffCallback : DiffUtil.ItemCallback<PostEntity>() {
         override fun areItemsTheSame(oldItem: PostEntity, newItem: PostEntity): Boolean {
-            return oldItem.chatId == newItem.chatId
+            return oldItem.id == newItem.id
         }
 
         override fun areContentsTheSame(oldItem: PostEntity, newItem: PostEntity): Boolean {

@@ -278,6 +278,4 @@ class ChannelsSettingsFragment : BaseFragment() {
     companion object {
         const val TAG = "ChannelsSettingsFragment"
     }
-
-
 }

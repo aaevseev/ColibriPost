@@ -5,5 +5,5 @@ import ru.teamdroid.colibripost.domain.type.Failure
 
 interface PostRepository {
 
-    suspend fun getChatSchedulesMessages(chatIds: List<Long>): Either<Failure, List<PostEntity>>
+    suspend fun getChatSchedulesMessages(chatIds: List<Long>, scheduleDay:Long): Either<Failure, List<PostEntity>>
 }

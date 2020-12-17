@@ -11,9 +11,9 @@ class PostRepositoryImpl(
         private val networkHandler: NetworkHandler
 ): PostRepository {
 
-    override suspend fun getChatSchedulesMessages(chatIds: List<Long>):
+    override suspend fun getChatSchedulesMessages(chatIds: List<Long>, scheduleDay:Long):
             Either<Failure, List<PostEntity>> {
-        val posts = postRemote.getChatScheduledMessages(chatIds)
-        return if(posts.size == 0) Either.Left(Failure.PostsListIsEmptyError) else Either.Right(postRemote.getChatScheduledMessages(chatIds))
+        val posts = postRemote.getChatScheduledMessages(chatIds, scheduleDay)
+        return if(posts.size == 0) Either.Left(Failure.PostsListIsEmptyError) else Either.Right(posts)
     }
 }

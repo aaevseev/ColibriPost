@@ -3,6 +3,7 @@ package ru.teamdroid.colibripost.ui.main
 import android.opengl.Visibility
 import android.os.Bundle
 import android.view.View
+import android.widget.CalendarView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
@@ -41,6 +42,8 @@ class MainFragment : BaseFragment() {
     lateinit var channelsViewModel: ChannelsViewModel
 
     private lateinit var schedulePostsRView: RecyclerView
+    private lateinit var calendar: ru.teamdroid.colibripost.ui.main.calendar.CalendarView
+
     val postAdapter = PostAdapter()
 
     override val layoutId = R.layout.fragment_main
@@ -68,12 +71,18 @@ class MainFragment : BaseFragment() {
                 if (scrollRange + verticalOffset == 0) {
                     isShow = true
                     toolbar_layout.isTitleEnabled = true
+                    channelFilterTextView.isEnabled = false
                 } else if(isShow){
                     isShow = false
                     toolbar_layout.isTitleEnabled = false
+                    channelFilterTextView.isEnabled = true
                 }
             }
         })
+
+        calendar = calendarView
+        calendar.adapter.loadPostsByData = {
+            channelsViewModel.getAddedChannels()}
 
         postViewModel = viewModel {
             onSuccess(postsData, ::handleSchedulePosts)
@@ -98,7 +107,7 @@ class MainFragment : BaseFragment() {
     //region Handle events
 
     private fun handleAddedChannels(channels: List<ChannelEntity>?) {
-        postViewModel.getScheduledPosts(channels!!.map { it.chatId })
+        postViewModel.getScheduledPosts(channels!!.map { it.chatId }, calendar.selectedDay.time)
     }
 
     private fun handleSchedulePosts(schedulePosts: List<PostEntity>?){
@@ -108,9 +117,8 @@ class MainFragment : BaseFragment() {
     private fun handlePostsChannelPhoto(schedulePosts: List<PostEntity>?){
         if(schedulePosts != null) {
             val scheduleList: MutableList<PostEntity> = mutableListOf()
-            //scheduleList.add(PostEntity())
             scheduleList.addAll(schedulePosts)
-            //scheduleList.add(PostEntity())
+            scheduleList.add(PostEntity())
             tvEmpty.visibility = View.GONE
             postAdapter.submitList(scheduleList)
         }
@@ -119,8 +127,7 @@ class MainFragment : BaseFragment() {
 
     override fun handleFailure(failure: Failure?) {
         when(failure){
-            is Failure.ChannelsListIsEmptyError -> Toast.makeText(requireContext(), "добавь каналы",
-                    Toast.LENGTH_SHORT).show()
+            is Failure.ChannelsListIsEmptyError,
             is Failure.PostsListIsEmptyError -> tvEmpty.visibility = View.VISIBLE
             else -> super.handleFailure(failure)
         }
