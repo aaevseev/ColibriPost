@@ -66,7 +66,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/calendarView">
 
                     <RelativeLayout
-                        android:id="@+id/ingredientRelativeLayout"
+                        android:id="@+id/filterRelativeLayout"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/disabled_accent_border_background"

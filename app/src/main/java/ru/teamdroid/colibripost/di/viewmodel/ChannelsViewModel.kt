@@ -15,6 +15,7 @@ class ChannelsViewModel @Inject constructor(
 ) : BaseViewModel() {
 
     var addedChannelsData: SingleLiveData<List<ChannelEntity>> = SingleLiveData()
+    var weekAddedChannelsData: SingleLiveData<List<ChannelEntity>> = SingleLiveData()
     var avChannelsData: SingleLiveData<List<ChannelEntity>> = SingleLiveData()
     var setChannelsData: SingleLiveData<None> = SingleLiveData()
     var deleteChannelData: SingleLiveData<None> = SingleLiveData()
@@ -24,6 +25,11 @@ class ChannelsViewModel @Inject constructor(
         updateRefreshing(true)
         getAddedChannelsUseCase(None()) { it.either(::handleFailure) { handleAddedChannels(it) } }
     }
+
+    fun getAddedChannelsForWeek() {
+        getAddedChannelsUseCase(None()) { it.either(::handleFailure) { handleWeekAddedChannels(it) } }
+    }
+
 
     fun getAvChannels() {
         getAvailableChannelsUseCase(None()) {
@@ -54,6 +60,10 @@ class ChannelsViewModel @Inject constructor(
         addedChannelsData.value = channels
     }
 
+    private fun handleWeekAddedChannels(channels: List<ChannelEntity>) {
+        weekAddedChannelsData.value = channels
+    }
+
     private fun handleAvailableChannels(channels: List<ChannelEntity>) {
         avChannelsData.value = channels
     }
@@ -76,5 +86,6 @@ class ChannelsViewModel @Inject constructor(
         getAvailableChannelsUseCase.unsubscribe()
         setChannelsUseCase.unsubscribe()
         deleteChannelUseCase.unsubscribe()
+        getPostsChannelPhotoUseCase.unsubscribe()
     }
 }

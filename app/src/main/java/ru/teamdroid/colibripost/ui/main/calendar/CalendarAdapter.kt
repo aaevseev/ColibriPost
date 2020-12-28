@@ -17,7 +17,9 @@ import java.util.*
 
 class CalendarAdapter : RecyclerView.Adapter<CalendarAdapter.WeekHolder>() {
     private val weeks =
-        Week.getWeekAround(5) //нужно ли делать бесконечный скролл или мы будем отображать посты в определённом периоде?
+        Week.getWeekAround(52) //нужно ли делать бесконечный скролл или мы будем отображать посты в определённом периоде?
+
+    lateinit var currentWeek:Week
 
     var selectedDay =
         Day(System.currentTimeMillis())
@@ -31,15 +33,20 @@ class CalendarAdapter : RecyclerView.Adapter<CalendarAdapter.WeekHolder>() {
     var calendarClickListener: CalendarClickListener? = null
 
     lateinit var loadPostsByData:()->Unit
+    lateinit var cacheIndicateDaysOfWeek:(days:List<Int>, months:List<Int>, years:List<Int>, setUpDays:(week:Week, postExisting:List<Boolean>)->Unit)->Unit
+    lateinit var remoteIndicateDaysOfWeek:(times:List<Long>, setUpDays:(week:Week, postExisting:List<Boolean>)->Unit)->Unit
+
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WeekHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ItemCalendarBinding.inflate(inflater, parent, false)
-        return WeekHolder(binding)
+        return WeekHolder(binding, remoteIndicateDaysOfWeek)
     }
 
 
     override fun onBindViewHolder(holder: WeekHolder, position: Int) {
+        currentWeek = weeks[position]
         holder.bind(weeks[position])
     }
 
@@ -111,7 +118,8 @@ class CalendarAdapter : RecyclerView.Adapter<CalendarAdapter.WeekHolder>() {
     }
 
 
-    inner class WeekHolder(private val binding: ItemCalendarBinding) :
+    inner class WeekHolder(private val binding: ItemCalendarBinding,
+                           val remoteIndicateDaysOfWeek:(times:List<Long>, setUpDays:(week:Week, postExisting:List<Boolean>)->Unit)->Unit) :
         RecyclerView.ViewHolder(binding.root) {
         private val calendar = Calendar.getInstance()
         private val set = ConstraintSet()
@@ -193,13 +201,8 @@ class CalendarAdapter : RecyclerView.Adapter<CalendarAdapter.WeekHolder>() {
                 )
             )
 
-            setupStateUnderView(viewUnderDay1, week.dayOfWeek(1))
-            setupStateUnderView(viewUnderDay2, week.dayOfWeek(2))
-            setupStateUnderView(viewUnderDay3, week.dayOfWeek(3))
-            setupStateUnderView(viewUnderDay4, week.dayOfWeek(4))
-            setupStateUnderView(viewUnderDay5, week.dayOfWeek(5))
-            setupStateUnderView(viewUnderDay6, week.dayOfWeek(6))
-            setupStateUnderView(viewUnderDay7, week.dayOfWeek(7))
+            //indicateDaysOfWeek(getCacheDays(week), getCacheMonth(week), getCacheYears(week), ::setUpDaysIndicator)
+            remoteIndicateDaysOfWeek(getWeekTimes(week), ::setUpDaysIndicator)
 
             setupSelection(week)
             animatorHelper =
@@ -207,6 +210,43 @@ class CalendarAdapter : RecyclerView.Adapter<CalendarAdapter.WeekHolder>() {
                     this,
                     week
                 )
+        }
+
+        private fun getCacheDays(week: Week):List<Int>{
+            return listOf(week.dayOfWeek(1).dayOfMonth, week.dayOfWeek(2).dayOfMonth, week.dayOfWeek(3).dayOfMonth, week.dayOfWeek(4).dayOfMonth,
+                    week.dayOfWeek(5).dayOfMonth, week.dayOfWeek(6).dayOfMonth, week.dayOfWeek(7).dayOfMonth)
+        }
+
+        private fun getCacheMonth(week: Week):List<Int>{
+            return listOf(week.dayOfWeek(1).month, week.dayOfWeek(2).month, week.dayOfWeek(3).month, week.dayOfWeek(4).month,
+                    week.dayOfWeek(5).month, week.dayOfWeek(6).month, week.dayOfWeek(7).month)
+        }
+
+        private fun getCacheYears(week: Week):List<Int>{
+            return listOf(week.dayOfWeek(1).year, week.dayOfWeek(2).year, week.dayOfWeek(3).year, week.dayOfWeek(4).year,
+                    week.dayOfWeek(5).year, week.dayOfWeek(6).year, week.dayOfWeek(7).year)
+        }
+
+        private fun getWeekTimes(week: Week):List<Long>{
+            return listOf(week.dayOfWeek(1).time, week.dayOfWeek(2).time, week.dayOfWeek(3).time, week.dayOfWeek(4).time,
+                    week.dayOfWeek(5).time, week.dayOfWeek(6).time, week.dayOfWeek(7).time)
+        }
+
+        private fun setUpDaysIndicator(week:Week, existingPostsOnWeek:List<Boolean>){
+            var i = 1
+            for(isExist:Boolean in existingPostsOnWeek){
+                week.dayOfWeek(i).delayedPost = if(isExist)  Day.DelayedPosts.DELAYED
+                else Day.DelayedPosts.NONE
+                i++
+            }
+
+            setupStateUnderView(binding.viewUnderDay1, week.dayOfWeek(1))
+            setupStateUnderView(binding.viewUnderDay2, week.dayOfWeek(2))
+            setupStateUnderView(binding.viewUnderDay3, week.dayOfWeek(3))
+            setupStateUnderView(binding.viewUnderDay4, week.dayOfWeek(4))
+            setupStateUnderView(binding.viewUnderDay5, week.dayOfWeek(5))
+            setupStateUnderView(binding.viewUnderDay6, week.dayOfWeek(6))
+            setupStateUnderView(binding.viewUnderDay7, week.dayOfWeek(7))
         }
 
         private fun setupStateUnderView(view: View, day: Day) {

@@ -6,6 +6,7 @@ import dagger.Provides
 import ru.teamdroid.colibripost.cache.ColibriDatabase
 import ru.teamdroid.colibripost.data.account.AccountCache
 import ru.teamdroid.colibripost.data.channels.ChannelsCache
+import ru.teamdroid.colibripost.data.post.PostCache
 import javax.inject.Singleton
 
 @Module
@@ -27,5 +28,11 @@ class CacheModule {
     @Singleton
     fun provideAccountCache(colibriDatabase: ColibriDatabase): AccountCache {
         return colibriDatabase.accountDao
+    }
+
+    @Provides
+    @Singleton
+    fun providePostCache(colibriDatabase: ColibriDatabase): PostCache {
+        return colibriDatabase.postDao
     }
 }

@@ -1,19 +1,12 @@
 package ru.teamdroid.colibripost.ui.main
 
-import android.opengl.Visibility
 import android.os.Bundle
 import android.view.View
-import android.widget.CalendarView
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.AppBarLayout
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_bottom_navigation.*
+import kotlinx.android.synthetic.main.calendar_view.view.*
 import kotlinx.android.synthetic.main.fragment_main.*
-import kotlinx.android.synthetic.main.fragment_settings.*
 import ru.teamdroid.colibripost.App
 import ru.teamdroid.colibripost.MainActivity
 import ru.teamdroid.colibripost.R
@@ -27,6 +20,8 @@ import ru.teamdroid.colibripost.other.onSuccess
 import ru.teamdroid.colibripost.remote.Messages
 import ru.teamdroid.colibripost.remote.channels.ChatsRequests
 import ru.teamdroid.colibripost.ui.core.BaseFragment
+import ru.teamdroid.colibripost.ui.main.calendar.Week
+import java.util.*
 import javax.inject.Inject
 
 class MainFragment : BaseFragment() {
@@ -44,10 +39,17 @@ class MainFragment : BaseFragment() {
     private lateinit var schedulePostsRView: RecyclerView
     private lateinit var calendar: ru.teamdroid.colibripost.ui.main.calendar.CalendarView
 
+    private lateinit var setUpDays:(week:Week, postExisting:List<Boolean>)->Unit
+
     val postAdapter = PostAdapter()
 
     override val layoutId = R.layout.fragment_main
     override val toolbarTitle = R.string.splash_colibri_post
+
+    private var times:List<Long> = listOf()
+    private var isScreenLaunchLoad:Boolean = true
+    private var currentWeek: Week = Week(1)
+    private var indicateCount: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,11 +73,12 @@ class MainFragment : BaseFragment() {
                 if (scrollRange + verticalOffset == 0) {
                     isShow = true
                     toolbar_layout.isTitleEnabled = true
-                    channelFilterTextView.isEnabled = false
+                    filterRelativeLayout.visibility = View.GONE
                 } else if(isShow){
                     isShow = false
                     toolbar_layout.isTitleEnabled = false
-                    channelFilterTextView.isEnabled = true
+                   //channelFilterTextView.isEnabled = true
+                    filterRelativeLayout.visibility = View.VISIBLE
                 }
             }
         })
@@ -83,14 +86,39 @@ class MainFragment : BaseFragment() {
         calendar = calendarView
         calendar.adapter.loadPostsByData = {
             channelsViewModel.getAddedChannels()}
+        calendar.getCurrentWeek = {
+            this.currentWeek = it
+        }
+        calendar.adapter.remoteIndicateDaysOfWeek = {times, setUpDays ->
+            if(isScreenLaunchLoad){
+                this.times = times
+                this.setUpDays = setUpDays
+                channelsViewModel.getAddedChannelsForWeek()
+            }
+            else {
+                val week1 = currentWeek.toString()
+                val week2 = calendar.adapter.currentWeek.toString()
+                if(indicateCount == 0 && week1.equals(week2)){
+                    this.times = times
+                    this.setUpDays = setUpDays
+                    indicateCount++
+                    channelsViewModel.getAddedChannelsForWeek()
+                }else {
+                    calendar.adapter.currentWeek = calendar.adapter.currentWeek.previousWeek()
+                    indicateCount = 0
+                }
+            }
+        }
 
         postViewModel = viewModel {
             onSuccess(postsData, ::handleSchedulePosts)
+            onSuccess(weekExistData, ::handlePostsExisting)
             onFailure(failureData, ::handleFailure)
         }
 
         channelsViewModel = viewModel {
             onSuccess(addedChannelsData, ::handleAddedChannels)
+            onSuccess(weekAddedChannelsData, ::handleAddedChannelsForWeek)
             onSuccess(getPostsChannelPhotoData, ::handlePostsChannelPhoto)
             onSuccess(progressData, ::updateRefresh)
             onFailure(failureData, ::handleFailure)
@@ -100,18 +128,48 @@ class MainFragment : BaseFragment() {
             layoutManager = LinearLayoutManager(context)
             adapter = postAdapter
         }
-
-        channelsViewModel.getAddedChannels()
     }
 
     //region Handle events
 
     private fun handleAddedChannels(channels: List<ChannelEntity>?) {
-        postViewModel.getScheduledPosts(channels!!.map { it.chatId }, calendar.selectedDay.time)
+        val time = calendar.selectedDay.time
+        val date = Date(time)
+        postViewModel.getScheduledPosts(channels!!.map { it.chatId }, time, getDay(date), getMonth(date), getYear(date))
+    }
+
+    private fun handleAddedChannelsForWeek(channels: List<ChannelEntity>?){
+        postViewModel.getPostExistingOnDay(channels!!.map { it.chatId }, times)
     }
 
     private fun handleSchedulePosts(schedulePosts: List<PostEntity>?){
         channelsViewModel.getPostsChannelPhoto(schedulePosts!!)
+    }
+
+    private fun handlePostsExisting(existingPostsOnWeek:List<Boolean>?){
+        setUpDays(calendar.adapter.currentWeek, existingPostsOnWeek!!)
+        if(isScreenLaunchLoad) {
+            isScreenLaunchLoad = false
+            channelsViewModel.getAddedChannels()
+        } else updateRefresh(false)
+    }
+
+    fun getDay(scheduleDay: Date):Int{
+        val calendar = Calendar.getInstance()
+        calendar.time = scheduleDay
+        return calendar.get(Calendar.DAY_OF_MONTH)
+    }
+
+    fun getMonth(scheduleDay: Date):Int{
+        val calendar = Calendar.getInstance()
+        calendar.time = scheduleDay
+        return calendar.get(Calendar.MONTH)
+    }
+
+    fun getYear(scheduleDay: Date):Int{
+        val calendar = Calendar.getInstance()
+        calendar.time = scheduleDay
+        return calendar.get(Calendar.YEAR)
     }
 
     private fun handlePostsChannelPhoto(schedulePosts: List<PostEntity>?){
@@ -128,7 +186,10 @@ class MainFragment : BaseFragment() {
     override fun handleFailure(failure: Failure?) {
         when(failure){
             is Failure.ChannelsListIsEmptyError,
-            is Failure.PostsListIsEmptyError -> tvEmpty.visibility = View.VISIBLE
+            is Failure.PostsListIsEmptyError -> {
+                tvEmpty.visibility = View.VISIBLE
+                postAdapter.submitList(listOf())
+            }
             else -> super.handleFailure(failure)
         }
         updateRefresh(false)

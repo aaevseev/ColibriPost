@@ -26,10 +26,10 @@ class CalendarView @JvmOverloads constructor(
             binding.vpCalendar.setCurrentItem(adapter.getPageOfDay(value), false)
         }
 
-    private val binding: CalendarViewBinding
+    val binding: CalendarViewBinding
     val adapter =
         CalendarAdapter()
-
+    lateinit var getCurrentWeek:(week: Week) -> Unit
 
 
 
@@ -66,9 +66,11 @@ class CalendarView @JvmOverloads constructor(
         })
         binding.imgBtnNextWeek.setOnClickListener {
             binding.vpCalendar.currentItem++
+            getCurrentWeek(adapter.currentWeek.nextWeek())
         }
         binding.imgBtnPreviousWeek.setOnClickListener {
             binding.vpCalendar.currentItem--
+            getCurrentWeek(adapter.currentWeek.previousWeek())
         }
     }
 
