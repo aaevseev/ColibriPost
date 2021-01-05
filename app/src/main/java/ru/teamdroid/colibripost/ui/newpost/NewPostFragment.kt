@@ -93,7 +93,7 @@ class NewPostFragment : BaseFragment(), FragmentResultListener {
         childFragmentManager.setFragmentResultListener(REQUEST_DATE, viewLifecycleOwner, this)
         childFragmentManager.setFragmentResultListener(REQUEST_TIME, viewLifecycleOwner, this)
 
-
+        base { supportActionBar?.setDisplayHomeAsUpEnabled(true) }
         channelsViewModel = viewModel {
             onSuccess<List<ChannelEntity>,
                     SingleLiveData<List<ChannelEntity>>>(addedChannelsData, ::handleAddedChannels)
@@ -232,6 +232,7 @@ class NewPostFragment : BaseFragment(), FragmentResultListener {
             Log.d("wow", "cool")
 
             viewModel.sendPost(firstChannelId)
+
         }
         binding.tvDate.setOnClickListener {
             val dialogFragment = CalendarDialogFragment()
