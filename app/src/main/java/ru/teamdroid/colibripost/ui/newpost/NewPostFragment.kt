@@ -235,11 +235,13 @@ class NewPostFragment : BaseFragment(), FragmentResultListener {
             viewModel.setPostText(editable.toString())
         }
         binding.btnSendPost.setOnClickListener {
-            Log.d("wow", "cool")
-            viewModel.sendPost(firstChannelId)
-            Toast.makeText(context, "Сообщение отправлено", Toast.LENGTH_SHORT).show()
-            requireActivity().onBackPressed()
-
+            if (binding.etPost.text.isEmpty()) {
+                Toast.makeText(context, "Заполните текст", Toast.LENGTH_SHORT).show()
+            } else {
+                viewModel.sendPost(firstChannelId)
+                Toast.makeText(context, "Сообщение отправлено", Toast.LENGTH_SHORT).show()
+                requireActivity().onBackPressed()
+            }
         }
         binding.tvDate.setOnClickListener {
             val dialogFragment = CalendarDialogFragment()
