@@ -13,6 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -230,8 +231,9 @@ class NewPostFragment : BaseFragment(), FragmentResultListener {
         }
         binding.btnSendPost.setOnClickListener {
             Log.d("wow", "cool")
-
             viewModel.sendPost(firstChannelId)
+            Toast.makeText(context, "Сообщение отправлено", Toast.LENGTH_SHORT).show()
+            requireActivity().onBackPressed()
 
         }
         binding.tvDate.setOnClickListener {
