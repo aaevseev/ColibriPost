@@ -16,15 +16,25 @@ import android.widget.ArrayAdapter
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.FragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
 import com.srgpanov.telegrammsmm.ui.screen.SpinnerAdapter
 import com.srgpanov.telegrammsmm.ui.screen.SpinnerItem
+import kotlinx.android.synthetic.main.channels_bottom_sheet.*
+import kotlinx.android.synthetic.main.fragment_channels_settings.*
 import ru.teamdroid.colibripost.App
 import ru.teamdroid.colibripost.R
 import ru.teamdroid.colibripost.databinding.FragmentNewPostBinding
+import ru.teamdroid.colibripost.di.viewmodel.ChannelsViewModel
+import ru.teamdroid.colibripost.domain.channels.ChannelEntity
+import ru.teamdroid.colibripost.domain.type.Failure
+import ru.teamdroid.colibripost.domain.type.None
+import ru.teamdroid.colibripost.other.SingleLiveData
+import ru.teamdroid.colibripost.other.onFailure
+import ru.teamdroid.colibripost.other.onSuccess
 import ru.teamdroid.colibripost.ui.core.BaseFragment
 import ru.teamdroid.colibripost.ui.newpost.CalendarDialogFragment.Companion.KEY_DAY
 import ru.teamdroid.colibripost.ui.newpost.CalendarDialogFragment.Companion.KEY_MONTH
@@ -36,7 +46,7 @@ import ru.teamdroid.colibripost.ui.newpost.TimeDialogFragment.Companion.REQUEST_
 
 class NewPostFragment : BaseFragment(), FragmentResultListener {
 
-    override val layoutId = R.layout.fragment_channels_settings
+    override val layoutId = R.layout.fragment_new_post
     override val toolbarTitle = R.string.new_post
 
     private var _binding: FragmentNewPostBinding? = null
@@ -48,6 +58,9 @@ class NewPostFragment : BaseFragment(), FragmentResultListener {
     private val adapter: MessageContentAdapter by lazy { MessageContentAdapter() }
 
     val viewModel: NewPostViewModel by viewModels { viewModelFactory }
+
+    private var firstChannelId = 0L
+    lateinit var channelsViewModel: ChannelsViewModel
 
     val publishAdapter by lazy {
         ArrayAdapter<String>(
@@ -79,7 +92,61 @@ class NewPostFragment : BaseFragment(), FragmentResultListener {
         observeViewModel()
         childFragmentManager.setFragmentResultListener(REQUEST_DATE, viewLifecycleOwner, this)
         childFragmentManager.setFragmentResultListener(REQUEST_TIME, viewLifecycleOwner, this)
+
+
+        channelsViewModel = viewModel {
+            onSuccess<List<ChannelEntity>,
+                    SingleLiveData<List<ChannelEntity>>>(addedChannelsData, ::handleAddedChannels)
+            onSuccess<List<ChannelEntity>,
+                    SingleLiveData<List<ChannelEntity>>>(avChannelsData, ::handleAvailableChannels)
+            onSuccess(progressData, ::updateRefresh)
+            onFailure<SingleLiveData<Failure>>(failureData, ::handleFailure)
+        }
+
+        channelsViewModel.getAddedChannels()
     }
+
+    //region Handle events
+    private fun handleAddedChannels(channels: List<ChannelEntity>?) {
+        updateRefresh(false)
+        val publishList = mutableListOf<String>()
+        channels?.forEach { chat ->
+            publishList.add(chat.title)
+            firstChannelId = chat.chatId
+        }
+
+        publishAdapter.addAll(publishList)
+    }
+
+    private fun handleAvailableChannels(channels: List<ChannelEntity>?) {
+//        if (channels != null) {
+//            if (lrChannelsNotExist.isVisible)
+//                lrChannelsNotExist.visibility = View.GONE
+//            availableChannelsAdapter.submitList(channels)
+//        }
+    }
+
+    override fun handleFailure(failure: Failure?) {
+        updateRefresh(false)
+//        when (failure) {
+//            is Failure.ChannelsListIsEmptyError -> {
+//                hideRefreshing()
+//                lrChannelsEmpty.visibility = View.VISIBLE
+//                channelsAdapter.clear()
+//                val count = this.resources.getQuantityString(R.plurals.channels_count, 0, 0)
+//                tvChannelsCount.text = count
+//                channelsViewModel.getAvChannels()
+//            }
+//            is Failure.ChannelsNotCreatedError -> {
+//                bottomSheetSetPlaceHolder()
+//            }
+//            is Failure.NetworkPlaceHolderConnectionError -> {
+//                //bottomSheetSetPlaceHolder(true)
+//            }
+//            else -> super.handleFailure(failure)
+//        }
+    }
+    //endregion
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -126,13 +193,13 @@ class NewPostFragment : BaseFragment(), FragmentResultListener {
     }
 
     private fun observeViewModel() {
-        viewModel.chatList.observe(viewLifecycleOwner) { list ->
-            val publishList = mutableListOf<String>()
-            list.forEach { chat ->
-                publishList.add(chat.title)
-            }
-            publishAdapter.addAll(publishList)
-        }
+//        viewModel.chatList.observe(viewLifecycleOwner) { list ->
+//            val publishList = mutableListOf<String>()
+//            list.forEach { chat ->
+//                publishList.add(chat.title)
+//            }
+//            publishAdapter.addAll(publishList)
+//        }
         viewModel.takeBitmap.observe(viewLifecycleOwner) { bitmap ->
             if (bitmap != null) {
                 Log.d("NewPostFragment", "observeViewModel: ${bitmap.width} ${bitmap.height}")
@@ -162,7 +229,9 @@ class NewPostFragment : BaseFragment(), FragmentResultListener {
             viewModel.setPostText(editable.toString())
         }
         binding.btnSendPost.setOnClickListener {
-            viewModel.sendPost()
+            Log.d("wow", "cool")
+
+            viewModel.sendPost(firstChannelId)
         }
         binding.tvDate.setOnClickListener {
             val dialogFragment = CalendarDialogFragment()

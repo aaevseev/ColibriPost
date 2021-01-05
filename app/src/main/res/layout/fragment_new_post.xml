@@ -43,6 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
+        android:visibility="gone"
         android:background="@null"
         android:src="@drawable/ic_smile"
         app:layout_constraintBottom_toBottomOf="@id/et_post"
@@ -99,6 +100,7 @@
         android:textAllCaps="false"
         android:textColor="@color/accent"
         android:textSize="16sp"
+        android:visibility="gone"
         app:icon="@drawable/ic_plus"
         app:iconGravity="textStart"
         app:iconTint="@color/accent"
@@ -120,7 +122,6 @@
         app:layout_constraintEnd_toEndOf="@id/view_tool_panel"
         app:layout_constraintStart_toStartOf="@id/view_tool_panel"
         app:layout_constraintTop_toBottomOf="@id/btn_add_btn" />
-
 
     <ru.teamdroid.colibripost.ui.screens.new_task.NewTaskSpinner
         android:id="@+id/spinner_publish"
@@ -149,7 +150,7 @@
         android:singleLine="true"
         android:textColor="@color/text"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@id/btn_preview"
+        app:layout_constraintBottom_toTopOf="@id/btn_send_post"
         app:layout_constraintEnd_toStartOf="@id/tv_time"
         app:layout_constraintStart_toStartOf="@id/view_tool_panel"
         app:layout_constraintTop_toBottomOf="@id/spinner_publish" />
@@ -170,39 +171,17 @@
         app:layout_constraintTop_toTopOf="@id/tv_date"
         tools:text="11:00" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_preview"
-        style="?attr/borderlessButtonStyle"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="16dp"
-        android:backgroundTint="@color/white"
-        android:insetTop="0dp"
-        android:insetBottom="0dp"
-        android:text="@string/preview"
-        android:textAllCaps="false"
-        android:textColor="@color/accent"
-        app:layout_constraintBottom_toBottomOf="@id/view_tool_panel"
-        app:layout_constraintEnd_toStartOf="@id/btn_send_post"
-        app:layout_constraintStart_toStartOf="@id/view_tool_panel"
-        app:layout_constraintTop_toBottomOf="@id/tv_date"
-        app:strokeColor="@color/accent"
-        app:strokeWidth="1dp" />
-
     <ImageButton
         android:id="@+id/btn_send_post"
-        android:layout_width="74dp"
-        android:layout_height="0dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/new_post_send_post_background"
-        android:insetTop="0dp"
-        android:insetBottom="0dp"
         android:src="@drawable/ic_telegram_white"
-        app:layout_constraintBottom_toBottomOf="@id/btn_preview"
+        app:layout_constraintBottom_toBottomOf="@id/view_tool_panel"
         app:layout_constraintEnd_toEndOf="@id/tv_time"
-        app:layout_constraintStart_toStartOf="@id/tv_time"
-        app:layout_constraintTop_toTopOf="@id/btn_preview" />
+        app:layout_constraintStart_toStartOf="@id/tv_date"
+        app:layout_constraintTop_toBottomOf="@id/tv_date" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

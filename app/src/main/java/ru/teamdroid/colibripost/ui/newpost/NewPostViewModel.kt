@@ -9,6 +9,7 @@ import android.util.Log
 import androidx.lifecycle.*
 import kotlinx.coroutines.launch
 import org.drinkless.td.libcore.telegram.TdApi.*
+import ru.teamdroid.colibripost.domain.type.None
 import ru.teamdroid.colibripost.other.SingleLiveData
 import ru.teamdroid.colibripost.remote.Messages
 import ru.teamdroid.colibripost.remote.channels.ChatsRequests
@@ -17,7 +18,6 @@ import java.text.SimpleDateFormat
 import java.util.*
 import java.util.Date
 import javax.inject.Inject
-
 
 class NewPostViewModel @Inject constructor(
     val client: TelegramClient,
@@ -32,6 +32,7 @@ class NewPostViewModel @Inject constructor(
 
     private val _chatList =
         liveData(viewModelScope.coroutineContext) { emit(chatsRequests.getChats()) }
+
     val chatList: LiveData<List<Chat>>
         get() = _chatList
 
@@ -78,12 +79,10 @@ class NewPostViewModel @Inject constructor(
     }
 
 
-    fun sendPost() {
+    fun sendPost(chatId : Long) {
         val inputImages = inputFiles.value ?: emptyList<String>()
-        when (inputImages.size) {
-            0, 1 -> sendSimplePost()
-            else -> sendAlbum()
-        }
+        Log.d("wow", "send_pOst")
+        sendSimplePost(chatId)
     }
 
     private fun sendAlbum() {
@@ -116,10 +115,10 @@ class NewPostViewModel @Inject constructor(
         return list.toTypedArray().also { Log.d("NewPostViewModel", "createAlbum: $it") }
     }
 
-    private fun sendSimplePost() {
+    private fun sendSimplePost(chatId : Long) {
         val content = combineContent()
         val epoch = getEpochTime()
-        val chatId = publishChat.value?.id ?: return
+        Log.d("wow", "simple_Post")
         viewModelScope.launch {
             messages.sendMessage(
                 chatId,

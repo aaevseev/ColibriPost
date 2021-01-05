@@ -16,5 +16,4 @@ interface ChannelsRepository {
     suspend fun setChannels(channels: List<ChannelEntity>): Either<Failure, None>
 
     suspend fun deleteChannel(idChannel: Long): Either<Failure, None>
-
 }
