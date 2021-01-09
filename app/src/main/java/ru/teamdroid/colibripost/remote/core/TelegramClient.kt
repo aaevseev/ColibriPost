@@ -44,17 +44,8 @@ class TelegramClient @Inject constructor() : Client.ResultHandler {
             TdApi.UpdateChatPhoto.CONSTRUCTOR -> {
                 Log.d("TelegramClient", "onResult: UpdateChatPhoto")
             }
-            TdApi.UpdateChatChatList.CONSTRUCTOR -> {
-                Log.d("TelegramClient", "onResult: UpdateChatChatList")
-            }
             TdApi.UpdateChatLastMessage.CONSTRUCTOR -> {
                 Log.d("TelegramClient", "onResult: UpdateChatLastMessage")
-            }
-            TdApi.UpdateChatOrder.CONSTRUCTOR -> {
-                Log.d("TelegramClient", "onResult: UpdateChatOrder")
-            }
-            TdApi.UpdateChatIsPinned.CONSTRUCTOR -> {
-                Log.d("TelegramClient", "onResult: UpdateChatIsPinned")
             }
             TdApi.UpdateChatReadInbox.CONSTRUCTOR -> {
                 Log.d("TelegramClient", "onResult: UpdateChatReadInbox")
@@ -82,9 +73,6 @@ class TelegramClient @Inject constructor() : Client.ResultHandler {
             }
             TdApi.UpdateChatIsMarkedAsUnread.CONSTRUCTOR -> {
                 Log.d("TelegramClient", "onResult: UpdateChatIsMarkedAsUnread")
-            }
-            TdApi.UpdateChatIsSponsored.CONSTRUCTOR -> {
-                Log.d("TelegramClient", "onResult: UpdateChatIsSponsored")
             }
             TdApi.UpdateUserFullInfo.CONSTRUCTOR -> {
                 Log.d("TelegramClient", "onResult: UpdateUserFullInfo")
