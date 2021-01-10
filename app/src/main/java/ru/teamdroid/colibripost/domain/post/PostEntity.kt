@@ -31,7 +31,7 @@ data class PostEntity(
         calendar.time = Date((message.schedulingState as TdApi.MessageSchedulingStateSendAtDate).sendDate * 1000L)
 
         id = message.id
-        senderUserId = message.senderUserId
+        //senderUserId = message.senderUserId TODO: FIX
         chatId = message.chatId
 
         scheduleDate = (message.schedulingState as TdApi.MessageSchedulingStateSendAtDate).sendDate
