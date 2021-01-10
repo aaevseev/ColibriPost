@@ -1,11 +1,17 @@
 package ru.teamdroid.colibripost.ui.main.calendar
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.viewpager2.widget.ViewPager2
+import kotlinx.android.synthetic.main.item_calendar.view.*
+import ru.teamdroid.colibripost.R
 import ru.teamdroid.colibripost.databinding.CalendarViewBinding
+import ru.teamdroid.colibripost.databinding.ItemCalendarBinding
+import ru.teamdroid.colibripost.ui.core.getColorState
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -42,6 +48,16 @@ class CalendarView @JvmOverloads constructor(
 
     override fun onFinishInflate() {
         super.onFinishInflate()
+        adapter.indicateEndOfList = {
+            binding.imgBtnNextWeek.imageTintList = context.getColorState(R.color.accentEnabled)
+        }
+        adapter.indicateStartOfList = {
+            binding.imgBtnPreviousWeek.imageTintList = context.getColorState(R.color.accentEnabled)
+        }
+        adapter.indicateMiddleOfList = {
+            binding.imgBtnPreviousWeek.imageTintList = context.getColorState(R.color.accent)
+            binding.imgBtnNextWeek.imageTintList = context.getColorState(R.color.accent)
+        }
         binding.vpCalendar.adapter = adapter
         selectedDay =
             Day(System.currentTimeMillis())
@@ -62,15 +78,16 @@ class CalendarView @JvmOverloads constructor(
         binding.vpCalendar.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 setupNumbersOfWeek(adapter.getWeek(position))
+                adapter.showPositions(this@CalendarView, position)
             }
         })
+        binding.imgBtnNextWeek.isEnabled = false
+        binding.imgBtnPreviousWeek.isEnabled = false
         binding.imgBtnNextWeek.setOnClickListener {
             binding.vpCalendar.currentItem++
-            getCurrentWeek(adapter.currentWeek.nextWeek())
         }
         binding.imgBtnPreviousWeek.setOnClickListener {
             binding.vpCalendar.currentItem--
-            getCurrentWeek(adapter.currentWeek.previousWeek())
         }
     }
 

@@ -3,7 +3,9 @@ package ru.teamdroid.colibripost.ui.settings.channels
 
 import android.net.ConnectivityManager
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
@@ -19,6 +21,8 @@ import kotlinx.coroutines.launch
 import ru.teamdroid.colibripost.App
 import ru.teamdroid.colibripost.MainActivity
 import ru.teamdroid.colibripost.R
+import ru.teamdroid.colibripost.databinding.FragmentBottomNavigationBinding
+import ru.teamdroid.colibripost.databinding.FragmentChannelsSettingsBinding
 import ru.teamdroid.colibripost.di.viewmodel.ChannelsViewModel
 import ru.teamdroid.colibripost.domain.channels.ChannelEntity
 import ru.teamdroid.colibripost.domain.type.Failure
@@ -52,6 +56,10 @@ class ChannelsSettingsFragment : BaseFragment() {
 
     private lateinit var bottomSheet: BottomSheetBehavior<View>
 
+    private var _binding:FragmentChannelsSettingsBinding? = null
+    private val binding: FragmentChannelsSettingsBinding
+        get() = _binding!!
+
     private val channelsAdapter: ChannelsAdapter by lazy {
         ChannelsAdapter(
             showDeleteChannelDialog = {
@@ -65,6 +73,12 @@ class ChannelsSettingsFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         App.instance.appComponent.inject(this)
+    }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
+        _binding = FragmentChannelsSettingsBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -101,7 +115,7 @@ class ChannelsSettingsFragment : BaseFragment() {
     //region UI control
 
     fun setUpFragmentUi(view: View) {
-        addedChannelsRView = view.findViewById<RecyclerView>(R.id.rvChannels).apply {
+        addedChannelsRView = binding.rvChannels.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = channelsAdapter
         }
@@ -147,7 +161,7 @@ class ChannelsSettingsFragment : BaseFragment() {
                     bottomNavigation.visibility = View.VISIBLE
                     refreshAvailableChannels()
                 }
-                btnShowAvailableChannels.setOnClickListener {
+                binding.btnShowAvailableChannels.setOnClickListener {
                     state = BottomSheetBehavior.STATE_EXPANDED
                     setTranspViewVisibility(true)
                     transpBackground.visibility = View.VISIBLE
@@ -210,13 +224,13 @@ class ChannelsSettingsFragment : BaseFragment() {
 
     fun setBtnShowAvailableChannelsState(isEnable: Boolean) {
         if (isEnable) {
-            btnShowAvailableChannels.isEnabled = true
-            btnShowAvailableChannels.setTextColor(requireContext().getColorFromResource(R.color.accent))
-            btnShowAvailableChannels.iconTint = requireContext().getColorState(R.color.accent)
+            binding.btnShowAvailableChannels.isEnabled = true
+            binding.btnShowAvailableChannels.setTextColor(requireContext().getColorFromResource(R.color.accent))
+            binding.btnShowAvailableChannels.iconTint = requireContext().getColorState(R.color.accent)
         } else {
-            btnShowAvailableChannels.isEnabled = false
-            btnShowAvailableChannels.setTextColor(requireContext().getColorFromResource(R.color.accentEnabled))
-            btnShowAvailableChannels.iconTint =
+            binding.btnShowAvailableChannels.isEnabled = false
+            binding.btnShowAvailableChannels.setTextColor(requireContext().getColorFromResource(R.color.accentEnabled))
+            binding.btnShowAvailableChannels.iconTint =
                 requireContext().getColorState(R.color.accentEnabled)
         }
     }
@@ -227,9 +241,9 @@ class ChannelsSettingsFragment : BaseFragment() {
     private fun handleAddedChannels(channels: List<ChannelEntity>?) {
         updateRefresh(false)
         if (channels != null) {
-            if (lrChannelsEmpty.isVisible)
+            if (binding.lrChannelsEmpty.isVisible)
                 lrChannelsEmpty.visibility = View.GONE
-            tvChannelsCount.text = this.resources.getQuantityString(
+            binding.tvChannelsCount.text = this.resources.getQuantityString(
                 R.plurals.channels_count,
                 channels.size,
                 channels.size
@@ -253,10 +267,10 @@ class ChannelsSettingsFragment : BaseFragment() {
         when (failure) {
             is Failure.ChannelsListIsEmptyError -> {
                 hideRefreshing()
-                lrChannelsEmpty.visibility = View.VISIBLE
+                binding.lrChannelsEmpty.visibility = View.VISIBLE
                 channelsAdapter.clear()
                 val count = this.resources.getQuantityString(R.plurals.channels_count, 0, 0)
-                tvChannelsCount.text = count
+                binding.tvChannelsCount.text = count
                 channelsViewModel.getAvChannels()
             }
             is Failure.ChannelsNotCreatedError -> {
@@ -273,6 +287,7 @@ class ChannelsSettingsFragment : BaseFragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         (requireActivity() as MainActivity).connectivityManager.unregisterNetworkCallback(networkCallback)
+        _binding = null
     }
 
     companion object {

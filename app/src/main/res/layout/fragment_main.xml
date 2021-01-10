@@ -114,6 +114,7 @@
         android:background="@color/transparent_2"
         tools:context=".ui.main.MainFragment"/>
 
+
     <ProgressBar
         android:id="@+id/postProgressBar"
         android:layout_width="wrap_content"

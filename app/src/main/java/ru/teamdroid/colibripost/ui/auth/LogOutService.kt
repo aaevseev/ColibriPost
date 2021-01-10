@@ -34,9 +34,9 @@ class LogOutService constructor(): Service() {
 
     override fun onTaskRemoved(rootIntent: Intent?) {
         GlobalScope.launch {
-            Log.i(TAG, "onTaskRemoved(): ${authHolder.authState.value}.");
-            //if(authHolder.authState.value != AuthStates.AUTHENTICATED && authHolder.authState.value != AuthStates.UNAUTHENTICATED) authHolder.logOut()
+            Log.i(TAG, "onTaskRemoved(): ${authHolder.authState.value}.")
+            if(authHolder.authState.value != AuthStates.AUTHENTICATED && authHolder.authState.value != AuthStates.UNAUTHENTICATED) authHolder.logOut()
+            stopSelf()
         }
-        stopSelf()
     }
 }

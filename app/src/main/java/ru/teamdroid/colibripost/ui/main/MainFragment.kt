@@ -96,17 +96,18 @@ class MainFragment : BaseFragment() {
                 channelsViewModel.getAddedChannelsForWeek()
             }
             else {
-                val week1 = currentWeek.toString()
+                /*val week1 = currentWeek.toString()
                 val week2 = calendar.adapter.currentWeek.toString()
-                if(indicateCount == 0 && week1.equals(week2)){
+                if(indicateCount == 0 && week1.equals(week2)){*/
                     this.times = times
                     this.setUpDays = setUpDays
                     indicateCount++
                     channelsViewModel.getAddedChannelsForWeek()
-                }else {
+                /*}else {
                     calendar.adapter.currentWeek = calendar.adapter.currentWeek.previousWeek()
+                    calendar.adapter
                     indicateCount = 0
-                }
+                }*/
             }
         }
 

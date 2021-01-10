@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
@@ -17,7 +18,7 @@ import java.util.*
 
 class CalendarAdapter : RecyclerView.Adapter<CalendarAdapter.WeekHolder>() {
     private val weeks =
-        Week.getWeekAround(52) //нужно ли делать бесконечный скролл или мы будем отображать посты в определённом периоде?
+        Week.getWeekAround(6) //нужно ли делать бесконечный скролл или мы будем отображать посты в определённом периоде?
 
     lateinit var currentWeek:Week
 
@@ -35,19 +36,24 @@ class CalendarAdapter : RecyclerView.Adapter<CalendarAdapter.WeekHolder>() {
     lateinit var loadPostsByData:()->Unit
     lateinit var cacheIndicateDaysOfWeek:(days:List<Int>, months:List<Int>, years:List<Int>, setUpDays:(week:Week, postExisting:List<Boolean>)->Unit)->Unit
     lateinit var remoteIndicateDaysOfWeek:(times:List<Long>, setUpDays:(week:Week, postExisting:List<Boolean>)->Unit)->Unit
-
+    lateinit var indicateEndOfList:()->Unit
+    lateinit var indicateStartOfList:()->Unit
+    lateinit var indicateMiddleOfList:()->Unit
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WeekHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ItemCalendarBinding.inflate(inflater, parent, false)
-        return WeekHolder(binding, remoteIndicateDaysOfWeek)
+        return WeekHolder(binding, remoteIndicateDaysOfWeek, indicateEndOfList, indicateStartOfList, indicateMiddleOfList)
     }
-
 
     override fun onBindViewHolder(holder: WeekHolder, position: Int) {
         currentWeek = weeks[position]
-        holder.bind(weeks[position])
+        holder.remoteIndicateDaysOfWeek = remoteIndicateDaysOfWeek
+        holder.indicateEndOfList = indicateEndOfList
+        holder.indicateStartOfList = indicateStartOfList
+        holder.indicateMiddleOfList = indicateMiddleOfList
+        holder.bind(weeks[position], position)
     }
 
     override fun getItemCount(): Int {
@@ -117,15 +123,22 @@ class CalendarAdapter : RecyclerView.Adapter<CalendarAdapter.WeekHolder>() {
         }
     }
 
+    fun showPositions(parent: ViewGroup, position: Int){
+        onBindViewHolder(WeekHolder(binding=ItemCalendarBinding.inflate(LayoutInflater.from(parent.context),
+            parent, false)), position)
+    }
 
     inner class WeekHolder(private val binding: ItemCalendarBinding,
-                           val remoteIndicateDaysOfWeek:(times:List<Long>, setUpDays:(week:Week, postExisting:List<Boolean>)->Unit)->Unit) :
+                           var remoteIndicateDaysOfWeek:(times:List<Long>, setUpDays:(week:Week, postExisting:List<Boolean>)->Unit)->Unit = {_, _ ->},
+                           var indicateEndOfList:()->Unit={},
+                           var indicateStartOfList:()->Unit={},
+                           var indicateMiddleOfList:()->Unit={}) :
         RecyclerView.ViewHolder(binding.root) {
         private val calendar = Calendar.getInstance()
         private val set = ConstraintSet()
         var animatorHelper: AnimatorHelper? = null
 
-        fun bind(week: Week) = with(binding) {
+        fun bind(week: Week, position: Int) = with(binding) {
             tvNumberFirst.text = week.getNumberOfMonth(1).toString()
             tvNumberSecond.text = week.getNumberOfMonth(2).toString()
             tvNumberThird.text = week.getNumberOfMonth(3).toString()
@@ -202,6 +215,7 @@ class CalendarAdapter : RecyclerView.Adapter<CalendarAdapter.WeekHolder>() {
             )
 
             //indicateDaysOfWeek(getCacheDays(week), getCacheMonth(week), getCacheYears(week), ::setUpDaysIndicator)
+            setImageButtonState(position)
             remoteIndicateDaysOfWeek(getWeekTimes(week), ::setUpDaysIndicator)
 
             setupSelection(week)
@@ -240,8 +254,8 @@ class CalendarAdapter : RecyclerView.Adapter<CalendarAdapter.WeekHolder>() {
                 i++
             }
 
-            setupStateUnderView(binding.viewUnderDay1, week.dayOfWeek(1))
             setupStateUnderView(binding.viewUnderDay2, week.dayOfWeek(2))
+            setupStateUnderView(binding.viewUnderDay1, week.dayOfWeek(1))
             setupStateUnderView(binding.viewUnderDay3, week.dayOfWeek(3))
             setupStateUnderView(binding.viewUnderDay4, week.dayOfWeek(4))
             setupStateUnderView(binding.viewUnderDay5, week.dayOfWeek(5))
@@ -326,6 +340,20 @@ class CalendarAdapter : RecyclerView.Adapter<CalendarAdapter.WeekHolder>() {
             calendar.set(Calendar.DAY_OF_WEEK, day)
             return SimpleDateFormat("E", Locale.getDefault())
                 .format(calendar.time).toLowerCase(Locale.getDefault())
+        }
+
+        fun setImageButtonState(position: Int){
+            when(position){
+                weeks.size - 1 -> {
+                    indicateEndOfList()
+                }
+                0 -> {
+                    indicateStartOfList()
+                }
+                else -> {
+                    indicateMiddleOfList()
+                }
+            }
         }
 
     }
