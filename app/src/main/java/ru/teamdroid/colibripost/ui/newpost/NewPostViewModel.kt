@@ -9,15 +9,16 @@ import android.util.Log
 import androidx.lifecycle.*
 import kotlinx.coroutines.launch
 import org.drinkless.td.libcore.telegram.TdApi.*
+import ru.teamdroid.colibripost.domain.type.None
 import ru.teamdroid.colibripost.other.SingleLiveData
 import ru.teamdroid.colibripost.remote.Messages
 import ru.teamdroid.colibripost.remote.channels.ChatsRequests
 import ru.teamdroid.colibripost.remote.core.TelegramClient
+import ru.teamdroid.colibripost.utils.FileUtils
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.Date
 import javax.inject.Inject
-
 
 class NewPostViewModel @Inject constructor(
     val client: TelegramClient,
@@ -32,6 +33,7 @@ class NewPostViewModel @Inject constructor(
 
     private val _chatList =
         liveData(viewModelScope.coroutineContext) { emit(chatsRequests.getChats()) }
+
     val chatList: LiveData<List<Chat>>
         get() = _chatList
 
@@ -77,19 +79,17 @@ class NewPostViewModel @Inject constructor(
         _publishTime.value = time
     }
 
-
-    fun sendPost() {
+    fun sendPost(chatId : Long) {
         val inputImages = inputFiles.value ?: emptyList<String>()
         when (inputImages.size) {
-            0, 1 -> sendSimplePost()
-            else -> sendAlbum()
+            0, 1 -> sendSimplePost(chatId)
+            else -> sendAlbum(chatId)
         }
     }
 
-    private fun sendAlbum() {
+    private fun sendAlbum(chatId: Long) {
         val content = createAlbum()
         val epoch = getEpochTime()
-        val chatId = publishChat.value?.id ?: return
         viewModelScope.launch {
             messages.sendAlbum(
                 chatId,
@@ -116,10 +116,10 @@ class NewPostViewModel @Inject constructor(
         return list.toTypedArray().also { Log.d("NewPostViewModel", "createAlbum: $it") }
     }
 
-    private fun sendSimplePost() {
+    private fun sendSimplePost(chatId : Long) {
         val content = combineContent()
         val epoch = getEpochTime()
-        val chatId = publishChat.value?.id ?: return
+        Log.d("wow", "simple_Post")
         viewModelScope.launch {
             messages.sendMessage(
                 chatId,
@@ -144,13 +144,14 @@ class NewPostViewModel @Inject constructor(
 
     private fun combineContent(): InputMessageContent {
         val txt = getTextContent()
-        val list = inputFiles.value as List<String>
+        val list = inputFiles.value as List<Uri>
         return when (list.size) {
             0 -> {
                 InputMessageText(txt, false, false)
             }
             1 -> {
-                val file = InputFileLocal(list[0])
+                Log.d("wow111", FileUtils.getRealPath(context, list[0]))
+                val file = InputFileLocal(FileUtils.getRealPath(context, list[0]))
                 val photo = InputMessagePhoto()
                 photo.photo = file
                 photo.caption = txt

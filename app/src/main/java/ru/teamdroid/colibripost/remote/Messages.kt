@@ -53,11 +53,12 @@ class Messages @Inject constructor(private val client: TelegramClient) {
         content: TdApi.InputMessageContent,
         unixTime: Int
     ): Unit {
-        val options = TdApi.SendMessageOptions().apply {
+        val options = TdApi.MessageSendOptions().apply {
             schedulingState = TdApi.MessageSchedulingStateSendAtDate(unixTime)
             fromBackground = true
         }
-        val message = TdApi.SendMessage(chatId, 0, options, null, content)
+
+        val message = TdApi.SendMessage(chatId, 0, 0, options, null, content)
         client.send<Message>(message)
     }
 
@@ -69,7 +70,7 @@ class Messages @Inject constructor(private val client: TelegramClient) {
         replyMarkup: ReplyMarkup? = null
     ): Message {
         val options = getMessageOptions(delayedUnixTime)
-        val message = TdApi.SendMessage(chatId, 0, options, replyMarkup, content)
+        val message = TdApi.SendMessage(chatId, 0,0, options, replyMarkup, content)
         return client.send<Message>(message)
     }
 
@@ -79,7 +80,7 @@ class Messages @Inject constructor(private val client: TelegramClient) {
         delayedUnixTime: Int = 0
     ): TdApi.Messages {
         val options = getMessageOptions(delayedUnixTime)
-        val album: SendMessageAlbum = SendMessageAlbum(chatId, 0, options, content)
+        val album: SendMessageAlbum = SendMessageAlbum(chatId, 0, 0, options, content)
         return client.send(album)
     }
 
@@ -89,11 +90,11 @@ class Messages @Inject constructor(private val client: TelegramClient) {
         delayedUnixTime: Int = 0
     ): Message {
         val options = getMessageOptions(delayedUnixTime)
-        val message = SendMessageAlbum(chatId, 0, options, content)
+        val message = SendMessageAlbum(chatId, 0, 0, options, content)
         return client.send<Message>(message)
     }
 
-    private fun getMessageOptions(delayedUnixTime: Int) = SendMessageOptions().apply {
+    private fun getMessageOptions(delayedUnixTime: Int) = MessageSendOptions().apply {
         if (delayedUnixTime == 0) return@apply
         schedulingState = MessageSchedulingStateSendAtDate(delayedUnixTime)
         fromBackground = true

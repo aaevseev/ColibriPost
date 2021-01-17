@@ -37,21 +37,32 @@ class PostAdapter(
     }
 
     fun bind(holder: BaseViewHolder, position:Int){
+        setTimeLineEdges(holder, position)
+        holder.onBind(currentList[position])
+    }
+
+    fun setTimeLineEdges(holder: BaseViewHolder, position: Int){
         if(currentList.size > 2) {
             when(position){
                 0 -> {
                     holder.view.igTimeLineUp.visibility = View.INVISIBLE
+                    holder.view.igTimeLineDown.visibility = View.VISIBLE
                     holder.view.background = holder.view.context.getImageDrawable(R.drawable.settings_menu_background)
                 }
                 currentList.size - 2 -> {
                     holder.view.igTimeLineDown.visibility = View.INVISIBLE
                 }
+                else -> {
+                    if (position != currentList.size - 1){
+                        holder.view.igTimeLineUp.visibility = View.VISIBLE
+                        holder.view.igTimeLineDown.visibility = View.VISIBLE
+                    }
+                }
             }
-        } else {
+        } else if(position != currentList.size - 1){
             holder.view.igTimeLineUp.visibility = View.INVISIBLE
             holder.view.igTimeLineDown.visibility = View.INVISIBLE
         }
-        holder.onBind(currentList[position])
     }
 
     class PostViewHolder(val root: View):BaseAdapter.BaseViewHolder(root){
@@ -59,7 +70,7 @@ class PostAdapter(
         @SuppressLint("SetTextI18n")
         override fun onBind(item: Any) {
             (item as? PostEntity)?.let {
-                root.tvPostTitle.text = item.text?.text ?: "null"
+                root.tvPostTitle.text = item.text
                 PicassoHelper.loadImageFile(root.context, item.channelPhotoPath, root.ivChannelPhoto)
 
                 val value = item.scheduleDate
@@ -67,7 +78,8 @@ class PostAdapter(
 
                 val calendar = Calendar.getInstance()
                 calendar.time = date
-                root.tvPostDate.text = calendar.get(Calendar.HOUR_OF_DAY).toString() + ":" + calendar.get(Calendar.MINUTE).toString()
+                val minute = calendar.get(Calendar.MINUTE)
+                root.tvPostDate.text = calendar.get(Calendar.HOUR_OF_DAY).toString() + ":" + if (minute < 10) "0".plus(minute.toString()) else minute
             }
         }
 

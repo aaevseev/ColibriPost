@@ -1,6 +1,8 @@
 package ru.teamdroid.colibripost.ui.newpost
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.drawable.LayerDrawable
 import android.graphics.drawable.ShapeDrawable
@@ -13,18 +15,32 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.checkSelfPermission
+import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.FragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
 import com.srgpanov.telegrammsmm.ui.screen.SpinnerAdapter
 import com.srgpanov.telegrammsmm.ui.screen.SpinnerItem
+import kotlinx.android.synthetic.main.channels_bottom_sheet.*
+import kotlinx.android.synthetic.main.fragment_channels_settings.*
 import ru.teamdroid.colibripost.App
 import ru.teamdroid.colibripost.R
 import ru.teamdroid.colibripost.databinding.FragmentNewPostBinding
+import ru.teamdroid.colibripost.di.viewmodel.ChannelsViewModel
+import ru.teamdroid.colibripost.domain.channels.ChannelEntity
+import ru.teamdroid.colibripost.domain.type.Failure
+import ru.teamdroid.colibripost.domain.type.None
+import ru.teamdroid.colibripost.other.SingleLiveData
+import ru.teamdroid.colibripost.other.onFailure
+import ru.teamdroid.colibripost.other.onSuccess
 import ru.teamdroid.colibripost.ui.core.BaseFragment
 import ru.teamdroid.colibripost.ui.newpost.CalendarDialogFragment.Companion.KEY_DAY
 import ru.teamdroid.colibripost.ui.newpost.CalendarDialogFragment.Companion.KEY_MONTH
@@ -36,7 +52,7 @@ import ru.teamdroid.colibripost.ui.newpost.TimeDialogFragment.Companion.REQUEST_
 
 class NewPostFragment : BaseFragment(), FragmentResultListener {
 
-    override val layoutId = R.layout.fragment_channels_settings
+    override val layoutId = R.layout.fragment_new_post
     override val toolbarTitle = R.string.new_post
 
     private var _binding: FragmentNewPostBinding? = null
@@ -49,10 +65,13 @@ class NewPostFragment : BaseFragment(), FragmentResultListener {
 
     val viewModel: NewPostViewModel by viewModels { viewModelFactory }
 
+    private var firstChannelId = 0L
+    lateinit var channelsViewModel: ChannelsViewModel
+
     val publishAdapter by lazy {
         ArrayAdapter<String>(
-                requireActivity(),
-                android.R.layout.simple_spinner_item
+            requireActivity(),
+            android.R.layout.simple_spinner_item
         )
     }
 
@@ -66,8 +85,8 @@ class NewPostFragment : BaseFragment(), FragmentResultListener {
     }
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentNewPostBinding.inflate(inflater, container, false)
         return binding.root
@@ -79,7 +98,61 @@ class NewPostFragment : BaseFragment(), FragmentResultListener {
         observeViewModel()
         childFragmentManager.setFragmentResultListener(REQUEST_DATE, viewLifecycleOwner, this)
         childFragmentManager.setFragmentResultListener(REQUEST_TIME, viewLifecycleOwner, this)
+
+        base { supportActionBar?.setDisplayHomeAsUpEnabled(true) }
+        channelsViewModel = viewModel {
+            onSuccess<List<ChannelEntity>,
+                    SingleLiveData<List<ChannelEntity>>>(addedChannelsData, ::handleAddedChannels)
+            onSuccess<List<ChannelEntity>,
+                    SingleLiveData<List<ChannelEntity>>>(avChannelsData, ::handleAvailableChannels)
+            onSuccess(progressData, ::updateRefresh)
+            onFailure<SingleLiveData<Failure>>(failureData, ::handleFailure)
+        }
+
+        channelsViewModel.getAddedChannels()
     }
+
+    //region Handle events
+    private fun handleAddedChannels(channels: List<ChannelEntity>?) {
+        updateRefresh(false)
+        val publishList = mutableListOf<String>()
+        channels?.forEach { chat ->
+            publishList.add(chat.title)
+            firstChannelId = chat.chatId
+        }
+
+        publishAdapter.addAll(publishList)
+    }
+
+    private fun handleAvailableChannels(channels: List<ChannelEntity>?) {
+//        if (channels != null) {
+//            if (lrChannelsNotExist.isVisible)
+//                lrChannelsNotExist.visibility = View.GONE
+//            availableChannelsAdapter.submitList(channels)
+//        }
+    }
+
+    override fun handleFailure(failure: Failure?) {
+        updateRefresh(false)
+//        when (failure) {
+//            is Failure.ChannelsListIsEmptyError -> {
+//                hideRefreshing()
+//                lrChannelsEmpty.visibility = View.VISIBLE
+//                channelsAdapter.clear()
+//                val count = this.resources.getQuantityString(R.plurals.channels_count, 0, 0)
+//                tvChannelsCount.text = count
+//                channelsViewModel.getAvChannels()
+//            }
+//            is Failure.ChannelsNotCreatedError -> {
+//                bottomSheetSetPlaceHolder()
+//            }
+//            is Failure.NetworkPlaceHolderConnectionError -> {
+//                //bottomSheetSetPlaceHolder(true)
+//            }
+//            else -> super.handleFailure(failure)
+//        }
+    }
+    //endregion
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -126,13 +199,13 @@ class NewPostFragment : BaseFragment(), FragmentResultListener {
     }
 
     private fun observeViewModel() {
-        viewModel.chatList.observe(viewLifecycleOwner) { list ->
-            val publishList = mutableListOf<String>()
-            list.forEach { chat ->
-                publishList.add(chat.title)
-            }
-            publishAdapter.addAll(publishList)
-        }
+//        viewModel.chatList.observe(viewLifecycleOwner) { list ->
+//            val publishList = mutableListOf<String>()
+//            list.forEach { chat ->
+//                publishList.add(chat.title)
+//            }
+//            publishAdapter.addAll(publishList)
+//        }
         viewModel.takeBitmap.observe(viewLifecycleOwner) { bitmap ->
             if (bitmap != null) {
                 Log.d("NewPostFragment", "observeViewModel: ${bitmap.width} ${bitmap.height}")
@@ -162,7 +235,13 @@ class NewPostFragment : BaseFragment(), FragmentResultListener {
             viewModel.setPostText(editable.toString())
         }
         binding.btnSendPost.setOnClickListener {
-            viewModel.sendPost()
+            if (binding.etPost.text.isEmpty()) {
+                Toast.makeText(context, "Заполните текст", Toast.LENGTH_SHORT).show()
+            } else {
+                viewModel.sendPost(firstChannelId)
+                Toast.makeText(context, "Сообщение отправлено", Toast.LENGTH_SHORT).show()
+                requireActivity().onBackPressed()
+            }
         }
         binding.tvDate.setOnClickListener {
             val dialogFragment = CalendarDialogFragment()
@@ -185,9 +264,21 @@ class NewPostFragment : BaseFragment(), FragmentResultListener {
         }
 
         binding.btnClip.setOnClickListener {
-            val takePictureIntent = Intent(Intent.ACTION_PICK)
-            takePictureIntent.type = "image/*"
-            takePicture.launch(takePictureIntent)
+            if (checkSelfPermission(
+                    requireActivity(),
+                    Manifest.permission.READ_EXTERNAL_STORAGE
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                ActivityCompat.requestPermissions(
+                    requireActivity(),
+                    arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+                    123
+                )
+            } else {
+                val takePictureIntent = Intent(Intent.ACTION_PICK)
+                takePictureIntent.type = "image/*"
+                takePicture.launch(takePictureIntent)
+            }
         }
     }
 
@@ -206,30 +297,30 @@ class NewPostFragment : BaseFragment(), FragmentResultListener {
         binding.spinnerPublish.adapter = publishAdapter
         binding.spinnerPublish.setSelection(1)
         binding.spinnerPublish.onItemSelectedListener =
-                object : AdapterView.OnItemSelectedListener {
-                    override fun onNothingSelected(parent: AdapterView<*>?) {
+            object : AdapterView.OnItemSelectedListener {
+                override fun onNothingSelected(parent: AdapterView<*>?) {
 
-                    }
-
-                    override fun onItemSelected(
-                            parent: AdapterView<*>?,
-                            view: View?,
-                            position: Int,
-                            id: Long
-                    ) {
-                        val item = viewModel.chatList.value?.get(position)
-                        item?.let { viewModel.setPublishChat(it) }
-                    }
                 }
+
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    val item = viewModel.chatList.value?.get(position)
+                    item?.let { viewModel.setPublishChat(it) }
+                }
+            }
     }
 
     //спиннер нужно переделать
     private fun setupCategorySpinner(spinnerHeight: Int) {
         val categoryList = getSpinnerCategoryList()
         val categoryAdapter = SpinnerAdapter(
-                requireActivity(),
-                R.layout.simple_spinner_item,
-                categoryList
+            requireActivity(),
+            R.layout.simple_spinner_item,
+            categoryList
         )
         categoryAdapter.setDropDownViewResource(R.layout.simple_spinner_item)
         binding.spinnerCategory.dropDownVerticalOffset = spinnerHeight
@@ -252,15 +343,15 @@ class NewPostFragment : BaseFragment(), FragmentResultListener {
     //Мок данные для спиннера
     private fun getSpinnerCategoryList(): MutableList<SpinnerItem> {
         val drawable: LayerDrawable = requireActivity().resources.getDrawable(
-                R.drawable.spinner_circle,
-                null
+            R.drawable.spinner_circle,
+            null
         ) as LayerDrawable
         return mutableListOf(
-                SpinnerItem(drawable.findDrawableByLayerId(R.id.spinner_green), "News"),
-                SpinnerItem(drawable.findDrawableByLayerId(R.id.spinner_blue), "Advertising"),
-                SpinnerItem(drawable.findDrawableByLayerId(R.id.spinner_orange), "Entertainment"),
-                SpinnerItem(drawable.findDrawableByLayerId(R.id.spinner_purple), "Involvement"),
-                SpinnerItem(drawable.findDrawableByLayerId(R.id.spinner_hint), "Choose category")
+            SpinnerItem(drawable.findDrawableByLayerId(R.id.spinner_green), "News"),
+            SpinnerItem(drawable.findDrawableByLayerId(R.id.spinner_blue), "Advertising"),
+            SpinnerItem(drawable.findDrawableByLayerId(R.id.spinner_orange), "Entertainment"),
+            SpinnerItem(drawable.findDrawableByLayerId(R.id.spinner_purple), "Involvement"),
+            SpinnerItem(drawable.findDrawableByLayerId(R.id.spinner_hint), "Choose category")
         )
     }
 }

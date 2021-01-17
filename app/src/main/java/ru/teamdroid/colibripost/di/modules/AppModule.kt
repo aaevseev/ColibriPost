@@ -10,6 +10,7 @@ import ru.teamdroid.colibripost.data.account.auth.AuthRepositoryImpl
 import ru.teamdroid.colibripost.data.channels.ChannelsCache
 import ru.teamdroid.colibripost.data.channels.ChannelsRemote
 import ru.teamdroid.colibripost.data.channels.ChannelsRepositoryImpl
+import ru.teamdroid.colibripost.data.post.PostCache
 import ru.teamdroid.colibripost.data.post.PostRemote
 import ru.teamdroid.colibripost.data.post.PostRepositoryImpl
 import ru.teamdroid.colibripost.domain.account.AccountRepository
@@ -54,7 +55,7 @@ class AppModule(private val app: Application) {
 
     @Provides
     @Singleton
-    fun providePostRepository(remote: PostRemote, context: Context): PostRepository {
-        return PostRepositoryImpl(remote, NetworkHandler(context))
+    fun providePostRepository(cache:PostCache, remote: PostRemote, context: Context): PostRepository {
+        return PostRepositoryImpl(cache, remote, NetworkHandler(context))
     }
 }
