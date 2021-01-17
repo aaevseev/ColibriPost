@@ -40,7 +40,7 @@ class BottomNavigationFragment : BaseFragment(), OnBackPressedListener {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentBottomNavigationBinding.inflate(inflater, container, false)
         return binding.root
     }

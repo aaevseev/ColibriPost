@@ -2,6 +2,7 @@ package ru.teamdroid.colibripost.ui.main.calendar
 
 import android.content.res.ColorStateList
 import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,13 +18,15 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class CalendarAdapter : RecyclerView.Adapter<CalendarAdapter.WeekHolder>() {
-    private val weeks =
-        Week.getWeekAround(6) //нужно ли делать бесконечный скролл или мы будем отображать посты в определённом периоде?
+     val weeks =
+            Week.getWeekAround(6) //нужно ли делать бесконечный скролл или мы будем отображать посты в определённом периоде?
 
     lateinit var currentWeek:Week
+    var currentPosition:Int = 6
+    var isFragmentLaunch:Boolean = true
 
     var selectedDay =
-        Day(System.currentTimeMillis())
+            Day(System.currentTimeMillis())
         private set(value) {
             previousSelectedDay = field
             field = value
@@ -32,6 +35,8 @@ class CalendarAdapter : RecyclerView.Adapter<CalendarAdapter.WeekHolder>() {
         }
     private var previousSelectedDay = selectedDay
     var calendarClickListener: CalendarClickListener? = null
+
+    var lastPositionCounter: Int = 0
 
     lateinit var loadPostsByData:()->Unit
     lateinit var cacheIndicateDaysOfWeek:(days:List<Int>, months:List<Int>, years:List<Int>, setUpDays:(week:Week, postExisting:List<Boolean>)->Unit)->Unit
@@ -44,15 +49,12 @@ class CalendarAdapter : RecyclerView.Adapter<CalendarAdapter.WeekHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WeekHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ItemCalendarBinding.inflate(inflater, parent, false)
-        return WeekHolder(binding, remoteIndicateDaysOfWeek, indicateEndOfList, indicateStartOfList, indicateMiddleOfList)
+        return WeekHolder(binding, remoteIndicateDaysOfWeek)
     }
 
     override fun onBindViewHolder(holder: WeekHolder, position: Int) {
         currentWeek = weeks[position]
         holder.remoteIndicateDaysOfWeek = remoteIndicateDaysOfWeek
-        holder.indicateEndOfList = indicateEndOfList
-        holder.indicateStartOfList = indicateStartOfList
-        holder.indicateMiddleOfList = indicateMiddleOfList
         holder.bind(weeks[position], position)
     }
 
@@ -85,7 +87,7 @@ class CalendarAdapter : RecyclerView.Adapter<CalendarAdapter.WeekHolder>() {
         val list = mutableListOf<Day>()
         posts.forEach { post ->
             val day =
-                Day(post.time)
+                    Day(post.time)
             day.delayedPost = if (post.success) {
                 Day.DelayedPosts.DELAYED
             } else {
@@ -125,7 +127,7 @@ class CalendarAdapter : RecyclerView.Adapter<CalendarAdapter.WeekHolder>() {
 
     fun showPositions(parent: ViewGroup, position: Int){
         onBindViewHolder(WeekHolder(binding=ItemCalendarBinding.inflate(LayoutInflater.from(parent.context),
-            parent, false)), position)
+                parent, false)), position)
     }
 
     inner class WeekHolder(private val binding: ItemCalendarBinding,
@@ -133,12 +135,15 @@ class CalendarAdapter : RecyclerView.Adapter<CalendarAdapter.WeekHolder>() {
                            var indicateEndOfList:()->Unit={},
                            var indicateStartOfList:()->Unit={},
                            var indicateMiddleOfList:()->Unit={}) :
-        RecyclerView.ViewHolder(binding.root) {
+            RecyclerView.ViewHolder(binding.root) {
+
         private val calendar = Calendar.getInstance()
         private val set = ConstraintSet()
         var animatorHelper: AnimatorHelper? = null
 
         fun bind(week: Week, position: Int) = with(binding) {
+
+            //region UI Init
             tvNumberFirst.text = week.getNumberOfMonth(1).toString()
             tvNumberSecond.text = week.getNumberOfMonth(2).toString()
             tvNumberThird.text = week.getNumberOfMonth(3).toString()
@@ -172,59 +177,66 @@ class CalendarAdapter : RecyclerView.Adapter<CalendarAdapter.WeekHolder>() {
             tvSeventhDayWeek.setOnClickListener { onClick(week, 7) }
 
             tvNumberFirst.setTextColor(
-                ContextCompat.getColor(
-                    binding.root.context,
-                    R.color.text
-                )
+                    ContextCompat.getColor(
+                            binding.root.context,
+                            R.color.text
+                    )
             )
             tvNumberSecond.setTextColor(
-                ContextCompat.getColor(
-                    binding.root.context,
-                    R.color.text
-                )
+                    ContextCompat.getColor(
+                            binding.root.context,
+                            R.color.text
+                    )
             )
             tvNumberThird.setTextColor(
-                ContextCompat.getColor(
-                    binding.root.context,
-                    R.color.text
-                )
+                    ContextCompat.getColor(
+                            binding.root.context,
+                            R.color.text
+                    )
             )
             tvNumberFourth.setTextColor(
-                ContextCompat.getColor(
-                    binding.root.context,
-                    R.color.text
-                )
+                    ContextCompat.getColor(
+                            binding.root.context,
+                            R.color.text
+                    )
             )
             tvNumberFifth.setTextColor(
-                ContextCompat.getColor(
-                    binding.root.context,
-                    R.color.text
-                )
+                    ContextCompat.getColor(
+                            binding.root.context,
+                            R.color.text
+                    )
             )
             tvNumberSixth.setTextColor(
-                ContextCompat.getColor(
-                    binding.root.context,
-                    R.color.text
-                )
+                    ContextCompat.getColor(
+                            binding.root.context,
+                            R.color.text
+                    )
             )
             tvNumberSeventh.setTextColor(
-                ContextCompat.getColor(
-                    binding.root.context,
-                    R.color.text
-                )
+                    ContextCompat.getColor(
+                            binding.root.context,
+                            R.color.text
+                    )
             )
 
+            //endregion
+
             //indicateDaysOfWeek(getCacheDays(week), getCacheMonth(week), getCacheYears(week), ::setUpDaysIndicator)
-            setImageButtonState(position)
-            remoteIndicateDaysOfWeek(getWeekTimes(week), ::setUpDaysIndicator)
+
+            Log.d("ViewPagerCheck", "CalendarAdapter" + position.toString())
+            /*if(currentPosition == position)*/ remoteIndicateDaysOfWeek(getWeekTimes(week), ::setUpDaysIndicator)
+
 
             setupSelection(week)
+            val oneWeek = week
             animatorHelper =
-                AnimatorHelper(
-                    this,
-                    week
-                )
+                    AnimatorHelper(
+                            this,
+                            week
+                    )
         }
+
+        //region Date Data
 
         private fun getCacheDays(week: Week):List<Int>{
             return listOf(week.dayOfWeek(1).dayOfMonth, week.dayOfWeek(2).dayOfMonth, week.dayOfWeek(3).dayOfMonth, week.dayOfWeek(4).dayOfMonth,
@@ -246,16 +258,21 @@ class CalendarAdapter : RecyclerView.Adapter<CalendarAdapter.WeekHolder>() {
                     week.dayOfWeek(5).time, week.dayOfWeek(6).time, week.dayOfWeek(7).time)
         }
 
+        //endregion
+
+        //region UI Control
+
         private fun setUpDaysIndicator(week:Week, existingPostsOnWeek:List<Boolean>){
             var i = 1
+            Log.d("ViewPagerCheck", "SetUpDays " + adapterPosition)
             for(isExist:Boolean in existingPostsOnWeek){
                 week.dayOfWeek(i).delayedPost = if(isExist)  Day.DelayedPosts.DELAYED
                 else Day.DelayedPosts.NONE
                 i++
             }
 
-            setupStateUnderView(binding.viewUnderDay2, week.dayOfWeek(2))
             setupStateUnderView(binding.viewUnderDay1, week.dayOfWeek(1))
+            setupStateUnderView(binding.viewUnderDay2, week.dayOfWeek(2))
             setupStateUnderView(binding.viewUnderDay3, week.dayOfWeek(3))
             setupStateUnderView(binding.viewUnderDay4, week.dayOfWeek(4))
             setupStateUnderView(binding.viewUnderDay5, week.dayOfWeek(5))
@@ -266,11 +283,11 @@ class CalendarAdapter : RecyclerView.Adapter<CalendarAdapter.WeekHolder>() {
         private fun setupStateUnderView(view: View, day: Day) {
             when (day.delayedPost) {
                 Day.DelayedPosts.NONE -> view.backgroundTintList =
-                    ColorStateList.valueOf(Color.TRANSPARENT)
+                        ColorStateList.valueOf(Color.TRANSPARENT)
                 Day.DelayedPosts.DELAYED -> view.backgroundTintList =
-                    ColorStateList.valueOf(ContextCompat.getColor(view.context, R.color.accent))
+                        ColorStateList.valueOf(ContextCompat.getColor(view.context, R.color.accent))
                 Day.DelayedPosts.ERROR -> view.backgroundTintList =
-                    ColorStateList.valueOf(ContextCompat.getColor(view.context, R.color.red))
+                        ColorStateList.valueOf(ContextCompat.getColor(view.context, R.color.red))
             }
         }
 
@@ -290,9 +307,9 @@ class CalendarAdapter : RecyclerView.Adapter<CalendarAdapter.WeekHolder>() {
             set.clear(binding.viewSelectedDay.id, ConstraintSet.LEFT)
             set.clear(binding.viewSelectedDay.id, ConstraintSet.RIGHT)
             set.connect(binding.viewSelectedDay.id,
-                ConstraintSet.END,
-                ConstraintSet.PARENT_ID,
-                ConstraintSet.START
+                    ConstraintSet.END,
+                    ConstraintSet.PARENT_ID,
+                    ConstraintSet.START
             )
             set.applyTo(binding.container)
         }
@@ -330,8 +347,8 @@ class CalendarAdapter : RecyclerView.Adapter<CalendarAdapter.WeekHolder>() {
             set.clear(binding.viewSelectedDay.id, ConstraintSet.LEFT)
             set.clear(binding.viewSelectedDay.id, ConstraintSet.RIGHT)
             set.connect(binding.viewSelectedDay.id,
-                ConstraintSet.START, viewId,
-                ConstraintSet.START
+                    ConstraintSet.START, viewId,
+                    ConstraintSet.START
             )
             set.connect(binding.viewSelectedDay.id, ConstraintSet.END, viewId, ConstraintSet.END)
         }
@@ -339,12 +356,13 @@ class CalendarAdapter : RecyclerView.Adapter<CalendarAdapter.WeekHolder>() {
         private fun getWeekDay(day: Int): String {
             calendar.set(Calendar.DAY_OF_WEEK, day)
             return SimpleDateFormat("E", Locale.getDefault())
-                .format(calendar.time).toLowerCase(Locale.getDefault())
+                    .format(calendar.time).toLowerCase(Locale.getDefault())
         }
 
         fun setImageButtonState(position: Int){
             when(position){
                 weeks.size - 1 -> {
+
                     indicateEndOfList()
                 }
                 0 -> {
@@ -355,6 +373,8 @@ class CalendarAdapter : RecyclerView.Adapter<CalendarAdapter.WeekHolder>() {
                 }
             }
         }
+
+        //endregion
 
     }
 

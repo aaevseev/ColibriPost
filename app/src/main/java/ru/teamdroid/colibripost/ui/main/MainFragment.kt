@@ -1,15 +1,21 @@
 package ru.teamdroid.colibripost.ui.main
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.AppBarLayout
 import kotlinx.android.synthetic.main.calendar_view.view.*
 import kotlinx.android.synthetic.main.fragment_main.*
+import kotlinx.coroutines.asCoroutineDispatcher
+import kotlinx.coroutines.launch
 import ru.teamdroid.colibripost.App
 import ru.teamdroid.colibripost.MainActivity
 import ru.teamdroid.colibripost.R
+import ru.teamdroid.colibripost.databinding.FragmentMainBinding
 import ru.teamdroid.colibripost.di.viewmodel.ChannelsViewModel
 import ru.teamdroid.colibripost.di.viewmodel.PostViewModel
 import ru.teamdroid.colibripost.domain.channels.ChannelEntity
@@ -22,6 +28,7 @@ import ru.teamdroid.colibripost.remote.channels.ChatsRequests
 import ru.teamdroid.colibripost.ui.core.BaseFragment
 import ru.teamdroid.colibripost.ui.main.calendar.Week
 import java.util.*
+import java.util.concurrent.Executors
 import javax.inject.Inject
 
 class MainFragment : BaseFragment() {
@@ -51,9 +58,17 @@ class MainFragment : BaseFragment() {
     private var currentWeek: Week = Week(1)
     private var indicateCount: Int = 0
 
+    private var _binding: FragmentMainBinding? = null
+    private val binding: FragmentMainBinding get() = _binding!!
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         App.instance.appComponent.inject(this)
+    }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        _binding = FragmentMainBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -63,7 +78,7 @@ class MainFragment : BaseFragment() {
         (requireActivity() as MainActivity).setSupportActionBar(scheduleToolbar)
         toolbar_layout.title = getString(R.string.splash_colibri_post)
 
-        appBar.addOnOffsetChangedListener(object : AppBarLayout.OnOffsetChangedListener {
+        binding.appBar.addOnOffsetChangedListener(object : AppBarLayout.OnOffsetChangedListener {
             var isShow = true
             var scrollRange = -1
             override fun onOffsetChanged(appBarLayout: AppBarLayout?, verticalOffset: Int) {
@@ -77,37 +92,34 @@ class MainFragment : BaseFragment() {
                 } else if(isShow){
                     isShow = false
                     toolbar_layout.isTitleEnabled = false
-                   //channelFilterTextView.isEnabled = true
+                    //channelFilterTextView.isEnabled = true
                     filterRelativeLayout.visibility = View.VISIBLE
                 }
             }
         })
 
-        calendar = calendarView
-        calendar.adapter.loadPostsByData = {
+
+        binding.calendarView.adapter.loadPostsByData = {
             channelsViewModel.getAddedChannels()}
-        calendar.getCurrentWeek = {
-            this.currentWeek = it
-        }
-        calendar.adapter.remoteIndicateDaysOfWeek = {times, setUpDays ->
+        binding.calendarView.adapter.remoteIndicateDaysOfWeek = {times, setUpDays ->
             if(isScreenLaunchLoad){
                 this.times = times
                 this.setUpDays = setUpDays
                 channelsViewModel.getAddedChannelsForWeek()
-            }
-            else {
+            } else {
                 /*val week1 = currentWeek.toString()
                 val week2 = calendar.adapter.currentWeek.toString()
                 if(indicateCount == 0 && week1.equals(week2)){*/
-                    this.times = times
-                    this.setUpDays = setUpDays
-                    indicateCount++
-                    channelsViewModel.getAddedChannelsForWeek()
-                /*}else {
-                    calendar.adapter.currentWeek = calendar.adapter.currentWeek.previousWeek()
-                    calendar.adapter
-                    indicateCount = 0
-                }*/
+
+                this.times = times
+                this.setUpDays = setUpDays
+                indicateCount++
+                lifecycleScope.launch{ channelsViewModel.getAddedChannelsForWeek() }
+                    /*}else {
+                        calendar.adapter.currentWeek = calendar.adapter.currentWeek.previousWeek()
+                        calendar.adapter
+                        indicateCount = 0
+                    }*/
             }
         }
 
@@ -125,7 +137,7 @@ class MainFragment : BaseFragment() {
             onFailure(failureData, ::handleFailure)
         }
 
-        schedulePostsRView = view.findViewById<RecyclerView>(R.id.rvSchedulePosts).apply {
+        schedulePostsRView =binding.rvSchedulePosts.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = postAdapter
         }
@@ -134,7 +146,7 @@ class MainFragment : BaseFragment() {
     //region Handle events
 
     private fun handleAddedChannels(channels: List<ChannelEntity>?) {
-        val time = calendar.selectedDay.time
+        val time = binding.calendarView.selectedDay.time
         val date = Date(time)
         postViewModel.getScheduledPosts(channels!!.map { it.chatId }, time, getDay(date), getMonth(date), getYear(date))
     }
@@ -148,7 +160,10 @@ class MainFragment : BaseFragment() {
     }
 
     private fun handlePostsExisting(existingPostsOnWeek:List<Boolean>?){
-        setUpDays(calendar.adapter.currentWeek, existingPostsOnWeek!!)
+        val week = with(binding){
+            calendarView.adapter.getWeek(calendarView.adapter.currentPosition)
+        }
+        setUpDays(week, existingPostsOnWeek!!)
         if(isScreenLaunchLoad) {
             isScreenLaunchLoad = false
             channelsViewModel.getAddedChannels()
@@ -178,7 +193,7 @@ class MainFragment : BaseFragment() {
             val scheduleList: MutableList<PostEntity> = mutableListOf()
             scheduleList.addAll(schedulePosts)
             scheduleList.add(PostEntity())
-            tvEmpty.visibility = View.GONE
+            binding.tvEmpty.visibility = View.GONE
             postAdapter.submitList(scheduleList)
         }
         updateRefresh(false)
@@ -188,7 +203,7 @@ class MainFragment : BaseFragment() {
         when(failure){
             is Failure.ChannelsListIsEmptyError,
             is Failure.PostsListIsEmptyError -> {
-                tvEmpty.visibility = View.VISIBLE
+                binding.tvEmpty.visibility = View.VISIBLE
                 postAdapter.submitList(listOf())
             }
             else -> super.handleFailure(failure)
@@ -211,8 +226,6 @@ class MainFragment : BaseFragment() {
         super.onDestroyView()
         base { setMainToolbar() }
     }
-
-
 
     companion object {
         const val TAG = "MainFragment"

@@ -1,5 +1,6 @@
 package ru.teamdroid.colibripost.data.post
 
+import kotlinx.coroutines.delay
 import ru.teamdroid.colibripost.domain.post.PostEntity
 import ru.teamdroid.colibripost.domain.post.PostRepository
 import ru.teamdroid.colibripost.domain.type.Either

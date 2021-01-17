@@ -164,7 +164,7 @@ class ChannelsSettingsFragment : BaseFragment() {
                 binding.btnShowAvailableChannels.setOnClickListener {
                     state = BottomSheetBehavior.STATE_EXPANDED
                     setTranspViewVisibility(true)
-                    transpBackground.visibility = View.VISIBLE
+                    binding.transpBackground.visibility = View.VISIBLE
                     bottomNavigation.visibility = View.GONE
                 }
                 transpView.setOnClickListener {

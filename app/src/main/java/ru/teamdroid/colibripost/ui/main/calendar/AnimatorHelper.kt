@@ -13,7 +13,7 @@ import ru.teamdroid.colibripost.R
 import ru.teamdroid.colibripost.databinding.ItemCalendarBinding
 
 class AnimatorHelper(val binding: ItemCalendarBinding, val week: Week) :
-    Transition.TransitionListener {
+        Transition.TransitionListener {
     private val set = ConstraintSet()
     private val transition = AutoTransition()
     private var endTransitionTextColor = Color.BLACK
@@ -97,17 +97,17 @@ class AnimatorHelper(val binding: ItemCalendarBinding, val week: Week) :
         set.clear(binding.viewSelectedDay.id, ConstraintSet.RIGHT)
         if (isOutLeftSide) {
             set.connect(
-                binding.viewSelectedDay.id,
-                ConstraintSet.END,
-                ConstraintSet.PARENT_ID,
-                ConstraintSet.START
+                    binding.viewSelectedDay.id,
+                    ConstraintSet.END,
+                    ConstraintSet.PARENT_ID,
+                    ConstraintSet.START
             )
         } else {
             set.connect(
-                binding.viewSelectedDay.id,
-                ConstraintSet.START,
-                ConstraintSet.PARENT_ID,
-                ConstraintSet.END
+                    binding.viewSelectedDay.id,
+                    ConstraintSet.START,
+                    ConstraintSet.PARENT_ID,
+                    ConstraintSet.END
             )
         }
     }
