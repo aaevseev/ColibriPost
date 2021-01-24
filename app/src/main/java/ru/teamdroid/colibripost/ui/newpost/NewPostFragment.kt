@@ -20,24 +20,20 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.checkSelfPermission
-import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.FragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
 import com.srgpanov.telegrammsmm.ui.screen.SpinnerAdapter
 import com.srgpanov.telegrammsmm.ui.screen.SpinnerItem
-import kotlinx.android.synthetic.main.channels_bottom_sheet.*
-import kotlinx.android.synthetic.main.fragment_channels_settings.*
+import kotlinx.android.synthetic.main.fragment_new_post.*
 import ru.teamdroid.colibripost.App
 import ru.teamdroid.colibripost.R
 import ru.teamdroid.colibripost.databinding.FragmentNewPostBinding
 import ru.teamdroid.colibripost.di.viewmodel.ChannelsViewModel
 import ru.teamdroid.colibripost.domain.channels.ChannelEntity
 import ru.teamdroid.colibripost.domain.type.Failure
-import ru.teamdroid.colibripost.domain.type.None
 import ru.teamdroid.colibripost.other.SingleLiveData
 import ru.teamdroid.colibripost.other.onFailure
 import ru.teamdroid.colibripost.other.onSuccess
@@ -62,10 +58,10 @@ class NewPostFragment : BaseFragment(), FragmentResultListener {
     private lateinit var takePicture: ActivityResultLauncher<Intent>
 
     private val adapter: MessageContentAdapter by lazy { MessageContentAdapter() }
+    private var listChannels : List<ChannelEntity> = listOf()
 
     val viewModel: NewPostViewModel by viewModels { viewModelFactory }
 
-    private var firstChannelId = 0L
     lateinit var channelsViewModel: ChannelsViewModel
 
     val publishAdapter by lazy {
@@ -118,7 +114,10 @@ class NewPostFragment : BaseFragment(), FragmentResultListener {
         val publishList = mutableListOf<String>()
         channels?.forEach { chat ->
             publishList.add(chat.title)
-            firstChannelId = chat.chatId
+        }
+
+        channels?.let {
+            listChannels = it
         }
 
         publishAdapter.addAll(publishList)
@@ -234,23 +233,27 @@ class NewPostFragment : BaseFragment(), FragmentResultListener {
         binding.etPost.doAfterTextChanged { editable ->
             viewModel.setPostText(editable.toString())
         }
+
         binding.btnSendPost.setOnClickListener {
             if (binding.etPost.text.isEmpty()) {
                 Toast.makeText(context, "Заполните текст", Toast.LENGTH_SHORT).show()
             } else {
-                viewModel.sendPost(firstChannelId)
+                viewModel.sendPost(listChannels[spinner_publish.selectedItemPosition].chatId)
                 Toast.makeText(context, "Сообщение отправлено", Toast.LENGTH_SHORT).show()
                 requireActivity().onBackPressed()
             }
         }
+
         binding.tvDate.setOnClickListener {
             val dialogFragment = CalendarDialogFragment()
             dialogFragment.show(childFragmentManager, CalendarDialogFragment.TAG)
         }
+
         binding.tvTime.setOnClickListener {
             val dialogFragment = TimeDialogFragment()
             dialogFragment.show(childFragmentManager, TimeDialogFragment.TAG)
         }
+
         takePicture = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             val selectedImage = it.data?.data
 
