@@ -1,5 +1,7 @@
 package ru.teamdroid.colibripost.di.viewmodel
 
+import android.util.Log
+import ru.teamdroid.colibripost.domain.UseCase
 import ru.teamdroid.colibripost.domain.channels.*
 import ru.teamdroid.colibripost.domain.post.PostEntity
 import ru.teamdroid.colibripost.domain.type.None
@@ -12,7 +14,8 @@ class ChannelsViewModel @Inject constructor(
     private val getAvailableChannelsUseCase: GetAvailableChannels,
     private val setChannelsUseCase: SetChannels,
     private val deleteChannelUseCase: DeleteChannel,
-    private val getPostsChannelPhotoUseCase: GetPostsChannelsPhoto
+    private val getPostsChannelPhotoUseCase: GetPostsChannelsPhoto,
+    private val getChipChannelsUseCase: GetChipChannels
 ) : BaseViewModel() {
 
     var addedChannelsData: SingleLiveData<List<ChannelEntity>> = SingleLiveData()
@@ -21,6 +24,7 @@ class ChannelsViewModel @Inject constructor(
     var setChannelsData: SingleLiveData<None> = SingleLiveData()
     var deleteChannelData: SingleLiveData<None> = SingleLiveData()
     var getPostsChannelPhotoData: SingleLiveData<List<PostEntity>> = SingleLiveData()
+    var chipChannelsData: SingleLiveData<List<ChannelEntity>> = SingleLiveData()
 
     fun getAddedChannels() {
         updateRefreshing(true)
@@ -29,6 +33,10 @@ class ChannelsViewModel @Inject constructor(
 
     fun getAddedChannelsForWeek() {
         getAddedChannelsUseCase(None()) { it.either(::handleFailure) { handleWeekAddedChannels(it) } }
+    }
+
+    fun getAddedChannelsForChips(){
+        getChipChannelsUseCase(None()) { it.either(::handleFailure) { handleChipChannels(it) } }
     }
 
 
@@ -61,6 +69,12 @@ class ChannelsViewModel @Inject constructor(
         addedChannelsData.value = channels
     }
 
+
+    private fun handleChipChannels(channels: List<ChannelEntity>){
+        Log.d("Check1", "handle")
+        chipChannelsData.value = channels
+    }
+
     private fun handleWeekAddedChannels(channels: List<ChannelEntity>) {
         weekAddedChannelsData.value = channels
     }
@@ -88,5 +102,6 @@ class ChannelsViewModel @Inject constructor(
         setChannelsUseCase.unsubscribe()
         deleteChannelUseCase.unsubscribe()
         getPostsChannelPhotoUseCase.unsubscribe()
+        getChipChannelsUseCase.unsubscribe()
     }
 }

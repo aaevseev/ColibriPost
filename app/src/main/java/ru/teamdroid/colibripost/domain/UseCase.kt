@@ -1,6 +1,9 @@
 package ru.teamdroid.colibripost.domain
 
+import android.util.Log
 import kotlinx.coroutines.*
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import ru.teamdroid.colibripost.domain.type.Either
 import ru.teamdroid.colibripost.domain.type.Failure
 import kotlin.coroutines.CoroutineContext
@@ -20,6 +23,7 @@ abstract class UseCase<out Type, in Params> {
 
         CoroutineScope(foregroundContext + parentJob).launch {
             val result = withContext(backgroundContext) {
+                Log.d("Channels", "Run coroutine")
                 run(params)
             }
             onResult(result)

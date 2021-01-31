@@ -131,6 +131,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
         android:background="@drawable/new_post_spinner_background"
+        android:spinnerMode="dropdown"
         app:layout_constraintBottom_toTopOf="@id/tv_date"
         app:layout_constraintEnd_toEndOf="@id/view_tool_panel"
         app:layout_constraintStart_toStartOf="@id/view_tool_panel"

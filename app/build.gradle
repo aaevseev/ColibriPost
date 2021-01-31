@@ -25,6 +25,7 @@ android {
 
     buildFeatures {
         viewBinding = true
+        dataBinding = true
     }
 
     compileOptions {
@@ -35,9 +36,7 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
-    buildFeatures{
-        viewBinding = true
-    }
+
     compileOptions {
         coreLibraryDesugaringEnabled true
 
@@ -126,6 +125,9 @@ dependencies {
 
     //circle image view
     implementation "de.hdodenhof:circleimageview:3.0.0"
+
+    //Chips
+    implementation 'com.github.pchmn:MaterialChipsInput:1.0.8'
 
     implementation "androidx.room:room-runtime:2.2.6"
     kapt "androidx.room:room-compiler:2.2.6"

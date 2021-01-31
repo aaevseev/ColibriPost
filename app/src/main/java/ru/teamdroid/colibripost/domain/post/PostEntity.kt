@@ -21,8 +21,10 @@ data class PostEntity(
         var Month: Int = 0,
         var Year: Int = 0,
         var text: String = "",
+        var mediaAlbumId:Long = 0L,
         var formatInfo: TdApi.FormattedText? = null,
-        var channelPhotoPath: String = ""
+        var channelPhotoPath: String = "",
+        var photoPath: String = ""
 ){
 
     fun fill(message: TdApi.Message){
@@ -39,7 +41,9 @@ data class PostEntity(
         Month = calendar.get(Calendar.MONTH)
         Month = if(Month != 12) Month + 1 else Month - 11
         Year = calendar.get(Calendar.YEAR)
+        mediaAlbumId = message.mediaAlbumId
 
+        photoPath = getPhotoContent(message.content)
         text = getTextContent(message.content)
     }
 
@@ -51,6 +55,14 @@ data class PostEntity(
             is TdApi.MessageVideo -> content.caption.text
             else -> { "" }
         }
+    }
+
+    fun getPhotoContent(content:TdApi.MessageContent): String{
+        return when(content){
+            is TdApi.MessagePhoto -> content.photo.sizes[0].photo.local.path
+            else -> ""
+        }
+
     }
 }
 

@@ -127,38 +127,4 @@ class CalendarView @JvmOverloads constructor(
         }
     }
 
-    /*private fun setUpDaysIndicator(week:Week, existingPostsOnWeek:List<Boolean>){
-        Log.d("ViewPagerCheck", "SetUpDays")
-        var i = 1
-        for(isExist:Boolean in existingPostsOnWeek){
-            week.dayOfWeek(i).delayedPost = if(isExist)  Day.DelayedPosts.DELAYED
-            else Day.DelayedPosts.NONE
-            i++
-        }
-
-        setupStateUnderView(view_under_day1, week.dayOfWeek(1))
-        setupStateUnderView(view_under_day2, week.dayOfWeek(2))
-        setupStateUnderView(view_under_day3, week.dayOfWeek(3))
-        setupStateUnderView(view_under_day4, week.dayOfWeek(4))
-        setupStateUnderView(view_under_day5, week.dayOfWeek(5))
-        setupStateUnderView(view_under_day6, week.dayOfWeek(6))
-        setupStateUnderView(view_under_day7, week.dayOfWeek(7))
-    }
-
-    private fun setupStateUnderView(view: View, day: Day) {
-        when (day.delayedPost) {
-            Day.DelayedPosts.NONE -> view.backgroundTintList =
-                    ColorStateList.valueOf(Color.TRANSPARENT)
-            Day.DelayedPosts.DELAYED -> view.backgroundTintList =
-                    ColorStateList.valueOf(ContextCompat.getColor(view.context, R.color.accent))
-            Day.DelayedPosts.ERROR -> view.backgroundTintList =
-                    ColorStateList.valueOf(ContextCompat.getColor(view.context, R.color.red))
-        }
-    }
-
-    private fun getWeekTimes(week: Week):List<Long>{
-        return listOf(week.dayOfWeek(1).time, week.dayOfWeek(2).time, week.dayOfWeek(3).time, week.dayOfWeek(4).time,
-                week.dayOfWeek(5).time, week.dayOfWeek(6).time, week.dayOfWeek(7).time)
-    }*/
-
 }

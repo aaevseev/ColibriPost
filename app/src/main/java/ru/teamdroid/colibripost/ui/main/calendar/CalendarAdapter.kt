@@ -23,7 +23,8 @@ class CalendarAdapter : RecyclerView.Adapter<CalendarAdapter.WeekHolder>() {
 
     lateinit var currentWeek:Week
     var currentPosition:Int = 6
-    var isFragmentLaunch:Boolean = true
+
+    var isLaunchFragment: Boolean = true
 
     var selectedDay =
             Day(System.currentTimeMillis())
@@ -36,10 +37,7 @@ class CalendarAdapter : RecyclerView.Adapter<CalendarAdapter.WeekHolder>() {
     private var previousSelectedDay = selectedDay
     var calendarClickListener: CalendarClickListener? = null
 
-    var lastPositionCounter: Int = 0
-
     lateinit var loadPostsByData:()->Unit
-    lateinit var cacheIndicateDaysOfWeek:(days:List<Int>, months:List<Int>, years:List<Int>, setUpDays:(week:Week, postExisting:List<Boolean>)->Unit)->Unit
     lateinit var remoteIndicateDaysOfWeek:(times:List<Long>, setUpDays:(week:Week, postExisting:List<Boolean>)->Unit)->Unit
     lateinit var indicateEndOfList:()->Unit
     lateinit var indicateStartOfList:()->Unit
@@ -224,8 +222,11 @@ class CalendarAdapter : RecyclerView.Adapter<CalendarAdapter.WeekHolder>() {
             //indicateDaysOfWeek(getCacheDays(week), getCacheMonth(week), getCacheYears(week), ::setUpDaysIndicator)
 
             Log.d("ViewPagerCheck", "CalendarAdapter" + position.toString())
-            /*if(currentPosition == position)*/ remoteIndicateDaysOfWeek(getWeekTimes(week), ::setUpDaysIndicator)
-
+            /*if(currentPosition == position)*/ //remoteIndicateDaysOfWeek(getWeekTimes(week), ::setUpDaysIndicator)
+            if(isLaunchFragment) {
+                loadPostsByData()
+                isLaunchFragment = false
+            }
 
             setupSelection(week)
             val oneWeek = week
@@ -265,6 +266,7 @@ class CalendarAdapter : RecyclerView.Adapter<CalendarAdapter.WeekHolder>() {
         private fun setUpDaysIndicator(week:Week, existingPostsOnWeek:List<Boolean>){
             var i = 1
             Log.d("ViewPagerCheck", "SetUpDays " + adapterPosition)
+            Log.d("Channels", "Handle existing: " + existingPostsOnWeek.toString())
             for(isExist:Boolean in existingPostsOnWeek){
                 week.dayOfWeek(i).delayedPost = if(isExist)  Day.DelayedPosts.DELAYED
                 else Day.DelayedPosts.NONE

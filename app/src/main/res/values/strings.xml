@@ -27,6 +27,8 @@
     <string name="paying">Оплата</string>
     <string name="notifications">Уведомления</string>
     <string name="help">Помощь</string>
+    <string name="image">Изображение</string>
+    <string name="images">Альбом</string>
     <string name="quit">Выйти</string>
     <string name="settings_fragment_title">Настройки</string>
     <string name="user_image_description">User photo</string>
@@ -34,6 +36,8 @@
     <!--Buttons-->
     <string name="add_button">Add button</string>
     <string name="add_channel">Добавить канал</string>
+    <string name="delete_post">Удалить</string>
+    <string name="clone_post">Дублировать</string>
     <string name="preview">Preview</string>
     <string name="choose_category">Choose category</string>
     <string name="select_time">Select time</string>
@@ -62,6 +66,13 @@
 
     <!--TelegramErrors-->
     <string name="phone_code_invalid">PHONE_CODE_INVALID</string>
+
+    <string-array name="catNames">
+        <item>Барсик</item>
+        <item>Мурзик</item>
+        <item>Васька</item>
+        <item>Рыжик</item>
+    </string-array>
 
     <!--Plurals-->
     <plurals name="channels_count">

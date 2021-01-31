@@ -10,15 +10,6 @@ object PicassoHelper {
         Picasso.with(context)
             .load(java.io.File(path))
             .into(iv)
-
-    }
-
-    fun loadImageFileWithTransofrm(context: Context, path: String, iv: ImageView) {
-        Picasso.with(context)
-                .load(java.io.File(path))
-                .transform(CircleTransform())
-                .into(iv)
-
     }
 
 }

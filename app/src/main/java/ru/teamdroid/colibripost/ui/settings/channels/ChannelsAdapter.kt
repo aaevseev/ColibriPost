@@ -11,7 +11,7 @@ import ru.teamdroid.colibripost.ui.core.BaseAdapter
 import ru.teamdroid.colibripost.ui.core.PicassoHelper
 
 open class ChannelsAdapter(
-    var showDeleteChannelDialog: (idChannel: Long) -> Unit
+    val showDeleteChannelDialog: (idChannel: Long) -> Unit
 ) : BaseAdapter<ChannelEntity, ChannelsAdapter.ChannelViewHolder>(
     ChannelDiffCallback()
 ) {

@@ -1,6 +1,7 @@
 package ru.teamdroid.colibripost.data.post
 
 import ru.teamdroid.colibripost.domain.post.PostEntity
+import ru.teamdroid.colibripost.ui.main.calendar.Post
 
 interface PostCache {
 
@@ -10,5 +11,7 @@ interface PostCache {
     fun savePost(entity: PostEntity)
 
     fun savePosts(entities: List<PostEntity>)
+
+    fun getRelatedPosts(messageId:Long, albumId:Long):List<PostEntity>
 
 }

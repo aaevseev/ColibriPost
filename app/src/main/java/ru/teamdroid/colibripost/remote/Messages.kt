@@ -62,7 +62,6 @@ class Messages @Inject constructor(private val client: TelegramClient) {
         client.send<Message>(message)
     }
 
-
     suspend fun sendMessage(
         chatId: Long,
         content: TdApi.InputMessageContent,

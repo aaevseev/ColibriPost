@@ -8,7 +8,7 @@ import ru.teamdroid.colibripost.domain.account.AccountEntity
 import ru.teamdroid.colibripost.domain.channels.ChannelEntity
 import ru.teamdroid.colibripost.domain.post.PostEntity
 
-@Database(entities = [ChannelEntity::class, AccountEntity::class, PostEntity::class], version = 3)
+@Database(entities = [ChannelEntity::class, AccountEntity::class, PostEntity::class], version = 5)
 abstract class ColibriDatabase : RoomDatabase() {
 
     abstract val channelsDao: ChannelsDao

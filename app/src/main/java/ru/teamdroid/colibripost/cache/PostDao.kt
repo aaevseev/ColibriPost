@@ -33,4 +33,7 @@ interface PostDao: PostCache {
 
     @Query("SELECT * FROM posts_table WHERE Day = :day AND Month = :month AND Year = :year")
     override fun getPostsByDay(day: Int, month: Int, year: Int): List<PostEntity>
+
+    @Query("SELECT * FROM posts_table WHERE id != :messageId AND mediaAlbumId = :albumId")
+    override fun getRelatedPosts(messageId: Long, albumId: Long):List<PostEntity>
 }

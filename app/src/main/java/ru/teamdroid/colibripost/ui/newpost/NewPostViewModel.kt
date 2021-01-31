@@ -141,7 +141,6 @@ class NewPostViewModel @Inject constructor(
         return (timeGMT / 1000).toInt() + 1
     }
 
-
     private fun combineContent(): InputMessageContent {
         val txt = getTextContent()
         val list = inputFiles.value as List<Uri>
@@ -166,7 +165,6 @@ class NewPostViewModel @Inject constructor(
         val txt = FormattedText(text, null)
         return txt
     }
-
 
     private fun Uri.recievePath(): String? {
         val cursor: Cursor =

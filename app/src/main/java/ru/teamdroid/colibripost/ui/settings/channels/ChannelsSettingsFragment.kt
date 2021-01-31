@@ -21,17 +21,16 @@ import kotlinx.coroutines.launch
 import ru.teamdroid.colibripost.App
 import ru.teamdroid.colibripost.MainActivity
 import ru.teamdroid.colibripost.R
-import ru.teamdroid.colibripost.databinding.FragmentBottomNavigationBinding
 import ru.teamdroid.colibripost.databinding.FragmentChannelsSettingsBinding
 import ru.teamdroid.colibripost.di.viewmodel.ChannelsViewModel
 import ru.teamdroid.colibripost.domain.channels.ChannelEntity
 import ru.teamdroid.colibripost.domain.type.Failure
 import ru.teamdroid.colibripost.domain.type.None
-import ru.teamdroid.colibripost.other.SingleLiveData
 import ru.teamdroid.colibripost.other.onFailure
 import ru.teamdroid.colibripost.other.onSuccess
 import ru.teamdroid.colibripost.remote.core.NetworkHandler
 import ru.teamdroid.colibripost.remote.core.setNetworkCallback
+import ru.teamdroid.colibripost.ui.bottomnavigation.BottomNavigationFragment
 import ru.teamdroid.colibripost.ui.core.BaseFragment
 import ru.teamdroid.colibripost.ui.core.getColorFromResource
 import ru.teamdroid.colibripost.ui.core.getColorState
@@ -92,16 +91,12 @@ class ChannelsSettingsFragment : BaseFragment() {
         setUpFragmentUi(view)
 
         channelsViewModel = viewModel {
-            onSuccess<List<ChannelEntity>,
-                    SingleLiveData<List<ChannelEntity>>>(addedChannelsData, ::handleAddedChannels)
-            onSuccess<List<ChannelEntity>,
-                    SingleLiveData<List<ChannelEntity>>>(avChannelsData, ::handleAvailableChannels)
-            onSuccess<None,
-                    SingleLiveData<None>>(setChannelsData, ::refreshChannelsListsData)
-            onSuccess<None,
-                    SingleLiveData<None>>(deleteChannelData, ::refreshChannelsListsData)
+            onSuccess(addedChannelsData, ::handleAddedChannels)
+            onSuccess(avChannelsData, ::handleAvailableChannels)
+            onSuccess(setChannelsData, ::refreshChannelsListsData)
+            onSuccess(deleteChannelData, ::refreshChannelsListsData)
             onSuccess(progressData, ::updateRefresh)
-            onFailure<SingleLiveData<Failure>>(failureData, ::handleFailure)
+            onFailure(failureData, ::handleFailure)
         }
 
         (requireActivity() as MainActivity).connectivityManager.let {
@@ -136,13 +131,13 @@ class ChannelsSettingsFragment : BaseFragment() {
                 override fun onStateChanged(bottomSheet: View, newState: Int) {
                     if (newState == BottomSheetBehavior.STATE_SETTLING) {
                         setTranspViewVisibility(false)
-                        transpBackground.visibility = View.GONE
+                        binding.transpBackground.visibility = View.GONE
                         bottomNavigation.visibility = View.VISIBLE
                     }
                 }
 
                 override fun onSlide(bottomSheet: View, slideOffset: Float) {
-                    if (transpBackground.visibility == View.VISIBLE)
+                    if (binding.transpBackground.visibility == View.VISIBLE)
                         if (slideOffset <= 0.1) {
                             bottomNavigation.visibility = View.VISIBLE
                         } else bottomNavigation.visibility = View.GONE
@@ -172,7 +167,7 @@ class ChannelsSettingsFragment : BaseFragment() {
                     bottomNavigation.visibility = View.VISIBLE
                     refreshAvailableChannels()
                 }
-                transpBackground.setOnClickListener {
+                binding.transpBackground.setOnClickListener {
                     state = BottomSheetBehavior.STATE_COLLAPSED
                     bottomNavigation.visibility = View.VISIBLE
                     refreshAvailableChannels()
@@ -242,7 +237,7 @@ class ChannelsSettingsFragment : BaseFragment() {
         updateRefresh(false)
         if (channels != null) {
             if (binding.lrChannelsEmpty.isVisible)
-                lrChannelsEmpty.visibility = View.GONE
+                binding.lrChannelsEmpty.visibility = View.GONE
             binding.tvChannelsCount.text = this.resources.getQuantityString(
                 R.plurals.channels_count,
                 channels.size,

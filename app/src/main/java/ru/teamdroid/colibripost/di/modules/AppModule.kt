@@ -56,6 +56,6 @@ class AppModule(private val app: Application) {
     @Provides
     @Singleton
     fun providePostRepository(cache:PostCache, remote: PostRemote, context: Context): PostRepository {
-        return PostRepositoryImpl(cache, remote, NetworkHandler(context))
+        return PostRepositoryImpl(cache, remote, NetworkHandler(context), context)
     }
 }
